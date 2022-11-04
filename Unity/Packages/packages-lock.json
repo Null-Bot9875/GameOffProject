@@ -1,51 +1,10 @@
 {
   "dependencies": {
-    "com.unity.2d.animation": {
-      "version": "6.0.4",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.2d.common": "5.0.0",
-        "com.unity.mathematics": "1.1.0",
-        "com.unity.2d.sprite": "1.0.0",
-        "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.uielements": "1.0.0"
-      },
-      "url": "https://packages.unity.cn"
-    },
-    "com.unity.2d.common": {
-      "version": "5.0.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.2d.sprite": "1.0.0",
-        "com.unity.modules.uielements": "1.0.0"
-      },
-      "url": "https://packages.unity.cn"
-    },
-    "com.unity.2d.path": {
-      "version": "5.0.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.cn"
-    },
     "com.unity.2d.pixel-perfect": {
-      "version": "5.0.0",
+      "version": "5.0.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
-    },
-    "com.unity.2d.psdimporter": {
-      "version": "5.0.4",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.2d.common": "5.0.0",
-        "com.unity.2d.animation": "6.0.4",
-        "com.unity.2d.sprite": "1.0.0"
-      },
       "url": "https://packages.unity.cn"
     },
     "com.unity.2d.sprite": {
@@ -54,32 +13,11 @@
       "source": "builtin",
       "dependencies": {}
     },
-    "com.unity.2d.spriteshape": {
-      "version": "6.0.1",
+    "com.unity.cinemachine": {
+      "version": "2.8.4",
       "depth": 0,
       "source": "registry",
-      "dependencies": {
-        "com.unity.mathematics": "1.1.0",
-        "com.unity.2d.common": "5.0.0",
-        "com.unity.2d.path": "5.0.0",
-        "com.unity.modules.physics2d": "1.0.0"
-      },
-      "url": "https://packages.unity.cn"
-    },
-    "com.unity.2d.tilemap": {
-      "version": "1.0.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {}
-    },
-    "com.unity.2d.tilemap.extras": {
-      "version": "2.0.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.tilemap": "1.0.0",
-        "com.unity.2d.tilemap": "1.0.0"
-      },
+      "dependencies": {},
       "url": "https://packages.unity.cn"
     },
     "com.unity.collab-proxy": {
@@ -99,7 +37,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.7",
+      "version": "3.0.15",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -108,7 +46,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.9",
+      "version": "2.0.15",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -117,7 +55,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.ide.vscode": {
-      "version": "1.2.3",
+      "version": "1.2.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -125,7 +63,7 @@
     },
     "com.unity.mathematics": {
       "version": "1.2.1",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.cn"
@@ -136,6 +74,60 @@
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.cn"
+    },
+    "com.unity.postprocessing": {
+      "version": "3.1.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      },
+      "url": "https://packages.unity.cn"
+    },
+    "com.unity.render-pipelines.core": {
+      "version": "11.0.0",
+      "depth": 2,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0"
+      }
+    },
+    "com.unity.render-pipelines.lightweight": {
+      "version": "10.9.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "10.9.0",
+        "com.unity.postprocessing": "2.1.7"
+      },
+      "url": "https://packages.unity.cn"
+    },
+    "com.unity.render-pipelines.universal": {
+      "version": "11.0.0",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.mathematics": "1.1.0",
+        "com.unity.render-pipelines.core": "11.0.0",
+        "com.unity.shadergraph": "11.0.0"
+      }
+    },
+    "com.unity.searcher": {
+      "version": "4.3.2",
+      "depth": 3,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.cn"
+    },
+    "com.unity.shadergraph": {
+      "version": "11.0.0",
+      "depth": 2,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "11.0.0",
+        "com.unity.searcher": "4.3.1"
+      }
     },
     "com.unity.test-framework": {
       "version": "1.1.27",

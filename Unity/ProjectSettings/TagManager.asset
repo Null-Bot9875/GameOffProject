@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Weather
   layers:
   - Default
   - TransparentFX
@@ -38,6 +40,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Sky
+    uniqueID: 4290852533
+    locked: 0
+  - name: BackGround
+    uniqueID: 53690051
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Character
+    uniqueID: 1390911821
+    locked: 0
+  - name: FontGround
+    uniqueID: 629098865
+    locked: 0
+  - name: Weather
+    uniqueID: 1905154345
     locked: 0
