@@ -1,0 +1,787 @@
+[
+  {
+    "Id": 1000,
+    "Weight": 1,
+    "IsRemove": true,
+    "Content": "太阳下山了，你该选择今晚的行动了",
+    "ShowID": 6001,
+    "NextEvtGroup": [],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 1,
+        "Content": "战斗测试",
+        "ChangeNextEvt": [
+          8001
+        ]
+      },
+      {
+        "ChoiceId": 2,
+        "Content": "事件测试",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 1101,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "测试内容,暂时保留 用作代码的测试接口",
+    "ShowID": 6001,
+    "NextEvtGroup": [],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 8001,
+    "Weight": 1,
+    "IsRemove": true,
+    "Content": "流浪骑士",
+    "ShowID": 6001,
+    "NextEvtGroup": [],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 1,
+        "Content": "战斗",
+        "ChangeNextEvt": [
+          9001
+        ]
+      },
+      {
+        "ChoiceId": 2,
+        "Content": "逃跑",
+        "ChangeNextEvt": [
+          9801,
+          9802
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 8002,
+    "Weight": 1,
+    "IsRemove": true,
+    "Content": "流浪法师",
+    "ShowID": 6001,
+    "NextEvtGroup": [],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 1,
+        "Content": "战斗",
+        "ChangeNextEvt": [
+          8001
+        ]
+      },
+      {
+        "ChoiceId": 2,
+        "Content": "逃跑",
+        "ChangeNextEvt": [
+          9801,
+          9802
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 8003,
+    "Weight": 1,
+    "IsRemove": true,
+    "Content": "嗜血精灵",
+    "ShowID": 6001,
+    "NextEvtGroup": [],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 1,
+        "Content": "战斗",
+        "ChangeNextEvt": [
+          8001
+        ]
+      },
+      {
+        "ChoiceId": 2,
+        "Content": "逃跑",
+        "ChangeNextEvt": [
+          9801,
+          9802
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 8004,
+    "Weight": 1,
+    "IsRemove": true,
+    "Content": "吸血鬼仆人",
+    "ShowID": 6001,
+    "NextEvtGroup": [],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 1,
+        "Content": "战斗",
+        "ChangeNextEvt": [
+          8001
+        ]
+      },
+      {
+        "ChoiceId": 2,
+        "Content": "逃跑",
+        "ChangeNextEvt": [
+          9801,
+          9802
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 8005,
+    "Weight": 1,
+    "IsRemove": true,
+    "Content": "流氓",
+    "ShowID": 6001,
+    "NextEvtGroup": [],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 1,
+        "Content": "战斗",
+        "ChangeNextEvt": [
+          8001
+        ]
+      },
+      {
+        "ChoiceId": 2,
+        "Content": "逃跑",
+        "ChangeNextEvt": [
+          9801,
+          9802
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9101,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9102
+    ],
+    "ChoiceEvtList": [],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9102,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9103
+    ],
+    "ChoiceEvtList": [],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9103,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9104
+    ],
+    "ChoiceEvtList": [],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9104,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9101
+    ],
+    "ChoiceEvtList": [],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 0,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9001,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "战斗",
+    "ShowID": 5001,
+    "NextEvtGroup": [
+      9901,
+      9902
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 30,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9002,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "战斗",
+    "ShowID": 5001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 30,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9003,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "战斗",
+    "ShowID": 5001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 30,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9004,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "战斗",
+    "ShowID": 5001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 30,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9005,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "战斗",
+    "ShowID": 5001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 30,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9901,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "获得1金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 1
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9902,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "获得5金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 5
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9903,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "获得10金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 10
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9904,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "获得20金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 20
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9905,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "获得30金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 30
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9906,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "获得50金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 50
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9907,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "丢失1金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": -1
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9908,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "丢失5金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": -5
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9909,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "丢失10金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": -10
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9910,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "丢失20金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": -20
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9911,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "丢失30金币",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9901
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "继续",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": -30
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9801,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "逃跑成功！！",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9101
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  },
+  {
+    "Id": 9802,
+    "Weight": 1,
+    "IsRemove": false,
+    "Content": "逃跑失败…",
+    "ShowID": 6001,
+    "NextEvtGroup": [
+      9101
+    ],
+    "ChoiceEvtList": [
+      {
+        "ChoiceId": 0,
+        "Content": "",
+        "ChangeNextEvt": [
+          8001
+        ]
+      }
+    ],
+    "Result": {
+      "AddPow": 0,
+      "AddHp": 0,
+      "AddSan": 0,
+      "AddCoin": 0
+    },
+    "AddTime": 5,
+    "Weather": "延续上一个天气"
+  }
+]

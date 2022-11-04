@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "延续上一个天气",
+    "Vfx": "",
+    "ToState": "默认状态"
+  },
+  {
+    "Name": "舒适",
+    "Vfx": "PW_2D_Clouds05_Volume02",
+    "ToState": "默认状态"
+  },
+  {
+    "Name": "下雨",
+    "Vfx": "PW_2D_Rain01_Drizzle",
+    "ToState": "潮湿"
+  },
+  {
+    "Name": "下雪",
+    "Vfx": "PW_2D_Snow02_Flake_Moderate",
+    "ToState": "寒冷"
+  }
+]

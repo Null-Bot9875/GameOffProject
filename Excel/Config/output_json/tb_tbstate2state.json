@@ -1,0 +1,16 @@
+[
+  {
+    "Id": 10001,
+    "CurrentState": "默认状态",
+    "OtherState": "潮湿",
+    "ToState": "潮湿",
+    "HandlerType": 0
+  },
+  {
+    "Id": 10002,
+    "CurrentState": "默认状态",
+    "OtherState": "寒冷",
+    "ToState": "寒冷",
+    "HandlerType": 0
+  }
+]

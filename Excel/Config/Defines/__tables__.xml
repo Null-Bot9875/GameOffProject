@@ -1,0 +1,10 @@
+<root>
+	<bean name="StageTest">
+		<var name="id" type="int"/>
+		<var name="name" type="string"/>
+		<var name="desc" type="string"/>
+		<var name="location" type="vector3"/>
+		<var name="reward_item_id" type="int"/>
+		<var name="reward_item_count" type="int"/>
+	</bean>
+</root>

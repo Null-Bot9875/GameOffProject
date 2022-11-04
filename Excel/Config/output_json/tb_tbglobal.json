@@ -1,0 +1,18 @@
+[
+  {
+    "InitHp": 5,
+    "InitPow": 5,
+    "InitSan": 60,
+    "DayTime": 3,
+    "NightTime": 240,
+    "Armor": 150,
+    "DelayTime": 2,
+    "DefaultState": "默认状态",
+    "DefaultActionPoint": 6,
+    "DefaultCardNum": 4,
+    "BaseAttackCardId": 10001,
+    "BaseDefendCardId": 10002,
+    "DefaultEvt": 1000,
+    "DefaultAddSan": 6
+  }
+]

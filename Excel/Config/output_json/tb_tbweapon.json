@@ -1,0 +1,114 @@
+[
+  {
+    "Id": 0,
+    "Res": {
+      "Name": "默认武器，不会触发。用来解决导表的索引的警告",
+      "Path": 1
+    },
+    "Type": 3
+  },
+  {
+    "Id": 52001,
+    "Res": {
+      "Name": "Axe_1",
+      "Path": 1
+    },
+    "Type": 3
+  },
+  {
+    "Id": 52002,
+    "Res": {
+      "Name": "Soon_Spear",
+      "Path": 1
+    },
+    "Type": 3
+  },
+  {
+    "Id": 52003,
+    "Res": {
+      "Name": "Sword_1",
+      "Path": 1
+    },
+    "Type": 1
+  },
+  {
+    "Id": 52004,
+    "Res": {
+      "Name": "Sword_2",
+      "Path": 1
+    },
+    "Type": 1
+  },
+  {
+    "Id": 52005,
+    "Res": {
+      "Name": "Sword_3",
+      "Path": 1
+    },
+    "Type": 1
+  },
+  {
+    "Id": 52006,
+    "Res": {
+      "Name": "Sword_4",
+      "Path": 1
+    },
+    "Type": 1
+  },
+  {
+    "Id": 52007,
+    "Res": {
+      "Name": "Sword_4",
+      "Path": 1
+    },
+    "Type": 3
+  },
+  {
+    "Id": 52008,
+    "Res": {
+      "Name": "Sword_5",
+      "Path": 1
+    },
+    "Type": 1
+  },
+  {
+    "Id": 52009,
+    "Res": {
+      "Name": "Sword_6",
+      "Path": 1
+    },
+    "Type": 1
+  },
+  {
+    "Id": 52010,
+    "Res": {
+      "Name": "Sword_6",
+      "Path": 1
+    },
+    "Type": 3
+  },
+  {
+    "Id": 52011,
+    "Res": {
+      "Name": "Axe_1",
+      "Path": 1
+    },
+    "Type": 5
+  },
+  {
+    "Id": 52012,
+    "Res": {
+      "Name": "Soon_Spear",
+      "Path": 1
+    },
+    "Type": 5
+  },
+  {
+    "Id": 52013,
+    "Res": {
+      "Name": "Sword_1",
+      "Path": 1
+    },
+    "Type": 5
+  }
+]
