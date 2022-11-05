@@ -4,18 +4,51 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="" />
+    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="优化代码">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Animancer.FSM.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Animancer.FSM.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Animancer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Animancer.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor-firstpass.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-Editor-firstpass.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameData/Scenes/TestEnemy.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Scenes/TestEnemy.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IngameDebugConsole.Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/IngameDebugConsole.Editor.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IngameDebugConsole.Runtime.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/IngameDebugConsole.Runtime.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/58a4dd82307e4998a93e7f385e72c68b26c00/09/8c156ef8/AxisConstraint.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a2f9e31d0c940e38b7870dcf12d26b81b800/05/7ad4ebd3/Physics2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a9561d8ad93449b86c78ad206fedee7144200/54/2d2a41a8/Component.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/GameData/Scenes/TestEnemy.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/GameData/Scenes/TestEnemy.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Resources/Prefabs/Enemy.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Resources/Prefabs/Enemy.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/Enemy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/GameDataCache.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs.meta" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameUtility/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameUtility/TypeEvent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/ProjectSettings/TagManager.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/UserSettings/EditorUserSettings.asset" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -29,21 +62,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;rider.run.widget.enabled.cache&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Discover.Launch.Via.Unity": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "rider.run.widget.enabled.cache": "false",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Confirmation",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.1.16f1c1\Editor\Unity.exe" />
@@ -63,10 +97,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="55636">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="55636" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
