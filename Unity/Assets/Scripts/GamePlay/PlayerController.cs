@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Enemy : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         
     }
