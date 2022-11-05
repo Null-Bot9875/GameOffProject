@@ -4,156 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/2D Renderer.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/2D Renderer.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/CC.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/CC.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue.controller.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue_Idle.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue_Idle.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue_Jump.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue_Jump.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue_Land.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue_Land.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue_Run.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Blue/Player_Blue_Run.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink.controller.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink_Idle.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink_Idle.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink_Jump.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink_Jump.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink_Land.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink_Land.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink_Run.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Animations/Player_Pink/Player_Pink_Run.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/LWRP Asset.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/LWRP Asset.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Prefabs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Prefabs/Platform.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Prefabs/Platform.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Prefabs/Platform_Wood.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Prefabs/Platform_Wood.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Space Example.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Background.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Background.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Background_N.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Background_N.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/DinnerTable.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/DinnerTable.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Foreground.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Foreground.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Blue.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Pink.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Pink.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Uncolored.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Uncolored.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Wood.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Wood.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Wood_Wide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Wood_Wide.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Player_Blue.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Player_Blue.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Player_Pink.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Player_Pink.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Space.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Space/Level Backdrop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Space/Level Backdrop.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Space/Rock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Space/Rock.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Space/Rock_Normal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Space/Rock_Normal.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Sprite Cookie.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Sprite Cookie.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_Down.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_DownLeft.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_DownRight.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_Left.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_Right.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollDown.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollDownLeft.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollDownRight.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollLeft.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollRight.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollUp.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollUpLeft.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollUpRight.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_SlashDownLeft.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_SlashDownRight.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_SlashUpLeft.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_SlashUpRight.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_Up.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_UpLeft.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_UpRight.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Weapon.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Weapon/Sword_DownLeft.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Weapon/Sword_DownRight.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Weapon/Sword_UpLeft.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Weapon/Sword_UpRight.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Scenes/TestEnemy.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/Scenes/TestEnemy.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/URP.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/URP/2DRender.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/URP/2DRender.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/URP/UniversalRenderPipelineAsset.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/URP/UniversalRenderPipelineAsset.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/URP/UniversalRenderPipelineAsset_Renderer.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/GameData/URP/UniversalRenderPipelineAsset_Renderer.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/Enemy.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/Enemy.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Animancer.FSM.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Animancer.FSM.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Animancer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Animancer.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor-firstpass.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-Editor-firstpass.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_Down.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_Down.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_DownLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_DownLeft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_DownRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_DownRight.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_Left.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_Left.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_Right.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_Right.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_RollDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollDown.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_RollDownLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollDownLeft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_RollDownRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollDownRight.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_RollLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollLeft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_RollRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollRight.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_RollUp.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollUp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_RollUpLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollUpLeft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_RollUpRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_RollUpRight.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_SlashDownLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_SlashDownLeft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_SlashDownRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_SlashDownRight.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_SlashUpLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_SlashUpLeft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_SlashUpRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_SlashUpRight.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_Up.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_Up.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_UpLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_UpLeft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Character/Character_UpRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Character/Character_UpRight.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Weapon/Sword_DownLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Weapon/Sword_DownLeft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Weapon/Sword_DownRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Weapon/Sword_DownRight.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Weapon/Sword_UpLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Weapon/Sword_UpLeft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/TopDownCharacter/Weapon/Sword_UpRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Art/TopDownCharacter/Weapon/Sword_UpRight.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Scenes.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Space Example.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IngameDebugConsole.Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/IngameDebugConsole.Editor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IngameDebugConsole.Runtime.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/IngameDebugConsole.Runtime.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="2d光照">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameUtility.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameUtility/TypeEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameUtility/TypeEvent.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/Enemy.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,6 +18,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameUtility/TypeEvent.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -228,8 +85,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667619745946</updated>
-      <workItem from="1667619754453" duration="1001000" />
+      <workItem from="1667619754453" duration="1955000" />
     </task>
+    <task id="LOCAL-00001" summary="2d光照">
+      <created>1667625018775</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667625018775</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,5 +117,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="2d光照" />
+    <option name="LAST_COMMIT_MESSAGE" value="2d光照" />
   </component>
 </project>
