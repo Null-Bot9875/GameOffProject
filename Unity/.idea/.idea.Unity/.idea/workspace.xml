@@ -5,6 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c315a64f-dfb4-4e60-b445-a282bc436067" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayeMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayeMove.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,13 +21,16 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2H797j1V73QxIplzvAcPiJq9bIm" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Discover.Launch.Via.Unity": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -72,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667625091597</updated>
-      <workItem from="1667625105537" duration="1053000" />
+      <workItem from="1667625105537" duration="2300000" />
     </task>
     <servers />
   </component>
@@ -94,6 +102,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
 </project>
