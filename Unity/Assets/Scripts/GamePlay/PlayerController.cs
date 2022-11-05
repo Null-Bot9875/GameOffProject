@@ -7,7 +7,7 @@ namespace Game
     {
         private float x;
         private float y;
-        [SerializeField]private float moveSpeed;
+        [SerializeField,Header("玩家移动速度")]private float moveSpeed;
         private Vector2 mouseV2;
         public float tset;
 
@@ -69,6 +69,15 @@ namespace Game
         void ChangeWeaponForce()
         {
             gunGo.GetComponent<SpriteRenderer>().flipY = (mouseV2.x < transform.position.x);
+            if (mouseV2.y > transform.position.y)
+            {
+                gunGo.GetComponent<SpriteRenderer>().sortingOrder = -1;
+            }
+            else
+            {
+                gunGo.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            }
+            
         }
     }
 }

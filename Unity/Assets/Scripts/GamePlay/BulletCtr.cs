@@ -5,8 +5,8 @@ namespace Game
 {
     public class BulletCtr : MonoBehaviour
     {
-        [SerializeField] private float shootSpeed;
-        [SerializeField] private float backSpeed;
+        [SerializeField,Header("发射速度")] private float shootSpeed;
+        [SerializeField,Header("折返速度")] private float backSpeed;
         #region 组件
         private Rigidbody2D rb;
         private Collider2D cld;
