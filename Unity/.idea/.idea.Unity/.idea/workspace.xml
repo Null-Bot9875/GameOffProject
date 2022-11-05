@@ -4,13 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="" />
+    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Item.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Item/Bullet.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Item/Bullet.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/BulletCtr.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/BulletCtr.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Blue.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/2DLightSample/Sprites/Platform_Blue.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameData/Scenes/PlayerMoveTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Scenes/PlayerMoveTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/PlayerController.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/BulletCtr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/GameDataCache.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
