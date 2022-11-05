@@ -41,18 +41,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\DelegateState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateMachine1.InputBuffer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\AssemblyInfo.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateMachine2.InputBuffer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\KeyChange.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateMachine1.WithDefault.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateChange.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\IState.cs" />
      <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateMachine1.StateSelector.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateChange.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\AssemblyInfo.cs" />
      <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateMachine1.cs" />
      <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateMachine2.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\DelegateState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateMachine2.InputBuffer.cs" />
      <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateBehaviour.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\KeyChange.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateMachine1.WithDefault.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\StateMachine1.InputBuffer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\FSM\IState.cs" />
      <None Include="Assets\Plugins\Animancer\Utilities\FSM\Animancer.FSM.asmdef" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.1.16f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -295,34 +295,34 @@
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.1.16f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Plastic.Antlr3.Runtime">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.YamlDotNet">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.IonicZip">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
-     </Reference>
-     <Reference Include="log4netPlastic">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Newtonsoft.Json">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-     </Reference>
-     <Reference Include="unityplastic">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-     </Reference>
-     <Reference Include="clipper_library">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.cinemachine@2.8.4\Runtime\ThirdParty\clipper_library.dll</HintPath>
-     </Reference>
-     <Reference Include="DOTween">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
      </Reference>
      <Reference Include="DOTweenEditor">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.IonicZip">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+     </Reference>
+     <Reference Include="log4netPlastic">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+     </Reference>
+     <Reference Include="DOTween">
+     <HintPath>E:\Unity\GameOffProject\Unity\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="clipper_library">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.cinemachine@2.8.4\Runtime\ThirdParty\clipper_library.dll</HintPath>
+     </Reference>
+     <Reference Include="Newtonsoft.Json">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="unityplastic">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
      </Reference>
      <Reference Include="netstandard">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.1.16f1c1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -670,10 +670,10 @@
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.1.16f1c1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
      </Reference>
      <Reference Include="UnityEditor.UI">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
      </Reference>
      <Reference Include="UnityEngine.UI">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
      </Reference>
   </ItemGroup>
   <ItemGroup>

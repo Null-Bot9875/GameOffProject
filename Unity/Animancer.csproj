@@ -41,150 +41,150 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerState.EventDispatcher.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\MixerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\Float2ControllerTransitionAsset.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.Animations.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IMotion.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\DirectionalAnimationSet.cs" />
      <Compile Include="Assets\Plugins\Animancer\HybridAnimancerComponent.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\OptionalWarning.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Events\SimpleEventReceiver.cs" />
      <Compile Include="Assets\Plugins\Animancer\NamedAnimancerComponent.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\ClipTransitionSequence.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\DefaultFadeValueAttribute.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AnimancerEditorUtilities.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\CustomFade.Curve.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\SerializedArrayProperty.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\FadeMode.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\Easing.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Collections\FastComparer.cs" />
      <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\ManualMixerTransition.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.GenerateSpriteAnimations.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerLayer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\TransitionDrawer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Controller States\Float1ControllerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Events\EndEventReceiver.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.RemapAnimationBindings.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\MixerState.Drawer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\TypeSelectionButton.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerStateDrawer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\Units\AnimationTimeAttribute.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IUpdatable.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimatedInt.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\ITransitionDetailed.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\ThresholdLabelAttribute.cs" />
      <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\Float1ControllerTransitionAsset.cs" />
      <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\Float3ControllerTransitionAsset.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\DontAllowFade.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\MixerTransition.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Editor\ConversionCache.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\Units\UnitsAttribute.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerPlayable.StateDictionary.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerPlayable.LayerList.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Collections\FastEnumerator.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\ICharacterRoot.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerNode.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\DummySerializableCallback.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\TemporarySettings.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\Units\AnimationSpeedAttribute.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.Panel.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\BoolPref.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.RemapSpriteAnimation.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerState.EventDispatcher.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\MixerState.Drawer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerEvent.Sequence.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Collections\LazyStack.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\ReadMe.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.Settings.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AnimationBindings.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Events\EndEventReceiver.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\TypeSelectionButton.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\Polymorphic.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IAnimationClipCollection.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\NamedAnimancerComponentEditor.cs" />
      <Compile Include="Assets\Plugins\Animancer\AnimancerComponent.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerEvent.Sequence.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\DirectionalMixerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\ManualMixerTransitionAsset.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerPlayable.cs" />
      <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\ClipTransitionAsset.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerNodeDrawer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Collections\FastEnumerator.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Validate.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\EventNamesAttribute.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.RenameSprites.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\MixerParameterTween.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimatedFloat.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.SpriteModifierPanel.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\Units\Units.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\MixerStateT.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\SpriteEditor.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\Serialization.ObjectReference.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\BaseAnimancerComponentEditor.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\LinearMixerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Collections\LazyStack.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\DefaultValueAttribute.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerNode.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.Animations.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\ICharacterRoot.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Events\ExitEvent.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerPlayableDrawer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\ITransition.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AssemblyInfo.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\DummySerializableCallback.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimancerJob.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\ReadMe.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Strings.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerGUI.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\SelfDrawerAttribute.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\PlayableAssetTransitionAsset.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.PackTextures.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IHasKey.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\ScriptableObjectEditor.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerUtilities.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.Settings.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\Serialization.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\Float2ControllerTransitionAsset.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimatedInt.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\LinearMixerState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AssemblyInfo.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerGUI.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\ClipTransitionSequence.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\CustomFade.Curve.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.RemapAnimationBindings.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerStateDrawer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\DontAllowFade.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimatedFloat.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\BaseAnimancerComponentEditor.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\DefaultValueAttribute.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Strings.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\EventSequenceDrawer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Controller States\Float3ControllerState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Validate.Value.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\TimeSynchronizationGroup.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\Easing.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Controller States\Float1ControllerState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerNodeDrawer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\MixerParameterTween.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimancerJob.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\CustomFade.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IHasEvents.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\AnimancerTransitionAsset.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\ClipState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Events\AnimationEventReceiver.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\SpriteRendererTextureSwap.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\ManualMixerTransitionAsset.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\ParametizedAnimancerStateDrawer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimatedBool.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.AnimationModifierPanel.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IAnimancerComponent.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\CustomFade.Delegate.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\FadeMode.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Collections\FastComparer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IUpdatable.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\Units\AnimationTimeAttribute.cs" />
      <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\MixerTransition2DAsset.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerEvent.Sequence.Serializable.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\ParametizedAnimancerStateDrawer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\SoloAnimation.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Collections\ObjectPool.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\ManualMixerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IPlayableWrapper.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\AnimancerTransitionAssetT.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\DrawAfterEventsAttribute.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\CustomFade.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\DirectionalAnimationSet8.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimatedBool.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\TemporarySettings.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Collections\KeyedList.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AnimationGatherer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\AttributeCache.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.Settings.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IHasEvents.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\EventSequenceDrawer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\ControllerTransitionAsset.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\CompactUnitConversionCache.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\Units\AnimationSpeedAttribute.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerComponentEditor.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\CartesianMixerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.Panel.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.ModifySprites.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerEvent.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Controller States\Float3ControllerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AnimationBindings.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IAnimancerComponent.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.AnimationModifierPanel.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AnimancerSettings.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\AnimancerTransitionAsset.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerLayerDrawer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\BoolPref.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\AnimancerTransition.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerUtilities.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.Scene.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimatedProperty.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimationClipEditor.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\AnimationClipPreview.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\TimelineGUI.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\ClipState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\PlayableAssetState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\SerializableEventSequenceDrawer.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\Serialization.PropertyReference.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IMotion.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.Settings.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Validate.Value.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IWrapper.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AnimancerEditorUtilities.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\SerializedArrayProperty.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerLayer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\ThresholdLabelAttribute.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerPlayable.StateDictionary.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IAnimationClipCollection.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\Units\Units.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Events\ExitEvent.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\PlayableAssetTransitionAsset.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\DirectionalAnimationSet8.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\ControllerTransitionAsset.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerEvent.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.Scene.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\AnimationClipPreview.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\OptionalWarning.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Validate.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IHasKey.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\DrawAfterEventsAttribute.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\AttributeCache.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\TimelineGUI.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.Inspector.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\TimeSynchronizationGroup.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Events\AnimationEventReceiver.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Controller States\Float2ControllerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\SpriteRendererTextureSwap.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\LinearMixerTransitionAsset.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\DirectionalAnimationSet.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\DefaultFadeValueAttribute.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\DirectionalMixerState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerPlayableDrawer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.PackTextures.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\ScriptableObjectEditor.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerComponentEditor.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.ModifySprites.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimancerLayerDrawer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\AnimationClipEditor.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.GenerateSpriteAnimations.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\MixerTransition.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerPlayable.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\ITransition.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IPlayableWrapper.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AnimancerSettings.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Controller States\ControllerState.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.RemapSpriteAnimation.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\CustomFade.Delegate.cs" />
-     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\Serialization.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\Units\UnitsAttribute.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.SpriteModifierPanel.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\CompactUnitConversionCache.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Jobs\AnimatedProperty.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\Serialization.PropertyReference.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Controller States\Float2ControllerState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Animation Events\SimpleEventReceiver.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\TransitionDrawer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\ITransitionDetailed.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimancerToolsWindow.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\ManualMixerState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\AnimancerTransitionAssetT.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\AnimancerTransition.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\PlayableAssetState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\LinearMixerTransitionAsset.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\MixerState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerPlayable.LayerList.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\EventNamesAttribute.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Serialization\Serialization.ObjectReference.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Core\SoloAnimation.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\AnimationGatherer.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\CartesianMixerState.cs" />
+     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\GUI\SerializableEventSequenceDrawer.cs" />
      <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\ITransitionGUI.cs" />
      <None Include="Assets\Plugins\Animancer\Internal\Core\Animancer.Lite.xml" />
      <None Include="Assets\Plugins\Animancer\Animancer.asmdef" />
@@ -430,34 +430,34 @@
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.1.16f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Plastic.Antlr3.Runtime">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.YamlDotNet">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.IonicZip">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
-     </Reference>
-     <Reference Include="log4netPlastic">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Newtonsoft.Json">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-     </Reference>
-     <Reference Include="unityplastic">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-     </Reference>
-     <Reference Include="clipper_library">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\PackageCache\com.unity.cinemachine@2.8.4\Runtime\ThirdParty\clipper_library.dll</HintPath>
-     </Reference>
-     <Reference Include="DOTween">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
      </Reference>
      <Reference Include="DOTweenEditor">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.IonicZip">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+     </Reference>
+     <Reference Include="log4netPlastic">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+     </Reference>
+     <Reference Include="DOTween">
+     <HintPath>E:\Unity\GameOffProject\Unity\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.visualscripting@1.6.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="clipper_library">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.cinemachine@2.8.4\Runtime\ThirdParty\clipper_library.dll</HintPath>
+     </Reference>
+     <Reference Include="Newtonsoft.Json">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="unityplastic">
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
      </Reference>
      <Reference Include="netstandard">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.1.16f1c1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -805,10 +805,10 @@
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.1.16f1c1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
      </Reference>
      <Reference Include="UnityEditor.UI">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
      </Reference>
      <Reference Include="UnityEngine.UI">
-     <HintPath>F:\UnityLab\GameOffProject\Unity\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+     <HintPath>E:\Unity\GameOffProject\Unity\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
      </Reference>
   </ItemGroup>
   <ItemGroup>
