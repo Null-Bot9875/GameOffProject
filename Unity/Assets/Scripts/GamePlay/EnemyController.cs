@@ -14,7 +14,6 @@ namespace Game
 
         [SerializeField, Header("射线数")] private int _lookCount = 5;
 
-
         [SerializeField, Header("当前警戒值")] private int _currentAlertValue;
 
         [SerializeField, Header("最高值,超过该值就报警")]
@@ -91,16 +90,9 @@ namespace Game
 
         private void EnemyDetectPerSec()
         {
-            if (_isFoundPlayer)
-            {
-                _currentAlertValue += _addPerSecondAlertValue;
-            }
-            else
-            {
-                _currentAlertValue += _reducePerSecondAlertValue;
-            }
-
+            _currentAlertValue += _isFoundPlayer ? _addPerSecondAlertValue : _reducePerSecondAlertValue;
             _currentAlertValue = Mathf.Clamp(_currentAlertValue, 0, _maxAlertValue);
+
             TypeEventSystem.Global.Send(new GameEnemyAlertEvt(EnemyId, _currentAlertValue));
             if (_currentAlertValue >= _maxAlertValue)
             {
