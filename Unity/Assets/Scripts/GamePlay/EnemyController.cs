@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -12,7 +12,5 @@ namespace Game
         {
             
         }
-        
-        
     }
 }

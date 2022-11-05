@@ -1,21 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using Game.GameEvent;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
     public class GameRoot : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
-        
+            GameDataCache.Instance.EnemyList = GameObject.FindObjectsOfType<EnemyController>().ToList();
+            GameDataCache.Instance.Player = GameObject.FindObjectsOfType<PlayerController>().ToList();
+
+            TypeEventSystem.Global.Register<GameOverEvt>(OnGameOverEvt);
         }
 
-        // Update is called once per frame
-        void Update()
+
+        private void OnDestroy()
         {
-        
+            TypeEventSystem.Global.UnRegister<GameOverEvt>(OnGameOverEvt);
+        }
+
+        private void OnGameOverEvt(GameOverEvt obj)
+        {
+            ReloadScene();
+        }
+
+
+        private void ReloadScene()
+        {
+            SceneManager.LoadScene(GameDataCache.Instance.CrtSceneIdx);
         }
     }
 }
