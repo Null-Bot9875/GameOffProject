@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5b6ac0c7ebd7b41b307d920db7b245, type: 3}
+  m_Name: Player_Idle
+  m_EditorClassIdentifier: 
+  _Up: {fileID: 7400000, guid: 9301273dedb67d64e909304e6ca33bed, type: 2}
+  _Right: {fileID: 7400000, guid: 85d284b14411b4f4c84d7346588011ba, type: 2}
+  _Down: {fileID: 7400000, guid: ebd9b14bdb2c9a6499fb748cf1119fe3, type: 2}
+  _Left: {fileID: 7400000, guid: fa1b6e479dc811c47a5170d87cb671fe, type: 2}
+  _UpRight: {fileID: 7400000, guid: 8368632f1a408394cb65a3336528ac7a, type: 2}
+  _DownRight: {fileID: 7400000, guid: 93147e41ffdda5e45a4d11e1a2ccb66d, type: 2}
+  _DownLeft: {fileID: 7400000, guid: e96ba084779b71643b246a851bedde7e, type: 2}
+  _UpLeft: {fileID: 7400000, guid: 70c8c808404d34b4086b755cd547d3aa, type: 2}
