@@ -4,12 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="游戏结束事件">
+    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="简易架构">
+      <change afterPath="$PROJECT_DIR$/Assets/GameData/Prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Enemy.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Enemy.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEvent/GameEnemyAlertEvt.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEvent/GameEnemyAlertEvt.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameSceneRoot.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameSceneRoot.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameUtility/GamePath.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameUtility/GamePath.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/GameData/Scenes/TestEnemy.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Scenes/TestEnemy.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameDataCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameDataCache.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameRoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameRoot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameRoot.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameRoot.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,13 +29,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a2f9e31d0c940e38b7870dcf12d26b81b800/05/7ad4ebd3/Physics2D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a9561d8ad93449b86c78ad206fedee7144200/54/2d2a41a8/Component.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/GameData/Scenes/TestEnemy.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/Enemy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/GameDataCache.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameUtility/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
@@ -75,10 +92,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="55636">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="55636" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -94,7 +111,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667619745946</updated>
-      <workItem from="1667619754453" duration="6041000" />
+      <workItem from="1667619754453" duration="9546000" />
     </task>
     <task id="LOCAL-00001" summary="2d光照">
       <created>1667625018775</created>
@@ -124,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667629055086</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="简易架构">
+      <created>1667630771099</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667630771099</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +175,26 @@
     <MESSAGE value="事件系统" />
     <MESSAGE value="单例类" />
     <MESSAGE value="游戏结束事件" />
-    <option name="LAST_COMMIT_MESSAGE" value="游戏结束事件" />
+    <MESSAGE value="简易架构" />
+    <option name="LAST_COMMIT_MESSAGE" value="简易架构" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs</url>
+          <line>63</line>
+          <properties documentPath="E:\Unity\GameOffProject\Unity\Assets\Scripts\GamePlay\EnemyController.cs" initialLine="63" containingFunctionPresentation="method 'Update'">
+            <startOffsets>
+              <option value="2145" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2146" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
