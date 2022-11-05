@@ -3,7 +3,6 @@ Unity/Logs
 Unity/Library
 Unity/obj
 Unity/Temp
-*.csproj
 *.sln
 *.csproj
-*.csproj
+Unity/.idea/.idea.Unity/.idea/workspace.xml
