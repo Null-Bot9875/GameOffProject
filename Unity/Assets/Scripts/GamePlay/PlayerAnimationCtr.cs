@@ -9,13 +9,13 @@ namespace Game
         [SerializeField] private DirectionalAnimationSet8 moveSet;
         [SerializeField] private DirectionalAnimationSet8 idleSet;
 
-        private PlayeMove _playeMove;
+        private PlayerController _playeMove;
         
         
         // Start is called before the first frame update
         void Start()
         {
-            _playeMove = GetComponent<PlayeMove>();
+            _playeMove = GetComponent<PlayerController>();
         }
 
         // Update is called once per frame

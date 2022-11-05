@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3869642461521513129}
   - component: {fileID: 3869642461521513128}
-  - component: {fileID: 3869642461521513127}
   - component: {fileID: 3869642461521513126}
   - component: {fileID: 3869642461521513125}
   - component: {fileID: 3869642463190991458}
   - component: {fileID: 3869642463190991459}
   - component: {fileID: 3617632295220367002}
+  - component: {fileID: 209750661302366428}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -90,20 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3869642461521513127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3869642461521513124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfeade04f3d37e24a96070524dabda82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1
-  gunGo: {fileID: 5206519181117189686}
 --- !u!50 &3869642461521513126
 Rigidbody2D:
   serializedVersion: 4
@@ -199,6 +185,20 @@ MonoBehaviour:
   animancer: {fileID: 3869642463190991459}
   moveSet: {fileID: 11400000, guid: cbef26d727f2b1e44a8f52eb06b36a1c, type: 2}
   idleSet: {fileID: 11400000, guid: 273f14e4b06e4a247b1b231f7ea4c65d, type: 2}
+--- !u!114 &209750661302366428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3869642461521513124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d016e462c38a4f3448d8a8d4aa1ea6ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  gunGo: {fileID: 5206519181117189686}
 --- !u!1 &5206519181117189686
 GameObject:
   m_ObjectHideFlags: 0
