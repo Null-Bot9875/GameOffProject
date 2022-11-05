@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324077305398384110}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3612183789760842951}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &1324077305398384111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81a8e527f5d92d489ac74ddc021bad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyId: 0
   _SightLight2D: {fileID: 1324077305398384111}
   _lookDistance: 5.14
   _lookAngle: 108.7
@@ -182,7 +183,12 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 192
-  EnemyId: 0
+  _enemyPatrol:
+    List:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    Speed: 1
 --- !u!1 &6617127664409248979
 GameObject:
   m_ObjectHideFlags: 0
