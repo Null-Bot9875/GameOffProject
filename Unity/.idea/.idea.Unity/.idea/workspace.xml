@@ -4,37 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="敌人检测">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" afterDir="false" />
-    </list>
+    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a2f9e31d0c940e38b7870dcf12d26b81b800/05/7ad4ebd3/Physics2D.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a9561d8ad93449b86c78ad206fedee7144200/54/2d2a41a8/Component.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/GameData/Scenes/TestEnemy.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/GameData/Scenes/TestEnemy.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/Enemy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/GameDataCache.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs.meta" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameUtility/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameUtility/TypeEvent.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity/GameOffProject/Unity/ProjectSettings/TagManager.asset" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
