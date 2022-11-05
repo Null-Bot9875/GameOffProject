@@ -10,7 +10,7 @@ namespace Game
         private void Awake()
         {
             GameDataCache.Instance.EnemyList = GameObject.FindObjectsOfType<EnemyController>().ToList();
-            GameDataCache.Instance.Player = GameObject.FindObjectsOfType<PlayerController>().ToList();
+            GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
 
             TypeEventSystem.Global.Register<GameOverEvt>(OnGameOverEvt);
         }
@@ -27,7 +27,7 @@ namespace Game
         }
 
 
-        private void ReloadScene()
+        public void ReloadScene()
         {
             SceneManager.LoadScene(GameDataCache.Instance.CrtSceneIdx);
         }

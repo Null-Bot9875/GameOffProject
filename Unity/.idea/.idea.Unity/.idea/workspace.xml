@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="单例类">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEvent.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEvent/GameOverEvt.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEvent/GameOverEvt.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/PlayerController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/PlayerController.cs.meta" afterDir="false" />
+    <list default="true" id="e0315cfc-35b0-4a12-8deb-37000dab0b45" name="Changes" comment="游戏结束事件">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameData/Scenes/TestEnemy.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameData/Scenes/TestEnemy.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameDataCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameDataCache.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameRoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/GameRoot.cs" afterDir="false" />
@@ -21,11 +17,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a9561d8ad93449b86c78ad206fedee7144200/54/2d2a41a8/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/Enemy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/EnemyController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/GameDataCache.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameDataCache.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity/GameOffProject/Unity/Assets/Scripts/GamePlay/GameRoot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePlay/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameUtility/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameUtility/TypeEvent.cs" root0="FORCE_HIGHLIGHTING" />
@@ -95,7 +94,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667619745946</updated>
-      <workItem from="1667619754453" duration="4357000" />
+      <workItem from="1667619754453" duration="6041000" />
     </task>
     <task id="LOCAL-00001" summary="2d光照">
       <created>1667625018775</created>
@@ -118,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667628454945</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="游戏结束事件">
+      <created>1667629055086</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667629055086</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +150,7 @@
     <MESSAGE value="2d光照" />
     <MESSAGE value="事件系统" />
     <MESSAGE value="单例类" />
-    <option name="LAST_COMMIT_MESSAGE" value="单例类" />
+    <MESSAGE value="游戏结束事件" />
+    <option name="LAST_COMMIT_MESSAGE" value="游戏结束事件" />
   </component>
 </project>
