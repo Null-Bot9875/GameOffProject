@@ -3,5 +3,7 @@ Unity/Logs
 Unity/Library
 Unity/obj
 Unity/Temp
-*.csproj
 *.sln
+*.csproj
+Unity/.idea
+Unity/UserSettings
