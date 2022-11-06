@@ -38,7 +38,7 @@ namespace Game
         {
             var ghostObj = CreatGhostObj(bulletCtr.gameObject, muzzlePos, quaternion);
             _line.positionCount = _maxFrameIterations;
-            ghostObj.GetComponent<BulletCtr>().SetFire(direction);
+            ghostObj.GetComponent<BulletCtr>().SetFire(direction,true);
             for (int i = 0; i < _line.positionCount; i++)
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);

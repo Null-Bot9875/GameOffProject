@@ -8,6 +8,7 @@ namespace Game
     {
         [SerializeField,Header("发射速度")] private float shootSpeed;
         [SerializeField,Header("折返速度")] private float backSpeed;
+        private bool isghost = false;
         #region 组件
         private Rigidbody2D rb;
         private Collider2D cld;
@@ -20,11 +21,23 @@ namespace Game
             cld = GetComponent<Collider2D>();
         }
 
-        public void SetFire(Vector2 direction)
+        public void SetFire(Vector2 direction,bool isghost =false)
         {
-            // Camera.main.DOShakePosition(.05f, .05f);
+            this.isghost = isghost;
             transform.up = direction;
             rb.velocity = direction * shootSpeed;
+            if (!this.isghost) SetEffect();
+        }
+
+        private void Update()
+        {
+            // transform.up = rb.velocity;
+            //todo 面朝方向为行进方向
+        }
+
+        void SetEffect()
+        {
+            Camera.main.DOShakePosition(.05f, .05f);
         }
         
     }
