@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1746064234065716940}
   - component: {fileID: 5866871702716853542}
   - component: {fileID: 8631256710281536125}
-  - component: {fileID: 4103013464555917428}
+  - component: {fileID: 352584248288417282}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5457098896987207704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.07, y: 0.644, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300014, guid: 3374c930158a8f3458c5d7c399625f5f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 97c7483e35c095d4f814d0537bd14a20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &4103013464555917428
+--- !u!70 &352584248288417282
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,6 +134,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.47727272}
-  m_Size: {x: 0.5, y: 0.95454544}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.03, y: 0.06}
   m_Direction: 0
