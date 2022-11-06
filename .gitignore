@@ -5,5 +5,5 @@ Unity/obj
 Unity/Temp
 *.sln
 *.csproj
-Unity/.idea/.idea.Unity/.idea/workspace.xml
-Unity/UserSettings/EditorUserSettings.asset
+Unity/.idea
+Unity/UserSettings
