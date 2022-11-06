@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Game
@@ -21,6 +22,7 @@ namespace Game
 
         public void SetFire(Vector2 direction)
         {
+            // Camera.main.DOShakePosition(.05f, .05f);
             transform.up = direction;
             rb.velocity = direction * shootSpeed;
         }

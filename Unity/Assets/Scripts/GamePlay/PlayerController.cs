@@ -1,5 +1,8 @@
+using DG.Tweening;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -18,7 +21,7 @@ namespace Game
         [SerializeField] private Transform muzzle;
         private Camera _camera;
         private bool _isCameraNotNull;
-
+        [SerializeField] private Projection _projection;
         #endregion
         // Start is called before the first frame update
         void Start()
@@ -50,8 +53,33 @@ namespace Game
                      as GameObject;
                 // go.transform.up  = (mouseV2 - (Vector2)gunGo.transform.position).normalized;
                 go.GetComponent<BulletCtr>().SetFire((mouseV2 - (Vector2)gunGo.transform.position).normalized);
+                
             }
             #endregion
+
+            #region 瞄准
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                GetComponent<LineRenderer>().enabled = true;
+            }
+            if (Input.GetMouseButton(1))
+            {
+                var go = Instantiate(Resources.Load("Prefabs/Item/Bullet"),
+                    muzzle.transform.position, gunGo.transform.rotation) as GameObject;
+                _projection.SimulateTrajectory(
+                    go.GetComponent<BulletCtr>(),
+                    muzzle.transform.position,
+                    gunGo.transform.rotation,(mouseV2 - (Vector2)gunGo.transform.position).normalized);
+                Destroy(go.gameObject);
+            }
+
+            if (Input.GetMouseButtonUp(1))
+            {
+                GetComponent<LineRenderer>().enabled = false;
+            }
+            #endregion
+            
         }
 
         public Vector2 GetMouseInfo()
