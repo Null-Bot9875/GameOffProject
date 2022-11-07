@@ -1,5 +1,7 @@
 using System;
 using DG.Tweening;
+using Game.GameEvent;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game
@@ -12,8 +14,29 @@ namespace Game
         #region 组件
         private Rigidbody2D rb;
         private Collider2D cld;
+        [SerializeField] private GameObject bulletOnWallObj;
         #endregion
-        
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            if (isghost && col.gameObject.CompareTag("OuterWall"))
+            {
+                Destroy(gameObject);
+                rb.velocity = Vector2.zero;
+                return;
+            }
+            if (col.gameObject.CompareTag("OuterWall"))
+            {
+                //todo 播放子弹上墙动画
+                TypeEventSystem.Global.Send(new BulletShotOnWall()
+                {
+                    bulletPos = transform.position
+                });
+                rb.velocity = Vector2.zero;
+                Instantiate(bulletOnWallObj, transform.position, quaternion.identity);
+                Destroy(gameObject);
+            }
+        }
 
         private void OnEnable()
         {
@@ -31,8 +54,7 @@ namespace Game
 
         private void Update()
         {
-            // transform.up = rb.velocity;
-            //todo 面朝方向为行进方向
+            transform.up = rb.velocity.normalized;
         }
 
         void SetEffect()

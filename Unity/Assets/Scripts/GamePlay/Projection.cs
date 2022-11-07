@@ -14,11 +14,20 @@ namespace Game
         [SerializeField, Header("障碍物")] private Transform _objParent;
         [SerializeField] private LineRenderer _line;
         [SerializeField] private int _maxFrameIterations;
-        
+        private readonly Dictionary<Transform, Transform> _spawnedObjects = new Dictionary<Transform, Transform>();
+
 
         private void Start()
         {
             CreatPhysicsScene();
+        }
+
+        private void Update()
+        {
+            foreach (var item in _spawnedObjects) {
+                item.Value.position = item.Key.position;
+                item.Value.rotation = item.Key.rotation;
+            }
         }
 
         void CreatPhysicsScene()
@@ -29,7 +38,11 @@ namespace Game
 
             foreach (Transform VARIABLE in _objParent)
             {
-                CreatGhostObj(VARIABLE.gameObject, VARIABLE.position, VARIABLE.rotation);
+                var ghostObj = CreatGhostObj(VARIABLE.gameObject, VARIABLE.position, VARIABLE.rotation);
+                if (ghostObj.isStatic)
+                {
+                    _spawnedObjects.Add(VARIABLE.transform,ghostObj.transform);
+                }
             }
 
         }
@@ -50,7 +63,7 @@ namespace Game
         private GameObject CreatGhostObj(GameObject go, Vector2 pos, Quaternion quaternion)
         {
             var ghostObj = Instantiate(go.gameObject, pos, quaternion);
-            ghostObj.GetComponent<SpriteRenderer>().enabled = false;
+            ghostObj.GetComponent<SpriteRenderer>().enabled = true;
             SceneManager.MoveGameObjectToScene(ghostObj,_simulationScene);
             return ghostObj;
         }
