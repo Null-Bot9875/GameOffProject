@@ -66,6 +66,14 @@ namespace Game
         {
             Camera.main.DOShakePosition(.05f, .05f);
         }
-        
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag("Player") && isghost)
+            {
+                rb.velocity = Vector2.zero;
+                Destroy(gameObject);
+            }
+        }
     }
 }

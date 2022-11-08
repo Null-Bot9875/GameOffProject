@@ -41,7 +41,18 @@ namespace Game
                 var ghostObj = CreatGhostObj(VARIABLE.gameObject, VARIABLE.position, VARIABLE.rotation);
                 if (!ghostObj.isStatic)
                 {
+                    if (ghostObj.CompareTag("Player"))
+                    {
+                        ghostObj.GetComponent<PlayerController>().enabled = false;
+                        ghostObj.GetComponent<Projection>().enabled = false;
+                        for (int i = 0; i < ghostObj.transform.childCount; i++)
+                        {
+                            ghostObj.transform.GetChild(i).gameObject.SetActive(false);
+                        }
+                        
+                    }
                     _spawnedObjects.Add(VARIABLE.transform,ghostObj.transform);
+                    
                 }
             }
 

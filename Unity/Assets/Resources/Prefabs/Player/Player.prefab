@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 3869642461521513129}
   - component: {fileID: 3869642461521513128}
   - component: {fileID: 3869642461521513126}
-  - component: {fileID: 3869642461521513125}
   - component: {fileID: 3869642463190991458}
   - component: {fileID: 3869642463190991459}
   - component: {fileID: 3617632295220367002}
   - component: {fileID: 209750661302366428}
   - component: {fileID: 1892308095}
   - component: {fileID: 4754204821894857572}
+  - component: {fileID: 1053683321911576426}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -113,32 +113,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3869642461521513125
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3869642461521513124}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0019937754, y: -0.047376245}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.19}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.103565454, y: 0.11075753}
-  m_EdgeRadius: 0
 --- !u!95 &3869642463190991458
 Animator:
   serializedVersion: 3
@@ -318,6 +292,22 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!58 &1053683321911576426
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3869642461521513124}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.042314485}
+  serializedVersion: 2
+  m_Radius: 0.052685514
 --- !u!1 &5206519181117189686
 GameObject:
   m_ObjectHideFlags: 0
