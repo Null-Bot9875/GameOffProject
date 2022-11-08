@@ -1,10 +1,5 @@
-using System;
-using DG.Tweening;
 using Game.GameEvent;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -15,7 +10,7 @@ namespace Game
         [SerializeField, Header("玩家移动速度")] private float moveSpeed;
         [SerializeField, Header("偏移系数")] private float offsetCoefficient;
         private Vector2 mouseV2;
-        private bool _isFowardShoot;
+        private bool _isForwardShoot;
         private bool canShoot;
         private Vector2 bulletOnWallPos;
 
@@ -46,7 +41,7 @@ namespace Game
             _camera = Camera.main;
             rb = GetComponent<Rigidbody2D>();
             cld = GetComponent<Collider2D>();
-            _isFowardShoot = true;
+            _isForwardShoot = true;
             canShoot = true;
         }
 
@@ -82,7 +77,7 @@ namespace Game
 
             if (canShoot)
             {
-                switch (_isFowardShoot)
+                switch (_isForwardShoot)
                 {
                     #region 射击与瞄准
 
@@ -95,7 +90,7 @@ namespace Game
                             // go.transform.up  = (mouseV2 - (Vector2)gunGo.transform.position).normalized;
                             go.GetComponent<BulletCtr>()
                                 .SetFire((mouseV2 - (Vector2)gunGo.transform.position).normalized);
-                            _isFowardShoot = false;
+                            _isForwardShoot = false;
                             canShoot = false;
                         }
 
@@ -196,7 +191,7 @@ namespace Game
         {
             if (col.transform.CompareTag("BackBullet"))
             {
-                _isFowardShoot = true;
+                _isForwardShoot = true;
                 canShoot = true;
                 Destroy(col.gameObject);
             }
