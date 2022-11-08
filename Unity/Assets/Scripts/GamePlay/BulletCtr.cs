@@ -11,50 +11,55 @@ namespace Game
         [SerializeField,Header("发射速度")] private float shootSpeed;
         [SerializeField,Header("折返速度")] private float backSpeed;
         private bool isghost = false;
+        public bool isback = false;
         #region 组件
         private Rigidbody2D rb;
-        private Collider2D cld;
-        [SerializeField] private GameObject bulletOnWallObj;
+        private Collider2D col;
         #endregion
 
-        private void OnCollisionEnter2D(Collision2D col)
+        public bool QueryIsghost()
         {
-            if (isghost && col.gameObject.CompareTag("OuterWall"))
-            {
-                Destroy(gameObject);
-                rb.velocity = Vector2.zero;
-                return;
-            }
-            if (col.gameObject.CompareTag("OuterWall"))
-            {
-                //todo 播放子弹上墙动画
-                TypeEventSystem.Global.Send(new BulletShotOnWall()
-                {
-                    bulletPos = transform.position
-                });
-                rb.velocity = Vector2.zero;
-                Instantiate(bulletOnWallObj, transform.position, quaternion.identity);
-                Destroy(gameObject);
-            }
+            return isghost;
         }
-
         private void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
-            cld = GetComponent<Collider2D>();
+            col = GetComponent<Collider2D>();
         }
 
-        public void SetFire(Vector2 direction,bool isghost =false)
+        public void SetFire(Vector2 direction,bool isghost =false,bool isback = false)
         {
             this.isghost = isghost;
+            this.isback = isback;
+            ChangeTagLayer();
             transform.up = direction;
             rb.velocity = direction * shootSpeed;
             if (!this.isghost) SetEffect();
+            if (isback && !isghost)
+            {
+                TypeEventSystem.Global.Send<GameBulletShotOutWallEvt>();
+            }
         }
 
         private void Update()
         {
             transform.up = rb.velocity.normalized;
+            
+        }
+
+        void ChangeTagLayer()
+        {
+            switch (isback)
+            {
+                case true:
+                    transform.tag = "BackBullet";
+                    gameObject.layer = LayerMask.NameToLayer("BackBullet");
+                    break;
+                case false:
+                    transform.tag = "Bullet";
+                    gameObject.layer = LayerMask.NameToLayer("Bullet");
+                    break;
+            }
         }
 
         void SetEffect()

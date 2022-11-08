@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 482334991743506765}
   m_Layer: 8
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootSpeed: 2
-  backSpeed: 0
-  bulletOnWallObj: {fileID: 6489939784925692741, guid: c78ec562793f7794a96503471fc6fae5, type: 3}
+  backSpeed: 3
+  isback: 0
 --- !u!50 &8631256710281536125
 Rigidbody2D:
   serializedVersion: 4

@@ -39,7 +39,7 @@ namespace Game
             foreach (Transform VARIABLE in _objParent)
             {
                 var ghostObj = CreatGhostObj(VARIABLE.gameObject, VARIABLE.position, VARIABLE.rotation);
-                if (ghostObj.isStatic)
+                if (!ghostObj.isStatic)
                 {
                     _spawnedObjects.Add(VARIABLE.transform,ghostObj.transform);
                 }
@@ -47,11 +47,18 @@ namespace Game
 
         }
 
-        public void SimulateTrajectory(BulletCtr bulletCtr,Vector2 muzzlePos,Quaternion quaternion,Vector2 direction)
+        public void SimulateTrajectory(BulletCtr bulletCtr,Vector2 StartShootPos,Quaternion quaternion,Vector2 direction)
         {
-            var ghostObj = CreatGhostObj(bulletCtr.gameObject, muzzlePos, quaternion);
+            var ghostObj = CreatGhostObj(bulletCtr.gameObject, StartShootPos, quaternion);
             _line.positionCount = _maxFrameIterations;
-            ghostObj.GetComponent<BulletCtr>().SetFire(direction,true);
+            if (ghostObj.GetComponent<BulletCtr>().isback)
+            {
+                ghostObj.GetComponent<BulletCtr>().SetFire(direction, true,true);
+            }
+            else
+            {
+                ghostObj.GetComponent<BulletCtr>().SetFire(direction, true);
+            }
             for (int i = 0; i < _line.positionCount; i++)
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);
@@ -63,7 +70,7 @@ namespace Game
         private GameObject CreatGhostObj(GameObject go, Vector2 pos, Quaternion quaternion)
         {
             var ghostObj = Instantiate(go.gameObject, pos, quaternion);
-            ghostObj.GetComponent<SpriteRenderer>().enabled = true;
+            ghostObj.GetComponent<SpriteRenderer>().enabled = false;
             SceneManager.MoveGameObjectToScene(ghostObj,_simulationScene);
             return ghostObj;
         }
