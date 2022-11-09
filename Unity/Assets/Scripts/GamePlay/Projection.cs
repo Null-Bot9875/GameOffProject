@@ -16,10 +16,14 @@ namespace Game
         [SerializeField] private int _maxFrameIterations;
         private readonly Dictionary<Transform, Transform> _spawnedObjects = new Dictionary<Transform, Transform>();
 
+        // [SerializeField, Header("场景更新周期")] private float fixUpdateTime = 1f;
+        // private float nowTime;
+
 
         private void Start()
         {
             CreatPhysicsScene();
+            // nowTime = Time.time;
         }
 
         private void Update()
@@ -28,6 +32,13 @@ namespace Game
                 item.Value.position = item.Key.position;
                 item.Value.rotation = item.Key.rotation;
             }
+
+            // if (Time.time > fixUpdateTime + nowTime)
+            // {
+            //     nowTime = Time.time;
+            //     UpdateSceneTransform();
+            // }
+            
         }
 
         void CreatPhysicsScene()
@@ -35,7 +46,13 @@ namespace Game
             _simulationScene =
                 SceneManager.CreateScene("simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
             _physicsScene = _simulationScene.GetPhysicsScene2D();
+            
+            UpdateSceneTransform();
 
+        }
+
+        void UpdateSceneTransform()
+        {
             foreach (Transform VARIABLE in _objParent)
             {
                 var ghostObj = CreatGhostObj(VARIABLE.gameObject, VARIABLE.position, VARIABLE.rotation);
@@ -56,7 +73,6 @@ namespace Game
                     
                 }
             }
-
         }
 
         public void SimulateTrajectory(BulletCtr bulletCtr,Vector2 StartShootPos,Quaternion quaternion,Vector2 direction)
@@ -86,5 +102,7 @@ namespace Game
             SceneManager.MoveGameObjectToScene(ghostObj,_simulationScene);
             return ghostObj;
         }
+        
+        
     }
 }
