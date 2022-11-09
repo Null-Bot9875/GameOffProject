@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  offsetCoefficient: 0.01
+  offsetCoefficient: -0.02
   gunGo: {fileID: 5206519181117189686}
   muzzle: {fileID: 890547792662252357}
   _projection: {fileID: 1892308095}
