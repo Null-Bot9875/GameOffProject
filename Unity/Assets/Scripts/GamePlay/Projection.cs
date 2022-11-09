@@ -45,6 +45,7 @@ namespace Game
                     {
                         ghostObj.GetComponent<PlayerController>().enabled = false;
                         ghostObj.GetComponent<Projection>().enabled = false;
+                        ghostObj.GetComponent<Collider2D>().isTrigger = true;
                         for (int i = 0; i < ghostObj.transform.childCount; i++)
                         {
                             ghostObj.transform.GetChild(i).gameObject.SetActive(false);

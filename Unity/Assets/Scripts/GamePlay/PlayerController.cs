@@ -23,8 +23,14 @@ namespace Game
         private Camera _camera;
         private bool _isCameraNotNull;
         [SerializeField] private Projection _projection;
+        private GameObject bullet;
 
         #endregion
+
+        private void Awake()
+        {
+            bullet = Resources.Load("Prefabs/Item/Bullet") as GameObject;
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -77,85 +83,39 @@ namespace Game
 
             if (canShoot)
             {
-                switch (_isForwardShoot)
+
+                if (Input.GetMouseButtonDown(0))
+
                 {
-                    #region 射击与瞄准
+                    if (_isForwardShoot)
+                    {
+                        var go = Instantiate(bullet, muzzle.transform.position, gunGo.transform.rotation);
+                        go.GetComponent<BulletCtr>().SetFire(GetDirection_ToGun());
+                        _isForwardShoot = false;
+                        canShoot = false;
+                    }
+                    else
+                    {
+                        var go = Instantiate(bullet, bulletOnWallPos - GetDirection_WallBulletToPlayer()*offsetCoefficient,
+                            Quaternion.identity);
+                        go.GetComponent<BulletCtr>().SetFire(
+                            GetDirection_GoToPlayer(go.transform.position), false, true);
+                        canShoot = false;
+                    }
+                }
 
-                    case true:
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            var go = Instantiate(Resources.Load("Prefabs/Item/Bullet"),
-                                    muzzle.transform.position, gunGo.transform.rotation)
-                                as GameObject;
-                            // go.transform.up  = (mouseV2 - (Vector2)gunGo.transform.position).normalized;
-                            go.GetComponent<BulletCtr>()
-                                .SetFire((mouseV2 - (Vector2)gunGo.transform.position).normalized);
-                            _isForwardShoot = false;
-                            canShoot = false;
-                        }
+                if (Input.GetMouseButton(1))
+                {
+                    GetComponent<LineRenderer>().enabled = true;
+                    if (_isForwardShoot)
+                    {
+                        CreatSimulateBullet(false);
+                    }
+                    else
+                    {
+                        CreatSimulateBullet(true);
+                    }
 
-                        if (Input.GetMouseButtonDown(1))
-                        {
-                            GetComponent<LineRenderer>().enabled = true;
-                        }
-
-                        if (Input.GetMouseButton(1))
-                        {
-                            var go = Instantiate(Resources.Load("Prefabs/Item/Bullet"),
-                                muzzle.transform.position, gunGo.transform.rotation) as GameObject;
-                            _projection.SimulateTrajectory(
-                                go.GetComponent<BulletCtr>(),
-                                muzzle.transform.position,
-                                gunGo.transform.rotation, (mouseV2 - (Vector2)gunGo.transform.position).normalized);
-                            Destroy(go.gameObject);
-                        }
-
-                        break;
-
-                    #endregion
-
-                    #region 预瞄与返回
-
-                    case false:
-                        if (Input.GetMouseButtonDown(1)) GetComponent<LineRenderer>().enabled = true;
-                        if (Input.GetMouseButton(1))
-                        {
-                            Vector2 nomToPlayer = new Vector2(transform.position.x - bulletOnWallPos.x,
-                                transform.position.y - bulletOnWallPos.y).normalized;
-                            var go = Instantiate(Resources.Load("Prefabs/Item/Bullet"),
-                                new Vector2(
-                                    bulletOnWallPos.x + ( nomToPlayer.x) * offsetCoefficient,
-                                    bulletOnWallPos.y + ( nomToPlayer.y) * offsetCoefficient), Quaternion.identity) as GameObject;
-                            go.GetComponent<BulletCtr>().isback = true;
-                            _projection.SimulateTrajectory(
-                                go.GetComponent<BulletCtr>(),
-                                new Vector2(
-                                    bulletOnWallPos.x + ( nomToPlayer.x) * offsetCoefficient,
-                                    bulletOnWallPos.y + ( nomToPlayer.y) * offsetCoefficient),
-                                Quaternion.identity,
-                                new Vector2(transform.position.x - go.transform.position.x,
-                                    transform.position.y - go.transform.position.y).normalized);
-                            Destroy(go.gameObject);
-                        }
-
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            Vector2 nomToPlayer = new Vector2(transform.position.x - bulletOnWallPos.x,
-                                transform.position.y - bulletOnWallPos.y).normalized;
-                            var go = Instantiate(Resources.Load("Prefabs/Item/Bullet"),
-                                new Vector2(
-                                    bulletOnWallPos.x + (nomToPlayer.x) * offsetCoefficient,
-                                    bulletOnWallPos.y + ( nomToPlayer.y) * offsetCoefficient),
-                                Quaternion.identity) as GameObject;
-                            go.GetComponent<BulletCtr>().SetFire(
-                                new Vector2(transform.position.x - go.transform.position.x,
-                                    transform.position.y - go.transform.position.y).normalized, false, true);
-                            canShoot = false;
-                        }
-
-                        break;
-
-                    #endregion
                 }
             }
 
@@ -195,6 +155,44 @@ namespace Game
                 canShoot = true;
                 Destroy(col.gameObject);
             }
+        }
+
+        void CreatSimulateBullet(bool isback)
+        {
+            GameObject go;
+            if (isback)
+            {
+                 go = Instantiate(bullet, bulletOnWallPos + GetDirection_WallBulletToPlayer()*offsetCoefficient, Quaternion.identity);
+                go.GetComponent<BulletCtr>().isback = true;
+                _projection.SimulateTrajectory(go.GetComponent<BulletCtr>(),
+                    bulletOnWallPos - GetDirection_WallBulletToPlayer()*offsetCoefficient, Quaternion.identity, 
+                    GetDirection_WallBulletToPlayer());
+                Destroy(go.gameObject);
+            }
+            else
+            {
+                go = Instantiate(bullet, muzzle.transform.position, gunGo.transform.rotation);
+                _projection.SimulateTrajectory(
+                    go.GetComponent<BulletCtr>(),
+                    muzzle.transform.position,
+                    gunGo.transform.rotation, GetDirection_ToGun());
+            }
+            Destroy(go);
+        }
+
+        Vector2 GetDirection_ToGun()
+        {
+            return (mouseV2 - (Vector2)gunGo.transform.position).normalized;
+        }
+
+        Vector2 GetDirection_WallBulletToPlayer()
+        {
+            return ((Vector2)transform.position - bulletOnWallPos).normalized;
+        }
+
+        Vector2 GetDirection_GoToPlayer(Vector2 GoPos)
+        {
+            return ((Vector2)transform.position - GoPos).normalized;
         }
     }
 }
