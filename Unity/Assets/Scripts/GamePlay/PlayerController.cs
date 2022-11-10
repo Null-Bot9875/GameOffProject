@@ -24,6 +24,7 @@ namespace Game
         private bool _isCameraNotNull;
         [SerializeField] private Projection _projection;
         private GameObject bullet;
+        [SerializeField] private LineRenderer _line;
 
         #endregion
 
@@ -104,9 +105,13 @@ namespace Game
                     }
                 }
 
+                if (Input.GetMouseButtonDown(1))
+                {
+                    _line.gameObject.SetActive(true);
+                    _line.gameObject.GetComponent<Projection>().Enable();
+                }
                 if (Input.GetMouseButton(1))
                 {
-                    GetComponent<LineRenderer>().enabled = true;
                     if (_isForwardShoot)
                     {
                         CreatSimulateBullet(false);
@@ -115,11 +120,14 @@ namespace Game
                     {
                         CreatSimulateBullet(true);
                     }
-
                 }
             }
 
-            if (Input.GetMouseButtonUp(1) || !canShoot) GetComponent<LineRenderer>().enabled = false;
+            if (Input.GetMouseButtonUp(1) || !canShoot)
+            {
+                _line.gameObject.SetActive(false);
+                _line.gameObject.GetComponent<Projection>().Disable();
+            }
         }
 
         public Vector2 GetMouseInfo()

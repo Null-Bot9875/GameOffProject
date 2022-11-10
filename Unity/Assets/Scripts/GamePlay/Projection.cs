@@ -15,15 +15,26 @@ namespace Game
         [SerializeField] private LineRenderer _line;
         [SerializeField] private int _maxFrameIterations;
         private readonly Dictionary<Transform, Transform> _spawnedObjects = new Dictionary<Transform, Transform>();
+        private readonly List<GameObject> ghostObj = new List<GameObject>();
 
         // [SerializeField, Header("场景更新周期")] private float fixUpdateTime = 1f;
         // private float nowTime;
 
-
         private void Start()
         {
-            CreatPhysicsScene();
-            // nowTime = Time.time;
+            InitPhysicsScene();
+        }
+
+        public void Enable()
+        {
+            UpdateSceneTransform();
+            _line.enabled = true;
+        }
+
+        public void Disable()
+        {
+            DeleteSceneTransform();
+            _line.enabled = false;
         }
 
         private void Update()
@@ -41,38 +52,49 @@ namespace Game
             
         }
 
-        void CreatPhysicsScene()
+        public void InitPhysicsScene()
         {
+            if (_simulationScene.isLoaded)
+            {
+                return;
+            }
             _simulationScene =
                 SceneManager.CreateScene("simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
             _physicsScene = _simulationScene.GetPhysicsScene2D();
-            
-            UpdateSceneTransform();
-
         }
 
         void UpdateSceneTransform()
         {
-            foreach (Transform VARIABLE in _objParent)
+            foreach (Transform item in _objParent)
             {
-                var ghostObj = CreatGhostObj(VARIABLE.gameObject, VARIABLE.position, VARIABLE.rotation);
+                var ghostObj = CreatGhostObj(item.gameObject, item.position, item.rotation);
                 if (!ghostObj.isStatic)
                 {
                     if (ghostObj.CompareTag("Player"))
                     {
                         ghostObj.GetComponent<PlayerController>().enabled = false;
-                        ghostObj.GetComponent<Projection>().enabled = false;
                         ghostObj.GetComponent<Collider2D>().isTrigger = true;
                         for (int i = 0; i < ghostObj.transform.childCount; i++)
                         {
                             ghostObj.transform.GetChild(i).gameObject.SetActive(false);
+                            
                         }
                         
                     }
-                    _spawnedObjects.Add(VARIABLE.transform,ghostObj.transform);
+                    _spawnedObjects.Add(item.transform,ghostObj.transform);
                     
                 }
             }
+        }
+
+        void DeleteSceneTransform()
+        {
+            foreach (var item in ghostObj)
+            {
+                Destroy(item);
+            }
+            ghostObj.Clear();
+            _spawnedObjects.Clear();
         }
 
         public void SimulateTrajectory(BulletCtr bulletCtr,Vector2 StartShootPos,Quaternion quaternion,Vector2 direction)
@@ -100,6 +122,10 @@ namespace Game
             var ghostObj = Instantiate(go.gameObject, pos, quaternion);
             ghostObj.GetComponent<SpriteRenderer>().enabled = false;
             SceneManager.MoveGameObjectToScene(ghostObj,_simulationScene);
+            if (go.GetComponent<BulletCtr>() == null)
+            {
+                this.ghostObj.Add(ghostObj);
+            }
             return ghostObj;
         }
         
