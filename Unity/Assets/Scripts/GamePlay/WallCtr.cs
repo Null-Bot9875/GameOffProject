@@ -39,6 +39,7 @@ namespace Game
             {
                 if (go.GetComponent<BulletCtr>().QueryIsghost())
                 {
+                    TypeEventSystem.Global.Send<GameOpenEndPointEvt>();
                     Destroy(go);
                     go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     return;

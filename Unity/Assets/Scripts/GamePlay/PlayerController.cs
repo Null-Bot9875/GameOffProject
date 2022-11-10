@@ -14,6 +14,14 @@ namespace Game
         private bool canShoot;
         private Vector2 bulletOnWallPos;
 
+        #region 子弹回收
+
+        private float _shootCD = 5f;
+        private float _nowShootTime;
+        private bool canShootCD;
+
+        #endregion
+
         #region 组件
 
         private Rigidbody2D rb;
@@ -50,6 +58,8 @@ namespace Game
             cld = GetComponent<Collider2D>();
             _isForwardShoot = true;
             canShoot = true;
+            _nowShootTime = -5f;
+
         }
 
         void GetBulletOnWallPos(GameBulletShotOnWallEvt gameBulletShotOnWallEvt)
@@ -69,7 +79,7 @@ namespace Game
             #region 鼠标跟随
 
             mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
-            gunGo.transform.right = (mouseV2 - (Vector2)gunGo.transform.position).normalized;
+            
             ChangeWeaponForce();
 
             #endregion
@@ -82,29 +92,18 @@ namespace Game
 
             #endregion
 
-            if (canShoot)
+            #region 瞄准射击
+
+            if (Time.time >_shootCD + _nowShootTime)
             {
-
-                if (Input.GetMouseButtonDown(0))
-
-                {
-                    if (_isForwardShoot)
-                    {
-                        var go = Instantiate(bullet, muzzle.transform.position, gunGo.transform.rotation);
-                        go.GetComponent<BulletCtr>().SetFire(GetDirection_ToGun());
-                        _isForwardShoot = false;
-                        canShoot = false;
-                    }
-                    else
-                    {
-                        var go = Instantiate(bullet, bulletOnWallPos - GetDirection_WallBulletToPlayer()*offsetCoefficient,
-                            Quaternion.identity);
-                        go.GetComponent<BulletCtr>().SetFire(
-                            GetDirection_GoToPlayer(go.transform.position), false, true);
-                        canShoot = false;
-                    }
-                }
-
+                canShootCD = true;
+            }
+            else
+            {
+                canShootCD = false;
+            }
+            if (canShoot && canShootCD)
+            {
                 if (Input.GetMouseButtonDown(1))
                 {
                     _line.gameObject.SetActive(true);
@@ -115,10 +114,29 @@ namespace Game
                     if (_isForwardShoot)
                     {
                         CreatSimulateBullet(false);
-                    }
-                    else
+                    }else
                     {
                         CreatSimulateBullet(true);
+                    }
+                    
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (_isForwardShoot)
+                        {
+                            var go = Instantiate(bullet, muzzle.transform.position, gunGo.transform.rotation);
+                            go.GetComponent<BulletCtr>().SetFire(GetDirection_ToGun());
+                            _isForwardShoot = false;
+                            canShoot = false;
+                            
+                        }
+                        else
+                        {
+                            var go = Instantiate(bullet, bulletOnWallPos - GetDirection_WallBulletToPlayer()*offsetCoefficient,
+                                Quaternion.identity);
+                            go.GetComponent<BulletCtr>().SetFire(
+                                GetDirection_GoToPlayer(go.transform.position), false, true);
+                            canShoot = false;
+                        }
                     }
                 }
             }
@@ -128,6 +146,15 @@ namespace Game
                 _line.gameObject.SetActive(false);
                 _line.gameObject.GetComponent<Projection>().Disable();
             }
+
+            #endregion
+
+            
+        }
+
+        void CountShootCD()
+        {
+            _nowShootTime = Time.time;
         }
 
         public Vector2 GetMouseInfo()
@@ -135,7 +162,7 @@ namespace Game
             return (mouseV2 - (Vector2)gunGo.transform.position).normalized;
         }
 
-        public Vector2 GetMoveInfo()
+        public Vector2 GetPlayerMoveInfo()
         {
             x = Input.GetAxis("Horizontal");
             y = Input.GetAxis("Vertical");
@@ -144,7 +171,9 @@ namespace Game
 
         void ChangeWeaponForce()
         {
+            gunGo.transform.right =  (mouseV2 - (Vector2)gunGo.transform.position).normalized;
             gunGo.GetComponent<SpriteRenderer>().flipY = (mouseV2.x < transform.position.x);
+            
             if (mouseV2.y > transform.position.y)
             {
                 gunGo.GetComponent<SpriteRenderer>().sortingOrder = -1;
@@ -161,6 +190,7 @@ namespace Game
             {
                 _isForwardShoot = true;
                 canShoot = true;
+                CountShootCD();
                 Destroy(col.gameObject);
             }
         }

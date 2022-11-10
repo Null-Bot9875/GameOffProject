@@ -21,7 +21,7 @@ namespace Game
         // Update is called once per frame
         void Update()
         {
-            if (_playeMove.GetMoveInfo().magnitude < 0.2f) 
+            if (_playeMove.GetPlayerMoveInfo().magnitude < 0.2f) 
             {
                 //静止
                 animancer.Play(

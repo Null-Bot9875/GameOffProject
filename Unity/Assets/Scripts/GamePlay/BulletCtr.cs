@@ -10,8 +10,8 @@ namespace Game
     {
         [SerializeField,Header("发射速度")] private float shootSpeed;
         [SerializeField,Header("折返速度")] private float backSpeed;
-        private bool isghost = false;
-        public bool isback = false;
+        private bool isghost ;
+        public bool isback;
         #region 组件
         private Rigidbody2D rb;
         private Collider2D col;
@@ -33,7 +33,15 @@ namespace Game
             this.isback = isback;
             ChangeTagLayer();
             transform.up = direction;
-            rb.velocity = direction * shootSpeed;
+            if (isback)
+            {
+                rb.velocity = direction * backSpeed;
+            }
+            else
+            {
+                rb.velocity = direction * shootSpeed;
+            }
+            
             if (!this.isghost) SetEffect();
             if (isback && !isghost)
             {
@@ -71,9 +79,22 @@ namespace Game
         {
             if (col.gameObject.CompareTag("Player") && isghost)
             {
+                TypeEventSystem.Global.Send<GameCloseEndPointEvt>();
                 rb.velocity = Vector2.zero;
                 Destroy(gameObject);
             }
+
+            if (col.gameObject.CompareTag("Player") && transform.CompareTag("Bullet"))
+            {
+                if (!isghost)
+                {
+                    Debug.Log("playerDie");
+                    TypeEventSystem.Global.Send<GamePlayerDieEvt>();
+                }
+                rb.velocity = Vector2.zero;
+                Destroy(gameObject);
+            }
+            
         }
     }
 }

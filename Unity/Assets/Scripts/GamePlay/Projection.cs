@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.GameEvent;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,13 @@ namespace Game
         [SerializeField, Header("障碍物")] private Transform _objParent;
         [SerializeField] private LineRenderer _line;
         [SerializeField] private int _maxFrameIterations;
-        private readonly Dictionary<Transform, Transform> _spawnedObjects = new Dictionary<Transform, Transform>();
+        private Vector2 lineEndPos;
+        [SerializeField] private GameObject endPosGo;
+        private bool checkWall;
+        public bool lineTouchPlayer;
+
+        private readonly List<KeyValuePair<Transform, Transform>> _spawnedObjects =
+            new List<KeyValuePair<Transform, Transform>>();
         private readonly List<GameObject> ghostObj = new List<GameObject>();
 
         // [SerializeField, Header("场景更新周期")] private float fixUpdateTime = 1f;
@@ -22,8 +29,15 @@ namespace Game
 
         private void Start()
         {
+            TypeEventSystem.Global.Register<GameCloseEndPointEvt>(CloseEndPoint)
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
+            TypeEventSystem.Global.Register<GameOpenEndPointEvt>(OpenEndPoint)
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
+            _line.positionCount = _maxFrameIterations;
             InitPhysicsScene();
         }
+        
+        
 
         public void Enable()
         {
@@ -35,6 +49,9 @@ namespace Game
         {
             DeleteSceneTransform();
             _line.enabled = false;
+            checkWall = false;
+            endPosGo.GetComponent<SpriteRenderer>().enabled = false;
+            lineTouchPlayer = false;
         }
 
         private void Update()
@@ -44,12 +61,37 @@ namespace Game
                 item.Value.rotation = item.Key.rotation;
             }
 
+            if (checkWall)
+            {
+                endPosGo.GetComponent<SpriteRenderer>().enabled = true;
+                endPosGo.transform.position = lineEndPos;
+            }
+
+            if (lineTouchPlayer)
+            {
+                endPosGo.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                endPosGo.GetComponent<SpriteRenderer>().enabled = true;
+            }
+
             // if (Time.time > fixUpdateTime + nowTime)
             // {
             //     nowTime = Time.time;
             //     UpdateSceneTransform();
             // }
-            
+
+        }
+
+        private void OpenEndPoint(GameOpenEndPointEvt gameOpenEndPointEvt)
+        {
+            lineTouchPlayer = false;
+        }
+
+        public void CloseEndPoint(GameCloseEndPointEvt gameCloseEndPointEvt)
+        {
+            lineTouchPlayer = true;
         }
 
         public void InitPhysicsScene()
@@ -81,7 +123,7 @@ namespace Game
                         }
                         
                     }
-                    _spawnedObjects.Add(item.transform,ghostObj.transform);
+                    _spawnedObjects.Add(new KeyValuePair<Transform, Transform>(item.transform,ghostObj.transform));
                     
                 }
             }
@@ -100,7 +142,7 @@ namespace Game
         public void SimulateTrajectory(BulletCtr bulletCtr,Vector2 StartShootPos,Quaternion quaternion,Vector2 direction)
         {
             var ghostObj = CreatGhostObj(bulletCtr.gameObject, StartShootPos, quaternion);
-            _line.positionCount = _maxFrameIterations;
+            
             if (ghostObj.GetComponent<BulletCtr>().isback)
             {
                 ghostObj.GetComponent<BulletCtr>().SetFire(direction, true,true);
@@ -113,9 +155,20 @@ namespace Game
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);
                 _line.SetPosition(i,ghostObj.transform.position);
+
+                if (i>1)
+                {
+                    if (_line.GetPosition(i) == _line.GetPosition(i-1))
+                    {
+                        lineEndPos = _line.GetPosition(i);
+                        checkWall = true;
+                    }
+                }
             }
             Destroy(ghostObj.gameObject);
         }
+
+        
 
         private GameObject CreatGhostObj(GameObject go, Vector2 pos, Quaternion quaternion)
         {
