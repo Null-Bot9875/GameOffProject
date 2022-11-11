@@ -174,7 +174,7 @@ namespace Game
             var bulletCtr = go.GetComponent<BulletCtr>();
             if (!_isForwardShoot)
             {
-                go.transform.position = bulletOnWallPos + GetDirection_WallBulletToPlayer() * offsetCoefficient;;
+                go.transform.position = bulletOnWallPos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                 go.transform.rotation = Quaternion.identity;
                 bulletCtr.isback = true;
                 _projection.SimulateTrajectory(bulletCtr, GetDirection_WallBulletToPlayer());
