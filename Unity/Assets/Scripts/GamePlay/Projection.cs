@@ -69,7 +69,7 @@ namespace Game
         {
             foreach (Transform item in _objParent)
             {
-                var ghostObj = CreatGhostObj(item.gameObject, item.position, item.rotation);
+                var ghostObj = CreatGhostObj(item.gameObject);
                 if (!ghostObj.isStatic)
                 {
                     if (ghostObj.CompareTag("Player"))
@@ -98,9 +98,9 @@ namespace Game
             _spawnedObjects.Clear();
         }
 
-        public void SimulateTrajectory(BulletCtr bulletCtr,Vector2 StartShootPos,Quaternion quaternion,Vector2 direction)
+        public void SimulateTrajectory(BulletCtr bulletCtr,Vector2 direction)
         {
-            var ghostObj = CreatGhostObj(bulletCtr.gameObject, StartShootPos, quaternion);
+            var ghostObj = CreatGhostObj(bulletCtr.gameObject);
             
             if (ghostObj.GetComponent<BulletCtr>().isback)
             {
@@ -127,9 +127,9 @@ namespace Game
             Destroy(ghostObj.gameObject);
         }
 
-        private GameObject CreatGhostObj(GameObject go, Vector2 pos, Quaternion quaternion)
+        private GameObject CreatGhostObj(GameObject go)
         {
-            var ghostObj = Instantiate(go.gameObject, pos, quaternion);
+            var ghostObj = Instantiate(go.gameObject,go.transform.position, go.transform.rotation);
             ghostObj.GetComponent<SpriteRenderer>().enabled = false;
             SceneManager.MoveGameObjectToScene(ghostObj,_simulationScene);
             if (go.GetComponent<BulletCtr>() == null)

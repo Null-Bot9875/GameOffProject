@@ -19,7 +19,6 @@ namespace Game
         private float _shootCD = 5f;
         private float _nowShootTime;
 
-
         #endregion
 
         #region 组件
@@ -46,6 +45,7 @@ namespace Game
 
             TypeEventSystem.Global.Register<GameBulletShotOnWallEvt>(OnBulletOnWallEvt)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
+
             #endregion
 
             _camera = Camera.main;
@@ -108,7 +108,8 @@ namespace Game
                         {
                             var position = bulletOnWallPos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                             var go = Instantiate(bullet, position, Quaternion.identity);
-                            go.GetComponent<BulletCtr>().SetFire(GetDirection_GoToPlayer(go.transform.position), false, true);
+                            go.GetComponent<BulletCtr>()
+                                .SetFire(GetDirection_GoToPlayer(go.transform.position), false, true);
                             canShoot = false;
                         }
                     }
@@ -169,24 +170,24 @@ namespace Game
 
         void CreatSimulateBullet()
         {
-            GameObject go;
+            var go = GameObject.Instantiate(bullet);
+            var bulletCtr = go.GetComponent<BulletCtr>();
             if (!_isForwardShoot)
             {
-                go = Instantiate(bullet, bulletOnWallPos + GetDirection_WallBulletToPlayer() * offsetCoefficient,
-                    Quaternion.identity);
-                go.GetComponent<BulletCtr>().isback = true;
-                _projection.SimulateTrajectory(go.GetComponent<BulletCtr>(),
-                    bulletOnWallPos - GetDirection_WallBulletToPlayer() * offsetCoefficient, Quaternion.identity,
-                    GetDirection_WallBulletToPlayer());
-                Destroy(go.gameObject);
+                var position = bulletOnWallPos + GetDirection_WallBulletToPlayer() * offsetCoefficient;
+                var rotation = Quaternion.identity;
+                go.transform.position = position;
+                go.transform.rotation = rotation;
+                bulletCtr.isback = true;
+                _projection.SimulateTrajectory(bulletCtr, GetDirection_WallBulletToPlayer());
             }
             else
             {
-                go = Instantiate(bullet, muzzle.transform.position, gunGo.transform.rotation);
-                _projection.SimulateTrajectory(
-                    go.GetComponent<BulletCtr>(),
-                    muzzle.transform.position,
-                    gunGo.transform.rotation, GetDirection_ToGun());
+                var position = muzzle.transform.position;
+                var rotation = gunGo.transform.rotation;
+                go.transform.position = position;
+                go.transform.rotation = rotation;
+                _projection.SimulateTrajectory(bulletCtr, GetDirection_ToGun());
             }
 
             Destroy(go);
