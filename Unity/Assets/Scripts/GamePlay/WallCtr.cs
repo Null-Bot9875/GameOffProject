@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Game.GameEvent;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game
@@ -39,7 +35,6 @@ namespace Game
             {
                 if (go.GetComponent<BulletCtr>().QueryIsghost())
                 {
-                    TypeEventSystem.Global.Send<GameOpenEndPointEvt>();
                     Destroy(go);
                     go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     return;

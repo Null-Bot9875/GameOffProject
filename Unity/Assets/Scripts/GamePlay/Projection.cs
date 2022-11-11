@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Game.GameEvent;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,9 +13,6 @@ namespace Game
         [SerializeField] private int _maxFrameIterations;
         private Vector2 lineEndPos;
         [SerializeField] private GameObject endPosGo;
-        private bool checkWall;
-        public bool lineTouchPlayer;
-
         private readonly List<KeyValuePair<Transform, Transform>> _spawnedObjects =
             new List<KeyValuePair<Transform, Transform>>();
         private readonly List<GameObject> ghostObj = new List<GameObject>();
@@ -29,29 +22,22 @@ namespace Game
 
         private void Start()
         {
-            TypeEventSystem.Global.Register<GameCloseEndPointEvt>(CloseEndPoint)
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
-            TypeEventSystem.Global.Register<GameOpenEndPointEvt>(OpenEndPoint)
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
             _line.positionCount = _maxFrameIterations;
             InitPhysicsScene();
         }
-        
-        
 
         public void Enable()
         {
             UpdateSceneTransform();
             _line.enabled = true;
+            endPosGo.GetComponent<SpriteRenderer>().enabled = true;
         }
 
         public void Disable()
         {
             DeleteSceneTransform();
             _line.enabled = false;
-            checkWall = false;
             endPosGo.GetComponent<SpriteRenderer>().enabled = false;
-            lineTouchPlayer = false;
         }
 
         private void Update()
@@ -61,39 +47,13 @@ namespace Game
                 item.Value.rotation = item.Key.rotation;
             }
 
-            if (checkWall)
-            {
-                endPosGo.GetComponent<SpriteRenderer>().enabled = true;
-                endPosGo.transform.position = lineEndPos;
-            }
-
-            if (lineTouchPlayer)
-            {
-                endPosGo.GetComponent<SpriteRenderer>().enabled = false;
-            }
-            else
-            {
-                endPosGo.GetComponent<SpriteRenderer>().enabled = true;
-            }
-
             // if (Time.time > fixUpdateTime + nowTime)
             // {
             //     nowTime = Time.time;
             //     UpdateSceneTransform();
             // }
-
         }
-
-        private void OpenEndPoint(GameOpenEndPointEvt gameOpenEndPointEvt)
-        {
-            lineTouchPlayer = false;
-        }
-
-        public void CloseEndPoint(GameCloseEndPointEvt gameCloseEndPointEvt)
-        {
-            lineTouchPlayer = true;
-        }
-
+        
         public void InitPhysicsScene()
         {
             if (_simulationScene.isLoaded)
@@ -119,7 +79,6 @@ namespace Game
                         for (int i = 0; i < ghostObj.transform.childCount; i++)
                         {
                             ghostObj.transform.GetChild(i).gameObject.SetActive(false);
-                            
                         }
                         
                     }
@@ -161,14 +120,12 @@ namespace Game
                     if (_line.GetPosition(i) == _line.GetPosition(i-1))
                     {
                         lineEndPos = _line.GetPosition(i);
-                        checkWall = true;
+                        endPosGo.transform.position = lineEndPos;
                     }
                 }
             }
             Destroy(ghostObj.gameObject);
         }
-
-        
 
         private GameObject CreatGhostObj(GameObject go, Vector2 pos, Quaternion quaternion)
         {
@@ -181,7 +138,5 @@ namespace Game
             }
             return ghostObj;
         }
-        
-        
     }
 }
