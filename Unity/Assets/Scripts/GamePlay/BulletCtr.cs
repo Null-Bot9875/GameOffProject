@@ -1,33 +1,33 @@
-using System;
 using DG.Tweening;
 using Game.GameEvent;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game
 {
     public class BulletCtr : MonoBehaviour
     {
-        [SerializeField,Header("发射速度")] private float shootSpeed;
-        [SerializeField,Header("折返速度")] private float backSpeed;
-        private bool isghost ;
+        [SerializeField, Header("发射速度")] private float shootSpeed;
+        [SerializeField, Header("折返速度")] private float backSpeed;
+        private bool isghost;
         public bool isback;
+
         #region 组件
+
         private Rigidbody2D rb;
-        private Collider2D col;
+
         #endregion
 
         public bool QueryIsghost()
         {
             return isghost;
         }
+
         private void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
-            col = GetComponent<Collider2D>();
         }
 
-        public void SetFire(Vector2 direction,bool isghost =false,bool isback = false)
+        public void SetFire(Vector2 direction, bool isghost = false, bool isback = false)
         {
             this.isghost = isghost;
             this.isback = isback;
@@ -41,18 +41,20 @@ namespace Game
             {
                 rb.velocity = direction * shootSpeed;
             }
-            
-            if (!this.isghost) SetEffect();
-            if (isback && !isghost)
+
+            if (!isghost)
             {
-                TypeEventSystem.Global.Send<GameBulletShotOutWallEvt>();
+                SetEffect();
+                if (isback)
+                {
+                    TypeEventSystem.Global.Send<GameBulletShotOutWallEvt>();
+                }
             }
         }
 
         private void Update()
         {
             transform.up = rb.velocity.normalized;
-            
         }
 
         void ChangeTagLayer()
@@ -79,7 +81,6 @@ namespace Game
         {
             if (col.gameObject.CompareTag("Player") && isghost)
             {
-                TypeEventSystem.Global.Send<GameCloseEndPointEvt>();
                 rb.velocity = Vector2.zero;
                 Destroy(gameObject);
             }
@@ -91,10 +92,10 @@ namespace Game
                     Debug.Log("playerDie");
                     TypeEventSystem.Global.Send<GamePlayerDieEvt>();
                 }
+
                 rb.velocity = Vector2.zero;
                 Destroy(gameObject);
             }
-            
         }
     }
 }
