@@ -174,19 +174,15 @@ namespace Game
             var bulletCtr = go.GetComponent<BulletCtr>();
             if (!_isForwardShoot)
             {
-                var position = bulletOnWallPos + GetDirection_WallBulletToPlayer() * offsetCoefficient;
-                var rotation = Quaternion.identity;
-                go.transform.position = position;
-                go.transform.rotation = rotation;
+                go.transform.position = bulletOnWallPos + GetDirection_WallBulletToPlayer() * offsetCoefficient;;
+                go.transform.rotation = Quaternion.identity;
                 bulletCtr.isback = true;
                 _projection.SimulateTrajectory(bulletCtr, GetDirection_WallBulletToPlayer());
             }
             else
             {
-                var position = muzzle.transform.position;
-                var rotation = gunGo.transform.rotation;
-                go.transform.position = position;
-                go.transform.rotation = rotation;
+                go.transform.position = muzzle.transform.position;
+                go.transform.rotation =  gunGo.transform.rotation;
                 _projection.SimulateTrajectory(bulletCtr, GetDirection_ToGun());
             }
 
