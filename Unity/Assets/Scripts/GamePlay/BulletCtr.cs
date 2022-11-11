@@ -14,7 +14,6 @@ namespace Game
         #region 组件
 
         private Rigidbody2D rb;
-        private Collider2D col;
 
         #endregion
 
@@ -26,7 +25,6 @@ namespace Game
         private void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
-            col = GetComponent<Collider2D>();
         }
 
         public void SetFire(Vector2 direction, bool isghost = false, bool isback = false)
@@ -44,10 +42,13 @@ namespace Game
                 rb.velocity = direction * shootSpeed;
             }
 
-            if (!this.isghost) SetEffect();
-            if (isback && !isghost)
+            if (!isghost)
             {
-                TypeEventSystem.Global.Send<GameBulletShotOutWallEvt>();
+                SetEffect();
+                if (isback)
+                {
+                    TypeEventSystem.Global.Send<GameBulletShotOutWallEvt>();
+                }
             }
         }
 

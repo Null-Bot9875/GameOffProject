@@ -18,14 +18,13 @@ namespace Game
 
         private float _shootCD = 5f;
         private float _nowShootTime;
-        private bool canShootCD;
+
 
         #endregion
 
         #region 组件
 
         private Rigidbody2D rb;
-        private Collider2D cld;
         [SerializeField] private GameObject gunGo;
         [SerializeField] private Transform muzzle;
         private Camera _camera;
@@ -41,45 +40,33 @@ namespace Game
             bullet = Resources.Load("Prefabs/Item/Bullet") as GameObject;
         }
 
-        // Start is called before the first frame update
         void Start()
         {
             #region 事件注册
 
-            TypeEventSystem.Global.Register<GameBulletShotOnWallEvt>(GetBulletOnWallPos)
+            TypeEventSystem.Global.Register<GameBulletShotOnWallEvt>(OnBulletOnWallEvt)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
-            TypeEventSystem.Global.Register<GameBulletShotOutWallEvt>(DosthBulletOutWall)
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
-
             #endregion
 
             _camera = Camera.main;
             rb = GetComponent<Rigidbody2D>();
-            cld = GetComponent<Collider2D>();
             _isForwardShoot = true;
             canShoot = true;
             _nowShootTime = -5f;
-
         }
 
-        void GetBulletOnWallPos(GameBulletShotOnWallEvt gameBulletShotOnWallEvt)
+        void OnBulletOnWallEvt(GameBulletShotOnWallEvt gameBulletShotOnWallEvt)
         {
             bulletOnWallPos = gameBulletShotOnWallEvt.bulletPos;
             canShoot = true;
         }
 
-        void DosthBulletOutWall(GameBulletShotOutWallEvt gameBulletShotOutWallEvt)
-        {
-            canShoot = true;
-        }
-
-        // Update is called once per frame
         void Update()
         {
             #region 鼠标跟随
 
             mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
-            
+
             ChangeWeaponForce();
 
             #endregion
@@ -94,14 +81,8 @@ namespace Game
 
             #region 瞄准射击
 
-            if (Time.time >_shootCD + _nowShootTime)
-            {
-                canShootCD = true;
-            }
-            else
-            {
-                canShootCD = false;
-            }
+            var canShootCD = Time.time > _shootCD + _nowShootTime;
+
             if (canShoot && canShootCD)
             {
                 if (Input.GetMouseButtonDown(1))
@@ -109,16 +90,11 @@ namespace Game
                     _line.gameObject.SetActive(true);
                     _line.gameObject.GetComponent<Projection>().Enable();
                 }
+
                 if (Input.GetMouseButton(1))
                 {
-                    if (_isForwardShoot)
-                    {
-                        CreatSimulateBullet(false);
-                    }else
-                    {
-                        CreatSimulateBullet(true);
-                    }
-                    
+                    CreatSimulateBullet();
+
                     if (Input.GetMouseButtonDown(0))
                     {
                         if (_isForwardShoot)
@@ -127,14 +103,12 @@ namespace Game
                             go.GetComponent<BulletCtr>().SetFire(GetDirection_ToGun());
                             _isForwardShoot = false;
                             canShoot = false;
-                            
                         }
                         else
                         {
-                            var go = Instantiate(bullet, bulletOnWallPos - GetDirection_WallBulletToPlayer()*offsetCoefficient,
-                                Quaternion.identity);
-                            go.GetComponent<BulletCtr>().SetFire(
-                                GetDirection_GoToPlayer(go.transform.position), false, true);
+                            var position = bulletOnWallPos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
+                            var go = Instantiate(bullet, position, Quaternion.identity);
+                            go.GetComponent<BulletCtr>().SetFire(GetDirection_GoToPlayer(go.transform.position), false, true);
                             canShoot = false;
                         }
                     }
@@ -148,8 +122,6 @@ namespace Game
             }
 
             #endregion
-
-            
         }
 
         void CountShootCD()
@@ -171,9 +143,9 @@ namespace Game
 
         void ChangeWeaponForce()
         {
-            gunGo.transform.right =  (mouseV2 - (Vector2)gunGo.transform.position).normalized;
+            gunGo.transform.right = (mouseV2 - (Vector2)gunGo.transform.position).normalized;
             gunGo.GetComponent<SpriteRenderer>().flipY = (mouseV2.x < transform.position.x);
-            
+
             if (mouseV2.y > transform.position.y)
             {
                 gunGo.GetComponent<SpriteRenderer>().sortingOrder = -1;
@@ -195,15 +167,16 @@ namespace Game
             }
         }
 
-        void CreatSimulateBullet(bool isback)
+        void CreatSimulateBullet()
         {
             GameObject go;
-            if (isback)
+            if (!_isForwardShoot)
             {
-                 go = Instantiate(bullet, bulletOnWallPos + GetDirection_WallBulletToPlayer()*offsetCoefficient, Quaternion.identity);
+                go = Instantiate(bullet, bulletOnWallPos + GetDirection_WallBulletToPlayer() * offsetCoefficient,
+                    Quaternion.identity);
                 go.GetComponent<BulletCtr>().isback = true;
                 _projection.SimulateTrajectory(go.GetComponent<BulletCtr>(),
-                    bulletOnWallPos - GetDirection_WallBulletToPlayer()*offsetCoefficient, Quaternion.identity, 
+                    bulletOnWallPos - GetDirection_WallBulletToPlayer() * offsetCoefficient, Quaternion.identity,
                     GetDirection_WallBulletToPlayer());
                 Destroy(go.gameObject);
             }
@@ -215,6 +188,7 @@ namespace Game
                     muzzle.transform.position,
                     gunGo.transform.rotation, GetDirection_ToGun());
             }
+
             Destroy(go);
         }
 
