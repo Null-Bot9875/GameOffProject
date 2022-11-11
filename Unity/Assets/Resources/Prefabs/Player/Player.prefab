@@ -48,7 +48,6 @@ MonoBehaviour:
   _line: {fileID: 1867948212}
   _maxFrameIterations: 300
   endPosGo: {fileID: 2884829841747057121}
-  touchPlayer: 0
 --- !u!120 &1867948212
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -163,7 +162,6 @@ GameObject:
   - component: {fileID: 3869642463190991459}
   - component: {fileID: 3617632295220367002}
   - component: {fileID: 209750661302366428}
-  - component: {fileID: 6936279146959001052}
   - component: {fileID: 1053683321911576426}
   m_Layer: 6
   m_Name: Player
@@ -328,18 +326,6 @@ MonoBehaviour:
   muzzle: {fileID: 890547792662252357}
   _projection: {fileID: 1867948213}
   _line: {fileID: 1867948212}
---- !u!114 &6936279146959001052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3869642461521513124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61d70ce9f862b149b4e152ac3d78870, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &1053683321911576426
 CircleCollider2D:
   m_ObjectHideFlags: 0

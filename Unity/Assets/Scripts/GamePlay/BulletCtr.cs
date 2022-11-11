@@ -31,7 +31,6 @@ namespace Game
         {
             this.isghost = isghost;
             this.isback = isback;
-            ChangeTagLayer();
             transform.up = direction;
             if (isback)
             {
@@ -57,21 +56,6 @@ namespace Game
             transform.up = rb.velocity.normalized;
         }
 
-        void ChangeTagLayer()
-        {
-            switch (isback)
-            {
-                case true:
-                    transform.tag = "BackBullet";
-                    gameObject.layer = LayerMask.NameToLayer("BackBullet");
-                    break;
-                case false:
-                    transform.tag = "Bullet";
-                    gameObject.layer = LayerMask.NameToLayer("Bullet");
-                    break;
-            }
-        }
-
         void SetEffect()
         {
             Camera.main.DOShakePosition(.05f, .05f);
@@ -79,23 +63,17 @@ namespace Game
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.CompareTag("Player") && isghost)
+            if (col.gameObject.CompareTag("Player")) // 子弹遇到玩家 停下并销毁子弹，如果是再实际场景并且非返回状态下遇到玩家，玩家死亡
             {
-                rb.velocity = Vector2.zero;
-                Destroy(gameObject);
-            }
-
-            if (col.gameObject.CompareTag("Player") && transform.CompareTag("Bullet"))
-            {
-                if (!isghost)
+                if (!isghost && !isback)
                 {
                     Debug.Log("playerDie");
                     TypeEventSystem.Global.Send<GamePlayerDieEvt>();
                 }
-
                 rb.velocity = Vector2.zero;
                 Destroy(gameObject);
             }
+
         }
     }
 }

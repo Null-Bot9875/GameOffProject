@@ -94,7 +94,6 @@ namespace Game
                 if (Input.GetMouseButton(1))
                 {
                     CreatSimulateBullet();
-
                     if (Input.GetMouseButtonDown(0))
                     {
                         if (_isForwardShoot)
@@ -159,22 +158,26 @@ namespace Game
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            if (col.transform.CompareTag("BackBullet"))
+            if (col.transform.CompareTag("Bullet")) //子弹返回玩家身上
             {
-                _isForwardShoot = true;
-                canShoot = true;
-                CountShootCD();
-                Destroy(col.gameObject);
+                if (col.gameObject.GetComponent<BulletCtr>().isback)
+                {
+                    _isForwardShoot = true;
+                    canShoot = true;
+                    CountShootCD();
+                    Destroy(col.gameObject);
+                }
+                
             }
         }
 
         void CreatSimulateBullet()
         {
-            var go = GameObject.Instantiate(bullet);
+            var go = Instantiate(bullet);
             var bulletCtr = go.GetComponent<BulletCtr>();
             if (!_isForwardShoot)
             {
-                go.transform.position = bulletOnWallPos + GetDirection_WallBulletToPlayer() * offsetCoefficient;;
+                go.transform.position = bulletOnWallPos - GetDirection_WallBulletToPlayer() * offsetCoefficient;;
                 go.transform.rotation = Quaternion.identity;
                 bulletCtr.isback = true;
                 _projection.SimulateTrajectory(bulletCtr, GetDirection_WallBulletToPlayer());

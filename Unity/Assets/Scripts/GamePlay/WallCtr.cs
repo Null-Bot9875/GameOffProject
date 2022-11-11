@@ -22,7 +22,7 @@ namespace Game
         private void OnCollisionEnter2D(Collision2D col1)
         {
             var go = col1.gameObject;
-            if (go.CompareTag("Bullet") || go.CompareTag("BackBullet"))
+            if (go.CompareTag("Bullet"))
             {
                 if (go.GetComponent<BulletCtr>().QueryIsghost())
                 {
