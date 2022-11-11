@@ -17,7 +17,7 @@ namespace Game
         [SerializeField] private int _maxFrameIterations;
         private Vector2 lineEndPos;
         [SerializeField] private GameObject endPosGo;
-        private bool checkWall;
+       
         public bool lineTouchPlayer;
 
         private readonly List<KeyValuePair<Transform, Transform>> _spawnedObjects =
@@ -49,7 +49,7 @@ namespace Game
         {
             DeleteSceneTransform();
             _line.enabled = false;
-            checkWall = false;
+            
             endPosGo.GetComponent<SpriteRenderer>().enabled = false;
             lineTouchPlayer = false;
         }
@@ -59,12 +59,6 @@ namespace Game
             foreach (var item in _spawnedObjects) {
                 item.Value.position = item.Key.position;
                 item.Value.rotation = item.Key.rotation;
-            }
-
-            if (checkWall)
-            {
-                endPosGo.GetComponent<SpriteRenderer>().enabled = true;
-                endPosGo.transform.position = lineEndPos;
             }
 
             if (lineTouchPlayer)
@@ -160,8 +154,8 @@ namespace Game
                 {
                     if (_line.GetPosition(i) == _line.GetPosition(i-1))
                     {
-                        lineEndPos = _line.GetPosition(i);
-                        checkWall = true;
+                        endPosGo.GetComponent<SpriteRenderer>().enabled = true;
+                        endPosGo.transform.position = _line.GetPosition(i);
                     }
                 }
             }

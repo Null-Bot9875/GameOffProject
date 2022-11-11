@@ -130,7 +130,8 @@ namespace Game
                             
                         }
                         else
-                        {
+                        {   
+                            TypeEventSystem.Global.Send<GamePlayerBackShootEvt>();
                             var go = Instantiate(bullet, bulletOnWallPos - GetDirection_WallBulletToPlayer()*offsetCoefficient,
                                 Quaternion.identity);
                             go.GetComponent<BulletCtr>().SetFire(
