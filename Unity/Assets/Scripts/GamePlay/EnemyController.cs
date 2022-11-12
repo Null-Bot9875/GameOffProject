@@ -9,6 +9,7 @@ namespace Game
     [System.Serializable]
     public class EnemyPatrolInfo
     {
+        public bool IsInvalid;
         public int CrtIdx { get; set; } = 1;
         public List<Transform> List;
 
@@ -18,6 +19,12 @@ namespace Game
 
         public void InitEnemyPatrol(EnemyController controller)
         {
+            if (List.Count == 0)
+            {
+                IsInvalid = true;
+                return;
+            }
+
             controller.transform.position = List[0].position;
             foreach (var item in List)
             {
@@ -45,17 +52,6 @@ namespace Game
         private float _lookAngle = 45f;
 
         [SerializeField, Header("射线数")] private int _lookCount = 5;
-
-        [SerializeField, Header("当前警戒值")] private int _currentAlertValue;
-
-        [SerializeField, Header("最高值,超过该值就报警")]
-        private int _maxAlertValue = 30;
-
-        [SerializeField, Header("没发现玩家的时候每秒减少的值")]
-        private int _reducePerSecondAlertValue = 1;
-
-        [SerializeField, Header("发现玩家的时候每秒增加的值")]
-        private int _addPerSecondAlertValue = -1;
 
         [SerializeField] private LayerMask _layerMask;
 
@@ -90,11 +86,13 @@ namespace Game
             _player = GameDataCache.Instance.Player.transform;
             _enemyPatrol.InitEnemyPatrol(this);
             EnemyPatrol();
-            InvokeRepeating(nameof(EnemyDetectPerSec), 1f, 1f);
+            InvokeRepeating(nameof(EnemyDetectPerSec), 1f, .5f);
         }
 
         private void EnemyPatrol()
         {
+            if (_enemyPatrol.IsInvalid)
+                return;
             var targetDir = _enemyPatrol.TargetPosition - transform.position;
             //指定哪根轴朝向目标
             var fromDir = transform.rotation * Vector3.right;
@@ -145,13 +143,13 @@ namespace Game
 
         private void EnemyDetectPerSec()
         {
-            _currentAlertValue += _isFoundPlayer ? _addPerSecondAlertValue : _reducePerSecondAlertValue;
-            _currentAlertValue = Mathf.Clamp(_currentAlertValue, 0, _maxAlertValue);
-
-            TypeEventSystem.Global.Send(new GameEnemyAlertEvt(EnemyId, _currentAlertValue));
-            if (_currentAlertValue >= _maxAlertValue)
+            if (_isFoundPlayer)
             {
-                TypeEventSystem.Global.Send(new GameOverEvt());
+                _player.GetComponent<PlayerController>().enabled = false;
+                transform.DOMove(_player.transform.position, .5f).OnComplete(() =>
+                {
+                    TypeEventSystem.Global.Send(new GameOverEvt());
+                });
             }
         }
     }
