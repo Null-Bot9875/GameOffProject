@@ -102,7 +102,7 @@ namespace Game
         {
             var ghostObj = CreatGhostObj(bulletCtr.gameObject);
             
-            if (ghostObj.GetComponent<BulletCtr>().isback)
+            if (ghostObj.GetComponent<BulletCtr>().isBack)
             {
                 ghostObj.GetComponent<BulletCtr>().SetFire(direction, true,true);
             }
