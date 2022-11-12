@@ -8,7 +8,7 @@ namespace Game
     {
         [SerializeField, Header("发射速度")] private float shootSpeed;
         [SerializeField, Header("折返速度")] private float backSpeed;
-        private bool isGhost;
+        public bool isGhost;
         public bool isBack;
 
         #region 组件
@@ -40,25 +40,13 @@ namespace Game
             {
                 rb.velocity = direction * shootSpeed;
             }
-
-            if (!isghost)
-            {
-                SetEffect();
-                if (isback)
-                {
-                    TypeEventSystem.Global.Send<GameBulletShotOutWallEvt>();
-                }
-            }
         }
+        
+        
 
         private void Update()
         {
             transform.up = rb.velocity.normalized;
-        }
-
-        void SetEffect()
-        {
-            Camera.main.DOShakePosition(.05f, .05f);
         }
 
         private void OnTriggerEnter2D(Collider2D col)

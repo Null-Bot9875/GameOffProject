@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Enemy
   - Bullet
-  - BackBullet
   layers:
   - Default
   - TransparentFX
@@ -17,7 +16,7 @@ TagManager:
   - Player
   - Wall
   - Bullet
-  - BackBullet
+  - 
   - Hover
   - 
   - 

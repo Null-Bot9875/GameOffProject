@@ -7,15 +7,22 @@ namespace Game
     {
         private GameObject bulletOnWallObj;
         private GameObject instanceOnWallObj;
+        private bool isInWall;
 
         private void Start()
         {
             bulletOnWallObj = Resources.Load<GameObject>("Prefabs/Item/BulletOnwall");
-            TypeEventSystem.Global.Register<GameBulletShotOutWallEvt>(DestroyWallBullet).UnRegisterWhenGameObjectDestroyed(gameObject);
+            TypeEventSystem.Global.Register<GamePlayerWantRetrievesBulletEvt>(WallBulletShoot)
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
+            
         }
 
-        void DestroyWallBullet(GameBulletShotOutWallEvt gameBulletShotOutWallEvt)
+        void WallBulletShoot(GamePlayerWantRetrievesBulletEvt playerWantRetrievesBulletEvt)
         {
+            if (isInWall == false)
+            {
+                return;
+            }
             Destroy(instanceOnWallObj);
         }
 
@@ -36,8 +43,9 @@ namespace Game
                         {
                             bulletPos = go.transform.position
                         } );
+                        isInWall = true;
                         go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                        instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position, Quaternion.identity);
+                        instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform);
                         Destroy(go);
                 }
             }

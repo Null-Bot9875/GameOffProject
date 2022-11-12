@@ -10,50 +10,45 @@ namespace Game
     public class HoverCtr : MonoBehaviour
     {
         private bool isInHover;
-        [SerializeField,Header("嵌入墙GameObject")] private GameObject _sprite;
-        private GameObject go;
+        [SerializeField,Header("嵌入墙GameObject")] private GameObject BulletOnHoverObj;
+        private GameObject instanceHoverGo;
 
         private void Start()
         {
-            TypeEventSystem.Global.Register<GamePlayerBackShootEvt>(DestroyGo)
+            TypeEventSystem.Global.Register<GamePlayerWantRetrievesBulletEvt>(HoverBulletShoot)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
-
-        private void OnTriggerEnter2D(Collider2D col)
+        
+        void HoverBulletShoot(GamePlayerWantRetrievesBulletEvt playerWantRetrievesBulletEvt)
         {
-            if (isInHover)
+            if (isInHover == false)
             {
                 return;
             }
 
-            isInHover = true;
-            if (col.transform.CompareTag("Bullet") || col.transform.CompareTag("BackBullet"))
+            GetComponent<Collider2D>().enabled = false;
+            Destroy(instanceHoverGo);
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            var go = col.gameObject;
+            if (col.transform.CompareTag("Bullet"))
             {
-                col.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                col.transform.DOMove(transform.position, 0.1f).OnComplete(() =>
+                if (!go.GetComponent<BulletCtr>().isGhost)
                 {
-                    if (!col.gameObject.GetComponent<BulletCtr>().QueryIsghost())
+                    
+                    TypeEventSystem.Global.Send(new GameBulletShotOnHoverEvt()
                     {
-                        go = Instantiate(_sprite, col.transform.position, Quaternion.identity);
-                        TypeEventSystem.Global.Send(new GameBulletShotOnWallEvt
-                        {
-                            bulletPos = col.transform.position
-                        } );
-                    }
-                    Destroy(col.gameObject);
-                });
+                        bulletPos = go.transform.position
+                    });
+                }
 
+                isInHover = true;
+                go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform);
+                Destroy(go);
             }
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            isInHover = false;
-        }
-
-        void DestroyGo(GamePlayerBackShootEvt gamePlayerBackShootEvt)
-        {
-            Destroy(go);
         }
     }
 }

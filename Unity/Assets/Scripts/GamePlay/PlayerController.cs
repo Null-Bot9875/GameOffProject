@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
+    
     public class PlayerController : MonoBehaviour
     {
         private float x;
@@ -12,7 +13,7 @@ namespace Game
         private Vector2 mouseV2;
         private bool _isForwardShoot;
         [SerializeField] bool canShoot;
-        private Vector2 bulletOnWallPos;
+        private Vector2 bulletOnPlacePos;
 
         #region 子弹回收
 
@@ -46,9 +47,10 @@ namespace Game
 
             TypeEventSystem.Global.Register<GameBulletShotOnWallEvt>(OnBulletOnWallEvt)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
+            TypeEventSystem.Global.Register<GameBulletShotOnHoverEvt>(OnBulletOnHoverEvt)
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
 
             #endregion
-
             _camera = Camera.main;
             rb = GetComponent<Rigidbody2D>();
             _isForwardShoot = true;
@@ -58,7 +60,12 @@ namespace Game
 
         void OnBulletOnWallEvt(GameBulletShotOnWallEvt gameBulletShotOnWallEvt)
         {
-            bulletOnWallPos = gameBulletShotOnWallEvt.bulletPos;
+            bulletOnPlacePos = gameBulletShotOnWallEvt.bulletPos;
+            canShoot = true;
+        }
+        void OnBulletOnHoverEvt(GameBulletShotOnHoverEvt gameBulletShotOnHoverEvt)
+        {
+            bulletOnPlacePos = gameBulletShotOnHoverEvt.bulletPos;
             canShoot = true;
         }
 
@@ -107,7 +114,7 @@ namespace Game
                         }
                         else
                         {
-                            var position = bulletOnWallPos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
+                            var position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                             var go = Instantiate(bullet, position, Quaternion.identity);
                             go.GetComponent<BulletCtr>()
                                 .SetFire(GetDirection_GoToPlayer(go.transform.position), false, true);
@@ -179,7 +186,7 @@ namespace Game
             var bulletCtr = go.GetComponent<BulletCtr>();
             if (!_isForwardShoot)
             {
-                go.transform.position = bulletOnWallPos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
+                go.transform.position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                 go.transform.rotation = Quaternion.identity;
                 bulletCtr.isBack = true;
                 _projection.SimulateTrajectory(bulletCtr, GetDirection_WallBulletToPlayer());
@@ -201,7 +208,7 @@ namespace Game
 
         Vector2 GetDirection_WallBulletToPlayer()
         {
-            return ((Vector2)transform.position - bulletOnWallPos).normalized;
+            return ((Vector2)transform.position - bulletOnPlacePos).normalized;
         }
 
         Vector2 GetDirection_GoToPlayer(Vector2 GoPos)
