@@ -315,7 +315,7 @@ MonoBehaviour:
   volumeLayer:
     serializedVersion: 2
     m_Bits: 1
-  stopNaNPropagation: 1
+  stopNaNPropagation: 0
   finalBlitToCameraTarget: 1
   antialiasingMode: 0
   temporalAntialiasing:
@@ -353,7 +353,7 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 0}
-  m_ShowToolkit: 0
+  m_ShowToolkit: 1
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
@@ -1124,8 +1124,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589485871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 0.93, z: 0}
-  m_LocalScale: {x: 2.7112, y: 1, z: 1}
+  m_LocalPosition: {x: 2.19, y: -0.95, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 603714648}
   m_RootOrder: 0
@@ -1548,10 +1548,10 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 21.576073
+  m_PointLightInnerAngle: 22.88
   m_PointLightOuterAngle: 320.99948
   m_PointLightInnerRadius: 1.1
-  m_PointLightOuterRadius: 6.4
+  m_PointLightOuterRadius: 14.3823595
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -1569,8 +1569,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1895085004}
-  m_LocalRotation: {x: -0, y: -0, z: 0.99913013, w: -0.041701242}
-  m_LocalPosition: {x: 0, y: 1.84, z: -0.27679095}
+  m_LocalRotation: {x: -0, y: -0, z: 0.99998385, w: -0.005689489}
+  m_LocalPosition: {x: 0.65, y: 4.17, z: -0.27679095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 992019414}
@@ -1586,6 +1586,10 @@ PrefabInstance:
     - target: {fileID: 3612183789760842945, guid: 19c6a25074b977b4aa6ea31c8b727e39, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612183789760842945, guid: 19c6a25074b977b4aa6ea31c8b727e39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3612183789760842946, guid: 19c6a25074b977b4aa6ea31c8b727e39, type: 3}
       propertyPath: _lookCount

@@ -10,13 +10,17 @@ namespace Game
     public class HoverCtr : MonoBehaviour
     {
         private bool isInHover;
-        [SerializeField,Header("嵌入墙GameObject")] private GameObject BulletOnHoverObj;
+
+        [SerializeField, Header("嵌入墙GameObject")]
+        private GameObject BulletOnHoverObj;
+
         private GameObject instanceHoverGo;
         private Collider2D col;
 
         private void Start()
         {
             col = GetComponent<Collider2D>();
+
             #region 注册事件
 
             TypeEventSystem.Global.Register<GamePlayerWantRetrievesBulletEvt>(HoverBulletShoot)
@@ -28,13 +32,13 @@ namespace Game
 
             #endregion
         }
-        
+
         void HoverBulletShoot(GamePlayerWantRetrievesBulletEvt playerWantRetrievesBulletEvt)
         {
-            if (isInHover == false)
-            {
+            if (!isInHover)
                 return;
-            }
+
+            isInHover = false;
             Destroy(instanceHoverGo);
         }
 
@@ -42,7 +46,7 @@ namespace Game
         {
             col.enabled = true;
         }
-        
+
         void SetColliderFromPlayer(GamePlayerGetBackBulletEvt getBackBulletEvt)
         {
             col.enabled = true;
@@ -51,8 +55,16 @@ namespace Game
         private void OnTriggerEnter2D(Collider2D col1)
         {
             var go = col1.gameObject;
-            if (col1.transform.CompareTag("Bullet") && !col1.GetComponent<CircleCollider2D>().isTrigger)
+            if (col1.transform.CompareTag("Bullet") && !isInHover)
             {
+                isInHover = true;
+                go.transform.DOMove(transform.position, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
+                //go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+
+            void OnBulletMoveComplete()
+            {
+                GameObject.Destroy(go);
                 if (!go.GetComponent<BulletCtr>().QueryGhost())
                 {
                     col.enabled = false;
@@ -60,17 +72,11 @@ namespace Game
                     {
                         bulletPos = go.transform.position
                     });
-                    instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position,go.transform.rotation);
-                    
+                    instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position, go.transform.rotation);
                 }
-                isInHover = true;
-                go.GetComponent<Rigidbody2D>().velocity  = Vector2.zero;
-                Destroy(go);
-                
             }
         }
 
-        
 
         // IEnumerator SlowBullet(GameObject go)
         // {
