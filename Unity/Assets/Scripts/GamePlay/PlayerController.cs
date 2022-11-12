@@ -16,7 +16,7 @@ namespace Game
 
         #region 子弹回收
 
-        private float _shootCD = .5f; //todo 5秒CD
+        private float _shootCD = 0.5f; //todo 5秒CD
         private float _nowShootTime;
 
         #endregion
@@ -52,7 +52,7 @@ namespace Game
             rb = GetComponent<Rigidbody2D>();
             _isForwardShoot = true;
             canShoot = true;
-            _nowShootTime = -5f;
+            _nowShootTime = -.5f; //todo 5秒cd
         }
 
         void OnBulletOnWallEvt(GameBulletShotOnWallEvt gameBulletShotOnWallEvt)
