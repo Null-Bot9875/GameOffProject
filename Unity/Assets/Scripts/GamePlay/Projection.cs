@@ -101,14 +101,13 @@ namespace Game
         public void SimulateTrajectory(BulletCtr bulletCtr,Vector2 direction)
         {
             var ghostObj = CreatGhostObj(bulletCtr.gameObject);
-            
-            if (ghostObj.GetComponent<BulletCtr>().isBack)
+            if (ghostObj.GetComponent<BulletCtr>().QueryBack())
             {
-                ghostObj.GetComponent<BulletCtr>().SetFire(direction, true,true);
+                ghostObj.GetComponent<BulletCtr>().SetFire(direction);
             }
             else
             {
-                ghostObj.GetComponent<BulletCtr>().SetFire(direction, true);
+                ghostObj.GetComponent<BulletCtr>().SetFire(direction);
             }
             for (int i = 0; i < _line.positionCount; i++)
             {
@@ -138,5 +137,13 @@ namespace Game
             }
             return ghostObj;
         }
+        
+        // private GameObject CreatGhostObj(BulletCtr go)
+        // {
+        //     var ghostObj = Instantiate(go.gameObject,go.transform.position, go.transform.rotation);
+        //     ghostObj.GetComponent<SpriteRenderer>().enabled = false;
+        //     SceneManager.MoveGameObjectToScene(ghostObj,_simulationScene);
+        //     return ghostObj;
+        // }
     }
 }

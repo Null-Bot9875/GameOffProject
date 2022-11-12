@@ -14,6 +14,7 @@ namespace Game
         private bool _isForwardShoot;
         [SerializeField] bool canShoot;
         private Vector2 bulletOnPlacePos;
+        
 
         #region 子弹回收
 
@@ -114,10 +115,11 @@ namespace Game
                         }
                         else
                         {
+                            TypeEventSystem.Global.Send<GamePlayerWantRetrievesBulletEvt>();
                             var position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                             var go = Instantiate(bullet, position, Quaternion.identity);
-                            go.GetComponent<BulletCtr>()
-                                .SetFire(GetDirection_GoToPlayer(go.transform.position), false, true);
+                            go.GetComponent<BulletCtr>().SetFire(GetDirection_GoToPlayer(go.transform.position));
+                            go.GetComponent<BulletCtr>().SetBack();
                             canShoot = false;
                         }
                     }
@@ -128,6 +130,7 @@ namespace Game
             {
                 _line.gameObject.SetActive(false);
                 _line.gameObject.GetComponent<Projection>().Disable();
+                
             }
 
             #endregion
@@ -169,7 +172,7 @@ namespace Game
         {
             if (col.transform.CompareTag("Bullet")) //子弹返回玩家身上
             {
-                if (col.gameObject.GetComponent<BulletCtr>().isBack)
+                if (col.gameObject.GetComponent<BulletCtr>().QueryBack())
                 {
                     _isForwardShoot = true;
                     canShoot = true;
@@ -184,11 +187,12 @@ namespace Game
         {
             var go = Instantiate(bullet);
             var bulletCtr = go.GetComponent<BulletCtr>();
+            bulletCtr.SetGhost();
             if (!_isForwardShoot)
             {
                 go.transform.position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                 go.transform.rotation = Quaternion.identity;
-                bulletCtr.isBack = true;
+                bulletCtr.SetBack();
                 _projection.SimulateTrajectory(bulletCtr, GetDirection_WallBulletToPlayer());
             }
             else

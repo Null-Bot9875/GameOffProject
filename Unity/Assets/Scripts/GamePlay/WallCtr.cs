@@ -31,11 +31,10 @@ namespace Game
             var go = col1.gameObject;
             if (go.CompareTag("Bullet"))
             {
-                if (go.GetComponent<BulletCtr>().QueryIsghost())
+                if (go.GetComponent<BulletCtr>().QueryGhost())
                 {
                     Destroy(go);
                     go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    return;
                 }else
                 {
                    //todo 播放子弹上墙动画
@@ -45,7 +44,7 @@ namespace Game
                         } );
                         isInWall = true;
                         go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                        instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform);
+                        instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position,go.transform.rotation);
                         Destroy(go);
                 }
             }

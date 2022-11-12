@@ -35,7 +35,7 @@ namespace Game
             var go = col.gameObject;
             if (col.transform.CompareTag("Bullet"))
             {
-                if (!go.GetComponent<BulletCtr>().isGhost)
+                if (!go.GetComponent<BulletCtr>().QueryGhost())
                 {
                     
                     TypeEventSystem.Global.Send(new GameBulletShotOnHoverEvt()
@@ -46,7 +46,7 @@ namespace Game
 
                 isInHover = true;
                 go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform);
+                instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position,go.transform.rotation);
                 Destroy(go);
             }
         }

@@ -531,8 +531,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1000280763}
-  - {fileID: 1844752316}
   - {fileID: 1074426899}
+  - {fileID: 1844752316}
   - {fileID: 1248252288}
   - {fileID: 602932349}
   - {fileID: 740493961}
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039ca4de8f7d1244bac9932664109e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 6489939784925692741, guid: c78ec562793f7794a96503471fc6fae5, type: 3}
+  BulletOnHoverObj: {fileID: 0}
 --- !u!61 &1000280762
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1280,7 +1280,7 @@ Transform:
   m_LocalScale: {x: 0.16346863, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 439841404}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -66.413}
 --- !u!61 &1074426900
 BoxCollider2D:

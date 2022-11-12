@@ -8,40 +8,43 @@ namespace Game
     {
         [SerializeField, Header("发射速度")] private float shootSpeed;
         [SerializeField, Header("折返速度")] private float backSpeed;
-        public bool isGhost;
-        public bool isBack;
+        public bool isGhost = false;
+        public bool isBack = false;
 
         #region 组件
 
         private Rigidbody2D rb;
 
         #endregion
-
-        public bool QueryIsghost()
-        {
-            return isGhost;
-        }
-
         private void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
         }
 
-        public void SetFire(Vector2 direction, bool isghost = false, bool isback = false)
+        public void SetFire(Vector2 direction)
         {
-            this.isGhost = isghost;
-            this.isBack = isback;
-            transform.up = direction;
-            if (isback)
-            {
-                rb.velocity = direction * backSpeed;
-            }
-            else
-            {
-                rb.velocity = direction * shootSpeed;
-            }
+            rb.velocity = isBack ? direction * backSpeed : direction * shootSpeed;
         }
-        
+
+        public void SetGhost()
+        {
+            isGhost = true;
+        }
+
+        public void SetBack()
+        {
+            isBack = true;
+        }
+
+        public bool QueryGhost()
+        {
+            return isGhost;
+        }
+
+        public bool QueryBack()
+        {
+            return isBack;
+        }
         
 
         private void Update()
