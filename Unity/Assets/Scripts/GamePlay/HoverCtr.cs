@@ -51,32 +51,32 @@ namespace Game
         private void OnTriggerEnter2D(Collider2D col1)
         {
             var go = col1.gameObject;
-            if (col1.transform.CompareTag("Bullet"))
+            if (col1.transform.CompareTag("Bullet") && !col1.GetComponent<CircleCollider2D>().isTrigger)
             {
-                if (go.GetComponent<BulletCtr>().QueryGhost())
-                {
-                    go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    Destroy(go);
-                    isInHover = true;
-                }
-                else
+                if (!go.GetComponent<BulletCtr>().QueryGhost())
                 {
                     col.enabled = false;
                     TypeEventSystem.Global.Send(new GameBulletShotOnHoverEvt
                     {
                         bulletPos = go.transform.position
                     });
-                    isInHover = true;
-                    go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    if (instanceHoverGo == null)
-                    {
-                        instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position,go.transform.rotation);
-                    }
-                    Destroy(go);
+                    instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position,go.transform.rotation);
+                    
                 }
-
+                isInHover = true;
+                go.GetComponent<Rigidbody2D>().velocity  = Vector2.zero;
+                Destroy(go);
                 
             }
         }
+
+        
+
+        // IEnumerator SlowBullet(GameObject go)
+        // {
+        //     DOTween.To(() => go.GetComponent<Rigidbody2D>().velocity , (x) => go.GetComponent<Rigidbody2D>().velocity = x,new Vector2(0, 0), 1f);
+        //     yield return new WaitForSeconds(1f);
+        //     Destroy(go);
+        // }
     }
 }
