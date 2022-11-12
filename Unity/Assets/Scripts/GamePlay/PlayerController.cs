@@ -16,7 +16,7 @@ namespace Game
 
         #region 子弹回收
 
-        private float _shootCD = 5f;
+        private float _shootCD = .5f; //todo 5秒CD
         private float _nowShootTime;
 
         #endregion
