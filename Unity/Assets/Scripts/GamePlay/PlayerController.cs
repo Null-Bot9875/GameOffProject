@@ -11,13 +11,14 @@ namespace Game
         [SerializeField, Header("偏移系数")] private float offsetCoefficient;
         private Vector2 mouseV2;
         private bool _isForwardShoot;
-        private bool canShoot;
+        [SerializeField] bool canShoot;
         private Vector2 bulletOnWallPos;
 
         #region 子弹回收
 
         private float _shootCD = 0.5f; //todo 5秒CD
         private float _nowShootTime;
+        [SerializeField]private bool canShootCD;
 
         #endregion
 
@@ -63,6 +64,7 @@ namespace Game
 
         void Update()
         {
+            
             #region 鼠标跟随
 
             mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
@@ -81,7 +83,7 @@ namespace Game
 
             #region 瞄准射击
 
-            var canShootCD = Time.time > _shootCD + _nowShootTime;
+            canShootCD = Time.time > _shootCD + _nowShootTime;
 
             if (canShoot && canShootCD)
             {
@@ -160,7 +162,7 @@ namespace Game
         {
             if (col.transform.CompareTag("Bullet")) //子弹返回玩家身上
             {
-                if (col.gameObject.GetComponent<BulletCtr>().isback)
+                if (col.gameObject.GetComponent<BulletCtr>().isBack)
                 {
                     _isForwardShoot = true;
                     canShoot = true;
@@ -179,7 +181,7 @@ namespace Game
             {
                 go.transform.position = bulletOnWallPos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                 go.transform.rotation = Quaternion.identity;
-                bulletCtr.isback = true;
+                bulletCtr.isBack = true;
                 _projection.SimulateTrajectory(bulletCtr, GetDirection_WallBulletToPlayer());
             }
             else
