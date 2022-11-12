@@ -59,7 +59,7 @@ namespace Game
                 if (!isGhost && !isBack)
                 {
                     Debug.Log("playerDie");
-                    TypeEventSystem.Global.Send<GamePlayerDieEvt>();
+                    TypeEventSystem.Global.Send<GameOverEvt>();
                 }
                 if (isGhost && isBack)
                 {

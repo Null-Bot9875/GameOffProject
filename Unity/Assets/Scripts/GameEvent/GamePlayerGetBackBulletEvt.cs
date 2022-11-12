@@ -1,6 +1,6 @@
 namespace Game.GameEvent
 {
-    public class GamePlayerDieEvt
+    public class GamePlayerGetBackBulletEvt
     {
         
     }

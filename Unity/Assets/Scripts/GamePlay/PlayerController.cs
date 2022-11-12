@@ -174,6 +174,7 @@ namespace Game
             {
                 if (col.gameObject.GetComponent<BulletCtr>().QueryBack())
                 {
+                    TypeEventSystem.Global.Send<GamePlayerGetBackBulletEvt>();
                     _isForwardShoot = true;
                     canShoot = true;
                     CountShootCD();

@@ -993,7 +993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1000280761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039ca4de8f7d1244bac9932664109e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletOnHoverObj: {fileID: 0}
+  BulletOnHoverObj: {fileID: 6489939784925692741, guid: c78ec562793f7794a96503471fc6fae5, type: 3}
 --- !u!61 &1000280762
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1089,7 +1089,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 066d3840badf4d24dba1d42b4c59b888, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.61960787}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
