@@ -137,7 +137,12 @@ namespace Game
             {
                 var hit = Physics2D.Raycast(transform.position, eulerAnger * transform.right.normalized * _lookDistance,
                     _lookDistance, _layerMask);
-                return hit.collider != null && hit.transform.CompareTag("Player");
+                // if (hit.collider != null)
+                // {
+                //     Debug.Log(hit.collider.name);
+                // }
+
+                return hit.transform != null && hit.transform.CompareTag("Player");
             }
         }
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 namespace Game
@@ -130,6 +131,10 @@ namespace Game
         {
             var ghostObj = Instantiate(go.gameObject,go.transform.position, go.transform.rotation);
             ghostObj.GetComponent<SpriteRenderer>().enabled = false;
+            if (ghostObj.CompareTag("Enemy"))
+            {
+                ghostObj.GetComponentInChildren<Light2D>().enabled = false;
+            }
             SceneManager.MoveGameObjectToScene(ghostObj,_simulationScene);
             if (go.GetComponent<BulletCtr>() == null)
             {
