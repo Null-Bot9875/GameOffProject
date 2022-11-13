@@ -61,8 +61,12 @@ namespace Game
                     Debug.Log("playerDie");
                     TypeEventSystem.Global.Send<GameOverEvt>();
                 }
+                if (!(!isGhost && isBack))
+                {
                     rb.velocity = Vector2.zero;
                     Destroy(gameObject);
+                }
+                    
                 
                 
             }

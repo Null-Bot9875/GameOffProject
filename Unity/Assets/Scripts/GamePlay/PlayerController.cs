@@ -10,17 +10,19 @@ namespace Game
         private float y;
         [SerializeField, Header("玩家移动速度")] private float moveSpeed;
         [SerializeField, Header("偏移系数")] private float offsetCoefficient;
-        private Vector2 mouseV2;
+        private Vector2 _mouseV2;
         private bool _isForwardShoot;
-        [SerializeField] bool canShoot;
+        private bool _canShoot;
+        public bool _canMove;
         private Vector2 bulletOnPlacePos;
         
 
         #region 子弹回收
 
+        [SerializeField,Header("子弹回收后再次射出CD")]
         private float _shootCD = 0.5f; //todo 5秒CD
         private float _nowShootTime;
-        [SerializeField]private bool canShootCD;
+        private bool _canShootCd;
 
         #endregion
 
@@ -53,15 +55,17 @@ namespace Game
             _camera = Camera.main;
             rb = GetComponent<Rigidbody2D>();
             _isForwardShoot = true;
-            canShoot = true;
+            _canShoot = true;
+            _canMove = true;
             _nowShootTime = -.5f; //todo 5秒cd
         }
 
         void OnBulletOnPlaceEvt(GameBulletShotOnPlaceEvt gameBulletShotOnPlaceEvt)
         {
             bulletOnPlacePos = gameBulletShotOnPlaceEvt.bulletPos;
-            canShoot = true;
-            
+            _canShoot = true;
+            _canMove = true;
+
         }
         
 
@@ -70,7 +74,10 @@ namespace Game
 
             #region 鼠标跟随
 
-            mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
+            if (_canMove)
+            {
+                _mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
+            }
 
             ChangeWeaponForce();
 
@@ -78,17 +85,21 @@ namespace Game
 
             #region 角色移动
 
-            x = Input.GetAxis("Horizontal");
-            y = Input.GetAxis("Vertical");
-            rb.velocity = new Vector2(x * moveSpeed, y * moveSpeed);
+            if (_canMove)
+            {
+                x = Input.GetAxis("Horizontal");
+                y = Input.GetAxis("Vertical");
+                rb.velocity = new Vector2(x * moveSpeed, y * moveSpeed);
+            }
+            
 
             #endregion
 
             #region 瞄准射击
 
-            canShootCD = Time.time > _shootCD + _nowShootTime;
+            _canShootCd = Time.time > _shootCD + _nowShootTime;
 
-            if (canShoot && canShootCD)
+            if (_canShoot && _canShootCd)
             {
                 if (Input.GetMouseButtonDown(1))
                 {
@@ -106,7 +117,7 @@ namespace Game
                             var go = Instantiate(bullet, muzzle.transform.position, gunGo.transform.rotation);
                             go.GetComponent<BulletCtr>().SetFire(GetDirection_ToGun());
                             _isForwardShoot = false;
-                            canShoot = false;
+                            _canShoot = false;
                         }
                         else
                         {
@@ -115,13 +126,16 @@ namespace Game
                             var go = Instantiate(bullet, position, Quaternion.identity);
                             go.GetComponent<BulletCtr>().SetFire(GetDirection_GoToPlayer(go.transform.position));
                             go.GetComponent<BulletCtr>().SetBack();
-                            canShoot = false;
+                            _canShoot = false;
+                            _canMove = false;
+                            rb.velocity = Vector2.zero;
+                            
                         }
                     }
                 }
             }
 
-            if (Input.GetMouseButtonUp(1) || !canShoot)
+            if (Input.GetMouseButtonUp(1) || !_canShoot)
             {
                 _line.gameObject.SetActive(false);
                 _line.gameObject.GetComponent<Projection>().Disable();
@@ -137,7 +151,7 @@ namespace Game
 
         public Vector2 GetMouseInfo()
         {
-            return (mouseV2 - (Vector2)gunGo.transform.position).normalized;
+            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
         }
 
         public Vector2 GetPlayerMoveInfo()
@@ -149,10 +163,10 @@ namespace Game
 
         void ChangeWeaponForce()
         {
-            gunGo.transform.right = (mouseV2 - (Vector2)gunGo.transform.position).normalized;
-            gunGo.GetComponent<SpriteRenderer>().flipY = (mouseV2.x < transform.position.x);
+            gunGo.transform.right = GetDirection_ToGun();
+            gunGo.GetComponent<SpriteRenderer>().flipY = (_mouseV2.x < transform.position.x);
 
-            if (mouseV2.y > transform.position.y)
+            if (_mouseV2.y > transform.position.y)
             {
                 gunGo.GetComponent<SpriteRenderer>().sortingOrder = -1;
             }
@@ -170,7 +184,8 @@ namespace Game
                 {
                     TypeEventSystem.Global.Send<GamePlayerGetBackBulletEvt>();
                     _isForwardShoot = true;
-                    canShoot = true;
+                    _canShoot = true;
+                    _canMove = true;
                     CountShootCD();
                     Destroy(col.gameObject);
                 }
@@ -202,7 +217,7 @@ namespace Game
 
         Vector2 GetDirection_ToGun()
         {
-            return (mouseV2 - (Vector2)gunGo.transform.position).normalized;
+            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
         }
 
         Vector2 GetDirection_WallBulletToPlayer()

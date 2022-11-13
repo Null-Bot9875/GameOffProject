@@ -64,11 +64,11 @@ namespace Game
             void OnBulletMoveComplete()
             {
                 GameObject.Destroy(go);
-                col.enabled = false;
                 TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
                 {
                     bulletPos = go.transform.position
                 });
+                col.enabled = false;
                 instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position, go.transform.rotation);
             }
         }
