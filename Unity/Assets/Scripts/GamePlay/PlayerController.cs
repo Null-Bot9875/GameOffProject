@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour,IExplosion
     {
         private float x;
         private float y;
@@ -228,6 +228,12 @@ namespace Game
         Vector2 GetDirection_GoToPlayer(Vector2 GoPos)
         {
             return ((Vector2)transform.position - GoPos).normalized;
+        }
+
+        public void OnExplosion()
+        {
+            Debug.Log("playerDie");
+            TypeEventSystem.Global.Send<GameOverEvt>();
         }
     }
 }
