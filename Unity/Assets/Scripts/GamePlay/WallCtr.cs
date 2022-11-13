@@ -38,7 +38,7 @@ namespace Game
                 }else
                 {
                    //todo 播放子弹上墙动画
-                        TypeEventSystem.Global.Send(new GameBulletShotOnWallEvt
+                        TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
                         {
                             bulletPos = go.transform.position
                         } );

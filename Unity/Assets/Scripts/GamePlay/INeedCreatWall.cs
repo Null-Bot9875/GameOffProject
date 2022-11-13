@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class CreatTestWall : MonoBehaviour
+    public class INeedCreatWall : MonoBehaviour
     {
         public bool 是否是固定外墙;
         public PhysicsMaterial2D P2D;
@@ -16,6 +16,7 @@ namespace Game
             if (gameObject.GetComponent<Rigidbody2D>() != null)
             {
                 return;
+                
             }
             if (是否是固定外墙)
             {
@@ -33,6 +34,7 @@ namespace Game
                 rb.sharedMaterial = P2D;
                 gameObject.isStatic = true;
             }
+            Destroy(this);
         }
     }
 }

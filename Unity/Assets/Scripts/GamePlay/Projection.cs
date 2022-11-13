@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -18,6 +19,18 @@ namespace Game
             new List<KeyValuePair<Transform, Transform>>();
         private readonly List<GameObject> ghostObj = new List<GameObject>();
 
+        [SerializeField] private float _radius ;
+        [SerializeField] private Vector2 _sphereCenter;
+        
+
+        // private void OnDrawGizmos()
+        // {
+        //     GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
+        //     Gizmos.color = Color.green;
+        //     Gizmos.DrawWireSphere(GameDataCache.Instance.Player.transform.position+(Vector3)_sphereCenter,_radius);
+        // }
+
+
         // [SerializeField, Header("场景更新周期")] private float fixUpdateTime = 1f;
         // private float nowTime;
 
@@ -25,10 +38,12 @@ namespace Game
         {
             _line.positionCount = _maxFrameIterations;
             InitPhysicsScene();
+            
         }
 
         public void Enable()
         {
+            GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
             UpdateSceneTransform();
             _line.enabled = true;
             endPosGo.GetComponent<SpriteRenderer>().enabled = true;
@@ -47,6 +62,11 @@ namespace Game
                 item.Value.position = item.Key.position;
                 item.Value.rotation = item.Key.rotation;
             }
+
+           
+                
+           
+            
 
             // if (Time.time > fixUpdateTime + nowTime)
             // {
@@ -121,6 +141,13 @@ namespace Game
                     {
                         lineEndPos = _line.GetPosition(i);
                         endPosGo.transform.position = lineEndPos;
+                        endPosGo.GetComponent<SpriteRenderer>().enabled =
+                            (Vector2.Distance(endPosGo.transform.position,
+                                GameDataCache.Instance.Player.transform.position+(Vector3)_sphereCenter) > _radius);
+                    }
+                    else
+                    {
+                        endPosGo.GetComponent<SpriteRenderer>().enabled = false;
                     }
                 }
             }

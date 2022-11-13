@@ -46,9 +46,7 @@ namespace Game
         {
             #region 事件注册
 
-            TypeEventSystem.Global.Register<GameBulletShotOnWallEvt>(OnBulletOnWallEvt)
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
-            TypeEventSystem.Global.Register<GameBulletShotOnHoverEvt>(OnBulletOnHoverEvt)
+            TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
 
             #endregion
@@ -59,20 +57,17 @@ namespace Game
             _nowShootTime = -.5f; //todo 5秒cd
         }
 
-        void OnBulletOnWallEvt(GameBulletShotOnWallEvt gameBulletShotOnWallEvt)
+        void OnBulletOnPlaceEvt(GameBulletShotOnPlaceEvt gameBulletShotOnPlaceEvt)
         {
-            bulletOnPlacePos = gameBulletShotOnWallEvt.bulletPos;
+            bulletOnPlacePos = gameBulletShotOnPlaceEvt.bulletPos;
             canShoot = true;
+            
         }
-        void OnBulletOnHoverEvt(GameBulletShotOnHoverEvt gameBulletShotOnHoverEvt)
-        {
-            bulletOnPlacePos = gameBulletShotOnHoverEvt.bulletPos;
-            canShoot = true;
-        }
+        
 
         void Update()
         {
-            
+
             #region 鼠标跟随
 
             mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
@@ -130,7 +125,6 @@ namespace Game
             {
                 _line.gameObject.SetActive(false);
                 _line.gameObject.GetComponent<Projection>().Disable();
-                
             }
 
             #endregion

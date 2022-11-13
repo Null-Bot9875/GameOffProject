@@ -25,7 +25,7 @@ namespace Game
 
             TypeEventSystem.Global.Register<GamePlayerWantRetrievesBulletEvt>(HoverBulletShoot)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
-            TypeEventSystem.Global.Register<GameBulletShotOnWallEvt>(SetColliderFromWall)
+            TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(SetColliderFromWall)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             TypeEventSystem.Global.Register<GamePlayerGetBackBulletEvt>(SetColliderFromPlayer)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -42,7 +42,7 @@ namespace Game
             Destroy(instanceHoverGo);
         }
 
-        void SetColliderFromWall(GameBulletShotOnWallEvt gameBulletShotOnWallEvt)
+        void SetColliderFromWall(GameBulletShotOnPlaceEvt gameBulletShotOnPlaceEvt)
         {
             col.enabled = true;
         }
@@ -65,7 +65,7 @@ namespace Game
             {
                 GameObject.Destroy(go);
                 col.enabled = false;
-                TypeEventSystem.Global.Send(new GameBulletShotOnHoverEvt
+                TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
                 {
                     bulletPos = go.transform.position
                 });

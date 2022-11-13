@@ -48,6 +48,8 @@ MonoBehaviour:
   _line: {fileID: 1867948212}
   _maxFrameIterations: 300
   endPosGo: {fileID: 2884829841747057121}
+  _radius: 0.2
+  _sphereCenter: {x: 0, y: -0.15}
 --- !u!120 &1867948212
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -374,7 +376,7 @@ MonoBehaviour:
   - {x: -0.012794961, y: -0.08764057, z: 0}
   m_ShapePathHash: 1874598716
   m_Mesh: {fileID: 0}
-  m_InstanceId: -4012
+  m_InstanceId: -2088
 --- !u!1 &5206519181117189686
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,14 +401,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5206519181117189686}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.99939084, w: 0.03489959}
   m_LocalPosition: {x: 0.046, y: -0.051, z: 0}
   m_LocalScale: {x: 1.4, y: 1, z: 1}
   m_Children:
   - {fileID: 890547792662252357}
   m_Father: {fileID: 3869642461521513129}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -176}
 --- !u!212 &2965628793969906273
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -510,11 +512,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4037867178411050885, guid: 4ef3a9d8445d88749995a32e7060f88c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.03
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4037867178411050885, guid: 4ef3a9d8445d88749995a32e7060f88c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.01
+      value: -0.042
       objectReference: {fileID: 0}
     - target: {fileID: 4037867178411050885, guid: 4ef3a9d8445d88749995a32e7060f88c, type: 3}
       propertyPath: m_LocalPosition.z
