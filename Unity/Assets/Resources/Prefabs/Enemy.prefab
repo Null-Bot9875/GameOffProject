@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3612183789760842951
 Transform:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   _SightLight2D: {fileID: 1324077305398384111}
   _lookDistance: 5.14
   _lookAngle: 108.7
-  _lookCount: 20
+  _lookCount: 10
   _layerMask:
     serializedVersion: 2
     m_Bits: 192

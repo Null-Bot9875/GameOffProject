@@ -55,25 +55,21 @@ namespace Game
         private void OnTriggerEnter2D(Collider2D col1)
         {
             var go = col1.gameObject;
-            if (col1.transform.CompareTag("Bullet") && !isInHover)
+            if (col1.transform.CompareTag("Bullet") && !isInHover && !go.GetComponent<BulletCtr>().QueryGhost())
             {
                 isInHover = true;
                 go.transform.DOMove(transform.position, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
-                //go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
 
             void OnBulletMoveComplete()
             {
                 GameObject.Destroy(go);
-                if (!go.GetComponent<BulletCtr>().QueryGhost())
+                col.enabled = false;
+                TypeEventSystem.Global.Send(new GameBulletShotOnHoverEvt
                 {
-                    col.enabled = false;
-                    TypeEventSystem.Global.Send(new GameBulletShotOnHoverEvt
-                    {
-                        bulletPos = go.transform.position
-                    });
-                    instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position, go.transform.rotation);
-                }
+                    bulletPos = go.transform.position
+                });
+                instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position, go.transform.rotation);
             }
         }
 

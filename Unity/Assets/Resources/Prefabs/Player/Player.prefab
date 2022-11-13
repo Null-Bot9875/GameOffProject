@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 3617632295220367002}
   - component: {fileID: 209750661302366428}
   - component: {fileID: 1053683321911576426}
+  - component: {fileID: 423596116}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -179,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 3869642461521513124}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 2608428518639915749}
   - {fileID: 1867948211}
@@ -322,6 +323,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   offsetCoefficient: -0.02
+  canShoot: 0
+  canShootCD: 0
   gunGo: {fileID: 5206519181117189686}
   muzzle: {fileID: 890547792662252357}
   _projection: {fileID: 1867948213}
@@ -342,6 +345,36 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.042314485}
   serializedVersion: 2
   m_Radius: 0.052685514
+--- !u!114 &423596116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3869642461521513124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: b536c1ffc33e3303000000004da1e75271497f2529598e71
+  m_ShapePath:
+  - {x: -0.051973175, y: -0.05389395, z: 0}
+  - {x: -0.07065788, y: 0.02586709, z: 0}
+  - {x: 0.020209482, y: 0.08565772, z: 0}
+  - {x: 0.058206413, y: 0.052493718, z: 0}
+  - {x: 0.076891035, y: 0.02259839, z: 0}
+  - {x: 0.0600749, y: -0.055876806, z: 0}
+  - {x: 0.08000004, y: -0.095, z: 0}
+  - {x: -0.012794961, y: -0.08764057, z: 0}
+  m_ShapePathHash: 1874598716
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -4012
 --- !u!1 &5206519181117189686
 GameObject:
   m_ObjectHideFlags: 0
