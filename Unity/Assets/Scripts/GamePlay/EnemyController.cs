@@ -42,7 +42,7 @@ namespace Game
         }
     }
 
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour,IExplosion
     {
         public int EnemyId;
         [SerializeField] private Light2D _SightLight2D;
@@ -156,6 +156,11 @@ namespace Game
                     TypeEventSystem.Global.Send(new GameOverEvt());
                 });
             }
+        }
+
+        public void OnExplosion()
+        {
+            //todo 死亡
         }
     }
 }
