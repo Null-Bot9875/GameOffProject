@@ -7,22 +7,19 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ExplotionBarrelCtr : MonoBehaviour
+    public class ExplotionBarrelCtr : MonoBehaviour,IExplosion
     {
         [SerializeField, Header("爆炸特效")] private GameObject explosionClip;
         private GameObject explosionGo;
+        public bool isInvalided;
         [SerializeField, Header("爆炸半径")] private float explosionRadius;
 
         private void OnTriggerEnter2D(Collider2D col)
         {
             var go = col.gameObject;
-            if (go.CompareTag("Bullet"))
+            if (go.CompareTag("Bullet") && !go.GetComponent<BulletCtr>().QueryGhost())
             {
-                if (!go.GetComponent<BulletCtr>().QueryGhost())
-                {
-                    Explosion();
-                }
-                
+                OnExplosion();
             }
         }
 
@@ -35,20 +32,22 @@ namespace Game
         public void Explosion()
         {
             explosionGo = Instantiate(explosionClip, transform.position, transform.rotation);
-            
-
-            if (Vector2.Distance(transform.position,GameDataCache.Instance.Player.transform.position) < explosionRadius)
+            foreach (var item in Physics2D.OverlapCircleAll(transform.position,explosionRadius))
             {
-                TypeEventSystem.Global.Send<GameOverEvt>();
-            }
-            foreach (var item in GameDataCache.Instance.EnemyList)
-            {
-                if (Vector2.Distance(transform.position,item.transform.position) < explosionRadius)
+                if (item.gameObject.TryGetComponent<IExplosion>(out IExplosion explosion))
                 {
-                    //todo 敌人死了
+                    explosion.OnExplosion();
+                    
                 }
             }
             Destroy(gameObject);
+        }
+
+        public void OnExplosion()
+        {
+            if (isInvalided) return;
+            isInvalided = true;
+            Explosion();
         }
     }
 }
