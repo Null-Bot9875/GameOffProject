@@ -13,12 +13,14 @@ namespace Game
         [SerializeField] private GameObject endPosGo;
         [SerializeField] private float _radius;
         [SerializeField] private Vector2 _sphereCenter;
-        
-        
+
+
         private Scene _simulationScene;
         private PhysicsScene2D _physicsScene;
-        
-        private readonly List<KeyValuePair<Transform, Transform>> _spawnedObjects = new List<KeyValuePair<Transform, Transform>>();
+
+        private readonly List<KeyValuePair<Transform, Transform>> _spawnedObjects =
+            new List<KeyValuePair<Transform, Transform>>();
+
         private readonly List<GameObject> _ghostList = new List<GameObject>();
 
         // private void OnDrawGizmos()
@@ -117,34 +119,21 @@ namespace Game
         public void SimulateTrajectory(BulletCtr bulletCtr, Vector2 direction)
         {
             var ghostObj = CreatGhostObj(bulletCtr.gameObject);
-            if (ghostObj.GetComponent<BulletCtr>().QueryBack())
-            {
-                ghostObj.GetComponent<BulletCtr>().SetFire(direction);
-            }
-            else
-            {
-                ghostObj.GetComponent<BulletCtr>().SetFire(direction);
-            }
+            ghostObj.GetComponent<BulletCtr>().SetFire(direction);
 
             for (int i = 0; i < _line.positionCount; i++)
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);
                 _line.SetPosition(i, ghostObj.transform.position);
 
-                if (i > 1)
+                if (i == _line.positionCount - 1)
                 {
-                    if (_line.GetPosition(i) == _line.GetPosition(i - 1))
-                    {
-                        var lineEndPos = _line.GetPosition(i);
-                        endPosGo.transform.position = lineEndPos;
-                        endPosGo.GetComponent<SpriteRenderer>().enabled =
-                            (Vector2.Distance(endPosGo.transform.position,
-                                GameDataCache.Instance.Player.transform.position + (Vector3)_sphereCenter) > _radius);
-                    }
-                    else
-                    {
-                        endPosGo.GetComponent<SpriteRenderer>().enabled = false;
-                    }
+                    var lastPosition = _line.GetPosition(i);
+                    endPosGo.transform.position = lastPosition;
+                    var enable = _line.GetPosition(i) == _line.GetPosition(i - 1);
+                    var playerPosition = GameDataCache.Instance.Player.transform.position + (Vector3)_sphereCenter;
+                    enable &= Vector2.Distance(lastPosition, playerPosition) > _radius;
+                    endPosGo.GetComponent<SpriteRenderer>().enabled = enable;
                 }
             }
 
