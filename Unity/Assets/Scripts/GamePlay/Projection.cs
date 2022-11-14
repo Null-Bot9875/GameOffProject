@@ -100,7 +100,7 @@ namespace Game
                         }
                     }
 
-                    _spawnedObjects.Add(new KeyValuePair<Transform, Transform>(item.transform, ghostObj.transform));
+                    _spawnedObjects.Add(new KeyValuePair<Transform, Transform>(item, ghostObj.transform));
                 }
             }
         }
