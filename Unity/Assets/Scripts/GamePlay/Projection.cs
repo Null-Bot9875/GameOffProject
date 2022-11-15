@@ -23,12 +23,12 @@ namespace Game
 
         private readonly List<GameObject> _ghostList = new List<GameObject>();
 
-        // private void OnDrawGizmos()
-        // {
-        //     GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
-        //     Gizmos.color = Color.green;
-        //     Gizmos.DrawWireSphere(GameDataCache.Instance.Player.transform.position+(Vector3)_sphereCenter,_radius);
-        // }
+        private void OnDrawGizmos()
+        {
+            GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(GameDataCache.Instance.Player.transform.position+(Vector3)_sphereCenter,_radius);
+        }
 
 
         // [SerializeField, Header("场景更新周期")] private float fixUpdateTime = 1f;
