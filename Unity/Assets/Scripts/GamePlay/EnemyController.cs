@@ -160,7 +160,14 @@ namespace Game
 
         public void OnExplosion()
         {
-            //todo 死亡
+            //死亡
+            Die();
+        }
+
+        public void Die()
+        {
+            GameObject.Destroy(gameObject);
+            GameDataCache.Instance.EnemyList.Remove(this);
         }
     }
 }

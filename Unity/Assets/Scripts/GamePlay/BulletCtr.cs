@@ -1,5 +1,3 @@
-using DG.Tweening;
-using Game.GameEvent;
 using UnityEngine;
 
 namespace Game
@@ -16,6 +14,7 @@ namespace Game
         private Rigidbody2D rb;
 
         #endregion
+
         private void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -45,7 +44,7 @@ namespace Game
         {
             return isBack;
         }
-        
+
 
         private void Update()
         {
@@ -54,23 +53,37 @@ namespace Game
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.CompareTag("Player")) // 子弹遇到玩家 停下并销毁子弹，如果是再实际场景并且非返回状态下遇到玩家，玩家死亡
+            var go = col.gameObject;
+            switch (go.tag)
             {
-                if (!isGhost && !isBack)
+                case "Player":
                 {
-                    Debug.Log("playerDie");
-                    TypeEventSystem.Global.Send<GameOverEvt>();
-                }
-                if (!(!isGhost && isBack))
-                {
-                    rb.velocity = Vector2.zero;
-                    Destroy(gameObject);
-                }
-                    
-                
-                
-            }
+                    // 子弹遇到玩家 停下并销毁子弹，如果是再实际场景并且非返回状态下遇到玩家，玩家死亡
+                    if (!isGhost && !isBack)
+                    {
+                        var player = go.GetComponent<PlayerController>();
+                        player.Die();
+                    }
 
+                    if (!(!isGhost && isBack))
+                    {
+                        rb.velocity = Vector2.zero;
+                        Destroy(gameObject);
+                    }
+
+                    break;
+                }
+
+                case "Enemy":
+                {
+                    var enemy = go.GetComponent<EnemyController>();
+                    enemy.Die();
+                    break;
+                }
+
+                default:
+                    break;
+            }
         }
     }
 }

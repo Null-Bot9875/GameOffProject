@@ -232,6 +232,11 @@ namespace Game
 
         public void OnExplosion()
         {
+            Die();
+        }
+
+        public void Die()
+        {
             Debug.Log("playerDie");
             TypeEventSystem.Global.Send<GameOverEvt>();
         }
