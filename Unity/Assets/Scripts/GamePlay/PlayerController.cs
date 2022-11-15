@@ -15,8 +15,6 @@ namespace Game
         private bool _canShoot;
         public bool _canMove;
         private Vector2 bulletOnPlacePos;
-        private Vector3 _mousePosCache;
-        
 
         #region 子弹回收
 
@@ -109,10 +107,8 @@ namespace Game
                 }
 
                 if (Input.GetMouseButton(1))
-                {
-                    if (_mousePosCache != Input.mousePosition)
-                        CreatSimulateBullet();
-                    _mousePosCache = Input.mousePosition;
+                { 
+                    CreatSimulateBullet();
                     
                     if (Input.GetMouseButtonDown(0))
                     {
