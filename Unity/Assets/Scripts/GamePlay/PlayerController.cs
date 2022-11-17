@@ -184,8 +184,7 @@ namespace Game
 
         void ChangeWeaponForce()
         {
-            gunGo.transform.right = GetDirection_ToGun();
-            gunGo.GetComponent<SpriteRenderer>().flipY = (_mouseV2.x < transform.position.x);
+            gunGo.transform.up = GetDirection_ToGun();
 
             if (_mouseV2.y > transform.position.y)
             {
