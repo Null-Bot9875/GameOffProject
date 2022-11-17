@@ -42,7 +42,7 @@ namespace Game
             
             if (go.TryGetComponent(out IBulletTrigger trigger))
             {
-                trigger.OnNormalBulletTrigger(this);
+                trigger.OnBulletTrigger(this);
             }
         }
 

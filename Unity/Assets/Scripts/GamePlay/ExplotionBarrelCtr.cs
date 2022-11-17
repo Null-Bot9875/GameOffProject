@@ -8,7 +8,7 @@ namespace Game
         public bool isInvalided;
         [SerializeField, Header("爆炸半径")] private float explosionRadius;
 
-        public void OnNormalBulletTrigger(BulletCtr ctr)
+        public void OnBulletTrigger(BulletCtr ctr)
         {
             if (ctr.IsGhost)
                 return;

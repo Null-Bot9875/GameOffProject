@@ -49,7 +49,7 @@ namespace Game
             col.enabled = true;
         }
 
-        public void OnNormalBulletTrigger(BulletCtr ctr)
+        public void OnBulletTrigger(BulletCtr ctr)
         {
             var go = ctr.gameObject;
             if (ctr.IsGhost)

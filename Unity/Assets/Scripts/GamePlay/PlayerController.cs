@@ -104,9 +104,9 @@ namespace Game
 
                     if (Input.GetMouseButtonDown(0))
                     {
+                        var go = InstantiateBullet();
                         if (_isForwardShoot)
                         {
-                            var go = Instantiate(bullet, muzzle.transform.position, gunGo.transform.rotation);
                             go.GetComponent<BulletCtr>().SetFire(GetDirection_ToGun());
                             _isForwardShoot = false;
                             _canShoot = false;
@@ -114,10 +114,7 @@ namespace Game
                         else
                         {
                             TypeEventSystem.Global.Send<GamePlayerWantRetrievesBulletEvt>();
-                            var position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
-                            var go = Instantiate(bullet, position, Quaternion.identity);
                             go.GetComponent<BulletCtr>().SetFire(GetDirection_GoToPlayer(go.transform.position));
-                            go.GetComponent<BulletCtr>().IsBack = true;
                             _canShoot = false;
                             _canMove = false;
                             rb.velocity = Vector2.zero;
@@ -135,13 +132,42 @@ namespace Game
             #endregion
         }
 
+        void CreatSimulateBullet()
+        {
+            var go = InstantiateBullet();
+            var bulletCtr = go.GetComponent<BulletCtr>();
+            bulletCtr.IsGhost = true;
+            var dir = _isForwardShoot ? GetDirection_ToGun() : GetDirection_WallBulletToPlayer();
+            _projection.SimulateLinePosition(bulletCtr, dir);
+            Destroy(go);
+        }
+
+        GameObject InstantiateBullet()
+        {
+            var go = Instantiate(bullet);
+            var bulletCtr = go.GetComponent<BulletCtr>();
+            if (_isForwardShoot)
+            {
+                go.transform.position = muzzle.transform.position;
+                go.transform.rotation = gunGo.transform.rotation;
+            }
+            else
+            {
+                go.transform.position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
+                go.transform.rotation = Quaternion.identity;
+                bulletCtr.IsBack = true;
+            }
+
+            return go;
+        }
+
         public void OnExplosion()
         {
             Die();
         }
 
 
-        public void OnNormalBulletTrigger(BulletCtr ctr)
+        public void OnBulletTrigger(BulletCtr ctr)
         {
             ctr.DestroyGo();
             if (ctr.IsBack)
@@ -162,28 +188,6 @@ namespace Game
         {
             Debug.Log("playerDie");
             TypeEventSystem.Global.Send<GameOverEvt>();
-        }
-
-        void CreatSimulateBullet()
-        {
-            var go = Instantiate(bullet);
-            var bulletCtr = go.GetComponent<BulletCtr>();
-            bulletCtr.IsGhost = true;
-            if (!_isForwardShoot)
-            {
-                go.transform.position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
-                go.transform.rotation = Quaternion.identity;
-                bulletCtr.IsBack = true;
-                _projection.SimulateLinePosition(bulletCtr, GetDirection_WallBulletToPlayer());
-            }
-            else
-            {
-                go.transform.position = muzzle.transform.position;
-                go.transform.rotation = gunGo.transform.rotation;
-                _projection.SimulateLinePosition(bulletCtr, GetDirection_ToGun());
-            }
-
-            Destroy(go);
         }
 
         Vector2 GetDirection_ToGun()

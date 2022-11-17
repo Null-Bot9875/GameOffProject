@@ -18,15 +18,13 @@ namespace Game
 
         void WallBulletShoot(GamePlayerWantRetrievesBulletEvt playerWantRetrievesBulletEvt)
         {
-            if (isInWall == false)
-            {
+            if (!isInWall)
                 return;
-            }
 
             Destroy(instanceOnWallObj);
         }
 
-        public void OnNormalBulletTrigger(BulletCtr ctr)
+        public void OnBulletTrigger(BulletCtr ctr)
         {
             if (ctr.IsGhost)
             {

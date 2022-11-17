@@ -2,6 +2,6 @@ namespace Game
 {
     public interface IBulletTrigger
     {
-        public void OnNormalBulletTrigger(BulletCtr ctr);
+        public void OnBulletTrigger(BulletCtr ctr);
     }
 }
