@@ -11,14 +11,16 @@ namespace Game
 
         private PlayerController _player;
 
+
+        // Start is called before the first frame update
         void Start()
         {
             _player = GetComponent<PlayerController>();
         }
 
+        // Update is called once per frame
         void Update()
-        {
-            var dir = DirectionalAnimationSet8.SnapVectorToDirection(_player.GetMouseInfo());
+        { var dir = DirectionalAnimationSet8.SnapVectorToDirection(_player.GetMouseInfo());
             var clip = GetPlayerMoveInfo(_player).magnitude < 0.2f ? idleSet.GetClip(dir) : moveSet.GetClip(dir);
             animancer.Play(clip);
         }
