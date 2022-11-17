@@ -109,6 +109,7 @@ namespace Game
             Destroy(bulletGo);
         }
 
+
         private GameObject CreatGhostObj(GameObject ghostGo)
         {
             var go = ghostGo.CompareTag("Player") ? CreatTmpGo(ghostGo) : CopyTmpGo(ghostGo);
@@ -134,7 +135,7 @@ namespace Game
 
             return go;
         }
-        
+
         private static GameObject CreatTmpGo(GameObject ghostGo)
         {
             var tmpGo = new GameObject();
@@ -168,8 +169,9 @@ namespace Game
             if (rb != null)
             {
                 var tmpRb = tmpGo.AddComponent<Rigidbody2D>();
-                tmpRb.bodyType = rb.bodyType;
+                tmpRb.bodyType = tmpRb.bodyType;
                 tmpRb.sharedMaterial = rb.sharedMaterial;
+                tmpRb.gravityScale = rb.gravityScale;
             }
 
             return tmpGo;
