@@ -31,20 +31,20 @@ namespace Game
         
         void ChangeWeaponForce()
         {
-            if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x)//右侧
-            {
-                 switch (Vector2.Angle(transform.up,_vector2))
-                {
-                    case 
-                }
-            }
-            else
-            {
-                switch (Vector2.Angle(transform.up,_vector2))
-                {
-                    
-                }
-            }
+            // if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x)//右侧
+            // {
+            //      switch (Vector2.Angle(transform.up,_vector2))
+            //     {
+            //         case 
+            //     }
+            // }
+            // else
+            // {
+            //     switch (Vector2.Angle(transform.up,_vector2))
+            //     {
+            //         
+            //     }
+            // }
             
             
 
