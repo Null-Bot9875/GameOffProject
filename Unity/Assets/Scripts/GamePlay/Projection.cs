@@ -65,9 +65,7 @@ namespace Game
         private void InitPhysicsScene()
         {
             if (_simulationScene.isLoaded)
-            {
                 return;
-            }
 
             _simulationScene =
                 SceneManager.CreateScene("simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
@@ -86,11 +84,11 @@ namespace Game
             }
         }
 
-        public void SimulateTrajectory(BulletCtr bulletCtr, Vector2 direction)
+        public void SimulateLinePosition(BulletCtr bulletCtr, Vector2 direction)
         {
             var bulletGo = GameObject.Instantiate(bulletCtr.gameObject);
+            SceneManager.MoveGameObjectToScene(bulletGo, _simulationScene);
             bulletGo.GetComponent<BulletCtr>().SetFire(direction);
-
             for (int i = 0; i < _line.positionCount; i++)
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);
@@ -112,11 +110,11 @@ namespace Game
 
         private GameObject CreatGhostObj(GameObject ghostGo)
         {
-            var tmpGo = new GameObject();
+             var tmpGo = new GameObject();
             tmpGo.transform.position = ghostGo.transform.position;
             tmpGo.transform.rotation = ghostGo.transform.rotation;
             tmpGo.transform.localScale = ghostGo.transform.localScale;
-
+            
             // foreach (var item in ghostGo.GetComponents<Collider2D>())
             {
                 var collider = ghostGo.GetComponent<Collider2D>();
@@ -136,11 +134,6 @@ namespace Game
                         circle.offset = tmpCircle.offset;
                         break;
                     }
-                }
-
-                if (ghostGo.CompareTag("Player"))
-                {
-                    tmpGo.GetComponent<Collider2D>().isTrigger = true;
                 }
 
                 var rb = ghostGo.GetComponent<Rigidbody2D>();

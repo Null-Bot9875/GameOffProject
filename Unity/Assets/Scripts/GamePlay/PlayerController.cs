@@ -196,13 +196,13 @@ namespace Game
                 go.transform.position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                 go.transform.rotation = Quaternion.identity;
                 bulletCtr.SetBack();
-                _projection.SimulateTrajectory(bulletCtr, GetDirection_WallBulletToPlayer());
+                _projection.SimulateLinePosition(bulletCtr, GetDirection_WallBulletToPlayer());
             }
             else
             {
                 go.transform.position = muzzle.transform.position;
                 go.transform.rotation = gunGo.transform.rotation;
-                _projection.SimulateTrajectory(bulletCtr, GetDirection_ToGun());
+                _projection.SimulateLinePosition(bulletCtr, GetDirection_ToGun());
             }
 
             Destroy(go);
