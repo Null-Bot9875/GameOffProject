@@ -105,19 +105,18 @@ namespace Game
                     if (Input.GetMouseButtonDown(0))
                     {
                         var go = InstantiateBullet();
+                        go.GetComponent<BulletCtr>().SetFire(GetBulletDir());
+                        _canShoot = false;
+
                         if (_isForwardShoot)
                         {
-                            go.GetComponent<BulletCtr>().SetFire(GetDirection_ToGun());
                             _isForwardShoot = false;
-                            _canShoot = false;
                         }
                         else
                         {
-                            TypeEventSystem.Global.Send<GamePlayerWantRetrievesBulletEvt>();
-                            go.GetComponent<BulletCtr>().SetFire(GetDirection_GoToPlayer(go.transform.position));
-                            _canShoot = false;
                             _canMove = false;
                             rb.velocity = Vector2.zero;
+                            TypeEventSystem.Global.Send<GamePlayerWantRetrievesBulletEvt>();
                         }
                     }
                 }
@@ -132,17 +131,16 @@ namespace Game
             #endregion
         }
 
-        void CreatSimulateBullet()
+        private void CreatSimulateBullet()
         {
             var go = InstantiateBullet();
             var bulletCtr = go.GetComponent<BulletCtr>();
             bulletCtr.IsGhost = true;
-            var dir = _isForwardShoot ? GetDirection_ToGun() : GetDirection_WallBulletToPlayer();
-            _projection.SimulateLinePosition(bulletCtr, dir);
+            _projection.SimulateLinePosition(bulletCtr, GetBulletDir());
             Destroy(go);
         }
 
-        GameObject InstantiateBullet()
+        private GameObject InstantiateBullet()
         {
             var go = Instantiate(bullet);
             var bulletCtr = go.GetComponent<BulletCtr>();
@@ -190,24 +188,24 @@ namespace Game
             TypeEventSystem.Global.Send<GameOverEvt>();
         }
 
-        Vector2 GetDirection_ToGun()
-        {
-            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
-        }
-
-        Vector2 GetDirection_WallBulletToPlayer()
-        {
-            return ((Vector2)transform.position - bulletOnPlacePos).normalized;
-        }
-
-        Vector2 GetDirection_GoToPlayer(Vector2 GoPos)
-        {
-            return ((Vector2)transform.position - GoPos).normalized;
-        }
-
         public Vector2 GetMouseInfo()
         {
             return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
+        }
+
+        private Vector2 GetBulletDir()
+        {
+            return _isForwardShoot ? GetDirection_ToGun() : GetDirection_WallBulletToPlayer();
+        }
+
+        private Vector2 GetDirection_ToGun()
+        {
+            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
+        }
+
+        private Vector2 GetDirection_WallBulletToPlayer()
+        {
+            return ((Vector2)transform.position - bulletOnPlacePos).normalized;
         }
     }
 }
