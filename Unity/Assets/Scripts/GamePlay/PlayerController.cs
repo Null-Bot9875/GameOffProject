@@ -68,8 +68,6 @@ namespace Game
 
             _mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
 
-            ChangeWeaponForce();
-
             #endregion
 
             #region 角色移动
@@ -180,19 +178,7 @@ namespace Game
             return new Vector2(x * moveSpeed, y * moveSpeed);
         }
 
-        void ChangeWeaponForce()
-        {
-            gunGo.transform.up = GetDirection_ToGun();
-
-            if (_mouseV2.y > transform.position.y)
-            {
-                gunGo.GetComponent<SpriteRenderer>().sortingOrder = -1;
-            }
-            else
-            {
-                gunGo.GetComponent<SpriteRenderer>().sortingOrder = 1;
-            }
-        }
+        
 
         Vector2 GetDirection_ToGun()
         {
