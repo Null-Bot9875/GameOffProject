@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class HoverCtr : MonoBehaviour
+    public class HoverCtr : MonoBehaviour, IBulletTrigger
     {
         private bool isInHover;
 
@@ -49,27 +49,26 @@ namespace Game
             col.enabled = true;
         }
 
-        private void OnTriggerEnter2D(Collider2D col1)
+        public void OnNormalBulletTrigger(BulletCtr ctr)
         {
-            var go = col1.gameObject;
-            if (col1.transform.CompareTag("Bullet") && !isInHover)
+            var go = ctr.gameObject;
+            if (ctr.IsGhost)
             {
-                if (!go.GetComponent<BulletCtr>().QueryGhost())
-                {
-                    isInHover = true;
-                    go.transform.DOMove(transform.position, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
-                }
-                else
-                {
-                    go.transform.position = transform.position;
-                    go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    GameObject.Destroy(go);
-                }
+                go.transform.position = transform.position;
+                ctr.DestroyGo();
+                return;
+            }
+            
+            if (go.CompareTag("Bullet") && !isInHover)
+            {
+                //防止爆炸递归调用
+                isInHover = true;
+                go.transform.DOMove(transform.position, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
             }
 
             void OnBulletMoveComplete()
             {
-                GameObject.Destroy(go);
+                ctr.DestroyGo();
                 TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
                 {
                     bulletPos = go.transform.position

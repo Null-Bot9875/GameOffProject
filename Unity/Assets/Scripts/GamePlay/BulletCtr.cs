@@ -6,8 +6,8 @@ namespace Game
     {
         [SerializeField, Header("发射速度")] private float shootSpeed;
         [SerializeField, Header("折返速度")] private float backSpeed;
-        public bool isGhost = false;
-        public bool isBack = false;
+        public bool IsGhost { get; set; } = false;
+        public bool IsBack { get; set; } = false;
 
         #region 组件
 
@@ -22,29 +22,8 @@ namespace Game
 
         public void SetFire(Vector2 direction)
         {
-            rb.velocity = isBack ? direction * backSpeed : direction * shootSpeed;
+            rb.velocity = IsBack ? direction * backSpeed : direction * shootSpeed;
         }
-
-        public void SetGhost()
-        {
-            isGhost = true;
-        }
-
-        public void SetBack()
-        {
-            isBack = true;
-        }
-
-        public bool QueryGhost()
-        {
-            return isGhost;
-        }
-
-        public bool QueryBack()
-        {
-            return isBack;
-        }
-
 
         private void Update()
         {
@@ -53,41 +32,24 @@ namespace Game
 
         private void OnTriggerEnter2D(Collider2D col)
         {
+            Debug.Log(col.gameObject.name);
             var go = col.gameObject;
-            switch (go.tag)
+            //模拟玩家没有挂脚本,特殊处理
+            if (IsGhost && go.CompareTag("Player"))
             {
-                case "Player":
-                {
-                    rb.velocity = Vector2.zero;
-                    Destroy(gameObject);
-
-                    if (isGhost)
-                        return;
-
-                    if (!isBack)
-                    {
-                        var player = go.GetComponent<PlayerController>();
-                        player.Die();
-                    }
-                    else
-                    {
-                        var player = go.GetComponent<PlayerController>();
-                        player.OnRecycleBullet();
-                    }
-
-                    break;
-                }
-
-                case "Enemy":
-                {
-                    var enemy = go.GetComponent<EnemyController>();
-                    enemy.Die();
-                    break;
-                }
-
-                default:
-                    break;
+                DestroyGo();
             }
+            
+            if (go.TryGetComponent(out IBulletTrigger trigger))
+            {
+                trigger.OnNormalBulletTrigger(this);
+            }
+        }
+
+        public void DestroyGo()
+        {
+            rb.velocity = Vector2.zero;
+            GameObject.Destroy(gameObject);
         }
     }
 }

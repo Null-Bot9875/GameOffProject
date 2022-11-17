@@ -88,12 +88,12 @@ namespace Game
 
         public void SimulateLinePosition(BulletCtr bulletCtr, Vector2 direction)
         {
-            var bulletGo = CreatGhostObj(bulletCtr.gameObject);
-            bulletGo.GetComponent<BulletCtr>().SetFire(direction);
+            SceneManager.MoveGameObjectToScene(bulletCtr.gameObject, _simulationScene);
+            bulletCtr.SetFire(direction);
             for (int i = 0; i < _line.positionCount; i++)
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);
-                _line.SetPosition(i, bulletGo.transform.position);
+                _line.SetPosition(i, bulletCtr.transform.position);
 
                 if (i == _line.positionCount - 1)
                 {
@@ -105,8 +105,6 @@ namespace Game
                     endPosGo.GetComponent<SpriteRenderer>().enabled = enable;
                 }
             }
-
-            Destroy(bulletGo);
         }
 
 
@@ -169,7 +167,7 @@ namespace Game
             if (rb != null)
             {
                 var tmpRb = tmpGo.AddComponent<Rigidbody2D>();
-                tmpRb.bodyType = tmpRb.bodyType;
+                tmpRb.bodyType = RigidbodyType2D.Static;
                 tmpRb.sharedMaterial = rb.sharedMaterial;
                 tmpRb.gravityScale = rb.gravityScale;
             }

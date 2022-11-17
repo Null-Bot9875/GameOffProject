@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class PlayerController : MonoBehaviour, IExplosion
+    public class PlayerController : MonoBehaviour, IExplosion, IBulletTrigger
     {
         [SerializeField, Header("玩家移动速度")] public float moveSpeed;
         [SerializeField, Header("偏移系数")] private float offsetCoefficient;
@@ -63,7 +63,7 @@ namespace Game
             _canShoot = true;
             _canMove = true;
         }
-       
+
         void Update()
         {
             #region 鼠标跟随
@@ -119,7 +119,7 @@ namespace Game
                             var position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                             var go = Instantiate(bullet, position, Quaternion.identity);
                             go.GetComponent<BulletCtr>().SetFire(GetDirection_GoToPlayer(go.transform.position));
-                            go.GetComponent<BulletCtr>().SetBack();
+                            go.GetComponent<BulletCtr>().IsBack = true;
                             _canShoot = false;
                             _canMove = false;
                             rb.velocity = Vector2.zero;
@@ -137,18 +137,21 @@ namespace Game
             #endregion
         }
 
-        public void OnRecycleBullet()
+        public void OnNormalBulletTrigger(BulletCtr ctr)
         {
-            TypeEventSystem.Global.Send<GamePlayerGetBackBulletEvt>();
-            _isForwardShoot = true;
-            _canShoot = true;
-            _canMove = true;
-            CountShootCD();
-        }
-
-        void CountShootCD()
-        {
-            _nowShootTime = Time.time;
+            ctr.DestroyGo();
+            if (ctr.IsBack)
+            {
+                _canShoot = true;
+                _canMove = true;
+                _isForwardShoot = true;
+                _nowShootTime = Time.time;
+                TypeEventSystem.Global.Send<GamePlayerGetBackBulletEvt>();
+            }
+            else
+            {
+                Die();
+            }
         }
 
         public Vector2 GetMouseInfo()
@@ -170,32 +173,16 @@ namespace Game
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D col)
-        {
-            if (col.transform.CompareTag("Bullet")) //子弹返回玩家身上
-            {
-                if (col.gameObject.GetComponent<BulletCtr>().QueryBack())
-                {
-                    TypeEventSystem.Global.Send<GamePlayerGetBackBulletEvt>();
-                    _isForwardShoot = true;
-                    _canShoot = true;
-                    _canMove = true;
-                    CountShootCD();
-                    Destroy(col.gameObject);
-                }
-            }
-        }
-
         void CreatSimulateBullet()
         {
             var go = Instantiate(bullet);
             var bulletCtr = go.GetComponent<BulletCtr>();
-            bulletCtr.SetGhost();
+            bulletCtr.IsGhost = true;
             if (!_isForwardShoot)
             {
                 go.transform.position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
                 go.transform.rotation = Quaternion.identity;
-                bulletCtr.SetBack();
+                bulletCtr.IsBack = true;
                 _projection.SimulateLinePosition(bulletCtr, GetDirection_WallBulletToPlayer());
             }
             else
@@ -228,7 +215,7 @@ namespace Game
             Die();
         }
 
-        public void Die()
+        void Die()
         {
             Debug.Log("playerDie");
             TypeEventSystem.Global.Send<GameOverEvt>();
