@@ -73,8 +73,6 @@ namespace Game
                 _mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
             }
 
-            ChangeWeaponForce();
-
             #endregion
 
             #region 角色移动
@@ -137,6 +135,12 @@ namespace Game
             #endregion
         }
 
+        public void OnExplosion()
+        {
+            Die();
+        }
+
+
         public void OnNormalBulletTrigger(BulletCtr ctr)
         {
             ctr.DestroyGo();
@@ -154,23 +158,10 @@ namespace Game
             }
         }
 
-        public Vector2 GetMouseInfo()
+        void Die()
         {
-            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
-        }
-
-        void ChangeWeaponForce()
-        {
-            gunGo.transform.up = GetDirection_ToGun();
-
-            if (_mouseV2.y > transform.position.y)
-            {
-                gunGo.GetComponent<SpriteRenderer>().sortingOrder = -1;
-            }
-            else
-            {
-                gunGo.GetComponent<SpriteRenderer>().sortingOrder = 1;
-            }
+            Debug.Log("playerDie");
+            TypeEventSystem.Global.Send<GameOverEvt>();
         }
 
         void CreatSimulateBullet()
@@ -210,15 +201,9 @@ namespace Game
             return ((Vector2)transform.position - GoPos).normalized;
         }
 
-        public void OnExplosion()
+        public Vector2 GetMouseInfo()
         {
-            Die();
-        }
-
-        void Die()
-        {
-            Debug.Log("playerDie");
-            TypeEventSystem.Global.Send<GameOverEvt>();
+            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
         }
     }
 }
