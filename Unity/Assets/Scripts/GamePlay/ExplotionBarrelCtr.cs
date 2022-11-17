@@ -23,6 +23,7 @@ namespace Game
 
         public void OnExplosion()
         {
+            //防止爆炸递归调用
             if (isInvalided)
                 return;
             isInvalided = true;
