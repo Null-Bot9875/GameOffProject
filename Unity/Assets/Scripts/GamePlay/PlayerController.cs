@@ -5,8 +5,6 @@ namespace Game
 {
     public class PlayerController : MonoBehaviour, IExplosion
     {
-        private float x;
-        private float y;
         [SerializeField, Header("玩家移动速度")] private float moveSpeed;
         [SerializeField, Header("偏移系数")] private float offsetCoefficient;
         private Vector2 _mouseV2;
@@ -76,8 +74,8 @@ namespace Game
 
             #region 角色移动
 
-            x = Input.GetAxis("Horizontal");
-            y = Input.GetAxis("Vertical");
+            var x = Input.GetAxis("Horizontal");
+            var y = Input.GetAxis("Vertical");
             rb.velocity = new Vector2(x * moveSpeed, y * moveSpeed);
 
             #endregion
@@ -119,7 +117,7 @@ namespace Game
             _canShoot = true;
             CountShootCD();
         }
-        
+
         private void ShootBullet()
         {
             if (_isForwardShoot)
@@ -177,8 +175,8 @@ namespace Game
 
         public Vector2 GetPlayerMoveInfo()
         {
-            x = Input.GetAxis("Horizontal");
-            y = Input.GetAxis("Vertical");
+            var x = Input.GetAxis("Horizontal");
+            var y = Input.GetAxis("Vertical");
             return new Vector2(x * moveSpeed, y * moveSpeed);
         }
 
