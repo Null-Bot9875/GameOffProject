@@ -5,7 +5,7 @@ namespace Game
 {
     public class PlayerController : MonoBehaviour, IExplosion
     {
-        [SerializeField, Header("玩家移动速度")] private float moveSpeed;
+        [SerializeField, Header("玩家移动速度")] public float moveSpeed;
         [SerializeField, Header("偏移系数")] private float offsetCoefficient;
         private Vector2 _mouseV2;
         private bool _isForwardShoot;
@@ -28,7 +28,6 @@ namespace Game
         [SerializeField] private GameObject gunGo;
         [SerializeField] private Transform muzzle;
         private Camera _camera;
-        private bool _isCameraNotNull;
         [SerializeField] private Projection _projection;
         private GameObject bullet;
         [SerializeField] private LineRenderer _line;
@@ -171,13 +170,6 @@ namespace Game
         public Vector2 GetMouseInfo()
         {
             return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
-        }
-
-        public Vector2 GetPlayerMoveInfo()
-        {
-            var x = Input.GetAxis("Horizontal");
-            var y = Input.GetAxis("Vertical");
-            return new Vector2(x * moveSpeed, y * moveSpeed);
         }
 
         void ChangeWeaponForce()

@@ -19,8 +19,15 @@ namespace Game
         void Update()
         {
             var dir = DirectionalAnimationSet8.SnapVectorToDirection(_player.GetMouseInfo());
-            var clip = _player.GetPlayerMoveInfo().magnitude < 0.2f ? idleSet.GetClip(dir) : moveSet.GetClip(dir);
+            var clip = GetPlayerMoveInfo(_player).magnitude < 0.2f ? idleSet.GetClip(dir) : moveSet.GetClip(dir);
             animancer.Play(clip);
+        }
+
+        private static Vector2 GetPlayerMoveInfo(PlayerController player)
+        {
+            var x = Input.GetAxis("Horizontal");
+            var y = Input.GetAxis("Vertical");
+            return new Vector2(x * player.moveSpeed, y * player.moveSpeed);
         }
     }
 }

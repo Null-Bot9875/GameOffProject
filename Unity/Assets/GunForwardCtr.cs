@@ -1,4 +1,3 @@
-using System;
 using Animancer;
 using UnityEngine;
 
@@ -11,6 +10,7 @@ namespace Game
         private DirectionalAnimationSet _set;
         private Vector3 _vector3;
 
+        
         private void FixedUpdate()
         {
             _vector3 = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
