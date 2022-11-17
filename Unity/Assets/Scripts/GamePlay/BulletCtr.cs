@@ -67,6 +67,9 @@ namespace Game
 
                     if (!(!isGhost && isBack))
                     {
+                        var player = go.GetComponent<PlayerController>();
+                        player.OnRecycleBullet();
+                        player.enabled = true;
                         rb.velocity = Vector2.zero;
                         Destroy(gameObject);
                     }
