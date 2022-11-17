@@ -58,20 +58,21 @@ namespace Game
             {
                 case "Player":
                 {
-                    // 子弹遇到玩家 停下并销毁子弹，如果是再实际场景并且非返回状态下遇到玩家，玩家死亡
-                    if (!isGhost && !isBack)
+                    rb.velocity = Vector2.zero;
+                    Destroy(gameObject);
+
+                    if (isGhost)
+                        return;
+
+                    if (!isBack)
                     {
                         var player = go.GetComponent<PlayerController>();
                         player.Die();
                     }
-
-                    if (!(!isGhost && isBack))
+                    else
                     {
                         var player = go.GetComponent<PlayerController>();
                         player.OnRecycleBullet();
-                        player.enabled = true;
-                        rb.velocity = Vector2.zero;
-                        Destroy(gameObject);
                     }
 
                     break;

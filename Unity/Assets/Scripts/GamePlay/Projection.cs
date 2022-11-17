@@ -21,18 +21,13 @@ namespace Game
         private readonly List<KeyValuePair<Transform, Transform>> _spawnedObjects =
             new List<KeyValuePair<Transform, Transform>>();
 
-        private readonly List<GameObject> _ghostList = new List<GameObject>();
 
         private void OnDrawGizmos()
         {
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(GameDataCache.Instance.Player.transform.position+(Vector3)_sphereCenter,_radius);
+            Gizmos.DrawWireSphere(GameDataCache.Instance.Player.transform.position + (Vector3)_sphereCenter, _radius);
         }
-
-
-        // [SerializeField, Header("场景更新周期")] private float fixUpdateTime = 1f;
-        // private float nowTime;
 
         private void Start()
         {
@@ -43,14 +38,19 @@ namespace Game
         public void Enable()
         {
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
-            UpdateSceneTransform();
+            InitSceneTransform();
             _line.enabled = true;
             endPosGo.GetComponent<SpriteRenderer>().enabled = true;
         }
 
         public void Disable()
         {
-            DeleteSceneTransform();
+            foreach (var go in _simulationScene.GetRootGameObjects())
+            {
+                GameObject.Destroy(go);
+            }
+
+            _spawnedObjects.Clear();
             _line.enabled = false;
             endPosGo.GetComponent<SpriteRenderer>().enabled = false;
         }
@@ -62,69 +62,38 @@ namespace Game
                 item.Value.position = item.Key.position;
                 item.Value.rotation = item.Key.rotation;
             }
-
-
-            // if (Time.time > fixUpdateTime + nowTime)
-            // {
-            //     nowTime = Time.time;
-            //     UpdateSceneTransform();
-            // }
         }
 
-        public void InitPhysicsScene()
+        private void InitPhysicsScene()
         {
             if (_simulationScene.isLoaded)
-            {
                 return;
-            }
 
             _simulationScene =
                 SceneManager.CreateScene("simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
             _physicsScene = _simulationScene.GetPhysicsScene2D();
         }
 
-        void UpdateSceneTransform()
+        void InitSceneTransform()
         {
             foreach (Transform item in _objParent)
             {
                 var ghostObj = CreatGhostObj(item.gameObject);
                 if (!ghostObj.isStatic)
                 {
-                    if (ghostObj.CompareTag("Player"))
-                    {
-                        ghostObj.GetComponent<PlayerController>().enabled = false;
-                        ghostObj.GetComponent<Collider2D>().isTrigger = true;
-                        for (int i = 0; i < ghostObj.transform.childCount; i++)
-                        {
-                            ghostObj.transform.GetChild(i).gameObject.SetActive(false);
-                        }
-                    }
-
                     _spawnedObjects.Add(new KeyValuePair<Transform, Transform>(item, ghostObj.transform));
                 }
             }
         }
 
-        void DeleteSceneTransform()
+        public void SimulateLinePosition(BulletCtr bulletCtr, Vector2 direction)
         {
-            foreach (var item in _ghostList)
-            {
-                Destroy(item);
-            }
-
-            _ghostList.Clear();
-            _spawnedObjects.Clear();
-        }
-
-        public void SimulateTrajectory(BulletCtr bulletCtr, Vector2 direction)
-        {
-            var ghostObj = CreatGhostObj(bulletCtr.gameObject);
-            ghostObj.GetComponent<BulletCtr>().SetFire(direction);
-
+            var bulletGo = CreatGhostObj(bulletCtr.gameObject);
+            bulletGo.GetComponent<BulletCtr>().SetFire(direction);
             for (int i = 0; i < _line.positionCount; i++)
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);
-                _line.SetPosition(i, ghostObj.transform.position);
+                _line.SetPosition(i, bulletGo.transform.position);
 
                 if (i == _line.positionCount - 1)
                 {
@@ -137,32 +106,73 @@ namespace Game
                 }
             }
 
-            Destroy(ghostObj.gameObject);
+            Destroy(bulletGo);
         }
 
-        private GameObject CreatGhostObj(GameObject go)
+        private GameObject CreatGhostObj(GameObject ghostGo)
         {
-            var ghostObj = Instantiate(go.gameObject, go.transform.position, go.transform.rotation);
-            if (!ghostObj.CompareTag("Bullet"))
-            {
-                _ghostList.Add(ghostObj);
-            }
+            var go = ghostGo.CompareTag("Player") ? CreatTmpGo(ghostGo) : CopyTmpGo(ghostGo);
+            SceneManager.MoveGameObjectToScene(go, _simulationScene);
+            return go;
+        }
 
-            ghostObj.GetComponent<SpriteRenderer>().enabled = false;
-            var shadow = ghostObj.GetComponent<ShadowCaster2D>();
+        private static GameObject CopyTmpGo(GameObject ghostGo)
+        {
+            var go = Instantiate(ghostGo);
+            go.GetComponent<SpriteRenderer>().enabled = false;
+            var shadow = go.GetComponent<ShadowCaster2D>();
             if (shadow != null)
             {
                 shadow.enabled = false;
             }
 
-            var light = ghostObj.GetComponentInChildren<Light2D>();
+            var light = go.GetComponentInChildren<Light2D>();
             if (light != null)
             {
                 light.enabled = false;
             }
 
-            SceneManager.MoveGameObjectToScene(ghostObj, _simulationScene);
-            return ghostObj;
+            return go;
+        }
+        
+        private static GameObject CreatTmpGo(GameObject ghostGo)
+        {
+            var tmpGo = new GameObject();
+            tmpGo.tag = ghostGo.tag;
+            tmpGo.layer = ghostGo.layer;
+            tmpGo.name = ghostGo.name;
+            tmpGo.transform.position = ghostGo.transform.position;
+            tmpGo.transform.rotation = ghostGo.transform.rotation;
+            tmpGo.transform.localScale = ghostGo.transform.localScale;
+
+            var collider = ghostGo.GetComponent<Collider2D>();
+            switch (collider)
+            {
+                case BoxCollider2D tmpBox:
+                {
+                    var box = tmpGo.AddComponent<BoxCollider2D>();
+                    box.size = tmpBox.size;
+                    box.offset = tmpBox.offset;
+                    break;
+                }
+                case CircleCollider2D tmpCircle:
+                {
+                    var circle = tmpGo.AddComponent<CircleCollider2D>();
+                    circle.radius = tmpCircle.radius;
+                    circle.offset = tmpCircle.offset;
+                    break;
+                }
+            }
+
+            var rb = ghostGo.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                var tmpRb = tmpGo.AddComponent<Rigidbody2D>();
+                tmpRb.bodyType = rb.bodyType;
+                tmpRb.sharedMaterial = rb.sharedMaterial;
+            }
+
+            return tmpGo;
         }
     }
 }

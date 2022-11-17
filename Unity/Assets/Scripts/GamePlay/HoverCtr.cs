@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using Game.GameEvent;
 using UnityEngine;
@@ -55,10 +52,19 @@ namespace Game
         private void OnTriggerEnter2D(Collider2D col1)
         {
             var go = col1.gameObject;
-            if (col1.transform.CompareTag("Bullet") && !isInHover && !go.GetComponent<BulletCtr>().QueryGhost())
+            if (col1.transform.CompareTag("Bullet") && !isInHover)
             {
-                isInHover = true;
-                go.transform.DOMove(transform.position, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
+                if (!go.GetComponent<BulletCtr>().QueryGhost())
+                {
+                    isInHover = true;
+                    go.transform.DOMove(transform.position, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
+                }
+                else
+                {
+                    go.transform.position = transform.position;
+                    go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    GameObject.Destroy(go);
+                }
             }
 
             void OnBulletMoveComplete()
@@ -72,13 +78,5 @@ namespace Game
                 instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position, go.transform.rotation);
             }
         }
-
-
-        // IEnumerator SlowBullet(GameObject go)
-        // {
-        //     DOTween.To(() => go.GetComponent<Rigidbody2D>().velocity , (x) => go.GetComponent<Rigidbody2D>().velocity = x,new Vector2(0, 0), 1f);
-        //     yield return new WaitForSeconds(1f);
-        //     Destroy(go);
-        // }
     }
 }
