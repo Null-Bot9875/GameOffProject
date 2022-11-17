@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using Game.GameEvent;
 using UnityEngine;
@@ -72,13 +69,5 @@ namespace Game
                 instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position, go.transform.rotation);
             }
         }
-
-
-        // IEnumerator SlowBullet(GameObject go)
-        // {
-        //     DOTween.To(() => go.GetComponent<Rigidbody2D>().velocity , (x) => go.GetComponent<Rigidbody2D>().velocity = x,new Vector2(0, 0), 1f);
-        //     yield return new WaitForSeconds(1f);
-        //     Destroy(go);
-        // }
     }
 }

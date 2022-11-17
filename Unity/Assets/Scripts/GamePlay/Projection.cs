@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 namespace Game
@@ -48,6 +49,7 @@ namespace Game
             {
                 GameObject.Destroy(go);
             }
+
             _spawnedObjects.Clear();
             _line.enabled = false;
             endPosGo.GetComponent<SpriteRenderer>().enabled = false;
@@ -86,8 +88,7 @@ namespace Game
 
         public void SimulateLinePosition(BulletCtr bulletCtr, Vector2 direction)
         {
-            var bulletGo = GameObject.Instantiate(bulletCtr.gameObject);
-            SceneManager.MoveGameObjectToScene(bulletGo, _simulationScene);
+            var bulletGo = CreatGhostObj(bulletCtr.gameObject);
             bulletGo.GetComponent<BulletCtr>().SetFire(direction);
             for (int i = 0; i < _line.positionCount; i++)
             {
@@ -110,42 +111,67 @@ namespace Game
 
         private GameObject CreatGhostObj(GameObject ghostGo)
         {
-             var tmpGo = new GameObject();
+            var go = ghostGo.CompareTag("Player") ? CreatTmpGo(ghostGo) : CopyTmpGo(ghostGo);
+            SceneManager.MoveGameObjectToScene(go, _simulationScene);
+            return go;
+        }
+
+        private static GameObject CopyTmpGo(GameObject ghostGo)
+        {
+            var go = Instantiate(ghostGo);
+            go.GetComponent<SpriteRenderer>().enabled = false;
+            var shadow = go.GetComponent<ShadowCaster2D>();
+            if (shadow != null)
+            {
+                shadow.enabled = false;
+            }
+
+            var light = go.GetComponentInChildren<Light2D>();
+            if (light != null)
+            {
+                light.enabled = false;
+            }
+
+            return go;
+        }
+        
+        private static GameObject CreatTmpGo(GameObject ghostGo)
+        {
+            var tmpGo = new GameObject();
+            tmpGo.tag = ghostGo.tag;
+            tmpGo.layer = ghostGo.layer;
+            tmpGo.name = ghostGo.name;
             tmpGo.transform.position = ghostGo.transform.position;
             tmpGo.transform.rotation = ghostGo.transform.rotation;
             tmpGo.transform.localScale = ghostGo.transform.localScale;
-            
-            // foreach (var item in ghostGo.GetComponents<Collider2D>())
-            {
-                var collider = ghostGo.GetComponent<Collider2D>();
-                switch (collider)
-                {
-                    case BoxCollider2D tmpBox:
-                    {
-                        var box = tmpGo.AddComponent<BoxCollider2D>();
-                        box.size = tmpBox.size;
-                        box.offset = tmpBox.offset;
-                        break;
-                    }
-                    case CircleCollider2D tmpCircle:
-                    {
-                        var circle = tmpGo.AddComponent<CircleCollider2D>();
-                        circle.radius = tmpCircle.radius;
-                        circle.offset = tmpCircle.offset;
-                        break;
-                    }
-                }
 
-                var rb = ghostGo.GetComponent<Rigidbody2D>();
-                if (rb != null)
+            var collider = ghostGo.GetComponent<Collider2D>();
+            switch (collider)
+            {
+                case BoxCollider2D tmpBox:
                 {
-                    var tmpRb = tmpGo.AddComponent<Rigidbody2D>();
-                    tmpRb.bodyType = rb.bodyType;
-                    tmpRb.sharedMaterial = rb.sharedMaterial;
+                    var box = tmpGo.AddComponent<BoxCollider2D>();
+                    box.size = tmpBox.size;
+                    box.offset = tmpBox.offset;
+                    break;
+                }
+                case CircleCollider2D tmpCircle:
+                {
+                    var circle = tmpGo.AddComponent<CircleCollider2D>();
+                    circle.radius = tmpCircle.radius;
+                    circle.offset = tmpCircle.offset;
+                    break;
                 }
             }
 
-            SceneManager.MoveGameObjectToScene(tmpGo, _simulationScene);
+            var rb = ghostGo.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                var tmpRb = tmpGo.AddComponent<Rigidbody2D>();
+                tmpRb.bodyType = rb.bodyType;
+                tmpRb.sharedMaterial = rb.sharedMaterial;
+            }
+
             return tmpGo;
         }
     }

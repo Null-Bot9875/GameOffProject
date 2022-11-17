@@ -63,8 +63,7 @@ namespace Game
             _canShoot = true;
             _canMove = true;
         }
-
-
+       
         void Update()
         {
             #region 鼠标跟随
@@ -143,6 +142,7 @@ namespace Game
             TypeEventSystem.Global.Send<GamePlayerGetBackBulletEvt>();
             _isForwardShoot = true;
             _canShoot = true;
+            _canMove = true;
             CountShootCD();
         }
 

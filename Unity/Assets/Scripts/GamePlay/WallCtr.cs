@@ -14,7 +14,6 @@ namespace Game
             bulletOnWallObj = Resources.Load<GameObject>("Prefabs/Item/BulletOnwall");
             TypeEventSystem.Global.Register<GamePlayerWantRetrievesBulletEvt>(WallBulletShoot)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
-            
         }
 
         void WallBulletShoot(GamePlayerWantRetrievesBulletEvt playerWantRetrievesBulletEvt)
@@ -23,6 +22,7 @@ namespace Game
             {
                 return;
             }
+
             Destroy(instanceOnWallObj);
         }
 
@@ -31,24 +31,20 @@ namespace Game
             var go = col1.gameObject;
             if (go.CompareTag("Bullet"))
             {
-                if (go.GetComponent<BulletCtr>().QueryGhost())
+                if (!go.GetComponent<BulletCtr>().QueryGhost())
                 {
-                    Destroy(go);
-                    go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                }else
-                {
-                   //todo 播放子弹上墙动画
-                        TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
-                        {
-                            bulletPos = go.transform.position
-                        } );
-                        isInWall = true;
-                        go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                        instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position,go.transform.rotation);
-                        Destroy(go);
+                    //todo 播放子弹上墙动画
+                    TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
+                    {
+                        bulletPos = go.transform.position
+                    });
+                    isInWall = true;
+                    instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position, go.transform.rotation);
                 }
+
+                go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                Destroy(go);
             }
-        
         }
     }
 }
