@@ -27,7 +27,7 @@ namespace Game
             if (isInvalided)
                 return;
             isInvalided = true;
-            var go = Instantiate(explosionClip, transform.position, transform.rotation);
+            Instantiate(explosionClip, transform.position, transform.rotation);
             foreach (var item in Physics2D.OverlapCircleAll(transform.position, explosionRadius))
             {
                 if (item.gameObject.TryGetComponent(out IExplosion explosion))
