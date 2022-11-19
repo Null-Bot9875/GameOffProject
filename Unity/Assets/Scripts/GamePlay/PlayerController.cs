@@ -161,9 +161,6 @@ namespace Game
             return new Vector2(x * moveSpeed, y * moveSpeed);
         }
 
-        
-
-
         private void OnCollisionEnter2D(Collision2D col)
         {
             if (col.transform.CompareTag("Bullet")) //子弹返回玩家身上
