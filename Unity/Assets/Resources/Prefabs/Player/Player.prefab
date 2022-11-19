@@ -325,7 +325,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   offsetCoefficient: -0.02
-  _canMove: 0
   _shootCD: 0.5
   gunGo: {fileID: 5206519181117189686}
   muzzle: {fileID: 890547792662252357}
@@ -405,7 +404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5206519181117189686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.068, y: -0.004, z: 0}
+  m_LocalPosition: {x: 0.09, y: 0.005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 890547792662252357}
@@ -495,6 +494,8 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 78dfa50612f01274c96a55b3f7ac2aad, type: 2}
   - {fileID: 7400000, guid: ab64c520ccad20149b4524d9e3e58a0c, type: 2}
   - {fileID: 7400000, guid: c6cd8c66c322b174799d5ef6d095b806, type: 2}
+  muzzleGo: {fileID: 6540311584416315098}
+  _radius: 2
 --- !u!114 &6380417515052461610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,7 +553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6540311584416315098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1014, y: 0.046, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2608428518639915749}
