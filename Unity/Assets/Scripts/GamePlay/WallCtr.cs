@@ -11,7 +11,7 @@ namespace Game
 
         private void Start()
         {
-            bulletOnWallObj = Resources.Load<GameObject>("Prefabs/Item/BulletOnwall");
+            bulletOnWallObj = Resources.Load<GameObject>(GamePath.BulletOnwallPath);
             TypeEventSystem.Global.Register<GameRecycleBulletRequestEvt>(WallBulletShoot)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }

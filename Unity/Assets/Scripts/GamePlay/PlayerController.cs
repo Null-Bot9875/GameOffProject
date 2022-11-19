@@ -40,7 +40,7 @@ namespace Game
 
         private void Awake()
         {
-            bullet = Resources.Load("Prefabs/Item/Bullet") as GameObject;
+            bullet = Resources.Load(GamePath.BulletPath) as GameObject;
             _camera = Camera.main;
             rb = GetComponent<Rigidbody2D>();
             InvokeRepeating(nameof(RepeatCountCd), 0, .1f);
