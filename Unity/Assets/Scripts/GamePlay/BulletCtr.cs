@@ -33,7 +33,6 @@ namespace Game
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log(col.gameObject.name);
             var go = col.gameObject;
             //模拟玩家没有挂脚本,特殊处理
             if (IsGhost && go.CompareTag("Player"))

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.GameEvent;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -103,8 +104,10 @@ namespace Game
                     endPosGo.transform.position = lastPosition;
                     var enable = _line.GetPosition(i) == _line.GetPosition(i - 1);
                     var playerPosition = GameDataCache.Instance.Player.transform.position + (Vector3)_sphereCenter;
-                    enable &= Vector2.Distance(lastPosition, playerPosition) > _radius;
+                    var distance = Vector2.Distance(lastPosition, playerPosition);
+                    enable &= distance > _radius;
                     endPosGo.GetComponent<SpriteRenderer>().enabled = enable;
+                    TypeEventSystem.Global.Send(new GameRecycleBulletGhost(distance < .5f));
                 }
             }
         }

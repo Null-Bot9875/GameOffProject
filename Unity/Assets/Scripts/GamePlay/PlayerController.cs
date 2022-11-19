@@ -71,7 +71,7 @@ namespace Game
 
         private void OnRecycleBulletGhostEvt(GameRecycleBulletGhost evt)
         {
-            isAimSelf = true;
+            isAimSelf = evt.IsAimSelf;
         }
 
         void Update()
@@ -110,25 +110,20 @@ namespace Game
                     _line.gameObject.GetComponent<Projection>().Disable();
                     var go = InstantiateBullet();
                     go.GetComponent<BulletCtr>().SetFire(GetBulletDir());
-                    SetState();
+                    if (_isForwardShoot)
+                    {
+                        _isForwardShoot = false;
+                        _isHaveBullet = false;
+                    }
+                    else
+                    {
+                        isCanMove = false;
+                        isAimSelf = false;
+                        _isBulletOnWall = false;
+                        rb.velocity = Vector2.zero;
+                        TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
+                    }
                 }
-            }
-        }
-
-        private void SetState()
-        {
-            if (_isForwardShoot)
-            {
-                _isForwardShoot = false;
-                _isHaveBullet = false;
-            }
-            else
-            {
-                isCanMove = false;
-                isAimSelf = false;
-                _isBulletOnWall = false;
-                rb.velocity = Vector2.zero;
-                TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
             }
         }
 
@@ -183,7 +178,6 @@ namespace Game
         {
             Die();
         }
-
 
         public void OnBulletTrigger(BulletCtr ctr)
         {
