@@ -12,8 +12,8 @@ namespace Game
         private bool _isForwardShoot = true;
         private bool _isHaveBullet = true;
         private bool _isBulletOnWall;
-        [HideInInspector] public bool isAimSelf;
-        [HideInInspector] public bool isCanMove = true;
+        private bool _isAimSelf;
+        private bool _isCanMove = true;
         private Vector2 bulletOnPlacePos;
 
         #region 子弹回收
@@ -66,17 +66,17 @@ namespace Game
         {
             bulletOnPlacePos = gameBulletShotOnPlaceEvt.bulletPos;
             _isBulletOnWall = true;
-            isCanMove = true;
+            _isCanMove = true;
         }
 
         private void OnRecycleBulletGhostEvt(GameRecycleBulletGhost evt)
         {
-            isAimSelf = evt.IsAimSelf;
+            _isAimSelf = evt.IsAimSelf;
         }
 
         void Update()
         {
-            if (isCanMove)
+            if (_isCanMove)
             {
                 //鼠标跟随
                 _mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
@@ -117,8 +117,8 @@ namespace Game
                     }
                     else
                     {
-                        isCanMove = false;
-                        isAimSelf = false;
+                        _isCanMove = false;
+                        _isAimSelf = false;
                         _isBulletOnWall = false;
                         rb.velocity = Vector2.zero;
                         TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
@@ -140,7 +140,7 @@ namespace Game
             else
             {
                 isCanShoot &= _isBulletOnWall;
-                isCanShoot &= isAimSelf;
+                isCanShoot &= _isAimSelf;
             }
 
             return isCanShoot;
@@ -185,7 +185,7 @@ namespace Game
             if (ctr.IsBack)
             {
                 _isHaveBullet = true;
-                isCanMove = true;
+                _isCanMove = true;
                 _isForwardShoot = true;
                 _countCd = _shootCD;
                 TypeEventSystem.Global.Send<GameRecycleBulletTriggerEvt>();
