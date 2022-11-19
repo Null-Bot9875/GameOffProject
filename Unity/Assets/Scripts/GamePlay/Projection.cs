@@ -13,8 +13,7 @@ namespace Game
         [SerializeField] private GameObject endPosGo;
         [SerializeField] private float _radius;
         [SerializeField] private Vector2 _sphereCenter;
-
-
+        
         private Scene _simulationScene;
         private PhysicsScene2D _physicsScene;
 
@@ -37,6 +36,7 @@ namespace Game
 
         public void Enable()
         {
+            _line.gameObject.SetActive(true);
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
             InitSceneTransform();
             _line.enabled = true;
@@ -45,6 +45,7 @@ namespace Game
 
         public void Disable()
         {
+            _line.gameObject.SetActive(false);
             foreach (var go in _simulationScene.GetRootGameObjects())
             {
                 GameObject.Destroy(go);
@@ -90,6 +91,7 @@ namespace Game
         {
             SceneManager.MoveGameObjectToScene(bulletCtr.gameObject, _simulationScene);
             bulletCtr.SetFire(direction);
+            
             for (int i = 0; i < _line.positionCount; i++)
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);

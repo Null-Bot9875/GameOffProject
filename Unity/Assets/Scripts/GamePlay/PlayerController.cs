@@ -8,9 +8,12 @@ namespace Game
         [SerializeField, Header("玩家移动速度")] public float moveSpeed;
         [SerializeField, Header("偏移系数")] private float offsetCoefficient;
         private Vector2 _mouseV2;
-        private bool _isForwardShoot;
-        private bool _canShoot;
-        public bool _canMove;
+
+        private bool _isForwardShoot = true;
+        private bool _isHaveBullet = true;
+        private bool _isBulletOnWall;
+        [HideInInspector] public bool isAimSelf;
+        [HideInInspector] public bool isCanMove = true;
         private Vector2 bulletOnPlacePos;
 
         #region 子弹回收
@@ -18,117 +21,134 @@ namespace Game
         [SerializeField, Header("子弹回收后再次射出CD")]
         private float _shootCD = 0.5f; //todo 5秒CD
 
-        private float _nowShootTime;
-        private bool _canShootCd;
+        private float _countCd;
 
         #endregion
 
         #region 组件
 
-        private Rigidbody2D rb;
         [SerializeField] private GameObject gunGo;
         [SerializeField] private Transform muzzle;
-        private Camera _camera;
         [SerializeField] private Projection _projection;
-        private GameObject bullet;
         [SerializeField] private LineRenderer _line;
+
+        private GameObject bullet;
+        private Rigidbody2D rb;
+        private Camera _camera;
 
         #endregion
 
         private void Awake()
         {
             bullet = Resources.Load("Prefabs/Item/Bullet") as GameObject;
-        }
-
-        void Start()
-        {
-            #region 事件注册
-
-            TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt)
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
-
-            #endregion
-
             _camera = Camera.main;
             rb = GetComponent<Rigidbody2D>();
-            _isForwardShoot = true;
-            _canShoot = true;
-            _canMove = true;
-            _nowShootTime = -.5f; //todo 5秒cd
+            InvokeRepeating(nameof(RepeatCountCd), 0, .1f);
+            TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt);
+            TypeEventSystem.Global.Register<GameRecycleBulletGhost>(OnRecycleBulletGhostEvt);
+        }
+
+        private void OnDestroy()
+        {
+            CancelInvoke(nameof(RepeatCountCd));
+            TypeEventSystem.Global.UnRegister<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt);
+            TypeEventSystem.Global.UnRegister<GameRecycleBulletGhost>(OnRecycleBulletGhostEvt);
+        }
+
+        void RepeatCountCd()
+        {
+            _countCd -= .1f;
+            if (_countCd <= 0)
+                _countCd = 0;
         }
 
         void OnBulletOnPlaceEvt(GameBulletShotOnPlaceEvt gameBulletShotOnPlaceEvt)
         {
             bulletOnPlacePos = gameBulletShotOnPlaceEvt.bulletPos;
-            _canShoot = true;
-            _canMove = true;
+            _isBulletOnWall = true;
+            isCanMove = true;
+        }
+
+        private void OnRecycleBulletGhostEvt(GameRecycleBulletGhost evt)
+        {
+            isAimSelf = true;
         }
 
         void Update()
         {
-            #region 鼠标跟随
-
-            if (_canMove)
+            if (isCanMove)
             {
+                //鼠标跟随
                 _mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
-            }
-
-            #endregion
-
-            #region 角色移动
-
-            if (_canMove)
-            {
+                //角色移动
                 var x = Input.GetAxis("Horizontal");
                 var y = Input.GetAxis("Vertical");
                 rb.velocity = new Vector2(x * moveSpeed, y * moveSpeed);
             }
 
-            #endregion
-
-            #region 瞄准射击
-
-            _canShootCd = Time.time > _shootCD + _nowShootTime;
-
-            if (_canShoot && _canShootCd)
+            if (Input.GetMouseButtonDown(1))
             {
-                if (Input.GetMouseButtonDown(1))
-                {
-                    _line.gameObject.SetActive(true);
-                    _line.gameObject.GetComponent<Projection>().Enable();
-                }
-
-                if (Input.GetMouseButton(1))
-                {
-                    CreatSimulateBullet();
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        var go = InstantiateBullet();
-                        go.GetComponent<BulletCtr>().SetFire(GetBulletDir());
-                        _canShoot = false;
-
-                        if (_isForwardShoot)
-                        {
-                            _isForwardShoot = false;
-                        }
-                        else
-                        {
-                            _canMove = false;
-                            rb.velocity = Vector2.zero;
-                            TypeEventSystem.Global.Send<GamePlayerWantRetrievesBulletEvt>();
-                        }
-                    }
-                }
+                _line.gameObject.GetComponent<Projection>().Enable();
             }
 
-            if (Input.GetMouseButtonUp(1) || !_canShoot)
+            if (Input.GetMouseButtonUp(1))
             {
-                _line.gameObject.SetActive(false);
                 _line.gameObject.GetComponent<Projection>().Disable();
             }
 
-            #endregion
+            if (Input.GetMouseButton(1))
+            {
+                //预测
+                CreatSimulateBullet();
+
+                if (!IsCanShoot())
+                    return;
+
+                //开火
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _line.gameObject.GetComponent<Projection>().Disable();
+                    var go = InstantiateBullet();
+                    go.GetComponent<BulletCtr>().SetFire(GetBulletDir());
+                    SetState();
+                }
+            }
+        }
+
+        private void SetState()
+        {
+            if (_isForwardShoot)
+            {
+                _isForwardShoot = false;
+                _isHaveBullet = false;
+            }
+            else
+            {
+                isCanMove = false;
+                isAimSelf = false;
+                _isBulletOnWall = false;
+                rb.velocity = Vector2.zero;
+                TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
+            }
+        }
+
+        private bool IsCanShoot()
+        {
+            var isCanShoot = true;
+            //回收的时候无视CD限制
+            var isShootCd = _countCd == 0;
+            if (_isForwardShoot)
+            {
+                isCanShoot &= _isHaveBullet;
+                isCanShoot &= isShootCd;
+            }
+            else
+            {
+                isCanShoot &= _isBulletOnWall;
+                isCanShoot &= isAimSelf;
+            }
+
+            return isCanShoot;
         }
 
         private void CreatSimulateBullet()
@@ -170,11 +190,11 @@ namespace Game
             ctr.DestroyGo();
             if (ctr.IsBack)
             {
-                _canShoot = true;
-                _canMove = true;
+                _isHaveBullet = true;
+                isCanMove = true;
                 _isForwardShoot = true;
-                _nowShootTime = Time.time;
-                TypeEventSystem.Global.Send<GamePlayerGetBackBulletEvt>();
+                _countCd = _shootCD;
+                TypeEventSystem.Global.Send<GameRecycleBulletTriggerEvt>();
             }
             else
             {

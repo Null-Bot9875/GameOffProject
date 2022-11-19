@@ -12,11 +12,11 @@ namespace Game
         private void Start()
         {
             bulletOnWallObj = Resources.Load<GameObject>("Prefabs/Item/BulletOnwall");
-            TypeEventSystem.Global.Register<GamePlayerWantRetrievesBulletEvt>(WallBulletShoot)
+            TypeEventSystem.Global.Register<GameRecycleBulletRequestEvt>(WallBulletShoot)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
-        void WallBulletShoot(GamePlayerWantRetrievesBulletEvt playerWantRetrievesBulletEvt)
+        void WallBulletShoot(GameRecycleBulletRequestEvt recycleBulletRequestEvt)
         {
             if (!isInWall)
                 return;

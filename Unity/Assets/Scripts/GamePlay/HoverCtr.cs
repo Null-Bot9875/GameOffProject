@@ -20,17 +20,17 @@ namespace Game
 
             #region 注册事件
 
-            TypeEventSystem.Global.Register<GamePlayerWantRetrievesBulletEvt>(HoverBulletShoot)
+            TypeEventSystem.Global.Register<GameRecycleBulletRequestEvt>(HoverBulletShoot)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(SetColliderFromWall)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
-            TypeEventSystem.Global.Register<GamePlayerGetBackBulletEvt>(SetColliderFromPlayer)
+            TypeEventSystem.Global.Register<GameRecycleBulletTriggerEvt>(SetColliderFromPlayer)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
 
             #endregion
         }
 
-        void HoverBulletShoot(GamePlayerWantRetrievesBulletEvt playerWantRetrievesBulletEvt)
+        void HoverBulletShoot(GameRecycleBulletRequestEvt recycleBulletRequestEvt)
         {
             if (!isInHover)
                 return;
@@ -44,7 +44,7 @@ namespace Game
             col.enabled = true;
         }
 
-        void SetColliderFromPlayer(GamePlayerGetBackBulletEvt getBackBulletEvt)
+        void SetColliderFromPlayer(GameRecycleBulletTriggerEvt getBackBulletTriggerEvt)
         {
             col.enabled = true;
         }
