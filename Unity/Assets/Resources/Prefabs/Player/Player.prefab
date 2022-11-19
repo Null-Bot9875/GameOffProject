@@ -375,7 +375,7 @@ MonoBehaviour:
   - {x: -0.012794961, y: -0.08764057, z: 0}
   m_ShapePathHash: 1874598716
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1318
+  m_InstanceId: -301750
 --- !u!1 &5206519181117189686
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,27 +475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01fea7c7a1020740ac3d0eedd70ddfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Clips:
-  - {fileID: 7400000, guid: 612d17c8217ebe94fb2c95c9925c14e9, type: 2}
-  - {fileID: 7400000, guid: d4865d26a9e098e478c2bc9db6b572f8, type: 2}
-  - {fileID: 7400000, guid: fcb2befae7112be4ba6406e1dcd693a3, type: 2}
-  - {fileID: 7400000, guid: 988fc926cf5be324881d6770cc8dc212, type: 2}
-  - {fileID: 7400000, guid: 22f7e0aa3df7b16488274f70589d51c5, type: 2}
-  - {fileID: 7400000, guid: d194fb9059611704ea063b0db269d374, type: 2}
-  - {fileID: 7400000, guid: 48d0084cd516cab4b92a789baeac7c60, type: 2}
-  - {fileID: 7400000, guid: de87d7d9f4799654ca87714b9af91575, type: 2}
-  - {fileID: 7400000, guid: aaca56ec048f6684b98b102bc1d0aa74, type: 2}
-  - {fileID: 7400000, guid: d95f9e61b1fcb2a48983104fa1055257, type: 2}
-  - {fileID: 7400000, guid: b12e4eb7dd1cfd245bdac111fc2f0a32, type: 2}
-  - {fileID: 7400000, guid: 7dc19603238aba8429c4b186dbdc4445, type: 2}
-  - {fileID: 7400000, guid: ed2b587d05a379e48912fdf064a7b454, type: 2}
-  - {fileID: 7400000, guid: d259dbf6d256bd14f914a6bd1808e621, type: 2}
-  - {fileID: 7400000, guid: eb9e4b2a9f50d2e4d8769146d4e4689d, type: 2}
-  - {fileID: 7400000, guid: 78dfa50612f01274c96a55b3f7ac2aad, type: 2}
-  - {fileID: 7400000, guid: ab64c520ccad20149b4524d9e3e58a0c, type: 2}
-  - {fileID: 7400000, guid: c6cd8c66c322b174799d5ef6d095b806, type: 2}
   muzzleGo: {fileID: 6540311584416315098}
-  _radius: 2
+  _radius: 0.9
 --- !u!114 &6380417515052461610
 MonoBehaviour:
   m_ObjectHideFlags: 0
