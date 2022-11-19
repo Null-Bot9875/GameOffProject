@@ -2,19 +2,17 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ExplotionBarrelCtr : MonoBehaviour, IExplosion
+    public class ExplotionBarrelCtr : MonoBehaviour, IExplosion, IBulletTrigger
     {
         [SerializeField, Header("爆炸特效")] private GameObject explosionClip;
         public bool isInvalided;
         [SerializeField, Header("爆炸半径")] private float explosionRadius;
 
-        private void OnTriggerEnter2D(Collider2D col)
+        public void OnBulletTrigger(BulletCtr ctr)
         {
-            var go = col.gameObject;
-            if (go.CompareTag("Bullet") && !go.GetComponent<BulletCtr>().QueryGhost())
-            {
-                OnExplosion();
-            }
+            if (ctr.IsGhost)
+                return;
+            OnExplosion();
         }
 
         private void OnDrawGizmos()
@@ -25,10 +23,11 @@ namespace Game
 
         public void OnExplosion()
         {
+            //防止爆炸递归调用
             if (isInvalided)
                 return;
             isInvalided = true;
-            var go = Instantiate(explosionClip, transform.position, transform.rotation);
+            Instantiate(explosionClip, transform.position, transform.rotation);
             foreach (var item in Physics2D.OverlapCircleAll(transform.position, explosionRadius))
             {
                 if (item.gameObject.TryGetComponent(out IExplosion explosion))

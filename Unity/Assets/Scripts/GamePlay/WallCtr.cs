@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class WallCtr : MonoBehaviour
+    public class WallCtr : MonoBehaviour, IBulletTrigger
     {
         private GameObject bulletOnWallObj;
         private GameObject instanceOnWallObj;
@@ -11,40 +11,36 @@ namespace Game
 
         private void Start()
         {
-            bulletOnWallObj = Resources.Load<GameObject>("Prefabs/Item/BulletOnwall");
-            TypeEventSystem.Global.Register<GamePlayerWantRetrievesBulletEvt>(WallBulletShoot)
+            bulletOnWallObj = Resources.Load<GameObject>(GamePath.BulletOnwallPath);
+            TypeEventSystem.Global.Register<GameRecycleBulletRequestEvt>(WallBulletShoot)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
-        void WallBulletShoot(GamePlayerWantRetrievesBulletEvt playerWantRetrievesBulletEvt)
+        void WallBulletShoot(GameRecycleBulletRequestEvt recycleBulletRequestEvt)
         {
-            if (isInWall == false)
-            {
+            if (!isInWall)
                 return;
-            }
 
             Destroy(instanceOnWallObj);
         }
 
-        private void OnCollisionEnter2D(Collision2D col1)
+        public void OnBulletTrigger(BulletCtr ctr)
         {
-            var go = col1.gameObject;
-            if (go.CompareTag("Bullet"))
+            if (ctr.IsGhost)
             {
-                if (!go.GetComponent<BulletCtr>().QueryGhost())
-                {
-                    //todo 播放子弹上墙动画
-                    TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
-                    {
-                        bulletPos = go.transform.position
-                    });
-                    isInWall = true;
-                    instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position, go.transform.rotation);
-                }
-
-                go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                Destroy(go);
+                ctr.DestroyGo();
+                return;
             }
+
+            var go = ctr.gameObject;
+            //todo 播放子弹上墙动画
+            TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
+            {
+                bulletPos = go.transform.position
+            });
+            isInWall = true;
+            instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position, go.transform.rotation);
+            ctr.DestroyGo();
         }
     }
 }

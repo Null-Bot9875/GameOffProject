@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.GameEvent;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -13,8 +14,7 @@ namespace Game
         [SerializeField] private GameObject endPosGo;
         [SerializeField] private float _radius;
         [SerializeField] private Vector2 _sphereCenter;
-
-
+        
         private Scene _simulationScene;
         private PhysicsScene2D _physicsScene;
 
@@ -37,6 +37,7 @@ namespace Game
 
         public void Enable()
         {
+            _line.gameObject.SetActive(true);
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
             InitSceneTransform();
             _line.enabled = true;
@@ -45,6 +46,7 @@ namespace Game
 
         public void Disable()
         {
+            _line.gameObject.SetActive(false);
             foreach (var go in _simulationScene.GetRootGameObjects())
             {
                 GameObject.Destroy(go);
@@ -88,12 +90,13 @@ namespace Game
 
         public void SimulateLinePosition(BulletCtr bulletCtr, Vector2 direction)
         {
-            var bulletGo = CreatGhostObj(bulletCtr.gameObject);
-            bulletGo.GetComponent<BulletCtr>().SetFire(direction);
+            SceneManager.MoveGameObjectToScene(bulletCtr.gameObject, _simulationScene);
+            bulletCtr.SetFire(direction);
+            
             for (int i = 0; i < _line.positionCount; i++)
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);
-                _line.SetPosition(i, bulletGo.transform.position);
+                _line.SetPosition(i, bulletCtr.transform.position);
 
                 if (i == _line.positionCount - 1)
                 {
@@ -101,13 +104,14 @@ namespace Game
                     endPosGo.transform.position = lastPosition;
                     var enable = _line.GetPosition(i) == _line.GetPosition(i - 1);
                     var playerPosition = GameDataCache.Instance.Player.transform.position + (Vector3)_sphereCenter;
-                    enable &= Vector2.Distance(lastPosition, playerPosition) > _radius;
+                    var distance = Vector2.Distance(lastPosition, playerPosition);
+                    enable &= distance > _radius;
                     endPosGo.GetComponent<SpriteRenderer>().enabled = enable;
+                    TypeEventSystem.Global.Send(new GameRecycleBulletGhost(distance < .5f));
                 }
             }
-
-            Destroy(bulletGo);
         }
+
 
         private GameObject CreatGhostObj(GameObject ghostGo)
         {
@@ -134,7 +138,7 @@ namespace Game
 
             return go;
         }
-        
+
         private static GameObject CreatTmpGo(GameObject ghostGo)
         {
             var tmpGo = new GameObject();
@@ -168,8 +172,9 @@ namespace Game
             if (rb != null)
             {
                 var tmpRb = tmpGo.AddComponent<Rigidbody2D>();
-                tmpRb.bodyType = rb.bodyType;
+                tmpRb.bodyType = RigidbodyType2D.Static;
                 tmpRb.sharedMaterial = rb.sharedMaterial;
+                tmpRb.gravityScale = rb.gravityScale;
             }
 
             return tmpGo;

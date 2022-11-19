@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class HoverCtr : MonoBehaviour
+    public class HoverCtr : MonoBehaviour, IBulletTrigger
     {
         private bool isInHover;
 
@@ -20,17 +20,17 @@ namespace Game
 
             #region 注册事件
 
-            TypeEventSystem.Global.Register<GamePlayerWantRetrievesBulletEvt>(HoverBulletShoot)
+            TypeEventSystem.Global.Register<GameRecycleBulletRequestEvt>(HoverBulletShoot)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(SetColliderFromWall)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
-            TypeEventSystem.Global.Register<GamePlayerGetBackBulletEvt>(SetColliderFromPlayer)
+            TypeEventSystem.Global.Register<GameRecycleBulletTriggerEvt>(SetColliderFromPlayer)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
 
             #endregion
         }
 
-        void HoverBulletShoot(GamePlayerWantRetrievesBulletEvt playerWantRetrievesBulletEvt)
+        void HoverBulletShoot(GameRecycleBulletRequestEvt recycleBulletRequestEvt)
         {
             if (!isInHover)
                 return;
@@ -44,32 +44,30 @@ namespace Game
             col.enabled = true;
         }
 
-        void SetColliderFromPlayer(GamePlayerGetBackBulletEvt getBackBulletEvt)
+        void SetColliderFromPlayer(GameRecycleBulletTriggerEvt getBackBulletTriggerEvt)
         {
             col.enabled = true;
         }
 
-        private void OnTriggerEnter2D(Collider2D col1)
+        public void OnBulletTrigger(BulletCtr ctr)
         {
-            var go = col1.gameObject;
-            if (col1.transform.CompareTag("Bullet") && !isInHover)
+            var go = ctr.gameObject;
+            if (ctr.IsGhost)
             {
-                if (!go.GetComponent<BulletCtr>().QueryGhost())
-                {
-                    isInHover = true;
-                    go.transform.DOMove(transform.position, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
-                }
-                else
-                {
-                    go.transform.position = transform.position;
-                    go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    GameObject.Destroy(go);
-                }
+                go.transform.position = transform.position;
+                ctr.DestroyGo();
+                return;
+            }
+            
+            if (go.CompareTag("Bullet") && !isInHover)
+            {
+                isInHover = true;
+                go.transform.DOMove(transform.position, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
             }
 
             void OnBulletMoveComplete()
             {
-                GameObject.Destroy(go);
+                ctr.DestroyGo();
                 TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
                 {
                     bulletPos = go.transform.position

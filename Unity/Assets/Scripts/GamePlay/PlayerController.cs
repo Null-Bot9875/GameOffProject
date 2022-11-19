@@ -3,14 +3,17 @@ using UnityEngine;
 
 namespace Game
 {
-    public class PlayerController : MonoBehaviour, IExplosion
+    public class PlayerController : MonoBehaviour, IExplosion, IBulletTrigger
     {
         [SerializeField, Header("玩家移动速度")] public float moveSpeed;
         [SerializeField, Header("偏移系数")] private float offsetCoefficient;
         private Vector2 _mouseV2;
-        private bool _isForwardShoot;
-        private bool _canShoot;
-        public bool _canMove;
+
+        private bool _isForwardShoot = true;
+        private bool _isHaveBullet = true;
+        private bool _isBulletOnWall;
+        private bool _isAimSelf;
+        private bool _isCanMove = true;
         private Vector2 bulletOnPlacePos;
 
         #region 子弹回收
@@ -18,200 +21,157 @@ namespace Game
         [SerializeField, Header("子弹回收后再次射出CD")]
         private float _shootCD = 0.5f; //todo 5秒CD
 
-        private float _nowShootTime;
-        private bool _canShootCd;
+        private float _countCd;
 
         #endregion
 
         #region 组件
 
-        private Rigidbody2D rb;
         [SerializeField] private GameObject gunGo;
         [SerializeField] private Transform muzzle;
-        private Camera _camera;
         [SerializeField] private Projection _projection;
-        private GameObject bullet;
         [SerializeField] private LineRenderer _line;
+
+        private GameObject bullet;
+        private Rigidbody2D rb;
+        private Camera _camera;
 
         #endregion
 
         private void Awake()
         {
-            bullet = Resources.Load("Prefabs/Item/Bullet") as GameObject;
-        }
-
-        void Start()
-        {
-            #region 事件注册
-
-            TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt)
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
-
-            #endregion
-
+            bullet = Resources.Load(GamePath.BulletPath) as GameObject;
             _camera = Camera.main;
             rb = GetComponent<Rigidbody2D>();
-            _isForwardShoot = true;
-            _canShoot = true;
-            _canMove = true;
-            _nowShootTime = -.5f; //todo 5秒cd
+            InvokeRepeating(nameof(RepeatCountCd), 0, .1f);
+            TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt);
+            TypeEventSystem.Global.Register<GameRecycleBulletGhost>(OnRecycleBulletGhostEvt);
+        }
+
+        private void OnDestroy()
+        {
+            CancelInvoke(nameof(RepeatCountCd));
+            TypeEventSystem.Global.UnRegister<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt);
+            TypeEventSystem.Global.UnRegister<GameRecycleBulletGhost>(OnRecycleBulletGhostEvt);
+        }
+
+        void RepeatCountCd()
+        {
+            _countCd -= .1f;
+            if (_countCd <= 0)
+                _countCd = 0;
         }
 
         void OnBulletOnPlaceEvt(GameBulletShotOnPlaceEvt gameBulletShotOnPlaceEvt)
         {
             bulletOnPlacePos = gameBulletShotOnPlaceEvt.bulletPos;
-            _canShoot = true;
-            _canMove = true;
+            _isBulletOnWall = true;
+            _isCanMove = true;
         }
-       
+
+        private void OnRecycleBulletGhostEvt(GameRecycleBulletGhost evt)
+        {
+            _isAimSelf = evt.IsAimSelf;
+        }
+
         void Update()
         {
-            #region 鼠标跟随
-
-            if (_canMove)
+            if (_isCanMove)
             {
+                //鼠标跟随
                 _mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
-            }
-
-            #endregion
-
-            #region 角色移动
-
-            if (_canMove)
-            {
+                //角色移动
                 var x = Input.GetAxis("Horizontal");
                 var y = Input.GetAxis("Vertical");
                 rb.velocity = new Vector2(x * moveSpeed, y * moveSpeed);
             }
 
-            #endregion
-
-            #region 瞄准射击
-
-            _canShootCd = Time.time > _shootCD + _nowShootTime;
-
-            if (_canShoot && _canShootCd)
+            if (Input.GetMouseButtonDown(1))
             {
-                if (Input.GetMouseButtonDown(1))
-                {
-                    _line.gameObject.SetActive(true);
-                    _line.gameObject.GetComponent<Projection>().Enable();
-                }
-
-                if (Input.GetMouseButton(1))
-                {
-                    CreatSimulateBullet();
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        if (_isForwardShoot)
-                        {
-                            var go = Instantiate(bullet, muzzle.transform.position, gunGo.transform.rotation);
-                            go.GetComponent<BulletCtr>().SetFire(GetDirection_ToGun());
-                            _isForwardShoot = false;
-                            _canShoot = false;
-                        }
-                        else
-                        {
-                            TypeEventSystem.Global.Send<GamePlayerWantRetrievesBulletEvt>();
-                            var position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
-                            var go = Instantiate(bullet, position, Quaternion.identity);
-                            go.GetComponent<BulletCtr>().SetFire(GetDirection_GoToPlayer(go.transform.position));
-                            go.GetComponent<BulletCtr>().SetBack();
-                            _canShoot = false;
-                            _canMove = false;
-                            rb.velocity = Vector2.zero;
-                        }
-                    }
-                }
+                _line.gameObject.GetComponent<Projection>().Enable();
             }
 
-            if (Input.GetMouseButtonUp(1) || !_canShoot)
+            if (Input.GetMouseButtonUp(1))
             {
-                _line.gameObject.SetActive(false);
                 _line.gameObject.GetComponent<Projection>().Disable();
             }
 
-            #endregion
-        }
-
-        public void OnRecycleBullet()
-        {
-            TypeEventSystem.Global.Send<GamePlayerGetBackBulletEvt>();
-            _isForwardShoot = true;
-            _canShoot = true;
-            _canMove = true;
-            CountShootCD();
-        }
-
-        void CountShootCD()
-        {
-            _nowShootTime = Time.time;
-        }
-
-        public Vector2 GetMouseInfo()
-        {
-            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
-        }
-
-        public Vector2 GetPlayerMoveInfo()
-        {
-            var x = Input.GetAxis("Horizontal");
-            var y = Input.GetAxis("Vertical");
-            return new Vector2(x * moveSpeed, y * moveSpeed);
-        }
-
-        private void OnCollisionEnter2D(Collision2D col)
-        {
-            if (col.transform.CompareTag("Bullet")) //子弹返回玩家身上
+            if (Input.GetMouseButton(1))
             {
-                if (col.gameObject.GetComponent<BulletCtr>().QueryBack())
+                //预测
+                CreatSimulateBullet();
+
+                if (!IsCanShoot())
+                    return;
+
+                //开火
+                if (Input.GetMouseButtonDown(0))
                 {
-                    TypeEventSystem.Global.Send<GamePlayerGetBackBulletEvt>();
-                    _isForwardShoot = true;
-                    _canShoot = true;
-                    _canMove = true;
-                    CountShootCD();
-                    Destroy(col.gameObject);
+                    _line.gameObject.GetComponent<Projection>().Disable();
+                    var go = InstantiateBullet();
+                    go.GetComponent<BulletCtr>().SetFire(GetBulletDir());
+                    if (_isForwardShoot)
+                    {
+                        _isForwardShoot = false;
+                        _isHaveBullet = false;
+                    }
+                    else
+                    {
+                        _isCanMove = false;
+                        _isAimSelf = false;
+                        _isBulletOnWall = false;
+                        rb.velocity = Vector2.zero;
+                        TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
+                    }
                 }
             }
         }
 
-        void CreatSimulateBullet()
+        private bool IsCanShoot()
         {
-            var go = Instantiate(bullet);
-            var bulletCtr = go.GetComponent<BulletCtr>();
-            bulletCtr.SetGhost();
-            if (!_isForwardShoot)
+            var isCanShoot = true;
+            //回收的时候无视CD限制
+            var isShootCd = _countCd == 0;
+            if (_isForwardShoot)
             {
-                go.transform.position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
-                go.transform.rotation = Quaternion.identity;
-                bulletCtr.SetBack();
-                _projection.SimulateLinePosition(bulletCtr, GetDirection_WallBulletToPlayer());
+                isCanShoot &= _isHaveBullet;
+                isCanShoot &= isShootCd;
             }
             else
             {
-                go.transform.position = muzzle.transform.position;
-                go.transform.rotation = gunGo.transform.rotation;
-                _projection.SimulateLinePosition(bulletCtr, GetDirection_ToGun());
+                isCanShoot &= _isBulletOnWall;
+                isCanShoot &= _isAimSelf;
             }
 
+            return isCanShoot;
+        }
+
+        private void CreatSimulateBullet()
+        {
+            var go = InstantiateBullet();
+            var bulletCtr = go.GetComponent<BulletCtr>();
+            bulletCtr.IsGhost = true;
+            _projection.SimulateLinePosition(bulletCtr, GetBulletDir());
             Destroy(go);
         }
 
-        Vector2 GetDirection_ToGun()
+        private GameObject InstantiateBullet()
         {
-            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
-        }
+            var go = Instantiate(bullet);
+            var bulletCtr = go.GetComponent<BulletCtr>();
+            if (_isForwardShoot)
+            {
+                go.transform.position = muzzle.transform.position;
+                go.transform.rotation = gunGo.transform.rotation;
+            }
+            else
+            {
+                go.transform.position = bulletOnPlacePos - GetDirection_WallBulletToPlayer() * offsetCoefficient;
+                go.transform.rotation = Quaternion.identity;
+                bulletCtr.IsBack = true;
+            }
 
-        Vector2 GetDirection_WallBulletToPlayer()
-        {
-            return ((Vector2)transform.position - bulletOnPlacePos).normalized;
-        }
-
-        Vector2 GetDirection_GoToPlayer(Vector2 GoPos)
-        {
-            return ((Vector2)transform.position - GoPos).normalized;
+            return go;
         }
 
         public void OnExplosion()
@@ -219,10 +179,47 @@ namespace Game
             Die();
         }
 
-        public void Die()
+        public void OnBulletTrigger(BulletCtr ctr)
+        {
+            ctr.DestroyGo();
+            if (ctr.IsBack)
+            {
+                _isHaveBullet = true;
+                _isCanMove = true;
+                _isForwardShoot = true;
+                _countCd = _shootCD;
+                TypeEventSystem.Global.Send<GameRecycleBulletTriggerEvt>();
+            }
+            else
+            {
+                Die();
+            }
+        }
+
+        void Die()
         {
             Debug.Log("playerDie");
             TypeEventSystem.Global.Send<GameOverEvt>();
+        }
+
+        public Vector2 GetMouseInfo()
+        {
+            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
+        }
+
+        private Vector2 GetBulletDir()
+        {
+            return _isForwardShoot ? GetDirection_ToGun() : GetDirection_WallBulletToPlayer();
+        }
+
+        private Vector2 GetDirection_ToGun()
+        {
+            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
+        }
+
+        private Vector2 GetDirection_WallBulletToPlayer()
+        {
+            return ((Vector2)transform.position - bulletOnPlacePos).normalized;
         }
     }
 }
