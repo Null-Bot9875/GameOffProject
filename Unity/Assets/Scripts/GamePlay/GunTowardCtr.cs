@@ -29,8 +29,9 @@ namespace Game
 
         private void FixedUpdate()
         {
-           
-            _vector2 = (Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position).normalized;
+            var tempV3 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var tempMouseV2 = new Vector3(tempV3.x, tempV3.y);
+            _vector2 = (tempMouseV2 - transform.position).normalized;
             // Debug.Log(Vector2.Angle(transform.up,_vector2));
             ChangeWeaponForce();
             ChangeMuzzleForce();
