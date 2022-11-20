@@ -14,7 +14,7 @@ namespace Game
         [SerializeField] private GameObject endPosGo;
         [SerializeField] private float _radius;
         [SerializeField] private Vector2 _sphereCenter;
-        
+
         private Scene _simulationScene;
         private PhysicsScene2D _physicsScene;
 
@@ -92,7 +92,7 @@ namespace Game
         {
             SceneManager.MoveGameObjectToScene(bulletCtr.gameObject, _simulationScene);
             bulletCtr.SetFire(direction);
-            
+
             for (int i = 0; i < _line.positionCount; i++)
             {
                 _physicsScene.Simulate(Time.fixedDeltaTime);
@@ -123,7 +123,12 @@ namespace Game
         private static GameObject CopyTmpGo(GameObject ghostGo)
         {
             var go = Instantiate(ghostGo);
-            go.GetComponent<SpriteRenderer>().enabled = false;
+            var sprite = go.GetComponent<SpriteRenderer>();
+            if (sprite)
+            {
+                sprite.enabled = false;
+            }
+
             var shadow = go.GetComponent<ShadowCaster2D>();
             if (shadow != null)
             {
