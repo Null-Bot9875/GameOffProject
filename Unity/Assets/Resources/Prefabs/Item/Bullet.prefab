@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5457098896987207704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.07, y: 0.644, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 5297686898879234153}
   m_Father: {fileID: 0}
@@ -102,8 +102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootSpeed: 2
   backSpeed: 3
-  isGhost: 0
-  isBack: 0
 --- !u!50 &8631256710281536125
 Rigidbody2D:
   serializedVersion: 4
