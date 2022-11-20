@@ -8,6 +8,7 @@ namespace Game
     public class CandleCrl : MonoBehaviour, IBulletTrigger, IExplosion
     {
         [SerializeField] private Light2D _light2D;
+        [SerializeField] private GameObject _candleLight;
 
         private float time;
         private float num;
@@ -39,11 +40,13 @@ namespace Game
                 return;
 
             _isInvalid = false;
+            _candleLight.SetActive(true);
         }
 
         public void OnExplosion()
         {
             _isInvalid = false;
+            _candleLight.SetActive(true);
         }
     }
 }
