@@ -1,15 +1,12 @@
-using System;
 using System.Collections.Generic;
 using Animancer;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game
 {
     public class GunTowardCtr : MonoBehaviour
     {
-        [SerializeField] private AnimationClip[] _Clips;
-        private AnimationClip toPlayClip;
+        private Dictionary<int, AnimationClip> _clipDic = new Dictionary<int, AnimationClip>();
         private AnimancerComponent animancer;
         private Vector2 _vector2;
 
@@ -18,69 +15,52 @@ namespace Game
 
         private void Start()
         {
+            var clips = Resources.LoadAll<AnimationClip>(GamePath.GunClipPath);
+            foreach (var clip in clips)
+            {
+                _clipDic.Add(int.Parse(clip.name), clip);
+            }
+
             animancer = GetComponent<AnimancerComponent>();
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position,_radius);
+            Gizmos.DrawWireSphere(transform.position, _radius);
         }
 
         private void FixedUpdate()
         {
-            var tempV3 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var tempMouseV2 = new Vector3(tempV3.x, tempV3.y);
-            _vector2 = (tempMouseV2 - transform.position).normalized;
-            // Debug.Log(Vector2.Angle(transform.up,_vector2));
+
+            var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var mousePos = new Vector3(pos.x, pos.y);
+            _vector2 = (mousePos - transform.position).normalized;
             ChangeWeaponForce();
             ChangeMuzzleForce();
-            
         }
-        
+
         void ChangeWeaponForce()
         {
-            var x = Vector2.Angle(transform.up, _vector2);
-            float Difference = x;
-            if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x)//右侧
+            var angle = Vector2.Angle(transform.up, _vector2);
+            var isRight = Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x;
+            angle = isRight ? angle : -angle;
+            var difference = float.MaxValue;
+            var num = 0;
+            for (int i = -170; i <= 170; i += 20)
             {
-                for (int i = 10; i <= 170; i+=20)
+                var maxValue = Mathf.Max(angle, i);
+                var minValue = Mathf.Min(angle, i);
+                var value = maxValue - minValue;
+                if (value < difference)
                 {
-                    foreach (var item in _Clips)
-                    {
-                        if (item.name == i.ToString())
-                        {
-                            var value = x - int.Parse(item.name);
-                            if (Difference > Mathf.Abs(value))
-                            {
-                                Difference = value;
-                                toPlayClip = item;
-                            }
-                        }
-                    }
+                    difference = value;
+                    num = i;
                 }
             }
-            else
-            {
-                for (int i = 10; i >= -170; i-=20)
-                {
-                    foreach (var item in _Clips)
-                    {
-                        if (item.name == i.ToString())
-                        {
-                            var value = x + int.Parse(item.name);
-                            if (Difference > Mathf.Abs(value))
-                            {
-                                Difference = value;
-                                toPlayClip = item;
-                            }
-                        }
-                    }
-                }
-            }
-            animancer.Play(toPlayClip);
-            
-            
+
+            animancer.Play(_clipDic[num]);
+
 
             if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > transform.position.y)
             {
@@ -94,7 +74,8 @@ namespace Game
 
         void ChangeMuzzleForce()
         {
-            muzzleGo.transform.position = (_vector2 * _radius) + (Vector2)transform.position ;
+            //Debug.Log(_vector2.magnitude);
+            muzzleGo.transform.position = (_vector2 * _radius) + (Vector2)transform.position;
         }
     }
 }
