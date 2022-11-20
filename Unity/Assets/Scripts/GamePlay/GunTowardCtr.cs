@@ -32,7 +32,6 @@ namespace Game
 
         private void FixedUpdate()
         {
-
             var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var mousePos = new Vector3(pos.x, pos.y);
             _vector2 = (mousePos - transform.position).normalized;
