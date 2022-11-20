@@ -115,7 +115,7 @@ namespace Game
 
         private GameObject CreatGhostObj(GameObject ghostGo)
         {
-            var go = ghostGo.CompareTag("Player") ? CreatTmpGo(ghostGo) : CopyTmpGo(ghostGo);
+            var go = ghostGo.CompareTag("Player") ? CreatPlayerGo(ghostGo) : CopyTmpGo(ghostGo);
             SceneManager.MoveGameObjectToScene(go, _simulationScene);
             return go;
         }
@@ -141,10 +141,14 @@ namespace Game
                 light.enabled = false;
             }
 
+            if (go.CompareTag("Enemy"))
+            {
+                go.GetComponent<Collider2D>().enabled = false;
+            }
             return go;
         }
 
-        private static GameObject CreatTmpGo(GameObject ghostGo)
+        private static GameObject CreatPlayerGo(GameObject ghostGo)
         {
             var tmpGo = new GameObject();
             tmpGo.tag = ghostGo.tag;

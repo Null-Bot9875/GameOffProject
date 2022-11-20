@@ -42,7 +42,7 @@ namespace Game
         }
     }
 
-    public class EnemyController : MonoBehaviour,IExplosion
+    public class EnemyController : MonoBehaviour, IExplosion, IBulletTrigger
     {
         public int EnemyId;
         [SerializeField] private Light2D _SightLight2D;
@@ -168,6 +168,12 @@ namespace Game
         {
             GameObject.Destroy(gameObject);
             GameDataCache.Instance.EnemyList.Remove(this);
+        }
+
+        public void OnBulletTrigger(BulletCtr ctr)
+        {
+            //Trigger在模拟的时候关掉，不需要判断ghost
+            Die();
         }
     }
 }
