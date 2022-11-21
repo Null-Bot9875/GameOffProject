@@ -6,15 +6,10 @@ namespace Game
 {
     public class GameSceneManager : SingletonWithMono<GameSceneManager>
     {
-        private void Awake()
+        public void Init()
         {
             Application.targetFrameRate = 60;
             TypeEventSystem.Global.Register<GameOverEvt>(OnGameOverEvt);
-        }
-
-        private void OnDestroy()
-        {
-            TypeEventSystem.Global.UnRegister<GameOverEvt>(OnGameOverEvt);
         }
 
         private void OnGameOverEvt(GameOverEvt obj)
