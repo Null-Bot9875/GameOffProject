@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Game.GameEvent;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -32,56 +31,22 @@ namespace Game
         private void Start()
         {
             _line.positionCount = _maxFrameIterations;
-            InitPhysicsScene();
+            if (_simulationScene.isLoaded)
+                return;
+
+            _simulationScene = SceneManager.CreateScene("simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
+            _physicsScene = _simulationScene.GetPhysicsScene2D();
         }
 
         public void Enable()
         {
             if (_line.gameObject.activeSelf)
                 return;
+            
             _line.gameObject.SetActive(true);
-            GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
-            InitSceneTransform();
             _line.enabled = true;
             endPosGo.GetComponent<SpriteRenderer>().enabled = true;
-        }
-
-        public void Disable()
-        {
-            if (!_line.gameObject.activeSelf)
-                return;
-            _line.gameObject.SetActive(false);
-            foreach (var go in _simulationScene.GetRootGameObjects())
-            {
-                GameObject.Destroy(go);
-            }
-
-            _spawnedObjects.Clear();
-            _line.enabled = false;
-            endPosGo.GetComponent<SpriteRenderer>().enabled = false;
-        }
-
-        private void Update()
-        {
-            foreach (var item in _spawnedObjects)
-            {
-                item.Value.position = item.Key.position;
-                item.Value.rotation = item.Key.rotation;
-            }
-        }
-
-        private void InitPhysicsScene()
-        {
-            if (_simulationScene.isLoaded)
-                return;
-
-            _simulationScene =
-                SceneManager.CreateScene("simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
-            _physicsScene = _simulationScene.GetPhysicsScene2D();
-        }
-
-        void InitSceneTransform()
-        {
+            
             foreach (Transform item in _objParent)
             {
                 if (item.CompareTag("Enemy"))
@@ -91,6 +56,31 @@ namespace Game
                 {
                     _spawnedObjects.Add(new KeyValuePair<Transform, Transform>(item, ghostObj.transform));
                 }
+            }
+        }
+
+        public void Disable()
+        {
+            if (!_line.gameObject.activeSelf)
+                return;
+            
+            _line.gameObject.SetActive(false);
+            _line.enabled = false;
+            endPosGo.GetComponent<SpriteRenderer>().enabled = false;
+            
+            _spawnedObjects.Clear();
+            foreach (var go in _simulationScene.GetRootGameObjects())
+            {
+                GameObject.Destroy(go);
+            }
+        }
+
+        private void Update()
+        {
+            foreach (var item in _spawnedObjects)
+            {
+                item.Value.position = item.Key.position;
+                item.Value.rotation = item.Key.rotation;
             }
         }
 
