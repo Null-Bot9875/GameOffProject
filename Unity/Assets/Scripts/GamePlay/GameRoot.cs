@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -6,8 +8,9 @@ namespace Game
     {
         private void Awake()
         {
-            Application.targetFrameRate = 60;
-            DontDestroyOnLoad(this.gameObject);
+            GameDataCache.Instance.EnemyList = GameObject.FindObjectsOfType<EnemyController>().ToList();
+            GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
+            GameDataCache.Instance.CrtSceneIdx = SceneManager.GetActiveScene().buildIndex;
         }
     }
 }
