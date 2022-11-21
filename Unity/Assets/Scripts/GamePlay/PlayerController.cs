@@ -112,6 +112,7 @@ namespace Game
                     return;
                 }
 
+                _line.gameObject.GetComponent<Projection>().Enable();
                 //预测
                 CreatSimulateBullet();
 

@@ -37,6 +37,8 @@ namespace Game
 
         public void Enable()
         {
+            if (_line.gameObject.activeSelf)
+                return;
             _line.gameObject.SetActive(true);
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
             InitSceneTransform();
@@ -46,6 +48,8 @@ namespace Game
 
         public void Disable()
         {
+            if (!_line.gameObject.activeSelf)
+                return;
             _line.gameObject.SetActive(false);
             foreach (var go in _simulationScene.GetRootGameObjects())
             {
