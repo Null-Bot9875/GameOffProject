@@ -2,11 +2,17 @@
 {
     public static class GamePath
     {
+        //Prefab
         public static string PrefabPath = "Prefabs/";
+        public static string ItemPrefabPath = "Item/";
+        public static string BulletPfb = PrefabPath + ItemPrefabPath + "Bullet";
+        public static string BulletOnwallPfb = PrefabPath + ItemPrefabPath + "BulletOnwall";
+        public static string FireEffectPfb = ItemPrefabPath + "FireEffect";
+        public static string RecycleEffectPfb = ItemPrefabPath + "RecycleEffect";
+
+        //Animation
         public static string AnimationPath = "Animation/";
-        public static string BulletPath = PrefabPath + "Item/Bullet";
-        public static string BulletOnwallPath = PrefabPath + "Item/BulletOnwall";
-        public static string GunClipPath = AnimationPath + "Gun";
-        public static string EnemyClipPath = AnimationPath + "Enemy";
+        public static string GunClip = AnimationPath + "Gun";
+        public static string EnemyClip = AnimationPath + "Enemy";
     }
 }

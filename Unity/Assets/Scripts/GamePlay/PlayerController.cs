@@ -16,6 +16,8 @@ namespace Game
         private bool _isCanMove = true;
         private Vector2 bulletOnPlacePos;
 
+        private GameObject _fireEffect;
+        private GameObject _recycleEffect;
         #region 子弹回收
 
         [SerializeField, Header("子弹回收后再次射出CD")]
@@ -40,8 +42,10 @@ namespace Game
 
         private void Awake()
         {
-            bullet = Resources.Load(GamePath.BulletPath) as GameObject;
+            bullet = Resources.Load(GamePath.BulletPfb) as GameObject;
             _camera = Camera.main;
+            _fireEffect = Resources.Load<GameObject>(GamePath.FireEffectPfb);
+            _recycleEffect = Resources.Load<GameObject>(GamePath.RecycleEffectPfb);
             rb = GetComponent<Rigidbody2D>();
             InvokeRepeating(nameof(RepeatCountCd), 0, .1f);
             TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt);
@@ -114,6 +118,7 @@ namespace Game
                     {
                         _isForwardShoot = false;
                         _isHaveBullet = false;
+                        GameObject.Instantiate(_fireEffect);
                     }
                     else
                     {
@@ -188,6 +193,7 @@ namespace Game
                 _isCanMove = true;
                 _isForwardShoot = true;
                 _countCd = _shootCD;
+                GameObject.Instantiate(_recycleEffect);
                 TypeEventSystem.Global.Send<GameRecycleBulletTriggerEvt>();
             }
             else

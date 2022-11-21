@@ -83,7 +83,7 @@ namespace Game
 
         private void Start()
         {
-            var clips = Resources.LoadAll<AnimationClip>(GamePath.EnemyClipPath);
+            var clips = Resources.LoadAll<AnimationClip>(GamePath.EnemyClip);
             foreach (var clip in clips)
             {
                 _clipDic.Add(clip.name, clip);
