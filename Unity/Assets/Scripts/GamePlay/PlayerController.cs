@@ -18,7 +18,7 @@ namespace Game
         private GameObject _fireEffect;
         private GameObject _recycleEffect;
 
-        public bool IsMove { get; private set; } = true;
+        public bool IsMove { get; set; } = true;
 
         #region 子弹回收
 
@@ -144,6 +144,7 @@ namespace Game
         private bool IsCanShoot()
         {
             var isCanShoot = true;
+            isCanShoot &= IsMove;
             //回收的时候无视CD限制
             var isShootCd = _countCd == 0;
             if (_isForwardShoot)

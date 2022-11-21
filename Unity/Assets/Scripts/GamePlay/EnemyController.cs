@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Animancer;
 using DG.Tweening;
@@ -102,6 +103,11 @@ namespace Game
             InvokeRepeating(nameof(EnemyDetectPerSec), 1f, .5f);
         }
 
+        private void OnDestroy()
+        {
+            transform.DOKill();
+        }
+
         private void EnemyPatrol()
         {
             if (_enemyPatrol.IsInvalid)
@@ -164,13 +170,15 @@ namespace Game
         {
             if (_isFoundPlayer)
             {
-                _player.GetComponent<PlayerController>().enabled = false;
+                _player.GetComponent<PlayerController>().IsMove = false;
+                _player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 var state = _animancer.Play(_clipDic["AttackClip"]);
                 state.Events.OnEnd += Attack;
             }
 
             void Attack()
             {
+                _animancer.Play(_clipDic["ForwardClip"]);
                 transform.DOMove(_player.transform.position, .5f).OnComplete(() =>
                 {
                     TypeEventSystem.Global.Send(new GameOverEvt());

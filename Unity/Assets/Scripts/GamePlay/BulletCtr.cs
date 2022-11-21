@@ -1,4 +1,3 @@
-using Game.GameEvent;
 using UnityEngine;
 
 namespace Game
