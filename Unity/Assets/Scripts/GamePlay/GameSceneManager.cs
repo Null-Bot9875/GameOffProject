@@ -1,20 +1,16 @@
-using System.Linq;
 using Game.GameEvent;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game
 {
-    public class GameSceneRoot : MonoBehaviour
+    public class GameSceneManager : SingletonWithMono<GameSceneManager>
     {
         private void Awake()
         {
-            GameDataCache.Instance.EnemyList = GameObject.FindObjectsOfType<EnemyController>().ToList();
-            GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
-
+            Application.targetFrameRate = 60;
             TypeEventSystem.Global.Register<GameOverEvt>(OnGameOverEvt);
         }
-
 
         private void OnDestroy()
         {
@@ -26,10 +22,14 @@ namespace Game
             ReloadScene();
         }
 
-
         public void ReloadScene()
         {
             SceneManager.LoadScene(GameDataCache.Instance.CrtSceneIdx);
+        }
+
+        public void LoadNextScene()
+        {
+            SceneManager.LoadScene(GameDataCache.Instance.CrtSceneIdx + 1);
         }
     }
 }

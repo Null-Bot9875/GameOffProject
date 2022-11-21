@@ -1,3 +1,26 @@
+//凭空创建一个GameObject，然后把组件对象挂上，场景切换不会销毁
+using UnityEngine;
+
+public class SingletonWithMono<T> : MonoBehaviour where T : Component
+{
+    private static T instance;
+
+    public static T Instance
+    {
+        get
+        {
+            if (null == instance)
+            {
+                var go = new GameObject(typeof(T).Name);
+                instance = go.AddComponent<T>();
+                DontDestroyOnLoad(go);
+            }
+
+            return instance;
+        }
+    }
+}
+
 public abstract class Singleton<T> where T : Singleton<T>, new()
 {
     /// <summary>

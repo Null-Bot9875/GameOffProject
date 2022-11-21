@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Collections.Generic;
+using Animancer;
 using DG.Tweening;
 using Game.GameEvent;
 using UnityEngine;
@@ -45,7 +45,6 @@ namespace Game
 
     public class EnemyController : MonoBehaviour, IExplosion, IBulletTrigger
     {
-        public int EnemyId;
         [SerializeField] private Light2D _SightLight2D;
         [SerializeField, Header("距离")] private float _lookDistance = 1f;
 
@@ -57,9 +56,11 @@ namespace Game
         [SerializeField] private LayerMask _layerMask;
 
         [SerializeField] private EnemyPatrolInfo _enemyPatrol;
+        [SerializeField] private AnimancerComponent _animancer;
         private Transform _player;
 
         private bool _isFoundPlayer;
+        private Dictionary<string, AnimationClip> _clipDic = new Dictionary<string, AnimationClip>();
 
         private void OnValidate()
         {
@@ -82,6 +83,12 @@ namespace Game
 
         private void Start()
         {
+            var clips = Resources.LoadAll<AnimationClip>(GamePath.EnemyClip);
+            foreach (var clip in clips)
+            {
+                _clipDic.Add(clip.name, clip);
+            }
+
             _SightLight2D.pointLightOuterAngle = _lookAngle;
             _SightLight2D.pointLightOuterRadius = _lookDistance;
             _player = GameDataCache.Instance.Player.transform;
@@ -104,7 +111,12 @@ namespace Game
             //将当前朝向向目标方向旋转一定角度，这个角度值可以做插值
             var rotation = Quaternion.AngleAxis(angle, axis) * transform.rotation;
 
+            var isBack = _enemyPatrol.TargetPosition.y > transform.position.y;
+            _animancer.Play(isBack ? _clipDic["BackClip"] : _clipDic["ForwardClip"]);
 
+            var isRight = _enemyPatrol.TargetPosition.x > transform.position.x;
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.flipX = isRight;
             transform.DORotate(rotation.eulerAngles, .5f);
             transform.DOMove(_enemyPatrol.TargetPosition, _enemyPatrol.Speed).SetSpeedBased().OnComplete(() =>
             {
@@ -138,11 +150,6 @@ namespace Game
             {
                 var hit = Physics2D.Raycast(transform.position, eulerAnger * transform.right.normalized * _lookDistance,
                     _lookDistance, _layerMask);
-                // if (hit.collider != null)
-                // {
-                //     Debug.Log(hit.collider.name);
-                // }
-
                 return hit.transform != null && hit.transform.CompareTag("Player");
             }
         }
@@ -152,6 +159,12 @@ namespace Game
             if (_isFoundPlayer)
             {
                 _player.GetComponent<PlayerController>().enabled = false;
+                var state = _animancer.Play(_clipDic["AttackClip"]);
+                state.Events.OnEnd += Attack;
+            }
+
+            void Attack()
+            {
                 transform.DOMove(_player.transform.position, .5f).OnComplete(() =>
                 {
                     TypeEventSystem.Global.Send(new GameOverEvt());
