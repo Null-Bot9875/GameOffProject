@@ -7,6 +7,11 @@ namespace Game
         [SerializeField] private AudioSource _bgm;
         [SerializeField] private AudioSource _effect;
 
+        public void Init()
+        {
+            
+        }
+        
         public void PlayBGM(string path)
         {
             _bgm.clip = Resources.Load<AudioClip>(path);

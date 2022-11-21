@@ -8,7 +8,6 @@ namespace Game
     {
         public void Init()
         {
-            Application.targetFrameRate = 60;
             TypeEventSystem.Global.Register<GameOverEvt>(OnGameOverEvt);
         }
 
