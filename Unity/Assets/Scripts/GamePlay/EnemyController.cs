@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Generic;
 using DG.Tweening;
 using Game.GameEvent;
 using UnityEngine;
@@ -172,7 +173,7 @@ namespace Game
 
         public void OnBulletTrigger(BulletCtr ctr)
         {
-            //Trigger在模拟的时候关掉，不需要判断ghost
+            //不生成敌人模拟对象，不需要判断ghost
             Die();
         }
     }

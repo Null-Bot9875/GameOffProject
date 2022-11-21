@@ -80,6 +80,8 @@ namespace Game
         {
             foreach (Transform item in _objParent)
             {
+                if (item.CompareTag("Enemy"))
+                    continue;
                 var ghostObj = CreatGhostObj(item.gameObject);
                 if (!ghostObj.isStatic)
                 {
@@ -140,11 +142,7 @@ namespace Game
             {
                 light.enabled = false;
             }
-
-            if (go.CompareTag("Enemy"))
-            {
-                go.GetComponent<Collider2D>().enabled = false;
-            }
+            
             return go;
         }
 
