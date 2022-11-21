@@ -10,6 +10,7 @@ namespace Game
         [SerializeField] private DirectionalAnimationSet8 idleSet;
 
         private PlayerController _player;
+
         void Start()
         {
             _player = GetComponent<PlayerController>();
@@ -17,7 +18,14 @@ namespace Game
 
         void Update()
         {
-            var dir = DirectionalAnimationSet8.SnapVectorToDirection(_player.GetMouseInfo());
+            var dir = DirectionalAnimationSet8.SnapVectorToDirection(_player.GetDirection_MouseToGun());
+            if (!_player.IsMove)
+            {
+                var idleClip = idleSet.GetClip(dir);
+                animancer.Play(idleClip);
+                return;
+            }
+
             var clip = GetPlayerMoveInfo(_player).magnitude < 0.2f ? idleSet.GetClip(dir) : moveSet.GetClip(dir);
             animancer.Play(clip);
         }

@@ -109,7 +109,6 @@ namespace Game
                     var distance = Vector2.Distance(lastPosition, playerPosition);
                     enable &= distance > _radius;
                     endPosGo.GetComponent<SpriteRenderer>().enabled = enable;
-                    TypeEventSystem.Global.Send(new GameRecycleBulletGhost(distance < .5f));
                 }
             }
         }
