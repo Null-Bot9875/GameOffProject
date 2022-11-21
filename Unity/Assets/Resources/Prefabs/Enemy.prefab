@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324077305398384110}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3612183789760842951}
@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 3612183789760842946}
   - component: {fileID: 6275189290752155879}
   - component: {fileID: 5381922730047266125}
+  - component: {fileID: 7284831205766119883}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -138,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 3612183789760842945}
   m_LocalRotation: {x: -0, y: 0, z: -0.9999659, w: -0.008264152}
   m_LocalPosition: {x: -3.92, y: -3.65, z: -1.3135}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 1324077305398384104}
   m_Father: {fileID: 0}
@@ -172,11 +173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81a8e527f5d92d489ac74ddc021bad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyId: 0
   _SightLight2D: {fileID: 1324077305398384111}
   _lookDistance: 5.14
   _lookAngle: 108.7
-  _lookCount: 10
+  _lookCount: 20
   _layerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -184,6 +184,7 @@ MonoBehaviour:
     IsInvalid: 0
     List: []
     Speed: 1
+  _animancer: {fileID: 7284831205766119883}
 --- !u!212 &6275189290752155879
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -225,9 +226,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: acb23b0f2a664cc4bbec6139bc26a6e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5080bf763b1c76a4fa80386dd8ade020, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.6818182, y: 0.72727275}
@@ -246,7 +247,7 @@ Animator:
   m_GameObject: {fileID: 3612183789760842945}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ee61b87218fcf3c4ab971cf6cce616e1, type: 2}
+  m_Controller: {fileID: 9100000, guid: f060c2f2a84b76545b66645bf8c5e08e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -255,3 +256,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7284831205766119883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612183789760842945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 5381922730047266125}
+  _ActionOnDisable: 0

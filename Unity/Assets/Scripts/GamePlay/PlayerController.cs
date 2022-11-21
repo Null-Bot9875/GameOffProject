@@ -18,6 +18,7 @@ namespace Game
 
         private GameObject _fireEffect;
         private GameObject _recycleEffect;
+
         #region 子弹回收
 
         [SerializeField, Header("子弹回收后再次射出CD")]
@@ -118,7 +119,8 @@ namespace Game
                     {
                         _isForwardShoot = false;
                         _isHaveBullet = false;
-                        GameObject.Instantiate(_fireEffect);
+                        var effect = GameObject.Instantiate(_fireEffect, transform);
+                        effect.transform.position = muzzle.transform.position;
                     }
                     else
                     {
@@ -193,7 +195,8 @@ namespace Game
                 _isCanMove = true;
                 _isForwardShoot = true;
                 _countCd = _shootCD;
-                GameObject.Instantiate(_recycleEffect);
+                var effect = GameObject.Instantiate(_recycleEffect, transform);
+                effect.transform.position = muzzle.transform.position;
                 TypeEventSystem.Global.Send<GameRecycleBulletTriggerEvt>();
             }
             else

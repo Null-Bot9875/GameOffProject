@@ -93,6 +93,7 @@ namespace Game
             _SightLight2D.pointLightOuterRadius = _lookDistance;
             _player = GameDataCache.Instance.Player.transform;
             _enemyPatrol.InitEnemyPatrol(this);
+            _animancer.Play(_clipDic["ForwardClip"]);
             EnemyPatrol();
             InvokeRepeating(nameof(EnemyDetectPerSec), 1f, .5f);
         }
@@ -116,7 +117,7 @@ namespace Game
 
             var isRight = _enemyPatrol.TargetPosition.x > transform.position.x;
             var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.flipX = isRight;
+            spriteRenderer.flipX = !isRight;
             transform.DORotate(rotation.eulerAngles, .5f);
             transform.DOMove(_enemyPatrol.TargetPosition, _enemyPatrol.Speed).SetSpeedBased().OnComplete(() =>
             {
