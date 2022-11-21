@@ -106,11 +106,14 @@ namespace Game
 
             if (Input.GetMouseButton(1))
             {
+                if (!IsCanShoot())
+                {
+                    _line.gameObject.GetComponent<Projection>().Disable();
+                    return;
+                }
+
                 //预测
                 CreatSimulateBullet();
-
-                if (!IsCanShoot())
-                    return;
 
                 //开火
                 if (Input.GetMouseButtonDown(0))
