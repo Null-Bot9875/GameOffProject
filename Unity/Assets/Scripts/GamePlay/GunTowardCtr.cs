@@ -15,6 +15,7 @@ namespace Game
 
         private void Start()
         {
+            GameDataCache.Instance.Player = FindObjectOfType<PlayerController>();
             var clips = Resources.LoadAll<AnimationClip>(GamePath.GunClipPath);
             foreach (var clip in clips)
             {
