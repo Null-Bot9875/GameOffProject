@@ -123,7 +123,7 @@ namespace Game
                     {
                         _isForwardShoot = false;
                         _isHaveBullet = false;
-                        var effectGo =  Instantiate(_fireEffect);
+                        var effectGo = Instantiate(_fireEffect);
                         effectGo.transform.position = muzzle.transform.position;
                     }
                     else
@@ -146,10 +146,10 @@ namespace Game
             isCanShoot &= !isWall;
             //不能移动的时候不能射击
             isCanShoot &= IsMove;
-            //回收的时候无视CD限制
-            var isShootCd = _countCd == 0;
             if (_isForwardShoot)
             {
+                //回收的时候无视CD限制
+                var isShootCd = _countCd == 0;
                 isCanShoot &= _isHaveBullet;
                 isCanShoot &= isShootCd;
             }

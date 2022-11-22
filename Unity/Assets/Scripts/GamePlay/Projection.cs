@@ -40,7 +40,7 @@ namespace Game
 
         public void Enable()
         {
-            if (_line.gameObject.activeSelf)
+            if (_line.enabled)
                 return;
             
             _line.gameObject.SetActive(true);
@@ -61,7 +61,7 @@ namespace Game
 
         public void Disable()
         {
-            if (!_line.gameObject.activeSelf)
+            if (!_line.enabled)
                 return;
             
             _line.gameObject.SetActive(false);
