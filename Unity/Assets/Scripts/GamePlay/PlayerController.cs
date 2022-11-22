@@ -126,8 +126,8 @@ namespace Game
                     {
                         _isForwardShoot = false;
                         _isHaveBullet = false;
-                        var effect = GameObject.Instantiate(_fireEffect, transform);
-                        effect.transform.position = muzzle.transform.position;
+                        var effectGo =  Instantiate(_fireEffect);
+                        effectGo.transform.position = muzzle.transform.position;
                     }
                     else
                     {
@@ -203,7 +203,7 @@ namespace Game
                 IsMove = true;
                 _isForwardShoot = true;
                 _countCd = _shootCD;
-                var effect = GameObject.Instantiate(_recycleEffect, transform);
+                var effect = GameObject.Instantiate(_recycleEffect, muzzle.transform);
                 effect.transform.position = muzzle.transform.position;
                 TypeEventSystem.Global.Send<GameRecycleBulletTriggerEvt>();
             }
