@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Animancer;
 using DG.Tweening;
 using Game.GameEvent;
 using UnityEngine;
@@ -44,7 +46,6 @@ namespace Game
 
     public class EnemyController : MonoBehaviour, IExplosion, IBulletTrigger
     {
-        public int EnemyId;
         [SerializeField] private Light2D _SightLight2D;
         [SerializeField, Header("距离")] private float _lookDistance = 1f;
 
@@ -56,9 +57,12 @@ namespace Game
         [SerializeField] private LayerMask _layerMask;
 
         [SerializeField] private EnemyPatrolInfo _enemyPatrol;
-        private Transform _player;
+        [SerializeField] private AnimancerComponent _animancer;
 
+        private Transform _player;
+        private Transform _light;
         private bool _isFoundPlayer;
+        private Dictionary<string, AnimationClip> _clipDic = new Dictionary<string, AnimationClip>();
 
         private void OnValidate()
         {
@@ -74,37 +78,57 @@ namespace Game
             {
                 var angleLeft = Quaternion.Euler(0, 0, -1 * subAngle * (i + 1));
                 var angleRight = Quaternion.Euler(0, 0, 1 * subAngle * (i + 1));
-                Debug.DrawRay(transform.position, angleLeft * transform.right.normalized * _lookDistance, Color.cyan);
-                Debug.DrawRay(transform.position, angleRight * transform.right.normalized * _lookDistance, Color.cyan);
+                Debug.DrawRay(transform.position,
+                    angleLeft * transform.Find("ViewLight").right.normalized * _lookDistance, Color.cyan);
+                Debug.DrawRay(transform.position,
+                    angleRight * transform.Find("ViewLight").right.normalized * _lookDistance, Color.cyan);
             }
         }
 
         private void Start()
         {
+            var clips = Resources.LoadAll<AnimationClip>(GamePath.EnemyClip);
+            foreach (var clip in clips)
+            {
+                _clipDic.Add(clip.name, clip);
+            }
+
             _SightLight2D.pointLightOuterAngle = _lookAngle;
             _SightLight2D.pointLightOuterRadius = _lookDistance;
             _player = GameDataCache.Instance.Player.transform;
             _enemyPatrol.InitEnemyPatrol(this);
+            _animancer.Play(_clipDic["ForwardClip"]);
+            _light = transform.Find("ViewLight");
             EnemyPatrol();
             InvokeRepeating(nameof(EnemyDetectPerSec), 1f, .5f);
+        }
+
+        private void OnDestroy()
+        {
+            transform.DOKill();
         }
 
         private void EnemyPatrol()
         {
             if (_enemyPatrol.IsInvalid)
                 return;
-            var targetDir = _enemyPatrol.TargetPosition - transform.position;
+            var targetDir = _enemyPatrol.TargetPosition - _light.position;
             //指定哪根轴朝向目标
-            var fromDir = transform.rotation * Vector3.right;
+            var fromDir = _light.rotation * Vector3.right;
             //计算垂直于当前方向和目标方向的轴
             var axis = Vector3.Cross(fromDir, targetDir).normalized;
             //计算当前方向和目标方向的夹角
             var angle = Vector3.Angle(fromDir, targetDir);
             //将当前朝向向目标方向旋转一定角度，这个角度值可以做插值
-            var rotation = Quaternion.AngleAxis(angle, axis) * transform.rotation;
+            var rotation = Quaternion.AngleAxis(angle, axis) * _light.rotation;
+            _light.DORotate(rotation.eulerAngles, .2f);
 
+            var isBack = _enemyPatrol.TargetPosition.y > transform.position.y;
+            _animancer.Play(isBack ? _clipDic["BackClip"] : _clipDic["ForwardClip"]);
 
-            transform.DORotate(rotation.eulerAngles, .5f);
+            var isRight = _enemyPatrol.TargetPosition.x > transform.position.x;
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.flipX = !isRight;
             transform.DOMove(_enemyPatrol.TargetPosition, _enemyPatrol.Speed).SetSpeedBased().OnComplete(() =>
             {
                 _enemyPatrol.SetNextIdx();
@@ -135,13 +159,9 @@ namespace Game
             //射出射线检测是否有Player
             bool IsLookPlayer(Quaternion eulerAnger)
             {
-                var hit = Physics2D.Raycast(transform.position, eulerAnger * transform.right.normalized * _lookDistance,
+                var hit = Physics2D.Raycast(transform.position,
+                    eulerAnger * _light.right.normalized * _lookDistance,
                     _lookDistance, _layerMask);
-                // if (hit.collider != null)
-                // {
-                //     Debug.Log(hit.collider.name);
-                // }
-
                 return hit.transform != null && hit.transform.CompareTag("Player");
             }
         }
@@ -150,7 +170,15 @@ namespace Game
         {
             if (_isFoundPlayer)
             {
-                _player.GetComponent<PlayerController>().enabled = false;
+                _player.GetComponent<PlayerController>().IsMove = false;
+                _player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                var state = _animancer.Play(_clipDic["AttackClip"]);
+                state.Events.OnEnd += Attack;
+            }
+
+            void Attack()
+            {
+                _animancer.Play(_clipDic["ForwardClip"]);
                 transform.DOMove(_player.transform.position, .5f).OnComplete(() =>
                 {
                     TypeEventSystem.Global.Send(new GameOverEvt());
@@ -172,7 +200,7 @@ namespace Game
 
         public void OnBulletTrigger(BulletCtr ctr)
         {
-            //Trigger在模拟的时候关掉，不需要判断ghost
+            //不生成敌人模拟对象，不需要判断ghost
             Die();
         }
     }

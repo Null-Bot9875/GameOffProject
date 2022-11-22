@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Game.GameEvent;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -32,29 +31,48 @@ namespace Game
         private void Start()
         {
             _line.positionCount = _maxFrameIterations;
-            InitPhysicsScene();
+            if (_simulationScene.isLoaded)
+                return;
+
+            _simulationScene = SceneManager.CreateScene("simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
+            _physicsScene = _simulationScene.GetPhysicsScene2D();
         }
 
         public void Enable()
         {
+            if (_line.gameObject.activeSelf)
+                return;
+            
             _line.gameObject.SetActive(true);
-            GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
-            InitSceneTransform();
             _line.enabled = true;
             endPosGo.GetComponent<SpriteRenderer>().enabled = true;
+            
+            foreach (Transform item in _objParent)
+            {
+                if (item.CompareTag("Enemy"))
+                    continue;
+                var ghostObj = CreatGhostObj(item.gameObject);
+                if (!ghostObj.isStatic)
+                {
+                    _spawnedObjects.Add(new KeyValuePair<Transform, Transform>(item, ghostObj.transform));
+                }
+            }
         }
 
         public void Disable()
         {
+            if (!_line.gameObject.activeSelf)
+                return;
+            
             _line.gameObject.SetActive(false);
+            _line.enabled = false;
+            endPosGo.GetComponent<SpriteRenderer>().enabled = false;
+            
+            _spawnedObjects.Clear();
             foreach (var go in _simulationScene.GetRootGameObjects())
             {
                 GameObject.Destroy(go);
             }
-
-            _spawnedObjects.Clear();
-            _line.enabled = false;
-            endPosGo.GetComponent<SpriteRenderer>().enabled = false;
         }
 
         private void Update()
@@ -63,28 +81,6 @@ namespace Game
             {
                 item.Value.position = item.Key.position;
                 item.Value.rotation = item.Key.rotation;
-            }
-        }
-
-        private void InitPhysicsScene()
-        {
-            if (_simulationScene.isLoaded)
-                return;
-
-            _simulationScene =
-                SceneManager.CreateScene("simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
-            _physicsScene = _simulationScene.GetPhysicsScene2D();
-        }
-
-        void InitSceneTransform()
-        {
-            foreach (Transform item in _objParent)
-            {
-                var ghostObj = CreatGhostObj(item.gameObject);
-                if (!ghostObj.isStatic)
-                {
-                    _spawnedObjects.Add(new KeyValuePair<Transform, Transform>(item, ghostObj.transform));
-                }
             }
         }
 
@@ -107,7 +103,6 @@ namespace Game
                     var distance = Vector2.Distance(lastPosition, playerPosition);
                     enable &= distance > _radius;
                     endPosGo.GetComponent<SpriteRenderer>().enabled = enable;
-                    TypeEventSystem.Global.Send(new GameRecycleBulletGhost(distance < .5f));
                 }
             }
         }
@@ -140,11 +135,7 @@ namespace Game
             {
                 light.enabled = false;
             }
-
-            if (go.CompareTag("Enemy"))
-            {
-                go.GetComponent<Collider2D>().enabled = false;
-            }
+            
             return go;
         }
 

@@ -12,11 +12,13 @@ namespace Game
 
         [SerializeField] private GameObject muzzleGo;
         [SerializeField] private float _radius;
+        [SerializeField] private PlayerController _player;
 
         private void Start()
         {
-            GameDataCache.Instance.Player = FindObjectOfType<PlayerController>();
-            var clips = Resources.LoadAll<AnimationClip>(GamePath.GunClipPath);
+
+            var clips = Resources.LoadAll<AnimationClip>(GamePath.GunClip);
+
             foreach (var clip in clips)
             {
                 _clipDic.Add(int.Parse(clip.name), clip);
@@ -33,6 +35,9 @@ namespace Game
 
         private void FixedUpdate()
         {
+            if (!_player.IsMove)
+                return;
+
             var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var mousePos = new Vector3(pos.x, pos.y);
             _vector2 = (mousePos - transform.position).normalized;

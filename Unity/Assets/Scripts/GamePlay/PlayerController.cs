@@ -13,8 +13,12 @@ namespace Game
         private bool _isHaveBullet = true;
         private bool _isBulletOnWall;
         private bool _isAimSelf;
-        private bool _isCanMove = true;
         private Vector2 bulletOnPlacePos;
+
+        private GameObject _fireEffect;
+        private GameObject _recycleEffect;
+
+        public bool IsMove { get; set; } = true;
 
         #region 子弹回收
 
@@ -32,27 +36,27 @@ namespace Game
         [SerializeField] private Projection _projection;
         [SerializeField] private LineRenderer _line;
 
-        private GameObject bullet;
-        private Rigidbody2D rb;
+        private GameObject _bullet;
+        private Rigidbody2D _rb;
         private Camera _camera;
 
         #endregion
 
         private void Awake()
         {
-            bullet = Resources.Load(GamePath.BulletPath) as GameObject;
+            _bullet = Resources.Load(GamePath.BulletPfb) as GameObject;
             _camera = Camera.main;
-            rb = GetComponent<Rigidbody2D>();
+            _fireEffect = Resources.Load<GameObject>(GamePath.FireEffectPfb);
+            _recycleEffect = Resources.Load<GameObject>(GamePath.RecycleEffectPfb);
+            _rb = GetComponent<Rigidbody2D>();
             InvokeRepeating(nameof(RepeatCountCd), 0, .1f);
             TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt);
-            TypeEventSystem.Global.Register<GameRecycleBulletGhost>(OnRecycleBulletGhostEvt);
         }
 
         private void OnDestroy()
         {
             CancelInvoke(nameof(RepeatCountCd));
             TypeEventSystem.Global.UnRegister<GameBulletShotOnPlaceEvt>(OnBulletOnPlaceEvt);
-            TypeEventSystem.Global.UnRegister<GameRecycleBulletGhost>(OnRecycleBulletGhostEvt);
         }
 
         void RepeatCountCd()
@@ -66,24 +70,28 @@ namespace Game
         {
             bulletOnPlacePos = gameBulletShotOnPlaceEvt.bulletPos;
             _isBulletOnWall = true;
-            _isCanMove = true;
-        }
-
-        private void OnRecycleBulletGhostEvt(GameRecycleBulletGhost evt)
-        {
-            _isAimSelf = evt.IsAimSelf;
+            IsMove = true;
         }
 
         void Update()
         {
-            if (_isCanMove)
+            if (IsMove)
             {
                 //鼠标跟随
                 _mouseV2 = _camera.ScreenToWorldPoint(Input.mousePosition);
                 //角色移动
                 var x = Input.GetAxis("Horizontal");
                 var y = Input.GetAxis("Vertical");
-                rb.velocity = new Vector2(x * moveSpeed, y * moveSpeed);
+                _rb.velocity = new Vector2(x * moveSpeed, y * moveSpeed);
+            }
+
+            if (!_isForwardShoot)
+            {
+                var angle = Vector2.Angle(GetDirection_MouseToGun(), GetDirection_WallBulletToPlayer());
+                // Debug.Log(angle);
+                // Debug.DrawLine(Vector3.zero, GetDirection_MouseToGun());
+                // Debug.DrawLine(Vector3.zero, GetDirection_WallBulletToPlayer());
+                _isAimSelf = (180 - angle) < 10;
             }
 
             if (Input.GetMouseButtonDown(1))
@@ -98,11 +106,15 @@ namespace Game
 
             if (Input.GetMouseButton(1))
             {
+                if (!IsCanShoot())
+                {
+                    _line.gameObject.GetComponent<Projection>().Disable();
+                    return;
+                }
+
+                _line.gameObject.GetComponent<Projection>().Enable();
                 //预测
                 CreatSimulateBullet();
-
-                if (!IsCanShoot())
-                    return;
 
                 //开火
                 if (Input.GetMouseButtonDown(0))
@@ -114,13 +126,15 @@ namespace Game
                     {
                         _isForwardShoot = false;
                         _isHaveBullet = false;
+                        var effect = GameObject.Instantiate(_fireEffect, transform);
+                        effect.transform.position = muzzle.transform.position;
                     }
                     else
                     {
-                        _isCanMove = false;
+                        IsMove = false;
                         _isAimSelf = false;
                         _isBulletOnWall = false;
-                        rb.velocity = Vector2.zero;
+                        _rb.velocity = Vector2.zero;
                         TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
                     }
                 }
@@ -130,6 +144,7 @@ namespace Game
         private bool IsCanShoot()
         {
             var isCanShoot = true;
+            isCanShoot &= IsMove;
             //回收的时候无视CD限制
             var isShootCd = _countCd == 0;
             if (_isForwardShoot)
@@ -157,7 +172,7 @@ namespace Game
 
         private GameObject InstantiateBullet()
         {
-            var go = Instantiate(bullet);
+            var go = Instantiate(_bullet);
             var bulletCtr = go.GetComponent<BulletCtr>();
             if (_isForwardShoot)
             {
@@ -185,9 +200,11 @@ namespace Game
             if (ctr.IsBack)
             {
                 _isHaveBullet = true;
-                _isCanMove = true;
+                IsMove = true;
                 _isForwardShoot = true;
                 _countCd = _shootCD;
+                var effect = GameObject.Instantiate(_recycleEffect, transform);
+                effect.transform.position = muzzle.transform.position;
                 TypeEventSystem.Global.Send<GameRecycleBulletTriggerEvt>();
             }
             else
@@ -202,17 +219,12 @@ namespace Game
             TypeEventSystem.Global.Send<GameOverEvt>();
         }
 
-        public Vector2 GetMouseInfo()
-        {
-            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
-        }
-
         private Vector2 GetBulletDir()
         {
-            return _isForwardShoot ? GetDirection_ToGun() : GetDirection_WallBulletToPlayer();
+            return _isForwardShoot ? GetDirection_MouseToGun() : GetDirection_WallBulletToPlayer();
         }
 
-        private Vector2 GetDirection_ToGun()
+        public Vector2 GetDirection_MouseToGun()
         {
             return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
         }
