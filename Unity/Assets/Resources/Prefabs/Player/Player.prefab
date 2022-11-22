@@ -375,7 +375,7 @@ MonoBehaviour:
   - {x: -0.012794961, y: -0.08764057, z: 0}
   m_ShapePathHash: 1874598716
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1318
+  m_InstanceId: -6028
 --- !u!1 &5206519181117189686
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +476,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzleGo: {fileID: 6540311584416315098}
-  _radius: 0.9
+  _Muzzleradius: 0.61
+  _Gunradius: 0.39
   _player: {fileID: 209750661302366428}
 --- !u!114 &6380417515052461610
 MonoBehaviour:

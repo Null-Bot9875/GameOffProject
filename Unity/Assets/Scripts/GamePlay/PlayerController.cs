@@ -87,9 +87,9 @@ namespace Game
 
             if (!_isForwardShoot)
             {
-                var angle = Vector2.Angle(GetDirection_MouseToGun(), GetDirection_WallBulletToPlayer());
+                var angle = Vector2.Angle(GetDirection_MouseToPlayer(), GetDirection_WallBulletToPlayer());
                 // Debug.Log(angle);
-                // Debug.DrawLine(Vector3.zero, GetDirection_MouseToGun());
+                // Debug.DrawLine(Vector3.zero, GetDirection_MouseToPlayer());
                 // Debug.DrawLine(Vector3.zero, GetDirection_WallBulletToPlayer());
                 _isAimSelf = (180 - angle) < 10;
             }
@@ -221,12 +221,12 @@ namespace Game
 
         private Vector2 GetBulletDir()
         {
-            return _isForwardShoot ? GetDirection_MouseToGun() : GetDirection_WallBulletToPlayer();
+            return _isForwardShoot ? GetDirection_MouseToPlayer() : GetDirection_WallBulletToPlayer();
         }
 
-        public Vector2 GetDirection_MouseToGun()
+        public Vector2 GetDirection_MouseToPlayer()
         {
-            return (_mouseV2 - (Vector2)gunGo.transform.position).normalized;
+            return (_mouseV2 - (Vector2)transform.position).normalized;
         }
 
         private Vector2 GetDirection_WallBulletToPlayer()

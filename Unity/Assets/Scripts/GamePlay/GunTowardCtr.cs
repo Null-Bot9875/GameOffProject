@@ -8,15 +8,16 @@ namespace Game
     {
         private Dictionary<int, AnimationClip> _clipDic = new Dictionary<int, AnimationClip>();
         private AnimancerComponent animancer;
-        private Vector2 _vector2;
+        private Vector2 _GunNor;
+        private Vector2 _playerNor;
 
         [SerializeField] private GameObject muzzleGo;
-        [SerializeField] private float _radius;
+        [SerializeField] private float _Muzzleradius;
+        [SerializeField] private float _Gunradius;
         [SerializeField] private PlayerController _player;
 
         private void Start()
         {
-
             var clips = Resources.LoadAll<AnimationClip>(GamePath.GunClip);
 
             foreach (var clip in clips)
@@ -30,7 +31,7 @@ namespace Game
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, _radius);
+            Gizmos.DrawWireSphere(transform.position, _Muzzleradius);
         }
 
         private void FixedUpdate()
@@ -40,15 +41,18 @@ namespace Game
 
             var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var mousePos = new Vector3(pos.x, pos.y);
-            _vector2 = (mousePos - transform.position).normalized;
+            _GunNor = (mousePos - transform.position).normalized;
+            _playerNor = (mousePos - _player.transform.position).normalized;
+            ChangeWeaponPos();
             ChangeWeaponForce();
             ChangeMuzzleForce();
         }
 
         void ChangeWeaponForce()
         {
-            var angle = Vector2.Angle(transform.up, _vector2);
-            var isRight = Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x;
+
+            var angle  = Vector2.Angle(transform.up, _playerNor);
+            var isRight = Camera.main.ScreenToWorldPoint(Input.mousePosition).x > _player.transform.position.x;
             angle = isRight ? angle : -angle;
             var difference = float.MaxValue;
             var num = 0;
@@ -67,7 +71,7 @@ namespace Game
             animancer.Play(_clipDic[num]);
 
 
-            if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > transform.position.y)
+            if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > _player.transform.position.y)
             {
                 GetComponent<SpriteRenderer>().sortingOrder = 0;
             }
@@ -79,8 +83,12 @@ namespace Game
 
         void ChangeMuzzleForce()
         {
-            //Debug.Log(_vector2.magnitude);
-            muzzleGo.transform.position = (_vector2 * _radius) + (Vector2)transform.position;
+            muzzleGo.transform.position = (_GunNor * _Muzzleradius) + (Vector2)transform.position;
+        }
+
+        void ChangeWeaponPos()
+        {
+            transform.position = (_playerNor * _Gunradius) + (Vector2)_player.transform.position;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Game
 
         void Update()
         {
-            var dir = DirectionalAnimationSet8.SnapVectorToDirection(_player.GetDirection_MouseToGun());
+            var dir = DirectionalAnimationSet8.SnapVectorToDirection(_player.GetDirection_MouseToPlayer());
             if (!_player.IsMove)
             {
                 var idleClip = idleSet.GetClip(dir);
