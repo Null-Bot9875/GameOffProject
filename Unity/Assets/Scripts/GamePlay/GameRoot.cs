@@ -11,6 +11,7 @@ namespace Game
             GameDataCache.Instance.EnemyList = GameObject.FindObjectsOfType<EnemyController>().ToList();
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
             GameDataCache.Instance.CrtSceneIdx = SceneManager.GetActiveScene().buildIndex;
+            GameDataCache.Instance.Canvas = GameObject.FindObjectOfType<Canvas>();
         }
     }
 }

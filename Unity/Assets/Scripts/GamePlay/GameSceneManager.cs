@@ -1,5 +1,4 @@
 using Game.GameEvent;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game
