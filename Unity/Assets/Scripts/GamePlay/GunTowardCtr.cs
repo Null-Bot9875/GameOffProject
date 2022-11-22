@@ -16,7 +16,9 @@ namespace Game
 
         private void Start()
         {
+
             var clips = Resources.LoadAll<AnimationClip>(GamePath.GunClip);
+
             foreach (var clip in clips)
             {
                 _clipDic.Add(int.Parse(clip.name), clip);
