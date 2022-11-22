@@ -50,8 +50,7 @@ namespace Game
 
         void ChangeWeaponForce()
         {
-
-            var angle  = Vector2.Angle(transform.up, _playerNor);
+            var angle = Vector2.Angle(transform.up, _playerNor);
             var isRight = Camera.main.ScreenToWorldPoint(Input.mousePosition).x > _player.transform.position.x;
             angle = isRight ? angle : -angle;
             var difference = float.MaxValue;
@@ -89,6 +88,13 @@ namespace Game
         void ChangeWeaponPos()
         {
             transform.position = (_playerNor * _Gunradius) + (Vector2)_player.transform.position;
+        }
+
+        public bool IsInWall()
+        {
+            var dir = muzzleGo.transform.position - transform.position;
+            var hit = Physics2D.Raycast(transform.position, dir, dir.magnitude, LayerMask.GetMask("Wall"));
+            return hit.transform != null;
         }
     }
 }
