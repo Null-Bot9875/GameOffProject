@@ -215,7 +215,7 @@ namespace Game
 
         void Die()
         {
-            Debug.Log("playerDie");
+            GameObject.Destroy(gameObject);
             TypeEventSystem.Global.Send<GameOverEvt>();
         }
 
