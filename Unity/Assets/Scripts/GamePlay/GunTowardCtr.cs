@@ -94,12 +94,6 @@ namespace Game
         {
             var dir = muzzleGo.transform.position - transform.position;
             var hit = Physics2D.Raycast(transform.position, dir, dir.magnitude, LayerMask.GetMask("Wall"));
-            if (hit.transform != null)
-            {
-                Debug.Log(hit.transform.name);
-                Debug.Log(!(hit.transform != null));
-            }
-
             return hit.transform != null;
         }
     }
