@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingsBtn: {fileID: 4260721021320005252}
   _reloadBtn: {fileID: 4260721019935019104}
-  _settingsPanel: {fileID: 0}
+  _settingsPanel: {fileID: 935673644116171784, guid: d45853a4f9d31304f97e1d0bbdfea723, type: 3}
 --- !u!1 &4260721019935019110
 GameObject:
   m_ObjectHideFlags: 0
