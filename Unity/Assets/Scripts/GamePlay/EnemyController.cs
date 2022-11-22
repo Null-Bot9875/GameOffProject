@@ -64,6 +64,8 @@ namespace Game
         private bool _isFoundPlayer;
         private Dictionary<string, AnimationClip> _clipDic = new Dictionary<string, AnimationClip>();
 
+        [SerializeField, Header("初始化的朝向,原地位置使用")] private bool _isInitForward;
+
         private void OnValidate()
         {
             _SightLight2D.pointLightOuterAngle = _lookAngle;
@@ -97,7 +99,7 @@ namespace Game
             _SightLight2D.pointLightOuterRadius = _lookDistance;
             _player = GameDataCache.Instance.Player.transform;
             _enemyPatrol.InitEnemyPatrol(this);
-            _animancer.Play(_clipDic["ForwardClip"]);
+            _animancer.Play(_isInitForward ? _clipDic["ForwardClip"] : _clipDic["BackClip"]);
             _light = transform.Find("ViewLight");
             EnemyPatrol();
             InvokeRepeating(nameof(EnemyDetectPerSec), 1f, .5f);
