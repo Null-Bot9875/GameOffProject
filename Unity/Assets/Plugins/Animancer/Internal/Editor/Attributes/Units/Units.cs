@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 namespace Animancer.Units
 {
@@ -69,7 +69,7 @@ namespace Animancer.Units
     [System.Diagnostics.Conditional(Strings.UnityEditor)]
     public sealed class MetersPerSecondPerSecondAttribute : UnitsAttribute
     {
-        public MetersPerSecondPerSecondAttribute() : base(" m/s²") { }
+        public MetersPerSecondPerSecondAttribute() : base(" m/s\xB2") { }
     }
 
     /************************************************************************************************************************/

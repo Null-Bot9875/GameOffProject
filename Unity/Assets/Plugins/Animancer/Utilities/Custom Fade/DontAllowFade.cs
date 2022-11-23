@@ -1,4 +1,9 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
+
+#if ! UNITY_EDITOR
+#pragma warning disable CS0612 // Type or member is obsolete (for Layers in Animancer Lite).
+#pragma warning disable CS0618 // Type or member is obsolete (for Layers in Animancer Lite).
+#endif
 
 using UnityEngine;
 
@@ -28,7 +33,7 @@ namespace Animancer
     /// 
     /// https://kybernetik.com.au/animancer/api/Animancer/DontAllowFade
     /// 
-    public sealed class DontAllowFade : Key, IUpdatable
+    public class DontAllowFade : Key, IUpdatable
     {
         /************************************************************************************************************************/
 
@@ -36,8 +41,10 @@ namespace Animancer
         [System.Diagnostics.Conditional(Strings.Assertions)]
         public static void Assert(AnimancerPlayable animancer)
         {
-#if UNITY_ASSERTIONS
+#if UNITY_EDITOR
+            var warnings = OptionalWarning.ProOnly.DisableTemporarily();
             animancer.RequirePreUpdate(new DontAllowFade());
+            warnings.Enable();
 #endif
         }
 

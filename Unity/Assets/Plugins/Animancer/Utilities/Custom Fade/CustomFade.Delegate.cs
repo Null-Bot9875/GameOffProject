@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 using System;
 
@@ -60,7 +60,7 @@ namespace Animancer
 
         /// <summary>A <see cref="CustomFade"/> which uses a <see cref="Func{T, TResult}"/> to calculate the weight.</summary>
         /// <example>See <see cref="CustomFade"/>.</example>
-        private sealed class Delegate : CustomFade
+        private class Delegate : CustomFade
         {
             /************************************************************************************************************************/
 

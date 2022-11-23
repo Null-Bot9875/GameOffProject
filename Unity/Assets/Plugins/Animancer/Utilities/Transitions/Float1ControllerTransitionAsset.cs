@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 using System;
 using UnityEngine;
@@ -7,14 +7,17 @@ namespace Animancer
 {
     /// <inheritdoc/>
     /// https://kybernetik.com.au/animancer/api/Animancer/Float1ControllerTransitionAsset
+#if !UNITY_EDITOR
+    [System.Obsolete(Validate.ProOnlyMessage)]
+#endif
     [CreateAssetMenu(menuName = Strings.MenuPrefix + "Controller Transition/Float 1", order = Strings.AssetMenuOrder + 6)]
     [HelpURL(Strings.DocsURLs.APIDocumentation + "/" + nameof(Float1ControllerTransitionAsset))]
     public class Float1ControllerTransitionAsset : AnimancerTransitionAsset<Float1ControllerTransition>
     {
         /// <inheritdoc/>
         [Serializable]
-        public class UnShared :
-            AnimancerTransitionAsset.UnShared<Float1ControllerTransitionAsset, Float1ControllerTransition, Float1ControllerState>,
+        public new class UnShared :
+            UnShared<Float1ControllerTransitionAsset, Float1ControllerTransition, Float1ControllerState>,
             Float1ControllerState.ITransition
         { }
     }
@@ -22,7 +25,11 @@ namespace Animancer
     /// <inheritdoc/>
     /// https://kybernetik.com.au/animancer/api/Animancer/Float1ControllerTransition
     [Serializable]
-    public class Float1ControllerTransition : ControllerTransition<Float1ControllerState>, Float1ControllerState.ITransition
+#if ! UNITY_EDITOR
+    [System.Obsolete(Validate.ProOnlyMessage)]
+#endif
+    public class Float1ControllerTransition : ControllerTransition<Float1ControllerState>,
+        Float1ControllerState.ITransition, ICopyable<Float1ControllerTransition>
     {
         /************************************************************************************************************************/
 
@@ -48,7 +55,23 @@ namespace Animancer
 
         /// <inheritdoc/>
         public override Float1ControllerState CreateState()
-            => State = new Float1ControllerState(Controller, _ParameterName, KeepStateOnStop);
+            => State = new Float1ControllerState(Controller, _ParameterName, ActionsOnStop);
+
+        /************************************************************************************************************************/
+
+        /// <inheritdoc/>
+        public virtual void CopyFrom(Float1ControllerTransition copyFrom)
+        {
+            CopyFrom((ControllerTransition<Float1ControllerState>)copyFrom);
+
+            if (copyFrom == null)
+            {
+                _ParameterName = default;
+                return;
+            }
+
+            _ParameterName = copyFrom._ParameterName;
+        }
 
         /************************************************************************************************************************/
         #region Drawer

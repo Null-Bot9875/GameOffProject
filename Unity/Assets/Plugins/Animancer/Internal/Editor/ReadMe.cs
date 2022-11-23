@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value.
 
@@ -44,20 +44,21 @@ namespace Animancer.Editor
         /// <item>[19] = v7.0: 2021-07-29.</item>
         /// <item>[20] = v7.1: 2021-08-13.</item>
         /// <item>[21] = v7.2: 2021-10-17.</item>
+        /// <item>[22] = v7.3: 2022-07-03.</item>
         /// </list></example>
-        protected virtual int ReleaseNumber => 21;
+        protected virtual int ReleaseNumber => 22;
 
         /// <summary>The display name of this product version.</summary>
-        protected virtual string VersionName => "v7.2";
+        protected virtual string VersionName => "v7.3";
 
         /// <summary>The URL for the change log of this Animancer version.</summary>
-        protected virtual string ChangeLogURL => Strings.DocsURLs.ChangeLogPrefix + "v7-2";
+        protected virtual string ChangeLogURL => Strings.DocsURLs.ChangeLogPrefix + "v7-3";
 
         /// <summary>The key used to save the release number.</summary>
         protected virtual string ReleaseNumberPrefKey => nameof(Animancer) + "." + nameof(ReleaseNumber);
 
         /// <summary>The name of this product.</summary>
-        protected virtual string ProductName => Strings.ProductName + " Pro";
+        protected virtual string ProductName => Strings.ProductName + " Lite";
 
         /// <summary>The URL for the documentation.</summary>
         protected virtual string DocumentationURL => Strings.DocsURLs.Documentation;
@@ -162,8 +163,9 @@ namespace Animancer.Editor
         #region Custom Editor
         /************************************************************************************************************************/
 
+        /// <summary>[Editor-Only] A custom Inspector for <see cref="ReadMe"/>.</summary>
         [CustomEditor(typeof(ReadMe), editorForChildClasses: true)]
-        protected class Editor : UnityEditor.Editor
+        public class Editor : UnityEditor.Editor
         {
             /************************************************************************************************************************/
 
@@ -183,7 +185,7 @@ namespace Animancer.Editor
 
             /************************************************************************************************************************/
 
-            private void OnEnable()
+            protected virtual void OnEnable()
             {
                 _Target = (ReadMe)target;
                 _Icon = AssetPreview.GetMiniThumbnail(target);
@@ -278,7 +280,6 @@ namespace Animancer.Editor
 
             private void DoWarnings()
             {
-
                 MessageType messageType;
 
                 if (!_Target.HasCorrectName)
@@ -296,6 +297,9 @@ namespace Animancer.Editor
                 DoSpace();
 
                 var directory = AssetDatabase.GetAssetPath(_Target);
+                if (string.IsNullOrEmpty(directory))
+                    return;
+
                 directory = Path.GetDirectoryName(directory);
 
                 var productName = _Target.ProductName;
@@ -550,7 +554,7 @@ namespace Animancer.Editor
             /************************************************************************************************************************/
 
             /// <summary>A group of example scenes.</summary>
-            private sealed class ExampleGroup
+            private class ExampleGroup
             {
                 /************************************************************************************************************************/
 
@@ -689,6 +693,71 @@ namespace Animancer.Editor
         #endregion
         /************************************************************************************************************************/
     }
+
+    /************************************************************************************************************************/
+    #region UnityVersionChecker
+    // This class isn't in its own file because files don't get removed when upgrading from Animancer Lite to Pro.
+    /************************************************************************************************************************/
+
+    /// <summary>[Editor-Only] [Lite-Only]
+    /// Validates that the Animancer.Lite.dll is the correct one for this version of Unity.
+    /// </summary>
+    [InitializeOnLoad]
+    internal static class UnityVersionChecker
+    {
+        /************************************************************************************************************************/
+
+        const string ExpectedAssemblyTarget =
+#if UNITY_2021_2_OR_NEWER
+            "2021.2";
+#elif UNITY_2021_1_OR_NEWER
+            "2021.1";
+#elif UNITY_2020_1_OR_NEWER
+            "2020.1";
+#else
+            "2019.4";
+#endif
+
+        /************************************************************************************************************************/
+
+        static UnityVersionChecker()
+        {
+            const string SessionStateKey = nameof(Animancer) + "." + nameof(UnityVersionChecker);
+
+            if (SessionState.GetBool(SessionStateKey, false))
+                return;
+
+            SessionState.SetBool(SessionStateKey, true);
+
+            var assembly = typeof(AnimancerEditorUtilities).Assembly;
+            var attributes = assembly.GetCustomAttributes(typeof(System.Reflection.AssemblyDescriptionAttribute), false);
+            if (attributes.Length != 1)
+            {
+                Debug.LogWarning($"{assembly.FullName} has {attributes.Length} [AssemblyDescription] attributes.");
+                return;
+            }
+
+            var attribute = (System.Reflection.AssemblyDescriptionAttribute)attributes[0];
+            if (attribute.Description.EndsWith("Unity " + ExpectedAssemblyTarget + "+."))
+                return;
+
+            var actualAssemblyTarget = attribute.Description.Substring(attribute.Description.Length - 14, 13);
+            if (!actualAssemblyTarget.StartsWith("Unity "))
+                actualAssemblyTarget = "[Unknown]";
+
+            Debug.LogWarning($"{assembly.GetName().Name}.dll was compiled for {actualAssemblyTarget}" +
+                $" but the correct target for this version of Unity would be {ExpectedAssemblyTarget}+." +
+                $"\nYou should download the appropriate version of Animancer from https://kybernetik.com.au/animancer/lite" +
+                $"\nOr you could ignore this warning and delete this file to disable it," +
+                $" but then some features might not work correctly.");
+        }
+
+        /************************************************************************************************************************/
+    }
+    
+    /************************************************************************************************************************/
+    #endregion
+    /************************************************************************************************************************/
 }
 
 #endif

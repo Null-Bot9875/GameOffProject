@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value.
 
@@ -15,7 +15,11 @@ namespace Animancer
     /// <inheritdoc/>
     /// https://kybernetik.com.au/animancer/api/Animancer/MixerTransition_2
     [Serializable]
+#if ! UNITY_EDITOR
+    [System.Obsolete(Validate.ProOnlyMessage)]
+#endif
     public abstract class MixerTransition<TMixer, TParameter> : ManualMixerTransition<TMixer>
+        , ICopyable<MixerTransition<TMixer, TParameter>>
         where TMixer : MixerState<TParameter>
     {
         /************************************************************************************************************************/
@@ -53,6 +57,24 @@ namespace Animancer
 
             State.SetThresholds(_Thresholds);
             State.Parameter = _DefaultParameter;
+        }
+
+        /************************************************************************************************************************/
+
+        /// <inheritdoc/>
+        public virtual void CopyFrom(MixerTransition<TMixer, TParameter> copyFrom)
+        {
+            CopyFrom((ManualMixerTransition<TMixer>)copyFrom);
+
+            if (copyFrom == null)
+            {
+                _DefaultParameter = default;
+                _Thresholds = default;
+                return;
+            }
+
+            _DefaultParameter = copyFrom._DefaultParameter;
+            AnimancerUtilities.CopyExactArray(copyFrom._Thresholds, ref _Thresholds);
         }
 
         /************************************************************************************************************************/
@@ -120,12 +142,11 @@ namespace Animancer
         {
             base.GatherSubProperties(property);
 
-            if (CurrentAnimations == null)
-                return;
-
             CurrentThresholds = property.FindPropertyRelative(MixerTransition2D.ThresholdsField);
 
-            if (CurrentThresholds == null)
+            if (CurrentAnimations == null ||
+                CurrentThresholds == null ||
+                property.hasMultipleDifferentValues)
                 return;
 
             var count = Math.Max(CurrentAnimations.arraySize, CurrentThresholds.arraySize);
@@ -143,9 +164,10 @@ namespace Animancer
         {
             var height = base.GetPropertyHeight(property, label);
 
-            if (property.isExpanded && CurrentThresholds != null)
+            if (property.isExpanded)
             {
-                height -= Editor.AnimancerGUI.StandardSpacing + EditorGUI.GetPropertyHeight(CurrentThresholds, label);
+                if (CurrentThresholds != null)
+                    height -= Editor.AnimancerGUI.StandardSpacing + EditorGUI.GetPropertyHeight(CurrentThresholds, label);
             }
 
             return height;

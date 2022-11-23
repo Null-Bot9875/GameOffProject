@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 using UnityEngine;
 
@@ -38,7 +38,7 @@ namespace Animancer
 
         /// <summary>A <see cref="CustomFade"/> which uses an <see cref="AnimationCurve"/> to calculate the weight.</summary>
         /// <example>See <see cref="CustomFade"/>.</example>
-        private sealed class Curve : CustomFade
+        private class Curve : CustomFade
         {
             /************************************************************************************************************************/
 

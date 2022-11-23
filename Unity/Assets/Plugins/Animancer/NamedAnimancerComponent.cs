@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 using System;
 using System.Collections;
@@ -33,7 +33,7 @@ namespace Animancer
         #region Fields and Properties
         /************************************************************************************************************************/
 
-        [SerializeField, Tooltip("If true, the 'Default Animation' will be automatically played by OnEnable")]
+        [SerializeField, Tooltip("If true, the 'Default Animation' will be automatically played by " + nameof(OnEnable))]
         private bool _PlayAutomatically = true;
 
         /// <summary>[<see cref="SerializeField"/>]
@@ -44,7 +44,7 @@ namespace Animancer
 
         /************************************************************************************************************************/
 
-        [SerializeField, Tooltip("Animations in this array will be automatically registered by Awake" +
+        [SerializeField, Tooltip("Animations in this array will be automatically registered by " + nameof(Awake) +
             " as states that can be retrieved using their name")]
         private AnimationClip[] _Animations;
 
@@ -124,7 +124,6 @@ namespace Animancer
         /************************************************************************************************************************/
 
         /// <summary>Creates a state for each clip in the <see cref="Animations"/> array.</summary>
-        /// <remarks>Called by Unity when this component is being loaded.</remarks>
         protected virtual void Awake()
         {
             States.CreateIfNew(_Animations);
@@ -135,9 +134,8 @@ namespace Animancer
         /// <summary>
         /// Plays the first clip in the <see cref="Animations"/> array if <see cref="PlayAutomatically"/> is true.
         /// <para></para>
-        /// Ensures that the <see cref="PlayableGraph"/> is playing.
+        /// Also ensures that the <see cref="PlayableGraph"/> is playing.
         /// </summary>
-        /// <remarks>Called by Unity when this component becomes enabled and active.</remarks>
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -152,14 +150,16 @@ namespace Animancer
 
         /************************************************************************************************************************/
 
-        /// <summary>
-        /// Returns the clip's name. This method is used to determine the dictionary key to use for an animation when
-        /// none is specified by the user, such as in <see cref="AnimancerComponent.Play(AnimationClip)"/>.
-        /// </summary>
+        /// <summary>Returns the clip's name.</summary>
+        /// <remarks>
+        /// This method is used to determine the dictionary key to use for an animation when none is specified by the
+        /// caller, such as in <see cref="AnimancerComponent.Play(AnimationClip)"/>.
+        /// </remarks>
         public override object GetKey(AnimationClip clip) => clip.name;
 
         /************************************************************************************************************************/
 
+        /// <inheritdoc/>
         public override void GatherAnimationClips(ICollection<AnimationClip> clips)
         {
             base.GatherAnimationClips(clips);

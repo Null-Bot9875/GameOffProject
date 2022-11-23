@@ -1,3 +1,15 @@
-﻿{
-	"name": "Animancer"
+{
+    "name": "Animancer",
+    "references": [
+        "GUID:2c573e6b271651846a79655161004c5b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
