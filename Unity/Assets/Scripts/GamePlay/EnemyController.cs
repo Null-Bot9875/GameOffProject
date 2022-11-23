@@ -196,6 +196,7 @@ namespace Game
         public void Die()
         {
             this.enabled = false;
+            transform.DOKill();
             GetComponent<Collider2D>().enabled = false;
             var state = _animancer.Play(_clipDic["DieClip"]);
             GameDataCache.Instance.EnemyList.Remove(this);
