@@ -10,8 +10,8 @@ namespace Game
 
         private void Awake()
         {
-            var mat = GetComponent<SpriteRenderer>().sharedMaterial;
-            mat.DOOffset(new Vector2(float.MaxValue, 0), _speed).SetSpeedBased();
+            var mat = GetComponent<SpriteRenderer>().material;
+            mat.DOOffset(new Vector2(10000000, 0), _speed).SetSpeedBased();
         }
     }
 }
