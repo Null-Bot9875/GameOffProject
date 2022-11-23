@@ -12,15 +12,21 @@ namespace Game
         private void Awake()
         {
             Time.timeScale = 0;
+            GameDataCache.Instance.IsOver = true;
+            foreach (var enemy in GameDataCache.Instance.EnemyList)
+            {
+                enemy.enabled = false;
+            }
             _respawnBtn.onClick.AddListener(() =>
             {
                 GameObject.Destroy(gameObject);
                 GameSceneManager.Instance.ReloadScene();
-            });   
+            });
         }
 
         private void OnDestroy()
         {
+            GameDataCache.Instance.IsOver = false;
             Time.timeScale = 1;
         }
     }

@@ -142,9 +142,7 @@ namespace Game
         {
             _isFoundPlayer = false;
             if (Vector3.Distance(_player.transform.position, transform.position) > _lookDistance)
-            {
                 return;
-            }
 
             //多一个精确度就多两条对称的射线,每条射线夹角是总角度除与精度
             var subAngle = (_lookAngle / 2) / _lookCount;
