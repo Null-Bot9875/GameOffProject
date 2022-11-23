@@ -6,10 +6,11 @@ namespace Game
 {
     public class GameSceneManager : SingletonWithMono<GameSceneManager>
     {
-        [SerializeField] private GameObject _diePanel;
+        private GameObject _diePanel;
 
         public void Init()
         {
+            _diePanel = Resources.Load<GameObject>(GamePath.DiePanelPfb);
             TypeEventSystem.Global.Register<GameOverEvt>(OnGameOverEvt);
         }
 

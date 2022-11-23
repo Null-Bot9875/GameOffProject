@@ -11,8 +11,12 @@ namespace Game
 
         private void Awake()
         {
-            GameDataCache.Instance.IsOver = true;
             Time.timeScale = 0;
+            GameDataCache.Instance.IsOver = true;
+            foreach (var enemy in GameDataCache.Instance.EnemyList)
+            {
+                enemy.enabled = false;
+            }
             _respawnBtn.onClick.AddListener(() =>
             {
                 GameObject.Destroy(gameObject);
