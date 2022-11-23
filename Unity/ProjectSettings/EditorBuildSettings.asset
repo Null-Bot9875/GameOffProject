@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameData/Scenes/Main.unity
     guid: 72ad2bd4276f2ff44bc21c352b70733f
-  - enabled: 1
-    path: Assets/GameData/Scenes/Init.unity
-    guid: 7acd10711e4dfc642b151b0216cafc46
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/GameData/Scenes/GameLevel1.unity
     guid: b348b63105256b241ae8e65c39c91164
