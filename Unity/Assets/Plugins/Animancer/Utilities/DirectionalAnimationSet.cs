@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 using System;
 using System.Collections.Generic;
@@ -182,7 +182,7 @@ namespace Animancer
                 case Direction.Right: return _Right;
                 case Direction.Down: return _Down;
                 case Direction.Left: return _Left;
-                default: throw new ArgumentException($"Unsupported {nameof(Direction)}: {direction}");
+                default: throw AnimancerUtilities.CreateUnsupportedArgumentException(direction);
             }
         }
 
@@ -200,7 +200,7 @@ namespace Animancer
                 case Direction.Right: Right = clip; break;
                 case Direction.Down: Down = clip; break;
                 case Direction.Left: Left = clip; break;
-                default: throw new ArgumentException($"Unsupported {nameof(Direction)}: {direction}");
+                default: throw AnimancerUtilities.CreateUnsupportedArgumentException(direction);
             }
         }
 
@@ -220,7 +220,7 @@ namespace Animancer
                 case Direction.Right: return Vector2.right;
                 case Direction.Down: return Vector2.down;
                 case Direction.Left: return Vector2.left;
-                default: throw new ArgumentException($"Unsupported {nameof(Direction)}: {direction}");
+                default: throw AnimancerUtilities.CreateUnsupportedArgumentException(direction);
             }
         }
 

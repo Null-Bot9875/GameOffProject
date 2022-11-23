@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value.
 
@@ -21,7 +21,7 @@ namespace Animancer
     [AddComponentMenu(Strings.MenuPrefix + "Sprite Renderer Texture Swap")]
     [HelpURL(Strings.DocsURLs.APIDocumentation + "/" + nameof(SpriteRendererTextureSwap))]
     [DefaultExecutionOrder(DefaultExecutionOrder)]
-    public sealed class SpriteRendererTextureSwap : MonoBehaviour
+    public class SpriteRendererTextureSwap : MonoBehaviour
     {
         /************************************************************************************************************************/
 
@@ -70,13 +70,13 @@ namespace Animancer
 
         /************************************************************************************************************************/
 
-        private void Awake() => RefreshSpriteMap();
+        protected virtual void Awake() => RefreshSpriteMap();
 
-        private void OnValidate() => RefreshSpriteMap();
+        protected virtual void OnValidate() => RefreshSpriteMap();
 
         /************************************************************************************************************************/
 
-        private void LateUpdate()
+        protected virtual void LateUpdate()
         {
             if (_Renderer == null)
                 return;

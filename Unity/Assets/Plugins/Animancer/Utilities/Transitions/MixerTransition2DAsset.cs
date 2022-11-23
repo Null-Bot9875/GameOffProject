@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 using System;
 using UnityEngine;
@@ -12,14 +12,17 @@ namespace Animancer
 {
     /// <inheritdoc/>
     /// https://kybernetik.com.au/animancer/api/Animancer/MixerTransition2DAsset
+#if !UNITY_EDITOR
+    [System.Obsolete(Validate.ProOnlyMessage)]
+#endif
     [CreateAssetMenu(menuName = Strings.MenuPrefix + "Mixer Transition/2D", order = Strings.AssetMenuOrder + 4)]
     [HelpURL(Strings.DocsURLs.APIDocumentation + "/" + nameof(MixerTransition2DAsset))]
     public class MixerTransition2DAsset : AnimancerTransitionAsset<MixerTransition2D>
     {
         /// <inheritdoc/>
         [Serializable]
-        public class UnShared :
-            AnimancerTransitionAsset.UnShared<MixerTransition2DAsset, MixerTransition2D, MixerState<Vector2>>,
+        public new class UnShared :
+            UnShared<MixerTransition2DAsset, MixerTransition2D, MixerState<Vector2>>,
             MixerState.ITransition2D
         { }
     }
@@ -27,7 +30,11 @@ namespace Animancer
     /// <inheritdoc/>
     /// https://kybernetik.com.au/animancer/api/Animancer/MixerTransition2D
     [Serializable]
-    public class MixerTransition2D : MixerTransition<MixerState<Vector2>, Vector2>, MixerState.ITransition2D
+#if ! UNITY_EDITOR
+    [System.Obsolete(Validate.ProOnlyMessage)]
+#endif
+    public class MixerTransition2D : MixerTransition<MixerState<Vector2>, Vector2>,
+        MixerState.ITransition2D, ICopyable<MixerTransition2D>
     {
         /************************************************************************************************************************/
 
@@ -72,6 +79,22 @@ namespace Animancer
             }
             InitializeState();
             return State;
+        }
+
+        /************************************************************************************************************************/
+
+        /// <inheritdoc/>
+        public virtual void CopyFrom(MixerTransition2D copyFrom)
+        {
+            CopyFrom((MixerTransition<MixerState<Vector2>, Vector2>)copyFrom);
+
+            if (copyFrom == null)
+            {
+                _Type = default;
+                return;
+            }
+
+            _Type = copyFrom._Type;
         }
 
         /************************************************************************************************************************/
@@ -178,9 +201,18 @@ namespace Animancer
             private void AddCalculateThresholdsFunction(GenericMenu menu, string label,
                 Func<Object, Vector2, Vector2> calculateThreshold)
             {
-                AddPropertyModifierFunction(menu, label, (property) =>
+                var functionState = CurrentAnimations == null || CurrentThresholds == null
+                    ? Editor.MenuFunctionState.Disabled
+                    : Editor.MenuFunctionState.Normal;
+
+                AddPropertyModifierFunction(menu, label, functionState, property =>
                 {
                     GatherSubProperties(property);
+
+                    if (CurrentAnimations == null ||
+                        CurrentThresholds == null)
+                        return;
+
                     var count = CurrentAnimations.arraySize;
                     for (int i = 0; i < count; i++)
                     {

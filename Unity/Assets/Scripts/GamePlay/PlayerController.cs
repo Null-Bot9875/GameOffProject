@@ -88,45 +88,42 @@ namespace Game
             if (!_isForwardShoot)
             {
                 var angle = Vector2.Angle(GetDirection_MouseToPlayer(), GetDirection_WallBulletToPlayer());
-                // Debug.Log(angle);
-                // Debug.DrawLine(Vector3.zero, GetDirection_MouseToPlayer());
-                // Debug.DrawLine(Vector3.zero, GetDirection_WallBulletToPlayer());
                 _isAimSelf = (180 - angle) < 10;
             }
 
             if (Input.GetMouseButtonDown(1))
             {
-                _line.gameObject.GetComponent<Projection>().Enable();
+                _projection.Enable();
             }
 
             if (Input.GetMouseButtonUp(1))
             {
-                _line.gameObject.GetComponent<Projection>().Disable();
+                _projection.Disable();
             }
 
             if (Input.GetMouseButton(1))
             {
                 if (!IsCanShoot())
                 {
-                    _line.gameObject.GetComponent<Projection>().Disable();
+                    _projection.Disable();
                     return;
                 }
 
-                _line.gameObject.GetComponent<Projection>().Enable();
+                _projection.Enable();
                 //预测
                 CreatSimulateBullet();
 
                 //开火
                 if (Input.GetMouseButtonDown(0))
                 {
-                    _line.gameObject.GetComponent<Projection>().Disable();
+                    _projection.Disable();
                     var go = InstantiateBullet();
                     go.GetComponent<BulletCtr>().SetFire(GetBulletDir());
                     if (_isForwardShoot)
                     {
                         _isForwardShoot = false;
                         _isHaveBullet = false;
-                        var effectGo =  Instantiate(_fireEffect);
+                        var effectGo = Instantiate(_fireEffect);
                         effectGo.transform.position = muzzle.transform.position;
                     }
                     else
@@ -144,11 +141,15 @@ namespace Game
         private bool IsCanShoot()
         {
             var isCanShoot = true;
+            var isWall = gunGo.GetComponent<GunTowardCtr>().IsInWall();
+            //子弹不在墙里可以射击
+            isCanShoot &= !isWall;
+            //不能移动的时候不能射击
             isCanShoot &= IsMove;
-            //回收的时候无视CD限制
-            var isShootCd = _countCd == 0;
             if (_isForwardShoot)
             {
+                //回收的时候无视CD限制
+                var isShootCd = _countCd == 0;
                 isCanShoot &= _isHaveBullet;
                 isCanShoot &= isShootCd;
             }

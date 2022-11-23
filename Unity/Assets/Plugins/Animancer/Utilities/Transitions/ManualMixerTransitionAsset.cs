@@ -1,4 +1,4 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
 using Animancer.Units;
 using System;
@@ -10,22 +10,29 @@ namespace Animancer
 {
     /// <inheritdoc/>
     /// https://kybernetik.com.au/animancer/api/Animancer/ManualMixerTransitionAsset
+#if !UNITY_EDITOR
+    [System.Obsolete(Validate.ProOnlyMessage)]
+#endif
     [CreateAssetMenu(menuName = Strings.MenuPrefix + "Mixer Transition/Manual", order = Strings.AssetMenuOrder + 2)]
     [HelpURL(Strings.DocsURLs.APIDocumentation + "/" + nameof(ManualMixerTransitionAsset))]
     public class ManualMixerTransitionAsset : AnimancerTransitionAsset<ManualMixerTransition>
     {
         /// <inheritdoc/>
         [Serializable]
-        public class UnShared :
-            AnimancerTransitionAsset.UnShared<ManualMixerTransitionAsset, ManualMixerTransition, ManualMixerState>,
+        public new class UnShared :
+            UnShared<ManualMixerTransitionAsset, ManualMixerTransition, ManualMixerState>,
             ManualMixerState.ITransition
         { }
     }
 
     /// <inheritdoc/>
     /// https://kybernetik.com.au/animancer/api/Animancer/ManualMixerTransition_1
+#if !UNITY_EDITOR
+    [System.Obsolete(Validate.ProOnlyMessage)]
+#endif
     [Serializable]
-    public abstract class ManualMixerTransition<TMixer> : AnimancerTransition<TMixer>, IMotion, IAnimationClipCollection
+    public abstract class ManualMixerTransition<TMixer> : AnimancerTransition<TMixer>,
+        IMotion, IAnimationClipCollection, ICopyable<ManualMixerTransition<TMixer>>
         where TMixer : ManualMixerState
     {
         /************************************************************************************************************************/
@@ -208,7 +215,11 @@ namespace Animancer
                     if (_Animations[i] == null)
                         return false;
 
+#if UNITY_EDITOR
                 return true;
+#else
+                return false;
+#endif
             }
         }
 
@@ -267,7 +278,30 @@ namespace Animancer
         /************************************************************************************************************************/
 
         /// <summary>Adds the <see cref="Animations"/> to the collection.</summary>
-        void IAnimationClipCollection.GatherAnimationClips(ICollection<AnimationClip> clips) => clips.GatherFromSource(_Animations);
+        void IAnimationClipCollection.GatherAnimationClips(ICollection<AnimationClip> clips)
+            => clips.GatherFromSource(_Animations);
+
+        /************************************************************************************************************************/
+
+        /// <inheritdoc/>
+        public virtual void CopyFrom(ManualMixerTransition<TMixer> copyFrom)
+        {
+            CopyFrom((AnimancerTransition<TMixer>)copyFrom);
+
+            if (copyFrom == null)
+            {
+                _Speed = 1;
+                _Animations = default;
+                _Speeds = default;
+                _SynchronizeChildren = default;
+                return;
+            }
+
+            _Speed = copyFrom._Speed;
+            AnimancerUtilities.CopyExactArray(copyFrom._Animations, ref _Animations);
+            AnimancerUtilities.CopyExactArray(copyFrom._Speeds, ref _Speeds);
+            AnimancerUtilities.CopyExactArray(copyFrom._SynchronizeChildren, ref _SynchronizeChildren);
+        }
 
         /************************************************************************************************************************/
     }

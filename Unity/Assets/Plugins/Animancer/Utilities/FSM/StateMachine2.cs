@@ -1,5 +1,6 @@
-// Animancer // https://kybernetik.com.au/animancer // Copyright 2021 Kybernetik //
+// Animancer // https://kybernetik.com.au/animancer // Copyright 2022 Kybernetik //
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,11 +55,14 @@ namespace Animancer.FSM
     /// See <see cref="StateMachine{TState}"/> for a system that does not bother keeping track of any states other than
     /// the active one.
     /// <para></para>
+    /// See <see cref="InitializeAfterDeserialize"/> if using this class in a serialized field.
+    /// <para></para>
     /// Documentation: <see href="https://kybernetik.com.au/animancer/docs/manual/fsm/keys">Keyed State Machines</see>
     /// </remarks>
     /// https://kybernetik.com.au/animancer/api/Animancer.FSM/StateMachine_2
     /// 
     [HelpURL(StateExtensions.APIDocumentationURL + nameof(StateMachine<TState>) + "_2")]
+    [Serializable]
     public partial class StateMachine<TKey, TState> : StateMachine<TState>, IKeyedStateMachine<TKey>, IDictionary<TKey, TState>
         where TState : class, IState
     {
@@ -67,8 +71,13 @@ namespace Animancer.FSM
         /// <summary>The collection of states mapped to a particular key.</summary>
         public IDictionary<TKey, TState> Dictionary { get; set; }
 
+        /************************************************************************************************************************/
+
+        [SerializeField]
+        private TKey _CurrentKey;
+
         /// <summary>The key which identifies the <see cref="StateMachine{TState}.CurrentState"/>.</summary>
-        public TKey CurrentKey { get; private set; }
+        public TKey CurrentKey => _CurrentKey;
 
         /************************************************************************************************************************/
 
@@ -126,6 +135,25 @@ namespace Animancer.FSM
 
         /************************************************************************************************************************/
 
+        /// <inheritdoc/>
+        public override void InitializeAfterDeserialize()
+        {
+            if (CurrentState != null)
+            {
+                using (new KeyChange<TKey>(this, default, _CurrentKey))
+                using (new StateChange<TState>(this, null, CurrentState))
+                    CurrentState.OnEnterState();
+            }
+            else if (Dictionary.TryGetValue(_CurrentKey, out var state))
+            {
+                ForceSetState(_CurrentKey, state);
+            }
+
+            // Don't call the base method.
+        }
+
+        /************************************************************************************************************************/
+
         /// <summary>Attempts to enter the specified `state` and returns true if successful.</summary>
         /// <remarks>
         /// This method returns true immediately if the specified `state` is already the
@@ -147,7 +175,7 @@ namespace Animancer.FSM
         /// </remarks>
         public TState TrySetState(TKey key)
         {
-            if (EqualityComparer<TKey>.Default.Equals(CurrentKey, key))
+            if (EqualityComparer<TKey>.Default.Equals(_CurrentKey, key))
                 return CurrentState;
             else
                 return TryResetState(key);
@@ -165,12 +193,12 @@ namespace Animancer.FSM
         /// </remarks>
         public bool TryResetState(TKey key, TState state)
         {
-            using (new KeyChange<TKey>(this, CurrentKey, key))
+            using (new KeyChange<TKey>(this, _CurrentKey, key))
             {
                 if (!CanSetState(state))
                     return false;
-                
-                CurrentKey = key;
+
+                _CurrentKey = key;
                 ForceSetState(state);
                 return true;
             }
@@ -205,9 +233,9 @@ namespace Animancer.FSM
         /// </remarks>
         public void ForceSetState(TKey key, TState state)
         {
-            using (new KeyChange<TKey>(this, CurrentKey, key))
+            using (new KeyChange<TKey>(this, _CurrentKey, key))
             {
-                CurrentKey = key;
+                _CurrentKey = key;
                 ForceSetState(state);
             }
         }
@@ -327,7 +355,7 @@ namespace Animancer.FSM
         /// <summary>
         /// Sets the <see cref="CurrentKey"/> without changing the <see cref="StateMachine{TState}.CurrentState"/>.
         /// </summary>
-        public void SetFakeKey(TKey key) => CurrentKey = key;
+        public void SetFakeKey(TKey key) => _CurrentKey = key;
 
         /************************************************************************************************************************/
 
@@ -336,8 +364,36 @@ namespace Animancer.FSM
         /// <see cref="StateMachine{TState}.CurrentState"/>.
         /// </summary>
         public override string ToString()
-            => $"{GetType().FullName} -> {CurrentKey} -> {(CurrentState != null ? CurrentState.ToString() : "null")}";
+            => $"{GetType().FullName} -> {_CurrentKey} -> {(CurrentState != null ? CurrentState.ToString() : "null")}";
 
+        /************************************************************************************************************************/
+#if UNITY_EDITOR
+        /************************************************************************************************************************/
+
+        /// <inheritdoc/>
+        public override int GUILineCount => 2;
+
+        /************************************************************************************************************************/
+
+        /// <inheritdoc/>
+        public override void DoGUI(ref Rect area)
+        {
+            area.height = UnityEditor.EditorGUIUtility.singleLineHeight;
+
+            UnityEditor.EditorGUI.BeginChangeCheck();
+
+            var key = StateMachineUtilities.DoGenericField(area, "Current Key", _CurrentKey);
+
+            if (UnityEditor.EditorGUI.EndChangeCheck())
+                SetFakeKey(key);
+
+            StateMachineUtilities.NextVerticalArea(ref area);
+
+            base.DoGUI(ref area);
+        }
+
+        /************************************************************************************************************************/
+#endif
         /************************************************************************************************************************/
     }
 }
