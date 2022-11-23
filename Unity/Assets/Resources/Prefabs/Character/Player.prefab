@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objParent: {fileID: 0}
   _line: {fileID: 1867948212}
-  _maxFrameIterations: 300
+  _maxFrameIterations: 900
   endPosGo: {fileID: 2884829841747057121}
   _radius: 0.2
   _sphereCenter: {x: 0, y: -0.15}
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2.5
-  offsetCoefficient: -0.02
+  offsetCoefficient: -0.1
   _shootCD: 0.5
   gunGo: {fileID: 5206519181117189686}
   muzzle: {fileID: 890547792662252357}
@@ -375,7 +375,7 @@ MonoBehaviour:
   - {x: -0.012794961, y: -0.08764057, z: 0}
   m_ShapePathHash: 1874598716
   m_Mesh: {fileID: 0}
-  m_InstanceId: -223048
+  m_InstanceId: -21218
 --- !u!1 &5206519181117189686
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +431,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
