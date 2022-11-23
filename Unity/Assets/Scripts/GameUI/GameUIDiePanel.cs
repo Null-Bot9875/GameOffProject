@@ -11,16 +11,18 @@ namespace Game
 
         private void Awake()
         {
+            GameDataCache.Instance.IsOver = true;
             Time.timeScale = 0;
             _respawnBtn.onClick.AddListener(() =>
             {
                 GameObject.Destroy(gameObject);
                 GameSceneManager.Instance.ReloadScene();
-            });   
+            });
         }
 
         private void OnDestroy()
         {
+            GameDataCache.Instance.IsOver = false;
             Time.timeScale = 1;
         }
     }

@@ -9,5 +9,6 @@ namespace Game
         public PlayerController Player { get; set; }
         public int CrtSceneIdx { get; set; }
         public Canvas Canvas { get; set; }
+        public bool IsOver { get; set; }
     }
 }
