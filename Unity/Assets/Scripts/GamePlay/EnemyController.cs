@@ -64,7 +64,8 @@ namespace Game
         private bool _isFoundPlayer;
         private Dictionary<string, AnimationClip> _clipDic = new Dictionary<string, AnimationClip>();
 
-        [SerializeField, Header("初始化的朝向,原地位置使用")] private bool _isInitForward;
+        [SerializeField, Header("初始化的朝向,原地位置使用")]
+        private bool _isInitForward;
 
         private void OnValidate()
         {
@@ -194,8 +195,11 @@ namespace Game
 
         public void Die()
         {
-            GameObject.Destroy(gameObject);
+            this.enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            var state = _animancer.Play(_clipDic["DieClip"]);
             GameDataCache.Instance.EnemyList.Remove(this);
+            state.Events.OnEnd += () => GameObject.Destroy(gameObject);
         }
 
         public void OnBulletTrigger(BulletCtr ctr)
