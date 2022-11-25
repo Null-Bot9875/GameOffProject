@@ -34,9 +34,7 @@ namespace Game
         {
             if (col.CompareTag("Player") && isOpen)
             {
-                //todo UI
-
-                //GameSceneManager.Instance.LoadNextScene();
+                TypeEventSystem.Global.Send(new GameFinishEvt());
             }
         }
     }
