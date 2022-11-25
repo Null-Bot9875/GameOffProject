@@ -1,4 +1,5 @@
 using System;
+using Game.GameEvent;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,27 @@ namespace Game
         {
             _settingsBtn.onClick.AddListener(OnClickSettingsBtn);
             _reloadBtn.onClick.AddListener(OnClickReloadBtn);
+            TypeEventSystem.Global.Register<GameShootBulletRequestEvt>(OnGameShootBulletRequestEvt);
+        }
+
+        private void OnDestroy()
+        {
+            TypeEventSystem.Global.UnRegister<GameShootBulletRequestEvt>(OnGameShootBulletRequestEvt);
+        }
+
+        private void OnGameShootBulletRequestEvt(GameShootBulletRequestEvt evt)
+        {
+            if (evt.Count > 1)
+            {
+                var group = transform.Find("StarGroup");
+                for (int i = 0; i < evt.Count - 1; i++)
+                {
+                    if (i < group.childCount)
+                    {
+                        group.GetChild(i).transform.Find("StarImg").gameObject.SetActive(false);
+                    }
+                }
+            }
         }
 
         private void OnClickSettingsBtn()

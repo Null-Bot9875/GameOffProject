@@ -125,6 +125,8 @@ namespace Game
                         _isHaveBullet = false;
                         var effectGo = Instantiate(_fireEffect);
                         effectGo.transform.position = muzzle.transform.position;
+                        GameDataCache.Instance.ShootCount += 1;
+                        TypeEventSystem.Global.Send(new GameShootBulletRequestEvt());
                     }
                     else
                     {

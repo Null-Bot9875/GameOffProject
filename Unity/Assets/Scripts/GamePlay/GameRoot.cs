@@ -12,6 +12,8 @@ namespace Game
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
             GameDataCache.Instance.CrtSceneIdx = SceneManager.GetActiveScene().buildIndex;
             GameDataCache.Instance.Canvas = GameObject.FindObjectOfType<Canvas>();
+            GameDataCache.Instance.IsOver = false;
+            GameDataCache.Instance.ShootCount = 0;
         }
     }
 }
