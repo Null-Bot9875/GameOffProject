@@ -26,8 +26,8 @@ namespace Game
 
         private void OnDestroy()
         {
-            GameDataCache.Instance.IsOver = false;
             Time.timeScale = 1;
+            GameDataCache.Instance.IsOver = false;
         }
     }
 }

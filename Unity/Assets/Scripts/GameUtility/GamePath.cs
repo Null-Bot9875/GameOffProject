@@ -15,6 +15,7 @@
         public static string FireEffectPfb = ItemPrefabPath + "FireEffect";
         public static string RecycleEffectPfb = ItemPrefabPath + "RecycleEffect";
         public static string DiePanelPfb = UIPrefabPath + "GameUIDiePanel";
+        public static string FinishPanelPfb = UIPrefabPath + "GameUIFinishPanel";
 
         //Animation
         public static string GunClip = AnimationPath + "Gun";
