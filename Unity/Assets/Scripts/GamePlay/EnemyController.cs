@@ -118,11 +118,13 @@ namespace Game
             //指定哪根轴朝向目标
             var fromDir = _light.rotation * Vector3.right;
             //计算垂直于当前方向和目标方向的轴
-            var axis = Vector3.Cross(fromDir, targetDir).normalized;
+            //var axis = Vector3.Cross(fromDir, targetDir).normalized;
+            var axis = Vector3.forward;
             //计算当前方向和目标方向的夹角
             var angle = Vector3.Angle(fromDir, targetDir);
             //将当前朝向向目标方向旋转一定角度，这个角度值可以做插值
             var rotation = Quaternion.AngleAxis(angle, axis) * _light.rotation;
+            //Debug.Log(rotation.eulerAngles);
             _light.DORotate(rotation.eulerAngles, .2f);
 
             var isBack = _enemyPatrol.TargetPosition.y > transform.position.y;
@@ -178,6 +180,7 @@ namespace Game
 
             void Attack()
             {
+                GetComponent<SpriteRenderer>().sortingOrder = 9999;
                 _animancer.Play(_clipDic["ForwardClip"]);
                 transform.DOMove(_player.transform.position, .5f).OnComplete(() =>
                 {
