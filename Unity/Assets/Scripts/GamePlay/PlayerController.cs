@@ -143,13 +143,13 @@ namespace Game
         private bool IsCanShoot()
         {
             var isCanShoot = true;
-            var isWall = gunGo.GetComponent<GunTowardCtr>().IsInWall();
-            //子弹不在墙里可以射击
-            isCanShoot &= !isWall;
             //不能移动的时候不能射击
             isCanShoot &= IsMove;
             if (_isForwardShoot)
             {
+                var isWall = gunGo.GetComponent<GunTowardCtr>().IsInWall();
+                //子弹不在墙里可以射击
+                isCanShoot &= !isWall;
                 //回收的时候无视CD限制
                 var isShootCd = _countCd == 0;
                 isCanShoot &= _isHaveBullet;

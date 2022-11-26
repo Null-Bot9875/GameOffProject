@@ -1,4 +1,4 @@
-using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,24 +9,28 @@ namespace Game
         [SerializeField] private Button _respawnBtn;
         [SerializeField] private Button _returnBtn;
 
+        [SerializeField] private Image _cgImg;
+        [SerializeField] private CanvasGroup _uiGroup;
+
         private void Awake()
         {
-            Time.timeScale = 0;
             GameDataCache.Instance.IsOver = true;
             foreach (var enemy in GameDataCache.Instance.EnemyList)
             {
                 enemy.enabled = false;
             }
+
             _respawnBtn.onClick.AddListener(() =>
             {
                 GameObject.Destroy(gameObject);
                 GameSceneManager.Instance.ReloadScene();
             });
+
+            _cgImg.DOFade(1, 1f).OnComplete(() => { _uiGroup.DOFade(1, .2f); });
         }
 
         private void OnDestroy()
         {
-            Time.timeScale = 1;
             GameDataCache.Instance.IsOver = false;
         }
     }
