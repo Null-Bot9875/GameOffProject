@@ -63,8 +63,12 @@ namespace Game
                         }
                         return;
                     }
+                    else
+                    {
+                        explosion.OnExplosion();
+                    }
+                   
 
-                    explosion.OnExplosion();
                 }
             }
 
