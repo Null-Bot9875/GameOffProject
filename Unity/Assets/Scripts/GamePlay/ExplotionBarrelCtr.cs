@@ -8,7 +8,7 @@ namespace Game
         [SerializeField, Header("爆炸特效")] private GameObject explosionClip;
         public bool isInvalided;
         [SerializeField, Header("爆炸半径")] private float explosionDistance;
-        
+
         // [SerializeField, Header("射线数")] private int rayCount = 5;
 
         private void Start()
@@ -26,7 +26,7 @@ namespace Game
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position,explosionDistance);
+            Gizmos.DrawWireSphere(transform.position, explosionDistance);
             // for (int i = 0; i <= rayCount; i++)
             // {
             //     var angleLeft = Quaternion.Euler(0, 0, -1 * perAngle * i);
@@ -50,29 +50,29 @@ namespace Game
 
         private void GetRayCast()
         {
-            foreach (var item in Physics2D.OverlapCircleAll(transform.position,explosionDistance))
+            foreach (var item in Physics2D.OverlapCircleAll(transform.position, explosionDistance))
             {
                 if (item.gameObject.TryGetComponent(out IExplosion explosion))
                 {
                     if (item.gameObject.CompareTag("Player"))
                     {
-                        var hit2d= Physics2D.Raycast(transform.position, (transform.position - item.transform.position).normalized,
-                            explosionDistance);
-
-                        if (hit2d.collider.gameObject.CompareTag("Player"))
+                        var hit2d = Physics2D.Raycast(transform.position, (transform.position - item.transform.position).normalized, explosionDistance, LayerMask.GetMask("Wall"));
+                        if (hit2d.collider != null)
                         {
                             explosion.OnExplosion();
                         }
+                        return;
                     }
                     else
                     {
                         explosion.OnExplosion();
                     }
                    
+
                 }
             }
-            
-            
+
+
             // var perAngle = 180 / rayCount;
             // for (int i = 0; i <= rayCount; i++)
             // {
@@ -97,7 +97,5 @@ namespace Game
             // }
             Destroy(gameObject);
         }
-
-       
     }
 }

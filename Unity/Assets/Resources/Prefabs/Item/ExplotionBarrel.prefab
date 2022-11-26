@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8528109258421676009}
   - component: {fileID: 8528109258421676008}
   - component: {fileID: 9083734812421554745}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: ExplotionBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,4 +153,4 @@ MonoBehaviour:
   - {x: 0.08000004, y: -0.10499999, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -156344
+  m_InstanceId: 86876

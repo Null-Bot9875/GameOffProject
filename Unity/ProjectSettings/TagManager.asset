@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Wall
+  - HoverCtr
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - Wall
   - Bullet
   - Enemy
-  - Hover
-  - ExplotionBarrel
+  - 
+  - 
   - 
   - 
   - 

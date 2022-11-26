@@ -10,7 +10,6 @@ namespace Game
     [System.Serializable]
     public class EnemyPatrolInfo
     {
-        public bool IsInvalid;
         public int CrtIdx { get; set; } = 1;
         public List<Transform> List;
 
@@ -21,10 +20,7 @@ namespace Game
         public void InitEnemyPatrol(EnemyController controller)
         {
             if (List.Count == 0)
-            {
-                IsInvalid = true;
                 return;
-            }
 
             controller.transform.position = List[0].position;
             foreach (var item in List)
@@ -58,6 +54,7 @@ namespace Game
         [SerializeField] private EnemyPatrolInfo _enemyPatrol;
         [SerializeField] private AnimancerComponent _animancer;
 
+        private bool _isInvalid;
         private Transform _player;
         private Transform _light;
         private bool _isFoundPlayer;
@@ -101,8 +98,8 @@ namespace Game
             _enemyPatrol.InitEnemyPatrol(this);
             _animancer.Play(_isInitForward ? _clipDic["ForwardClip"] : _clipDic["BackClip"]);
             _light = transform.Find("ViewLight");
-            EnemyPatrol();
             InvokeRepeating(nameof(EnemyDetectPerSec), 1f, .5f);
+            EnemyPatrol();
         }
 
         private void OnDestroy()
@@ -112,7 +109,7 @@ namespace Game
 
         private void EnemyPatrol()
         {
-            if (_enemyPatrol.IsInvalid)
+            if (_enemyPatrol.List.Count == 0)
                 return;
             var targetDir = _enemyPatrol.TargetPosition - _light.position;
             _light.right = targetDir;
@@ -161,10 +158,13 @@ namespace Game
         {
             if (_isFoundPlayer)
             {
+                CancelInvoke(nameof(EnemyDetectPerSec));
+                _isInvalid = true;
                 _player.GetComponent<PlayerController>().IsMove = false;
                 _player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 var state = _animancer.Play(_clipDic["AttackClip"]);
                 state.Events.OnEnd += Attack;
+                transform.DOKill();
             }
 
             void Attack()
@@ -184,20 +184,22 @@ namespace Game
             Die();
         }
 
-        public void Die()
+        public void OnBulletTrigger(BulletCtr ctr)
         {
+            //不生成敌人模拟对象，不需要判断ghost
+            Die();
+        }
+
+        private void Die()
+        {
+            if (_isInvalid)
+                return;
             this.enabled = false;
             transform.DOKill();
             GetComponent<Collider2D>().enabled = false;
             var state = _animancer.Play(_clipDic["DieClip"]);
             GameDataCache.Instance.EnemyList.Remove(this);
             state.Events.OnEnd += () => GameObject.Destroy(gameObject);
-        }
-
-        public void OnBulletTrigger(BulletCtr ctr)
-        {
-            //不生成敌人模拟对象，不需要判断ghost
-            Die();
         }
     }
 }
