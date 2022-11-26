@@ -37,6 +37,7 @@ namespace Game
             isInvalided = true;
             var clip = Instantiate(explosionClip, transform.position, transform.rotation);
             clip.GetComponent<Animator>().Play("Explosion3");
+
             GetRayCast();
         }
 
@@ -45,28 +46,28 @@ namespace Game
             var perAngle = 180 / rayCount;
             for (int i = 0; i <= rayCount; i++)
             {
+                
                 var angleLeft = Quaternion.Euler(0, 0, -1 * perAngle * i);
                 var angleRight = Quaternion.Euler(0, 0, 1 * perAngle * i);
-                if (Physics2D.Raycast(transform.position, angleLeft * transform.up.normalized * explosionDistance,explosionDistance))
-                {
-                    var hit2D = Physics2D.Raycast(transform.position,
-                        angleLeft * transform.up.normalized * explosionDistance, explosionDistance);
-                    hit2D.collider.gameObject.TryGetComponent(out IExplosion explosion);
-                    explosion.OnExplosion();
-                }
-                else if (Physics2D.Raycast(transform.position, angleRight * transform.up.normalized * explosionDistance,explosionDistance))
-                {
-                    var hit2D = Physics2D.Raycast(transform.position,
-                        angleRight * transform.up.normalized * explosionDistance, explosionDistance);
-                    hit2D.collider.gameObject.TryGetComponent(out IExplosion explosion);
-                    explosion.OnExplosion();
-                }
+                var hit2d1 = Physics2D.Raycast(transform.position, angleLeft * transform.up.normalized,
+                    explosionDistance);
+                var hit2d2 = Physics2D.Raycast(transform.position, angleRight * transform.up.normalized,
+                    explosionDistance);
 
+                if (hit2d1.collider.gameObject.TryGetComponent(out IExplosion explosion))
+                {
+                    explosion.OnExplosion();
+                }
                 
-
-                Destroy(gameObject);
+                if (hit2d2.collider.gameObject.TryGetComponent(out IExplosion explosion1))
+                {
+                    explosion1.OnExplosion();
+                }
+                
             }
-
+            Destroy(gameObject);
         }
+
+       
     }
 }
