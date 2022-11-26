@@ -414,18 +414,6 @@ MonoBehaviour:
   m_Text: 'Return
 
 '
---- !u!114 &8675014616975453990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220779574896887883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade1c8bb04b5cee4399fa7f017d9fd34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1494138455984587557
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,11 +677,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae67e8c90ecf3ae448d5d7b7260af8e3, type: 3}
---- !u!1 &1220779574896887883 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 686492652436532884, guid: ae67e8c90ecf3ae448d5d7b7260af8e3, type: 3}
-  m_PrefabInstance: {fileID: 1835214511954274015}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1296826030444832591 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 614949738525606288, guid: ae67e8c90ecf3ae448d5d7b7260af8e3, type: 3}
