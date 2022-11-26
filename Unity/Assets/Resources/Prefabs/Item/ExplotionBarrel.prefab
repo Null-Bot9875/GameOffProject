@@ -125,4 +125,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionClip: {fileID: 2681024924927159287, guid: 26d4eec8fcf2de94c8c4d563e6d3cf12, type: 3}
   isInvalided: 0
-  explosionRadius: 0.4
+  explosionDistance: 0.34
+  rayCount: 12
