@@ -197,7 +197,7 @@ namespace Game
             if (_isInvalid)
                 return;
             _isInvalid = true;
-            enabled = false;
+            this.enabled = false;
             transform.DOKill();
             GetComponent<Collider2D>().enabled = false;
             var state = _animancer.Play(_clipDic["DieClip"]);

@@ -57,11 +57,11 @@ namespace Game
                     if (item.gameObject.CompareTag("Player"))
                     {
                         var hit2d = Physics2D.Raycast(transform.position, (transform.position - item.transform.position).normalized, explosionDistance, LayerMask.GetMask("Wall"));
-                        if (hit2d.collider != null)
+                        if (hit2d.collider == null)
                         {
-                            continue;
+                            explosion.OnExplosion();
                         }
-                        explosion.OnExplosion();
+                        continue;
                     }
 
                     explosion.OnExplosion();
