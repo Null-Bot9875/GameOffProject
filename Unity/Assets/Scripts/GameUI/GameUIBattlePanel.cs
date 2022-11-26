@@ -23,7 +23,7 @@ namespace Game
         private void OnDestroy()
         {
             TypeEventSystem.Global.UnRegister<GameShootBulletRequestEvt>(OnGameShootBulletRequestEvt);
-            TypeEventSystem.Global.Register<GameFinishEvt>(OnGameFinishEvt);
+            TypeEventSystem.Global.UnRegister<GameFinishEvt>(OnGameFinishEvt);
         }
 
         private void OnGameFinishEvt(GameFinishEvt evt)
