@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -6,6 +7,7 @@ namespace Game
     {
         [SerializeField] private Texture2D _cursor;
 
+        private GameObject _fadePanel;
         private void Awake()
         {
             Application.targetFrameRate = 60;

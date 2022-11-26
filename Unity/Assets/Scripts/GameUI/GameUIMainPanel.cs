@@ -13,7 +13,10 @@ namespace Game
 
         private void Awake()
         {
-            _startBtn.onClick.AddListener(() => SceneManager.LoadScene("GameLevel1"));
+            _startBtn.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene("GameLevel1");
+            });
             _creditsBtn.onClick.AddListener(() =>
             {
                 var pfb = Resources.Load<GameObject>(GamePath.UIPrefabPath + "GameUICreditsPanel");
