@@ -61,14 +61,10 @@ namespace Game
                         {
                             explosion.OnExplosion();
                         }
-                        return;
+                        continue;
                     }
-                    else
-                    {
-                        explosion.OnExplosion();
-                    }
-                   
 
+                    explosion.OnExplosion();
                 }
             }
 
