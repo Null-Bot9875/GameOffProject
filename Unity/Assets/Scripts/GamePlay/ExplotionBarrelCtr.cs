@@ -6,7 +6,8 @@ namespace Game
     {
         [SerializeField, Header("爆炸特效")] private GameObject explosionClip;
         public bool isInvalided;
-        [SerializeField, Header("爆炸半径")] private float explosionRadius;
+        [SerializeField, Header("爆炸半径")] private float explosionDistance;
+        [SerializeField, Header("射线数")] private int rayCount = 5;
 
         public void OnBulletTrigger(BulletCtr ctr)
         {
@@ -18,7 +19,14 @@ namespace Game
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, explosionRadius);
+            var perAngle = 180 / rayCount;
+            for (int i = 0; i <= rayCount; i++)
+            {
+                var angleLeft = Quaternion.Euler(0, 0, -1 * perAngle * i);
+                var angleRight = Quaternion.Euler(0, 0, 1 * perAngle * i);
+                Gizmos.DrawRay(transform.position, angleLeft * transform.up.normalized * explosionDistance);
+                Gizmos.DrawRay(transform.position, angleRight * transform.up.normalized * explosionDistance);
+            }
         }
 
         public void OnExplosion()
@@ -29,15 +37,31 @@ namespace Game
             isInvalided = true;
             var clip = Instantiate(explosionClip, transform.position, transform.rotation);
             clip.GetComponent<Animator>().Play("Explosion3");
-            foreach (var item in Physics2D.OverlapCircleAll(transform.position, explosionRadius))
+            GetRayCast();
+        }
+
+        private void GetRayCast()
+        {
+            var perAngle = 180 / rayCount;
+            for (int i = 0; i <= rayCount; i++)
             {
-                if (item.gameObject.TryGetComponent(out IExplosion explosion))
+                var angleLeft = Quaternion.Euler(0, 0, -1 * perAngle * i);
+                var angleRight = Quaternion.Euler(0, 0, 1 * perAngle * i);
+                if (Physics2D.Raycast(transform.position, angleLeft * transform.up.normalized * explosionDistance,explosionDistance)
+                    .collider.gameObject.TryGetComponent(out IExplosion explosion))
                 {
                     explosion.OnExplosion();
                 }
+
+                if (Physics2D.Raycast(transform.position, angleRight * transform.up.normalized * explosionDistance,explosionDistance)
+                    .collider.gameObject.TryGetComponent(out IExplosion explosion1))
+                {
+                    explosion1.OnExplosion();
+                }
+
+                Destroy(gameObject);
             }
 
-            Destroy(gameObject);
         }
     }
 }
