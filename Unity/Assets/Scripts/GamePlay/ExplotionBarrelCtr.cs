@@ -64,7 +64,11 @@ namespace Game
                             explosion.OnExplosion();
                         }
                     }
-                    explosion.OnExplosion();
+                    else
+                    {
+                        explosion.OnExplosion();
+                    }
+                   
                 }
             }
             
