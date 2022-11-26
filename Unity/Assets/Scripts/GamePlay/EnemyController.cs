@@ -128,6 +128,8 @@ namespace Game
 
         private void Update()
         {
+            if (_isInvalid)
+                return;
             _isFoundPlayer = false;
             if (Vector3.Distance(_player.transform.position, transform.position) > _lookDistance)
                 return;
@@ -194,6 +196,7 @@ namespace Game
         {
             if (_isInvalid)
                 return;
+            _isInvalid = true;
             this.enabled = false;
             transform.DOKill();
             GetComponent<Collider2D>().enabled = false;
