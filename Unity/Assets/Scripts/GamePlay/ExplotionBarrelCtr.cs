@@ -47,17 +47,15 @@ namespace Game
             {
                 var angleLeft = Quaternion.Euler(0, 0, -1 * perAngle * i);
                 var angleRight = Quaternion.Euler(0, 0, 1 * perAngle * i);
-                if (Physics2D.Raycast(transform.position, angleLeft * transform.up.normalized * explosionDistance,explosionDistance))
+                var col = Physics2D.Raycast(transform.position, angleLeft * transform.up.normalized * explosionDistance, explosionDistance).collider;
+                if (col)
                 {
-                    var hit2D = Physics2D.Raycast(transform.position,
-                        angleLeft * transform.up.normalized * explosionDistance, explosionDistance);
-                    hit2D.collider.gameObject.TryGetComponent(out IExplosion explosion);
+                    col.TryGetComponent(out IExplosion explosion);
                     explosion.OnExplosion();
                 }
-                else if (Physics2D.Raycast(transform.position, angleRight * transform.up.normalized * explosionDistance,explosionDistance))
+                else
                 {
-                    var hit2D = Physics2D.Raycast(transform.position,
-                        angleRight * transform.up.normalized * explosionDistance, explosionDistance);
+                    var hit2D = Physics2D.Raycast(transform.position, angleRight * transform.up.normalized * explosionDistance, explosionDistance);
                     hit2D.collider.gameObject.TryGetComponent(out IExplosion explosion);
                     explosion.OnExplosion();
                 }
