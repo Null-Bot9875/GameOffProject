@@ -126,8 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionClip: {fileID: 2681024924927159287, guid: 26d4eec8fcf2de94c8c4d563e6d3cf12, type: 3}
   isInvalided: 0
-  explosionDistance: 0.76
-  rayCount: 8
+  explosionDistance: 2
+  rayCount: 18
 --- !u!114 &9083734812421554745
 MonoBehaviour:
   m_ObjectHideFlags: 0
