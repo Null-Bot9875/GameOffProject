@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: c1dea90a77578de47b8cd777b0bb388a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
-  m_Color: {r: 0.9339623, g: 0.4330314, b: 0.22467959, a: 1}
+  m_Color: {r: 0.9528302, g: 0.41567752, b: 0.19326274, a: 1}
   m_Intensity: 1.16
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
   m_ShadowIntensityEnabled: 1
-  m_ShadowIntensity: 0.75
+  m_ShadowIntensity: 0.207
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_Vertices:
@@ -182,8 +182,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 1.49
-  m_PointLightOuterRadius: 13.33
+  m_PointLightInnerRadius: 0.72
+  m_PointLightOuterRadius: 12.68
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -206,4 +206,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030d10d686414a609d6f5137eb2a02d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _light2D: {fileID: 0}
+  _light2D: {fileID: 599941656053796394}
