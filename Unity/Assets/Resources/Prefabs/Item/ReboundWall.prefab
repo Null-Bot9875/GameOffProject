@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 4604791177952005269}
   - component: {fileID: -5295818175559531115}
   - component: {fileID: 1490990749}
+  - component: {fileID: 2957696771151596118}
   m_Layer: 7
-  m_Name: Square
+  m_Name: ReboundWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,4 +125,16 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1638
+  m_InstanceId: 31414
+--- !u!114 &2957696771151596118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604791177952005265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f0ec77c496d7f4da7af2eeee0c45b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

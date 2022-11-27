@@ -177,6 +177,7 @@ namespace Game
                 {
                     TypeEventSystem.Global.Send(new GameOverEvt());
                 });
+                AudioManager.Instance.PlayAudioOnce(GamePath.EnemyAttackVFX);
             }
         }
 
@@ -203,6 +204,7 @@ namespace Game
             var state = _animancer.Play(_clipDic["DieClip"]);
             GameDataCache.Instance.EnemyList.Remove(this);
             state.Events.OnEnd += () => GameObject.Destroy(gameObject);
+            AudioManager.Instance.PlayAudioOnce(GamePath.EnemyDieVFX);
         }
     }
 }

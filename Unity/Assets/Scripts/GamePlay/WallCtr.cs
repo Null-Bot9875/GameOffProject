@@ -33,7 +33,6 @@ namespace Game
             }
 
             var go = ctr.gameObject;
-            //todo 播放子弹上墙动画
             TypeEventSystem.Global.Send(new GameBulletShotOnPlaceEvt
             {
                 bulletPos = go.transform.position
@@ -41,6 +40,8 @@ namespace Game
             isInWall = true;
             instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position, go.transform.rotation);
             ctr.DestroyGo();
+            
+            AudioManager.Instance.PlayAudioOnce(GamePath.WallVFX);
         }
     }
 }

@@ -127,6 +127,7 @@ namespace Game
                         effectGo.transform.position = muzzle.transform.position;
                         GameDataCache.Instance.ShootCount += 1;
                         TypeEventSystem.Global.Send(new GameShootBulletRequestEvt());
+                        AudioManager.Instance.PlayAudioOnce(GamePath.ForwardShootVFX);
                     }
                     else
                     {
@@ -135,6 +136,7 @@ namespace Game
                         _isBulletOnWall = false;
                         _rb.velocity = Vector2.zero;
                         TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
+                        AudioManager.Instance.PlayAudioOnce(GamePath.RecycleShootVFX);
                     }
                 }
             }
