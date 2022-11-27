@@ -6,6 +6,12 @@ namespace Game
     {
         [SerializeField] private GameObject _candleLight;
 
+        private void Awake()
+        {
+            _isInvalid = true;
+            _light2D.intensity = 0;
+        }
+
         private void OnDestroy()
         {
             AudioManager.Instance.StopAudioLoop(GamePath.CandleLoopVFX);

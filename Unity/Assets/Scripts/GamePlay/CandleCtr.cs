@@ -5,17 +5,10 @@ namespace Game
 {
     public class CandleCtr : MonoBehaviour
     {
-        [SerializeField] private Light2D _light2D;
-
-
+        [SerializeField] protected Light2D _light2D;
         private float time;
         private float num;
-        protected bool _isInvalid = true;
-
-        private void Awake()
-        {
-            _light2D.intensity = 0;
-        }
+        protected bool _isInvalid;
 
 
         private void Update()
