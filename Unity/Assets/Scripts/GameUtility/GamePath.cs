@@ -16,9 +16,9 @@
         public static string RecycleEffectPfb = ItemPrefabPath + "RecycleEffect";
         public static string DiePanelPfb = UIPrefabPath + "GameUIDiePanel";
         public static string FinishPanelPfb = UIPrefabPath + "GameUIFinishPanel";
-        public static string FadePanelPfb = UIPrefabPath + "GameUIFadePanel";
-
-
+        public static string FadePanelInPfb = UIPrefabPath + "GameUIFadeInPanel";
+        public static string FadePanelOutPfb = UIPrefabPath + "GameUIFadeOutPanel";
+        
         //Animation
         public static string GunClip = AnimationPath + "Gun";
         public static string EnemyClip = AnimationPath + "Enemy";

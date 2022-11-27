@@ -13,9 +13,10 @@ namespace Game
 
         private void Awake()
         {
+            
             _startBtn.onClick.AddListener(() =>
             {
-                SceneManager.LoadScene("GameLevel1");
+                StartCoroutine(GetComponent<GameUIMainToNextScene>().GoToNextScene());
             });
             _creditsBtn.onClick.AddListener(() =>
             {
