@@ -34,6 +34,11 @@ namespace Game
             _light2D.intensity = Mathf.Lerp(_light2D.intensity, num, 0.1f);
         }
 
+        private void OnDestroy()
+        {
+            AudioManager.Instance.StopAudioLoop(GamePath.CandleLoopVFX);
+        }
+
         public void OnBulletTrigger(BulletCtr ctr)
         {
             if (ctr.IsGhost)
@@ -47,6 +52,8 @@ namespace Game
         {
             _isInvalid = false;
             _candleLight.SetActive(true);
+            AudioManager.Instance.PlayAudioOnce(GamePath.CandleVFX);
+            AudioManager.Instance.PlayAudioLoop(GamePath.CandleLoopVFX);
         }
     }
 }
