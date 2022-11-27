@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3609693076509522784}
   - component: {fileID: 3609693076509522785}
   m_Layer: 5
-  m_Name: GameUIFadePanel
+  m_Name: GameUIFadeInPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,9 +185,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12688934b3415cc4a81932a8a6f9913d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFadeIn: 1
   _inClip: {fileID: 7400000, guid: 58b1822d2858ea04f853092acd131f97, type: 2}
   _outClip: {fileID: 7400000, guid: f55662fccd0dda04e811ff83b62eb089, type: 2}
   _animancer: {fileID: 3609693076509522785}
+  animcerDone: 0
 --- !u!114 &3609693076509522785
 MonoBehaviour:
   m_ObjectHideFlags: 0

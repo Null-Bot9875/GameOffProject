@@ -555,6 +555,7 @@ GameObject:
   - component: {fileID: 9055961050419193484}
   - component: {fileID: 9055961050419193487}
   - component: {fileID: 9055961050419193485}
+  - component: {fileID: 1381968356194079270}
   m_Layer: 5
   m_Name: GameUIMainPanel
   m_TagString: Untagged
@@ -635,6 +636,19 @@ MonoBehaviour:
   _startBtn: {fileID: 9055961049692572304}
   _creditsBtn: {fileID: 9055961049912427003}
   _quitBtn: {fileID: 9055961050402779702}
+--- !u!114 &1381968356194079270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055961050419193481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3dcabc755b401fab6959683ff58ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeGo: {fileID: 3609693076509522810, guid: 8171fa1d54ae2664a97c7189a92cbcce, type: 3}
 --- !u!1 &9055961050465956170
 GameObject:
   m_ObjectHideFlags: 0
