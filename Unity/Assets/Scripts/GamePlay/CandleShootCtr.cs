@@ -6,7 +6,7 @@ namespace Game
     {
         [SerializeField] private GameObject _candleLight;
 
-        private void Awake()
+        protected override void OnAwake()
         {
             _isInvalid = true;
             _light2D.intensity = 0;
@@ -30,6 +30,7 @@ namespace Game
         {
             _isInvalid = false;
             _candleLight.SetActive(true);
+            transform.Find("Fire").gameObject.SetActive(true);
             AudioManager.Instance.PlayAudioOnce(GamePath.CandleVFX);
             AudioManager.Instance.PlayAudioLoop(GamePath.CandleLoopVFX);
         }

@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -10,6 +12,16 @@ namespace Game
         private float num;
         protected bool _isInvalid;
 
+
+        private void Awake()
+        {
+            OnAwake();
+        }
+
+        protected virtual void OnAwake()
+        {
+            transform.Find("Fire").gameObject.SetActive(true);
+        }
 
         private void Update()
         {
