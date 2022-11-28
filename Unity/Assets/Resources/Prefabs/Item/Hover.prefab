@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4522715173977268015}
   - component: {fileID: 4522715173977268014}
   - component: {fileID: 4522715173977268013}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Hover
   m_TagString: HoverCtr
   m_Icon: {fileID: 0}

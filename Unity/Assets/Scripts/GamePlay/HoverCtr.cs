@@ -53,17 +53,18 @@ namespace Game
         public void OnBulletTrigger(BulletCtr ctr)
         {
             var go = ctr.gameObject;
+            var targetPos = transform.position + new Vector3(col.offset.x, col.offset.y, 0);
             if (ctr.IsGhost)
             {
-                go.transform.position = transform.position;
+                go.transform.position = targetPos;
                 ctr.DestroyGo();
                 return;
             }
-            
+
             if (go.CompareTag("Bullet") && !isInHover)
             {
                 isInHover = true;
-                go.transform.DOMove(transform.position, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
+                go.transform.DOMove(targetPos, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
             }
 
             void OnBulletMoveComplete()
@@ -74,7 +75,7 @@ namespace Game
                     bulletPos = go.transform.position
                 });
                 col.enabled = false;
-                instanceHoverGo = Instantiate(BulletOnHoverObj, go.transform.position, go.transform.rotation);
+                instanceHoverGo = Instantiate(BulletOnHoverObj, targetPos, go.transform.rotation);
                 AudioManager.Instance.PlayAudioLoop(GamePath.HoverLoopVFX);
             }
         }
