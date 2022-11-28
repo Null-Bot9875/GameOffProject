@@ -220,12 +220,12 @@ namespace Game
 
         void Die(DieReason reason)
         {
-            IsMove = false;
             GetComponent<PlayerAnimationCtr>().Die(() =>
             {
                 GameObject.Destroy(gameObject);
                 TypeEventSystem.Global.Send(new GameOverEvt(reason));
             });
+            IsMove = false;
         }
 
         private Vector2 GetBulletDir()
