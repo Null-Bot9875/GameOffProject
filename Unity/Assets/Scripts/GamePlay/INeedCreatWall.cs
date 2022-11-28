@@ -24,6 +24,7 @@ namespace Game
             }
             else
             {
+                gameObject.AddComponent<BoxCollider2D>();
                 var rb = gameObject.AddComponent<Rigidbody2D>();
                 rb.bodyType = RigidbodyType2D.Static;
                 rb.sharedMaterial = P2D;
