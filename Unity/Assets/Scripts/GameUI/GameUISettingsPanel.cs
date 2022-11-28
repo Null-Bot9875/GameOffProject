@@ -12,7 +12,7 @@ namespace Game
         private void Awake()
         {
             Time.timeScale = 0;
-
+            GameDataCache.Instance.Player.IsMove = false;
             _resumeBtn.onClick.AddListener(OnClickResumeBtn);
         }
 
@@ -24,6 +24,7 @@ namespace Game
         private void OnDestroy()
         {
             Time.timeScale = 1;
+            GameDataCache.Instance.Player.IsMove = true;
         }
     }
 }

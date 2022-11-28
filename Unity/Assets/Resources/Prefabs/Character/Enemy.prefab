@@ -98,7 +98,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 0
   m_PointLightOuterAngle: 108.7
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 5.14
+  m_PointLightOuterRadius: 10
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -124,7 +124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1324077305398384104
 Transform:
   m_ObjectHideFlags: 0
@@ -149,11 +149,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3612183789760842951}
-  - component: {fileID: 3612183789760842944}
   - component: {fileID: 3612183789760842946}
   - component: {fileID: 6275189290752155879}
   - component: {fileID: 5381922730047266125}
   - component: {fileID: 7284831205766119883}
+  - component: {fileID: 1182573661}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -168,30 +168,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3612183789760842945}
-  m_LocalRotation: {x: -0, y: 0, z: -0.9999659, w: -0.008264152}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.92, y: -3.65, z: -1.3135}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children:
   - {fileID: 1324077305398384104}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180.947}
---- !u!58 &3612183789760842944
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3612183789760842945}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.32
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3612183789760842946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SightLight2D: {fileID: 6370855926346173290}
-  _lookDistance: 5.14
+  _lookDistance: 10
   _lookAngle: 108.7
   _lookCount: 20
   _layerMask:
@@ -213,12 +197,10 @@ MonoBehaviour:
     m_Bits: 192
   _enemyPatrol:
     IsInvalid: 0
-    List:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    List: []
     Speed: 1
   _animancer: {fileID: 7284831205766119883}
+  _isInitForward: 1
 --- !u!212 &6275189290752155879
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -259,7 +241,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 99
   m_Sprite: {fileID: 21300000, guid: 5080bf763b1c76a4fa80386dd8ade020, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -304,3 +286,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Animator: {fileID: 5381922730047266125}
   _ActionOnDisable: 0
+--- !u!70 &1182573661
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612183789760842945}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.016106976, y: 0.02254963}
+  m_Size: {x: 0.14309385, y: 0.37611184}
+  m_Direction: 0

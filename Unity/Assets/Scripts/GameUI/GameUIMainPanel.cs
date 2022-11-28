@@ -13,7 +13,16 @@ namespace Game
 
         private void Awake()
         {
-            _startBtn.onClick.AddListener(() => SceneManager.LoadScene("GameLevel1"));
+            
+            _startBtn.onClick.AddListener(() =>
+            {
+                StartCoroutine(GetComponent<GameUIMainToNextScene>().GoToNextScene());
+            });
+            _creditsBtn.onClick.AddListener(() =>
+            {
+                var pfb = Resources.Load<GameObject>(GamePath.UIPrefabPath + "GameUICreditsPanel");
+                GameObject.Instantiate(pfb, transform.parent);
+            });
             _quitBtn.onClick.AddListener(Application.Quit);
         }
     }

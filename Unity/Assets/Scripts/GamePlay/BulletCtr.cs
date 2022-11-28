@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Game
@@ -15,9 +16,15 @@ namespace Game
 
         #endregion
 
-        private void OnEnable()
+        private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            AudioManager.Instance.PlayAudioLoop(GamePath.BulletVFX);
+        }
+
+        private void OnDestroy()
+        {
+            AudioManager.Instance.StopAudioLoop(GamePath.BulletVFX);
         }
 
         public void SetFire(Vector2 direction)

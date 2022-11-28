@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Animancer;
 using DG.Tweening;
@@ -11,7 +10,6 @@ namespace Game
     [System.Serializable]
     public class EnemyPatrolInfo
     {
-        public bool IsInvalid;
         public int CrtIdx { get; set; } = 1;
         public List<Transform> List;
 
@@ -22,10 +20,7 @@ namespace Game
         public void InitEnemyPatrol(EnemyController controller)
         {
             if (List.Count == 0)
-            {
-                IsInvalid = true;
                 return;
-            }
 
             controller.transform.position = List[0].position;
             foreach (var item in List)
@@ -59,12 +54,14 @@ namespace Game
         [SerializeField] private EnemyPatrolInfo _enemyPatrol;
         [SerializeField] private AnimancerComponent _animancer;
 
+        private bool _isInvalid;
         private Transform _player;
         private Transform _light;
         private bool _isFoundPlayer;
         private Dictionary<string, AnimationClip> _clipDic = new Dictionary<string, AnimationClip>();
 
-        [SerializeField, Header("初始化的朝向,原地位置使用")] private bool _isInitForward;
+        [SerializeField, Header("初始化的朝向,原地位置使用")]
+        private bool _isInitForward;
 
         private void OnValidate()
         {
@@ -101,8 +98,8 @@ namespace Game
             _enemyPatrol.InitEnemyPatrol(this);
             _animancer.Play(_isInitForward ? _clipDic["ForwardClip"] : _clipDic["BackClip"]);
             _light = transform.Find("ViewLight");
-            EnemyPatrol();
             InvokeRepeating(nameof(EnemyDetectPerSec), 1f, .5f);
+            EnemyPatrol();
         }
 
         private void OnDestroy()
@@ -112,19 +109,10 @@ namespace Game
 
         private void EnemyPatrol()
         {
-            if (_enemyPatrol.IsInvalid)
+            if (_enemyPatrol.List.Count == 0)
                 return;
             var targetDir = _enemyPatrol.TargetPosition - _light.position;
-            //指定哪根轴朝向目标
-            var fromDir = _light.rotation * Vector3.right;
-            //计算垂直于当前方向和目标方向的轴
-            var axis = Vector3.Cross(fromDir, targetDir).normalized;
-            //计算当前方向和目标方向的夹角
-            var angle = Vector3.Angle(fromDir, targetDir);
-            //将当前朝向向目标方向旋转一定角度，这个角度值可以做插值
-            var rotation = Quaternion.AngleAxis(angle, axis) * _light.rotation;
-            _light.DORotate(rotation.eulerAngles, .2f);
-
+            _light.right = targetDir;
             var isBack = _enemyPatrol.TargetPosition.y > transform.position.y;
             _animancer.Play(isBack ? _clipDic["BackClip"] : _clipDic["ForwardClip"]);
 
@@ -140,6 +128,8 @@ namespace Game
 
         private void Update()
         {
+            if (_isInvalid)
+                return;
             _isFoundPlayer = false;
             if (Vector3.Distance(_player.transform.position, transform.position) > _lookDistance)
                 return;
@@ -170,19 +160,24 @@ namespace Game
         {
             if (_isFoundPlayer)
             {
+                CancelInvoke(nameof(EnemyDetectPerSec));
+                _isInvalid = true;
                 _player.GetComponent<PlayerController>().IsMove = false;
                 _player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 var state = _animancer.Play(_clipDic["AttackClip"]);
                 state.Events.OnEnd += Attack;
+                transform.DOKill();
             }
 
             void Attack()
             {
+                GetComponent<SpriteRenderer>().sortingOrder = 9999;
                 _animancer.Play(_clipDic["ForwardClip"]);
                 transform.DOMove(_player.transform.position, .5f).OnComplete(() =>
                 {
                     TypeEventSystem.Global.Send(new GameOverEvt());
                 });
+                AudioManager.Instance.PlayAudioOnce(GamePath.EnemyAttackVFX);
             }
         }
 
@@ -192,16 +187,24 @@ namespace Game
             Die();
         }
 
-        public void Die()
-        {
-            GameObject.Destroy(gameObject);
-            GameDataCache.Instance.EnemyList.Remove(this);
-        }
-
         public void OnBulletTrigger(BulletCtr ctr)
         {
             //不生成敌人模拟对象，不需要判断ghost
             Die();
+        }
+
+        private void Die()
+        {
+            if (_isInvalid)
+                return;
+            _isInvalid = true;
+            this.enabled = false;
+            transform.DOKill();
+            GetComponent<Collider2D>().enabled = false;
+            var state = _animancer.Play(_clipDic["DieClip"]);
+            GameDataCache.Instance.EnemyList.Remove(this);
+            state.Events.OnEnd += () => GameObject.Destroy(gameObject);
+            AudioManager.Instance.PlayAudioOnce(GamePath.EnemyDieVFX);
         }
     }
 }

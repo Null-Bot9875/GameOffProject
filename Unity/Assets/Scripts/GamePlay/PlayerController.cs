@@ -125,6 +125,9 @@ namespace Game
                         _isHaveBullet = false;
                         var effectGo = Instantiate(_fireEffect);
                         effectGo.transform.position = muzzle.transform.position;
+                        GameDataCache.Instance.ShootCount += 1;
+                        TypeEventSystem.Global.Send(new GameShootBulletRequestEvt());
+                        AudioManager.Instance.PlayAudioOnce(GamePath.ForwardShootVFX);
                     }
                     else
                     {
@@ -133,6 +136,7 @@ namespace Game
                         _isBulletOnWall = false;
                         _rb.velocity = Vector2.zero;
                         TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
+                        AudioManager.Instance.PlayAudioOnce(GamePath.RecycleShootVFX);
                     }
                 }
             }
@@ -141,13 +145,13 @@ namespace Game
         private bool IsCanShoot()
         {
             var isCanShoot = true;
-            var isWall = gunGo.GetComponent<GunTowardCtr>().IsInWall();
-            //子弹不在墙里可以射击
-            isCanShoot &= !isWall;
             //不能移动的时候不能射击
             isCanShoot &= IsMove;
             if (_isForwardShoot)
             {
+                var isWall = gunGo.GetComponent<GunTowardCtr>().IsInWall();
+                //子弹不在墙里可以射击
+                isCanShoot &= !isWall;
                 //回收的时候无视CD限制
                 var isShootCd = _countCd == 0;
                 isCanShoot &= _isHaveBullet;
