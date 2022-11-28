@@ -22,7 +22,7 @@ namespace Game
 
             _respawnBtn.onClick.AddListener(() =>
             {
-                GameObject.Destroy(gameObject);
+               
                 GameSceneManager.Instance.ReloadScene();
             });
 
