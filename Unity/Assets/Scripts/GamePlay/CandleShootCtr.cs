@@ -22,11 +22,15 @@ namespace Game
             if (ctr.IsGhost)
                 return;
 
-            _isInvalid = false;
-            _candleLight.SetActive(true);
+            OnSetLightTrue();
         }
 
         public void OnExplosion()
+        {
+            OnSetLightTrue();
+        }
+
+        private void OnSetLightTrue()
         {
             _isInvalid = false;
             _candleLight.SetActive(true);
