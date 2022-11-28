@@ -20,6 +20,9 @@ namespace Game
 
         void Update()
         {
+            if (animancer.IsPlayingClip(dieClip))
+                return;
+
             var dir = DirectionalAnimationSet8.SnapVectorToDirection(_player.GetDirection_MouseToPlayer());
             if (!_player.IsMove)
             {
@@ -41,7 +44,11 @@ namespace Game
 
         public void Die(Action action)
         {
-            animancer.Play(dieClip).Events.OnEnd += action;
+            transform.Find("Gun").gameObject.SetActive(false);
+            if (!animancer.IsPlayingClip(dieClip))
+            {
+                animancer.Play(dieClip).Events.OnEnd += action;
+            }
         }
     }
 }

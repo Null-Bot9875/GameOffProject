@@ -13,9 +13,8 @@ namespace Game
         [SerializeField] private Image _cgImg;
         [SerializeField] private CanvasGroup _uiGroup;
 
-        public DieReason DieReason { get; set; }
 
-        private void Awake()
+        public void Init(DieReason evtDieReason)
         {
             GameDataCache.Instance.IsOver = true;
             foreach (var enemy in GameDataCache.Instance.EnemyList)
@@ -25,7 +24,7 @@ namespace Game
 
             _respawnBtn.onClick.AddListener(() => GameSceneManager.Instance.ReloadScene());
             _cgImg.DOFade(1, 1f).OnComplete(() => _uiGroup.DOFade(1, .2f));
-            if (DieReason != DieReason.Enemy)
+            if (evtDieReason != DieReason.Enemy)
             {
                 _cgImg.color = Color.black;
             }

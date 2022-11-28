@@ -32,8 +32,8 @@ namespace Game
             if (GameDataCache.Instance.IsOver)
                 return;
 
-            _diePanel.GetComponent<GameUIDiePanel>().DieReason = evt.DieReason;
-            GameObject.Instantiate(_diePanel, GameDataCache.Instance.Canvas.transform);
+            var go = GameObject.Instantiate(_diePanel, GameDataCache.Instance.Canvas.transform);
+            go.GetComponent<GameUIDiePanel>().Init(evt.DieReason);
         }
 
         private void OnGameFinishEvt(GameFinishEvt evt)
