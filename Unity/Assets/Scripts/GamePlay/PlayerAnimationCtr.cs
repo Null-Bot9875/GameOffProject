@@ -1,3 +1,4 @@
+using System;
 using Animancer;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Game
         [SerializeField] private AnimancerComponent animancer;
         [SerializeField] private DirectionalAnimationSet8 moveSet;
         [SerializeField] private DirectionalAnimationSet8 idleSet;
+        [SerializeField] private AnimationClip dieClip;
 
         private PlayerController _player;
 
@@ -35,6 +37,11 @@ namespace Game
             var x = Input.GetAxis("Horizontal");
             var y = Input.GetAxis("Vertical");
             return new Vector2(x * player.moveSpeed, y * player.moveSpeed);
+        }
+
+        public void Die(Action action)
+        {
+            animancer.Play(dieClip).Events.OnEnd += action;
         }
     }
 }

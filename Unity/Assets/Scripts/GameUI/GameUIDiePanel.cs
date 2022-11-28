@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Game.GameEvent;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ namespace Game
         [SerializeField] private Image _cgImg;
         [SerializeField] private CanvasGroup _uiGroup;
 
+        public DieReason DieReason { get; set; }
+
         private void Awake()
         {
             GameDataCache.Instance.IsOver = true;
@@ -20,13 +23,12 @@ namespace Game
                 enemy.enabled = false;
             }
 
-            _respawnBtn.onClick.AddListener(() =>
+            _respawnBtn.onClick.AddListener(() => GameSceneManager.Instance.ReloadScene());
+            _cgImg.DOFade(1, 1f).OnComplete(() => _uiGroup.DOFade(1, .2f));
+            if (DieReason != DieReason.Enemy)
             {
-               
-                GameSceneManager.Instance.ReloadScene();
-            });
-
-            _cgImg.DOFade(1, 1f).OnComplete(() => { _uiGroup.DOFade(1, .2f); });
+                _cgImg.color = Color.black;
+            }
         }
 
         private void OnDestroy()

@@ -175,7 +175,7 @@ namespace Game
                 _animancer.Play(_clipDic["ForwardClip"]);
                 transform.DOMove(_player.transform.position, .5f).OnComplete(() =>
                 {
-                    TypeEventSystem.Global.Send(new GameOverEvt());
+                    TypeEventSystem.Global.Send(new GameOverEvt(DieReason.Enemy));
                 });
                 AudioManager.Instance.PlayAudioOnce(GamePath.EnemyAttackVFX);
             }

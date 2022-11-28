@@ -32,6 +32,7 @@ namespace Game
             if (GameDataCache.Instance.IsOver)
                 return;
 
+            _diePanel.GetComponent<GameUIDiePanel>().DieReason = evt.DieReason;
             GameObject.Instantiate(_diePanel, GameDataCache.Instance.Canvas.transform);
         }
 

@@ -311,6 +311,7 @@ MonoBehaviour:
   animancer: {fileID: 3869642463190991459}
   moveSet: {fileID: 11400000, guid: cbef26d727f2b1e44a8f52eb06b36a1c, type: 2}
   idleSet: {fileID: 11400000, guid: 273f14e4b06e4a247b1b231f7ea4c65d, type: 2}
+  dieClip: {fileID: 7400000, guid: 18fe9a744f3e83b46b3cefa92379c198, type: 2}
 --- !u!114 &209750661302366428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +376,7 @@ MonoBehaviour:
   - {x: -0.012794961, y: -0.08764057, z: 0}
   m_ShapePathHash: 1874598716
   m_Mesh: {fileID: 0}
-  m_InstanceId: -21218
+  m_InstanceId: 33712
 --- !u!1 &5206519181117189686
 GameObject:
   m_ObjectHideFlags: 0

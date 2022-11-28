@@ -1,4 +1,5 @@
 using System;
+using Animancer;
 using Game.GameEvent;
 using UnityEngine;
 
@@ -6,8 +7,8 @@ namespace Game
 {
     public class DoorCtr : MonoBehaviour
     {
-        [SerializeField] private GameObject _doorOpen;
-        [SerializeField] private GameObject _doorClose;
+        [SerializeField] private AnimationClip _doorOpen;
+        [SerializeField] private AnimancerComponent _animancerComponent;
         private bool isOpen;
 
         private void Awake()
@@ -25,8 +26,7 @@ namespace Game
             if (GameDataCache.Instance.EnemyList.Count == 0)
             {
                 isOpen = true;
-                _doorClose.SetActive(false);
-                _doorOpen.SetActive(true);
+                _animancerComponent.Play(_doorOpen);
             }
         }
 

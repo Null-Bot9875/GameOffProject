@@ -196,7 +196,7 @@ namespace Game
 
         public void OnExplosion()
         {
-            Die();
+            Die(DieReason.Explosion);
         }
 
         public void OnBulletTrigger(BulletCtr ctr)
@@ -214,14 +214,18 @@ namespace Game
             }
             else
             {
-                Die();
+                Die(DieReason.Bullet);
             }
         }
 
-        void Die()
+        void Die(DieReason reason)
         {
-            GameObject.Destroy(gameObject);
-            TypeEventSystem.Global.Send<GameOverEvt>();
+            IsMove = false;
+            GetComponent<PlayerAnimationCtr>().Die(() =>
+            {
+                GameObject.Destroy(gameObject);
+                TypeEventSystem.Global.Send(new GameOverEvt(reason));
+            });
         }
 
         private Vector2 GetBulletDir()
