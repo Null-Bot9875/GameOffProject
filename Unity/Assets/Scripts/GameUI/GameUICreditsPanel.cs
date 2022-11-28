@@ -1,9 +1,7 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Button = UnityEngine.UI.Button;
 
 namespace Game
 {
@@ -15,12 +13,24 @@ namespace Game
 
         private float _targetY;
 
+        public bool isLast;
+
         private void Awake()
         {
             var grid = _content.GetComponent<GridLayoutGroup>().cellSize.y;
             _targetY = (_content.childCount + 1) * grid;
+            _closeBtn.onClick.AddListener(() =>
+            {
+                if (!isLast)
+                {
+                    GameObject.Destroy(gameObject);
+                }
+                else
+                {
+                    SceneManager.LoadScene("Main");
+                }
+            });
             MoveToTop();
-            _closeBtn.onClick.AddListener(() => GameObject.Destroy(gameObject));
         }
 
         void MoveToTop()

@@ -34,8 +34,13 @@ namespace Game
         {
             if (col.CompareTag("Player") && isOpen)
             {
-                TypeEventSystem.Global.Send(new GameFinishEvt());
+                OnTriggerAction();
             }
+        }
+
+        protected virtual void OnTriggerAction()
+        {
+            TypeEventSystem.Global.Send(new GameFinishEvt());
         }
     }
 }
