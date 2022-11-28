@@ -16,8 +16,7 @@ namespace Game
 
             if (是否是固定外墙)
             {
-                var collider = gameObject.AddComponent<BoxCollider2D>();
-                collider.size = new Vector2(1.2f, 1.2f);
+                gameObject.AddComponent<BoxCollider2D>();
                 gameObject.AddComponent<WallCtr>();
                 gameObject.layer = LayerMask.NameToLayer("Wall");
                 gameObject.isStatic = true;
