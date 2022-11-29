@@ -53,7 +53,7 @@ namespace Game
         public void OnBulletTrigger(BulletCtr ctr)
         {
             var go = ctr.gameObject;
-            var targetPos = transform.position + new Vector3(col.offset.x, col.offset.y, 0);
+            var targetPos = transform.Find("Target").position;
             if (ctr.IsGhost)
             {
                 go.transform.position = targetPos;
