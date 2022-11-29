@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Game.GameEvent;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Game
@@ -20,6 +22,7 @@ namespace Game
         [SerializeField] private float noteDuartion;
         private int startListIndex = 0;
         private int ShootListIndex = 0;
+        private int activeTimes;
         private NoteListName nowAcitveList;
 
         private Text UIText;
@@ -33,14 +36,24 @@ namespace Game
             UIText = imageGo.transform.Find("Text").GetComponent<Text>();
             imageGo.SetActive(false);
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
-            
         }
-        
-        
+
+        private void Start()
+        {
+            ShowNote(NoteListName.Start);
+            TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(ShowNote).UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
+
+        private void ShowNote(GameBulletShotOnPlaceEvt gameBulletShotOnPlaceEvt)
+        {
+            ShowNote(NoteListName.Shoot);
+        }
 
         public void ShowNote(NoteListName name)
         {
+            UIText.text = "";
             imageGo.SetActive(true);
+            
             GameDataCache.Instance.Player.IsMove = false;
             var list = name == NoteListName.Start ? textListStart : textListShoot;
             var index = name == NoteListName.Start ? startListIndex : ShootListIndex;
@@ -70,7 +83,6 @@ namespace Game
             {
                 return;
             }
-
             if (Input.anyKeyDown)
             {
                 _canGetPlayerInput = false;
@@ -79,16 +91,15 @@ namespace Game
                     _canContinueGame = false;
                     GameDataCache.Instance.Player.IsMove = true;
                     imageGo.SetActive(false);
+                    activeTimes++;
+                    if (activeTimes >= 2)
+                    {
+                        Destroy(gameObject);
+                    }
                     return;
                 }
                 ShowNote(nowAcitveList);
             }
-
-            if (startListIndex  == textListStart.Count -1 && ShootListIndex == textListShoot.Count-1)
-            {
-                Destroy(gameObject);
-            }
-            
         }
 
         
