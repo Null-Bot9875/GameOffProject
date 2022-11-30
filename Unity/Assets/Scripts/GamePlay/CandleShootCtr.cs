@@ -14,7 +14,7 @@ namespace Game
 
         private void OnDestroy()
         {
-            AudioManager.Instance.StopAudioLoop(GamePath.CandleLoopVFX);
+            AudioManager.Instance.StopAudioLoop(GamePath.CandleLoopSFX);
         }
 
         public void OnBulletTrigger(BulletCtr ctr)
@@ -35,8 +35,8 @@ namespace Game
             _isInvalid = false;
             _candleLight.SetActive(true);
             transform.Find("Fire").gameObject.SetActive(true);
-            AudioManager.Instance.PlayAudioOnce(GamePath.CandleVFX);
-            AudioManager.Instance.PlayAudioLoop(GamePath.CandleLoopVFX);
+            AudioManager.Instance.PlayAudioOnce(GamePath.CandleSFX);
+            AudioManager.Instance.PlayAudioLoop(GamePath.CandleLoopSFX);
         }
     }
 }

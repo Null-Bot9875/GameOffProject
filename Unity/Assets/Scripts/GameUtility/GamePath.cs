@@ -24,17 +24,24 @@
         public static string EnemyClip = AnimationPath + "Enemy";
 
         //Audio
-        public static string CandleVFX = AudioPath + "CandleVFX";
-        public static string CandleLoopVFX = AudioPath + "CandleLoopVFX";
-        public static string HoverLoopVFX = AudioPath + "HoverLoopVFX";
-        public static string BarrelVFX = AudioPath + "BarrelVFX";
-        public static string ReboundVFX = AudioPath + "ReboundVFX";
-        public static string ForwardShootVFX = AudioPath + "ForwardShootVFX";
-        public static string RecycleShootVFX = AudioPath + "RecycleShootVFX";
-        public static string WallVFX = AudioPath + "WallVFX";
-        public static string BulletVFX = AudioPath + "BulletVFX";
-        public static string TrainLoopVFX = AudioPath + "TrainLoopVFX";
-        public static string EnemyAttackVFX = AudioPath + "EnemyAttackVFX";
-        public static string EnemyDieVFX = AudioPath + "EnemyDieVFX";
+        public static string CandleSFX = AudioPath + "CandleSFX";
+        public static string CandleLoopSFX = AudioPath + "CandleLoopSFX";
+        public static string HoverLoopSFX = AudioPath + "HoverLoopSFX";
+        public static string BarrelSFX = AudioPath + "BarrelSFX";
+        public static string ReboundSFX = AudioPath + "ReboundSFX";
+        public static string ForwardShootSFX = AudioPath + "ForwardShootSFX";
+        public static string RecycleShootSFX = AudioPath + "RecycleShootSFX";
+        public static string WallSFX = AudioPath + "WallSFX";
+        public static string BulletSFX = AudioPath + "BulletSFX";
+        public static string TrainLoopSFX = AudioPath + "TrainLoopSFX";
+        public static string EnemyAttackSFX = AudioPath + "EnemyAttackSFX";
+        public static string EnemyDieSFX = AudioPath + "EnemyDieSFX";
+
+        public static string BulletHitSFX = AudioPath + "BulletHitSFX";
+        public static string UIClickSFX = AudioPath + "UIClickSFX";
+        public static string UIGameStartClickSFX = AudioPath + "UIGameStartClickSFX";
+        public static string GameDieByEnemySFX = AudioPath + "GameDieByEnemySFX";
+        public static string GameDieByOtherSFX = AudioPath + "GameDieByOtherSFX";
+        public static string GamePassSFX = AudioPath + "GamePassSFX";
     }
 }

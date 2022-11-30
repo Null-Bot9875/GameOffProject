@@ -37,7 +37,7 @@ namespace Game
 
             isInHover = false;
             Destroy(instanceHoverGo);
-            AudioManager.Instance.StopAudioLoop(GamePath.HoverLoopVFX);
+            AudioManager.Instance.StopAudioLoop(GamePath.HoverLoopSFX);
         }
 
         void SetColliderFromWall(GameBulletShotOnPlaceEvt gameBulletShotOnPlaceEvt)
@@ -76,7 +76,7 @@ namespace Game
                 });
                 col.enabled = false;
                 instanceHoverGo = Instantiate(BulletOnHoverObj, targetPos, Quaternion.identity);
-                AudioManager.Instance.PlayAudioLoop(GamePath.HoverLoopVFX);
+                AudioManager.Instance.PlayAudioLoop(GamePath.HoverLoopSFX);
             }
         }
     }

@@ -17,12 +17,12 @@ namespace Game
             GameDataCache.Instance.ShootCount = 0;
 
             Instantiate(Resources.Load<GameObject>(GamePath.FadePanelOutPfb),GameDataCache.Instance.Canvas.transform);
-            AudioManager.Instance.PlayAudioLoop(GamePath.TrainLoopVFX);
+            AudioManager.Instance.PlayAudioLoop(GamePath.TrainLoopSFX);
         }
 
         private void OnDestroy()
         {
-            AudioManager.Instance.StopAudioLoop(GamePath.TrainLoopVFX);
+            AudioManager.Instance.StopAudioLoop(GamePath.TrainLoopSFX);
         }
     }
 }

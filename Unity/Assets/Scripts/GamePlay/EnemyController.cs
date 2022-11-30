@@ -177,7 +177,7 @@ namespace Game
                 {
                     TypeEventSystem.Global.Send(new GameOverEvt(DieReason.Enemy));
                 });
-                AudioManager.Instance.PlayAudioOnce(GamePath.EnemyAttackVFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.EnemyAttackSFX);
             }
         }
 
@@ -190,6 +190,7 @@ namespace Game
         public void OnBulletTrigger(BulletCtr ctr)
         {
             //不生成敌人模拟对象，不需要判断ghost
+            AudioManager.Instance.PlayAudioOnce(GamePath.BulletHitSFX);
             Die();
         }
 
@@ -204,7 +205,7 @@ namespace Game
             var state = _animancer.Play(_clipDic["DieClip"]);
             GameDataCache.Instance.EnemyList.Remove(this);
             state.Events.OnEnd += () => GameObject.Destroy(gameObject);
-            AudioManager.Instance.PlayAudioOnce(GamePath.EnemyDieVFX);
+            AudioManager.Instance.PlayAudioOnce(GamePath.EnemyDieSFX);
         }
     }
 }

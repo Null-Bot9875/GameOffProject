@@ -27,6 +27,11 @@ namespace Game
             if (evtDieReason != DieReason.Enemy)
             {
                 _cgImg.color = Color.black;
+                AudioManager.Instance.PlayAudioOnce(GamePath.GameDieByOtherSFX);
+            }
+            else
+            {
+                AudioManager.Instance.PlayAudioOnce(GamePath.GameDieByEnemySFX);
             }
         }
 
