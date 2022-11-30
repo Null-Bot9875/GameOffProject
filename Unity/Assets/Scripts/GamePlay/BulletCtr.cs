@@ -16,15 +16,17 @@ namespace Game
 
         #endregion
 
-        private void Awake()
+        public void Init()
         {
             rb = GetComponent<Rigidbody2D>();
-            AudioManager.Instance.PlayAudioLoop(GamePath.BulletVFX);
+            if (!IsGhost)
+                AudioManager.Instance.PlayAudioLoop(GamePath.BulletVFX);
         }
 
         private void OnDestroy()
         {
-            AudioManager.Instance.StopAudioLoop(GamePath.BulletVFX);
+            if (!IsGhost)
+                AudioManager.Instance.StopAudioLoop(GamePath.BulletVFX);
         }
 
         public void SetFire(Vector2 direction)
@@ -45,7 +47,7 @@ namespace Game
             {
                 DestroyGo();
             }
-            
+
             if (go.TryGetComponent(out IBulletTrigger trigger))
             {
                 trigger.OnBulletTrigger(this);

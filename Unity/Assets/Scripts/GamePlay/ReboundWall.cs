@@ -2,17 +2,14 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ReboundWall : MonoBehaviour
+    public class ReboundWall : MonoBehaviour , IBulletTrigger
     {
-        private void OnCollisionEnter(Collision collision)
+        public void OnBulletTrigger(BulletCtr ctr)
         {
-            if (collision.gameObject.CompareTag("Bullet"))
+            var bullet = ctr.gameObject.GetComponent<BulletCtr>();
+            if (!bullet.IsGhost)
             {
-                var bullet = collision.gameObject.GetComponent<BulletCtr>();
-                if (!bullet.IsGhost)
-                {
-                    AudioManager.Instance.PlayAudioOnce(GamePath.ReboundVFX);
-                }
+                AudioManager.Instance.PlayAudioOnce(GamePath.ReboundVFX);
             }
         }
     }
