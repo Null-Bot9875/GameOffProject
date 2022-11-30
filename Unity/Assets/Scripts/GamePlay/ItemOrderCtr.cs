@@ -5,15 +5,17 @@ namespace Game
 {
     public class ItemOrderCtr : MonoBehaviour
     {
-        private List<SpriteRenderer> _spriteList;
+        [SerializeField] private List<SpriteRenderer> _spriteList;
 
+        [SerializeField] private int _fontOrderLayer = -11;
+        [SerializeField] private int _backOrderLayer = 11;
         private Vector3 _playerPosCache;
 
         private void Awake()
         {
             InvokeRepeating(nameof(SetSortingLayer), 0, .1f);
         }
-        
+
         private void SetSortingLayer()
         {
             //位置改变时刷新
@@ -24,7 +26,7 @@ namespace Game
             {
                 _playerPosCache = GameDataCache.Instance.Player.transform.position;
                 var isFont = _playerPosCache.y < transform.position.y;
-                item.sortingOrder = isFont ? SortingLayer.NameToID("FontGround") : SortingLayer.NameToID("Default");
+                item.sortingOrder = isFont ? _fontOrderLayer : _backOrderLayer;
             }
         }
     }
