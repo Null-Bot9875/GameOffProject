@@ -100,6 +100,7 @@ MonoBehaviour:
   - Don't forget that you only have one bullet, and you need to retrieve it to shoot
     it again
   - Now hold down the right button, aim at the bullet stop and left click to recover!
+  textListBack:
   - The door to the next level will be opened after you have destroyed the vampires
     and recovered the bullets!
   noteDuartion: 2

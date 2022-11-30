@@ -75,7 +75,7 @@ namespace Game
                     bulletPos = go.transform.position
                 });
                 col.enabled = false;
-                instanceHoverGo = Instantiate(BulletOnHoverObj, targetPos, go.transform.rotation);
+                instanceHoverGo = Instantiate(BulletOnHoverObj, targetPos, Quaternion.identity);
                 AudioManager.Instance.PlayAudioLoop(GamePath.HoverLoopVFX);
             }
         }

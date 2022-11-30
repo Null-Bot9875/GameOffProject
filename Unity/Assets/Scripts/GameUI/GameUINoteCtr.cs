@@ -12,18 +12,20 @@ namespace Game
     public enum NoteListName
     {
         Start,
-        Shoot
+        Shoot,
+        Back
     }
 
     public class GameUINoteCtr : MonoBehaviour
     {
         [SerializeField, TextArea] private List<string> textListStart;
         [SerializeField, TextArea] private List<string> textListShoot;
+        [SerializeField, TextArea] private List<string> textListBack;
         [SerializeField] private float noteDuartion;
-        private int startListIndex = 0;
-        private int ShootListIndex = 0;
+        private int ListIndex = 0;
         private int activeTimes;
-        private NoteListName nowAcitveList;
+        private List<string> nowActiveTempList;
+        private NoteListName nowAcitveListEnum;
 
         private Text UIText;
         private GameObject imageGo;
@@ -41,7 +43,14 @@ namespace Game
         private void Start()
         {
             ShowNote(NoteListName.Start);
-            TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(ShowNote).UnRegisterWhenGameObjectDestroyed(gameObject);
+            TypeEventSystem.Global.Register<GameBulletShotOnPlaceEvt>(ShowNote)
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
+            TypeEventSystem.Global.Register<GameRecycleBulletTriggerEvt>(ShowNote)
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
+        private void ShowNote(GameRecycleBulletTriggerEvt gameRecycleBulletTriggerEvt)
+        {
+            ShowNote(NoteListName.Back);
         }
 
         private void ShowNote(GameBulletShotOnPlaceEvt gameBulletShotOnPlaceEvt)
@@ -53,27 +62,29 @@ namespace Game
         {
             UIText.text = "";
             imageGo.SetActive(true);
-            
             GameDataCache.Instance.Player.IsMove = false;
-            var list = name == NoteListName.Start ? textListStart : textListShoot;
-            var index = name == NoteListName.Start ? startListIndex : ShootListIndex;
-
-            UIText.DOText(list[index], noteDuartion).OnComplete(() =>
+            switch (name)
             {
-                nowAcitveList = name;
+                case  NoteListName.Start :
+                    nowActiveTempList = textListStart;
+                    break;
+                case  NoteListName.Back :
+                    nowActiveTempList = textListBack;
+                    break;
+                case  NoteListName.Shoot :
+                    nowActiveTempList = textListShoot;
+                    break;
+            }
+
+            UIText.DOText(nowActiveTempList[ListIndex], noteDuartion).OnComplete(() =>
+            {
+                nowAcitveListEnum = name;
                 _canGetPlayerInput = true;
-                if (index == list.Count - 1)
+                if (ListIndex == nowActiveTempList.Count - 1)
                 {
                     _canContinueGame = true;
                 }
-                if (name == NoteListName.Start)
-                {
-                    startListIndex++;
-                }
-                else
-                {
-                    ShootListIndex++;
-                }
+                ListIndex++;
             });
         }
 
@@ -88,17 +99,18 @@ namespace Game
                 _canGetPlayerInput = false;
                 if (_canContinueGame)
                 {
+                    ListIndex = 0;
                     _canContinueGame = false;
                     GameDataCache.Instance.Player.IsMove = true;
                     imageGo.SetActive(false);
                     activeTimes++;
-                    if (activeTimes >= 2)
+                    if (activeTimes >= 3)
                     {
                         Destroy(gameObject);
                     }
                     return;
                 }
-                ShowNote(nowAcitveList);
+                ShowNote(nowAcitveListEnum);
             }
         }
 
