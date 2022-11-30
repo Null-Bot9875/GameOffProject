@@ -90,19 +90,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textListStart:
-  - WASD controls the movement of the character. Hold down the right button to aim
-    and then click the left button to shoot the bullet!
-  - 'Note : With the exception of the first shot, every subsequent shot from the
-    muzzle will reduce your rating by one star, and will kill you if found by a vampire. '
-  - Hope you find the most effective way to understand the meaning of the silver
-    bullet!
+  - "   <color=red>WASD</color> controls the movement of the character.\n   Hold
+    down the right button to aim and then click the left button to shoot the bullet!"
+  - '   <size=70>Note :With the exception of the first shot, every subsequent shot
+    from the muzzle will reduce your rating by one star, and will kill you if found
+    by a vampire. </size>'
+  - '      Hope you find the most effective way to understand the meaning of the
+    silver bullet!'
   textListShoot:
-  - Don't forget that you only have one bullet, and you need to retrieve it to shoot
-    it again
-  - Now hold down the right button, aim at the bullet stop and left click to recover!
+  - '   Don''t forget that you only have one bullet, and you need to retrieve it
+    to shoot it again'
+  - '   Now hold down the right button, aim at the bullet stop and left click to
+    recover!'
   textListBack:
-  - The door to the next level will be opened after you have destroyed the vampires
-    and recovered the bullets!
+  - '   The door to the next level will be opened after you have destroyed the vampires
+    and recovered the bullets!'
   noteDuartion: 1
 --- !u!1 &5893875378377508982
 GameObject:
@@ -214,8 +216,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15, y: 0}
-  m_SizeDelta: {x: -140.8463, y: -140.9584}
+  m_AnchoredPosition: {x: -15, y: -10}
+  m_SizeDelta: {x: -307.7103, y: -140.9584}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7602991996014488789
 CanvasRenderer:
@@ -246,12 +248,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 38
+    m_Font: {fileID: 12800000, guid: 6c6aef7c80010dd4699270a3c2fa86c7, type: 3}
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 70
+    m_MaxSize: 80
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
