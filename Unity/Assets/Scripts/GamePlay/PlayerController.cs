@@ -19,7 +19,7 @@ namespace Game
         private GameObject _fireEffect;
         private GameObject _recycleEffect;
 
-        private Tweener _shootTween;
+        // private Tweener _shootTween;
 
         public bool IsMove { get; set; } = true;
 
@@ -155,10 +155,10 @@ namespace Game
         private void ShootBackEffect()
         {
             _camera.DOShakePosition(0.2f, 0.2f,25,360f);
-            _shootTween = DOTween.To((value) =>
-            {
-                Time.timeScale = value;
-            }, 0.2f, 1, 1f).SetEase(Ease.InExpo);
+            // _shootTween = DOTween.To((value) =>
+            // {
+            //     Time.timeScale = value;
+            // }, 0.2f, 1, 1f).SetEase(Ease.InExpo);
         }
         
         
@@ -224,7 +224,7 @@ namespace Game
             ctr.DestroyGo();
             if (ctr.IsBack)
             {
-                _shootTween.Complete();
+                // _shootTween.Complete();
                 _isHaveBullet = true;
                 IsMove = true;
                 _isForwardShoot = true;
