@@ -23,6 +23,7 @@ namespace Game
         private void OnClickResumeBtn()
         {
             GameObject.Destroy(gameObject);
+            AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
         }
 
         private void OnDestroy()

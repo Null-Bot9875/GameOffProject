@@ -16,10 +16,12 @@ namespace Game
             
             _startBtn.onClick.AddListener(() =>
             {
+                AudioManager.Instance.PlayAudioOnce(GamePath.UIGameStartClickSFX);
                 StartCoroutine(GetComponent<GameUIMainToNextScene>().GoToNextScene());
             });
             _creditsBtn.onClick.AddListener(() =>
             {
+                AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
                 var pfb = Resources.Load<GameObject>(GamePath.UIPrefabPath + "GameUICreditsPanel");
                 GameObject.Instantiate(pfb, transform.parent);
             });

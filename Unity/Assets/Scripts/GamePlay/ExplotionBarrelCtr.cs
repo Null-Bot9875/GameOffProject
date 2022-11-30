@@ -45,7 +45,7 @@ namespace Game
             var clip = Instantiate(explosionClip, transform.position, transform.rotation);
             clip.GetComponent<Animator>().Play("Explosion3");
             GetRayCast();
-            AudioManager.Instance.PlayAudioSingle(GamePath.BarrelVFX);
+            AudioManager.Instance.PlayAudioSingle(GamePath.BarrelSFX);
         }
 
         private void GetRayCast()

@@ -132,7 +132,7 @@ namespace Game
                         effectGo.transform.position = muzzle.transform.position;
                         GameDataCache.Instance.ShootCount += 1;
                         TypeEventSystem.Global.Send(new GameShootBulletRequestEvt());
-                        AudioManager.Instance.PlayAudioOnce(GamePath.ForwardShootVFX);
+                        AudioManager.Instance.PlayAudioOnce(GamePath.ForwardShootSFX);
                     }
                     else
                     {
@@ -142,7 +142,7 @@ namespace Game
                         _isBulletOnWall = false;
                         _rb.velocity = Vector2.zero;
                         TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
-                        AudioManager.Instance.PlayAudioOnce(GamePath.RecycleShootVFX);
+                        AudioManager.Instance.PlayAudioOnce(GamePath.RecycleShootSFX);
                     }
                 }
             }
@@ -235,6 +235,7 @@ namespace Game
             }
             else
             {
+                AudioManager.Instance.PlayAudioOnce(GamePath.BulletHitSFX);
                 Die(DieReason.Bullet);
             }
         }
