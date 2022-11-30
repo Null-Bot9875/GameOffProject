@@ -91,7 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textListStart:
   - "   <color=red>WASD</color> controls the movement of the character.\n   Hold
-    down the right button to aim and then click the left button to shoot the bullet!"
+    down the <color=red>mouse right button</color> to aim and then click the <color=red>
+    mouse left button</color> to shoot the bullet!"
   - '   <size=70>Note :With the exception of the first shot, every subsequent shot
     from the muzzle will reduce your rating by one star, and will kill you if found
     by a vampire. </size>'
