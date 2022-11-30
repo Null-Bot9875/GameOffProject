@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8528109258421676010}
   - component: {fileID: 8528109258421676009}
   - component: {fileID: 8528109258421676008}
-  - component: {fileID: 9083734812421554745}
   m_Layer: 0
   m_Name: ExplotionBarrel
   m_TagString: Untagged
@@ -127,29 +126,3 @@ MonoBehaviour:
   explosionClip: {fileID: 2681024924927159287, guid: 26d4eec8fcf2de94c8c4d563e6d3cf12, type: 3}
   isInvalided: 0
   explosionDistance: 2
---- !u!114 &9083734812421554745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8528109258421675991}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: b536c1ffc33e3303000000004da1e75271497f2529598e71
-  m_ShapePath:
-  - {x: -0.07999992, y: -0.10499999, z: 0}
-  - {x: -0.07999992, y: 0.10499999, z: 0}
-  - {x: 0.08000004, y: 0.10499999, z: 0}
-  - {x: 0.08000004, y: -0.10499999, z: 0}
-  m_ShapePathHash: 0
-  m_Mesh: {fileID: 0}
-  m_InstanceId: 115834
