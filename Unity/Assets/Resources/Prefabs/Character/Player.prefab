@@ -67,7 +67,7 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2147483647
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
@@ -230,7 +230,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 5cc9a55b439e2794c93387121a6887b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2.5
-  offsetCoefficient: -0.1
+  offsetCoefficient: -0.15
   _shootCD: 0.5
   gunGo: {fileID: 5206519181117189686}
   muzzle: {fileID: 890547792662252357}
@@ -344,9 +344,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.042314485}
+  m_Offset: {x: 0.000000052981907, y: -0.04720324}
   serializedVersion: 2
-  m_Radius: 0.052685514
+  m_Radius: 0.047182675
 --- !u!114 &423596116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,17 +366,19 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: b536c1ffc33e3303000000004da1e75271497f2529598e71
   m_ShapePath:
-  - {x: -0.051973175, y: -0.05389395, z: 0}
+  - {x: -0.060523536, y: -0.060069244, z: 0}
   - {x: -0.07065788, y: 0.02586709, z: 0}
-  - {x: -0.027083477, y: 0.08762827, z: 0}
-  - {x: 0.026677689, y: 0.08894871, z: 0}
-  - {x: 0.06900896, y: 0.02161312, z: 0}
-  - {x: 0.0600749, y: -0.055876806, z: 0}
-  - {x: 0.020883799, y: -0.090073645, z: 0}
-  - {x: -0.012794961, y: -0.08764057, z: 0}
-  m_ShapePathHash: -1943640492
+  - {x: -0.050070845, y: 0.08450479, z: 0}
+  - {x: -0.038195267, y: 0.09733042, z: 0}
+  - {x: 0.0012084374, y: 0.11368412, z: 0}
+  - {x: 0.05678137, y: 0.08194519, z: 0}
+  - {x: 0.070240684, y: 0.023073412, z: 0}
+  - {x: 0.065300226, y: -0.06015203, z: 0}
+  - {x: 0.032497644, y: -0.08739963, z: 0}
+  - {x: -0.027045755, y: -0.08954066, z: 0}
+  m_ShapePathHash: 928131049
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1418656
+  m_InstanceId: -5530
 --- !u!1 &5206519181117189686
 GameObject:
   m_ObjectHideFlags: 0
