@@ -14,6 +14,10 @@ namespace Game
             Time.timeScale = 0;
             GameDataCache.Instance.Player.IsMove = false;
             _resumeBtn.onClick.AddListener(OnClickResumeBtn);
+            _sfxSlider.SetValueWithoutNotify(AudioManager.Instance.SFXVolume);
+            _musicSlider.SetValueWithoutNotify(AudioManager.Instance.MusicVolume);
+            _sfxSlider.onValueChanged.AddListener(AudioManager.Instance.SetSFXVolume);
+            _musicSlider.onValueChanged.AddListener(AudioManager.Instance.SetMusicVolume);
         }
 
         private void OnClickResumeBtn()

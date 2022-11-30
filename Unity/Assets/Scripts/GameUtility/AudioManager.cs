@@ -8,12 +8,17 @@ namespace Game
     {
         [SerializeField] private GameObject _tmpGameObject;
 
-        private Dictionary<string, AudioSource> _audioDic;
+        private Dictionary<string, AudioSource> _audioSFXDic;
+        private AudioSource _audioMusic;
+
+        public float SFXVolume { get; private set; } = 1;
+        public float MusicVolume { get; private set; } = 1;
 
         public void Init()
         {
-            _audioDic = new Dictionary<string, AudioSource>();
             _tmpGameObject = Resources.Load<GameObject>(GamePath.PrefabPath + "AudioSource");
+            _audioSFXDic = new Dictionary<string, AudioSource>();
+            _audioMusic = InitAudioGo(false);
         }
 
         //单次播放，多次播放该音效的时候后面调用的不生效
@@ -25,20 +30,20 @@ namespace Game
                 return;
 
             //正在播放
-            if (_audioDic.ContainsKey(path))
+            if (_audioSFXDic.ContainsKey(path))
             {
                 return;
             }
 
-            var audioSource = InitTempGo();
-            _audioDic.Add(path, audioSource);
+            var audioSource = InitAudioGo();
+            _audioSFXDic.Add(path, audioSource);
             audioSource.PlayOneShot(clip);
 
             var sequence = DOTween.Sequence();
             sequence.AppendInterval(clip.length);
             sequence.AppendCallback(() =>
             {
-                _audioDic.Remove(path);
+                _audioSFXDic.Remove(path);
                 GameObject.Destroy(audioSource.gameObject);
             });
         }
@@ -49,7 +54,7 @@ namespace Game
             var clip = Resources.Load<AudioClip>(path);
             if (clip == null)
                 return;
-            var audioSource = InitTempGo();
+            var audioSource = InitAudioGo();
             audioSource.PlayOneShot(clip);
             GameObject.Destroy(audioSource.gameObject, clip.length);
         }
@@ -62,14 +67,14 @@ namespace Game
                 return;
 
             AudioSource audioSource;
-            if (!_audioDic.ContainsKey(path))
+            if (!_audioSFXDic.ContainsKey(path))
             {
-                audioSource = InitTempGo();
-                _audioDic.Add(path, audioSource);
+                audioSource = InitAudioGo();
+                _audioSFXDic.Add(path, audioSource);
             }
             else
             {
-                audioSource = _audioDic[path];
+                audioSource = _audioSFXDic[path];
             }
 
             audioSource.clip = clip;
@@ -77,21 +82,50 @@ namespace Game
             audioSource.Play();
         }
 
+
         public void StopAudioLoop(string path)
         {
-            if (!_audioDic.ContainsKey(path))
+            if (!_audioSFXDic.ContainsKey(path))
                 return;
-            var audioSource = _audioDic[path];
+            var audioSource = _audioSFXDic[path];
             audioSource.Stop();
             GameObject.Destroy(audioSource.gameObject);
-            _audioDic.Remove(path);
+            _audioSFXDic.Remove(path);
         }
 
-        private AudioSource InitTempGo()
+        public void PlayMusicLoop(string path)
+        {
+            Debug.Log($"Play{path}");
+            var clip = Resources.Load<AudioClip>(path);
+            if (clip == null)
+                return;
+            _audioMusic.Stop();
+            _audioMusic.clip = clip;
+            _audioMusic.loop = true;
+            _audioMusic.Play();
+        }
+
+        public void SetMusicVolume(float volume)
+        {
+            MusicVolume = volume;
+            _audioMusic.volume = MusicVolume;
+        }
+
+        public void SetSFXVolume(float volume)
+        {
+            SFXVolume = volume;
+            foreach (var item in _audioSFXDic)
+            {
+                item.Value.volume = SFXVolume;
+            }
+        }
+
+        private AudioSource InitAudioGo(bool isSFX = true)
         {
             var go = GameObject.Instantiate(_tmpGameObject, transform);
             go.SetActive(true);
             var audio = go.GetComponent<AudioSource>();
+            audio.volume = isSFX ? SFXVolume : MusicVolume;
             return audio;
         }
     }
