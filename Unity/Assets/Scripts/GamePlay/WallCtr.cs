@@ -7,11 +7,13 @@ namespace Game
     {
         private GameObject bulletOnWallObj;
         private GameObject instanceOnWallObj;
+        private GameObject bulletShootWallObj;
         private bool isInWall;
 
         private void Start()
         {
             bulletOnWallObj = Resources.Load<GameObject>(GamePath.BulletOnwallPfb);
+            bulletShootWallObj = Resources.Load<GameObject>(GamePath.BulletShootPlacePfb);
             TypeEventSystem.Global.Register<GameRecycleBulletRequestEvt>(WallBulletShoot)
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
@@ -38,7 +40,8 @@ namespace Game
                 bulletPos = go.transform.position
             });
             isInWall = true;
-            instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position, go.transform.rotation);
+            Instantiate(bulletShootWallObj, go.transform.position, Quaternion.identity);
+            instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position, Quaternion.identity);
             ctr.DestroyGo();
             
             AudioManager.Instance.PlayAudioOnce(GamePath.WallVFX);
