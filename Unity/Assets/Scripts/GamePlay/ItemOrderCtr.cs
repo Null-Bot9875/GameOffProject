@@ -25,7 +25,7 @@ namespace Game
             foreach (var item in _spriteList)
             {
                 _playerPosCache = GameDataCache.Instance.Player.transform.position;
-                var isFont = _playerPosCache.y < transform.position.y;
+                var isFont = _playerPosCache.y < item.transform.position.y;
                 item.sortingOrder = isFont ? _fontOrderLayer : _backOrderLayer;
             }
         }
