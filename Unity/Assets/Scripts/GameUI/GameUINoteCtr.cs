@@ -8,6 +8,7 @@ namespace Game
 {
     public enum NoteListName
     {
+        None,
         Start,
         Shoot,
         Back
@@ -22,12 +23,14 @@ namespace Game
         private int ListIndex = 0;
         private int activeTimes;
         private List<string> nowActiveTempList;
-        private NoteListName nowAcitveListEnum;
+        private NoteListName nowAcitveListEnum = NoteListName.None;
 
         private Text UIText;
         private GameObject imageGo;
         private bool _canGetPlayerInput;
         private bool _canContinueGame;
+
+        private Tween _doTween;
 
         void Awake()
         {
@@ -35,6 +38,7 @@ namespace Game
             UIText = imageGo.transform.Find("Text").GetComponent<Text>();
             imageGo.SetActive(false);
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
+            
         }
 
         private void Start()
@@ -72,9 +76,10 @@ namespace Game
                 case  NoteListName.Shoot :
                     nowActiveTempList = textListShoot;
                     break;
+                case NoteListName.None : return;
             }
 
-            UIText.DOText(nowActiveTempList[ListIndex], noteDuartion).OnComplete(() =>
+            _doTween = UIText.DOText(nowActiveTempList[ListIndex], noteDuartion).OnComplete(() =>
             {
                 nowAcitveListEnum = name;
                 _canGetPlayerInput = true;
@@ -88,6 +93,22 @@ namespace Game
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape) && nowAcitveListEnum!= NoteListName.None)
+            {
+                _canGetPlayerInput = false;
+                _doTween.Kill(false);
+                ListIndex = 0;
+                _canContinueGame = false;
+                GameDataCache.Instance.Player.IsMove = true;
+                imageGo.SetActive(false);
+                activeTimes++;
+                if (activeTimes >= 3)
+                {
+                    Destroy(gameObject);
+                }
+                nowAcitveListEnum = NoteListName.None;
+                return;
+            }
             if (!_canGetPlayerInput)
             {
                 return;
@@ -106,6 +127,7 @@ namespace Game
                     {
                         Destroy(gameObject);
                     }
+                    nowAcitveListEnum = NoteListName.None;
                     return;
                 }
                 ShowNote(nowAcitveListEnum);

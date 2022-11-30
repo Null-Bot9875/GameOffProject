@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Game.GameEvent;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ namespace Game
 
         private GameObject _fireEffect;
         private GameObject _recycleEffect;
+
+        private Tweener _shootTween;
 
         public bool IsMove { get; set; } = true;
 
@@ -121,6 +124,7 @@ namespace Game
                     go.GetComponent<BulletCtr>().SetFire(GetBulletDir());
                     if (_isForwardShoot)
                     {
+                        ShootForwardEffect();
                         _isForwardShoot = false;
                         _isHaveBullet = false;
                         var effectGo = Instantiate(_fireEffect);
@@ -131,6 +135,7 @@ namespace Game
                     }
                     else
                     {
+                        ShootBackEffect();
                         IsMove = false;
                         _isAimSelf = false;
                         _isBulletOnWall = false;
@@ -142,6 +147,20 @@ namespace Game
             }
         }
 
+        private void ShootForwardEffect()
+        {
+            _camera.DOShakePosition(0.2f, 0.2f,25,360f);
+        }
+        private void ShootBackEffect()
+        {
+            _camera.DOShakePosition(0.2f, 0.2f,25,360f);
+            _shootTween = DOTween.To((value) =>
+            {
+                Time.timeScale = value;
+            }, 0.2f, 1, 1f).SetEase(Ease.InExpo);
+        }
+        
+        
         private bool IsCanShoot()
         {
             var isCanShoot = true;
@@ -204,6 +223,7 @@ namespace Game
             ctr.DestroyGo();
             if (ctr.IsBack)
             {
+                _shootTween.Complete();
                 _isHaveBullet = true;
                 IsMove = true;
                 _isForwardShoot = true;
