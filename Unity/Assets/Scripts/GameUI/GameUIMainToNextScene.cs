@@ -9,15 +9,13 @@ namespace Game
         [SerializeField] private GameObject FadeGo;
         public IEnumerator GoToNextScene()
         {
+            var pfb = Instantiate(FadeGo,transform);
             var async = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
             async.allowSceneActivation = false;
-            var pfb = Instantiate(FadeGo,transform);
-
             while (!pfb.GetComponent<GameUIFadePanel>().animcerDone)
             {
                 yield return null;
             }
-
             async.allowSceneActivation = true;
         }
     }

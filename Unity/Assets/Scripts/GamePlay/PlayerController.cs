@@ -154,11 +154,11 @@ namespace Game
         }
         private void ShootBackEffect()
         {
-            _camera.DOShakePosition(0.2f, 0.2f,25,360f);
-            // _shootTween = DOTween.To((value) =>
-            // {
-            //     Time.timeScale = value;
-            // }, 0.2f, 1, 1f).SetEase(Ease.InExpo);
+            _camera.DOShakePosition(0.2f, 0.1f,15,360f);
+        }
+        private void ShootRecycleEffect()
+        {
+            _camera.DOShakePosition(0.2f, 0.1f,15,360f);
         }
         
         
@@ -224,7 +224,7 @@ namespace Game
             ctr.DestroyGo();
             if (ctr.IsBack)
             {
-                // _shootTween.Complete();
+                ShootRecycleEffect();
                 _isHaveBullet = true;
                 IsMove = true;
                 _isForwardShoot = true;
