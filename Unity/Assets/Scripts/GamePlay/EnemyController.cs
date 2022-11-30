@@ -206,6 +206,7 @@ namespace Game
             GameDataCache.Instance.EnemyList.Remove(this);
             state.Events.OnEnd += () => GameObject.Destroy(gameObject);
             AudioManager.Instance.PlayAudioOnce(GamePath.EnemyDieSFX);
+            Camera.main.DOShakePosition(0.1f, 0.12f, 7, 90f);
         }
     }
 }
