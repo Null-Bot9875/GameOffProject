@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Game.GameEvent;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Game
@@ -63,6 +60,7 @@ namespace Game
             UIText.text = "";
             imageGo.SetActive(true);
             GameDataCache.Instance.Player.IsMove = false;
+            GameDataCache.Instance.Player.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             switch (name)
             {
                 case  NoteListName.Start :

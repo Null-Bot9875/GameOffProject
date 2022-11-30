@@ -103,7 +103,7 @@ MonoBehaviour:
   textListBack:
   - The door to the next level will be opened after you have destroyed the vampires
     and recovered the bullets!
-  noteDuartion: 2
+  noteDuartion: 1
 --- !u!1 &5893875378377508982
 GameObject:
   m_ObjectHideFlags: 0
