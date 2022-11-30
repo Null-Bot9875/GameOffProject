@@ -118,6 +118,7 @@ namespace Game
                 {
                     _projection.Disable();
                     var go = InstantiateBullet();
+                    go.GetComponent<BulletCtr>().Init();
                     go.GetComponent<BulletCtr>().SetFire(GetBulletDir());
                     if (_isForwardShoot)
                     {
@@ -171,6 +172,7 @@ namespace Game
             var go = InstantiateBullet();
             var bulletCtr = go.GetComponent<BulletCtr>();
             bulletCtr.IsGhost = true;
+            bulletCtr.Init();
             _projection.SimulateLinePosition(bulletCtr, GetBulletDir());
             Destroy(go);
         }
@@ -190,7 +192,6 @@ namespace Game
                 go.transform.rotation = Quaternion.identity;
                 bulletCtr.IsBack = true;
             }
-
             return go;
         }
 

@@ -7,28 +7,43 @@ namespace Game
     {
         [SerializeField] private GameObject _tmpGameObject;
 
-        private Dictionary<string, GameObject> _audioDic;
+        private Dictionary<string, AudioSource> _audioDic;
 
         public void Init()
         {
-            _audioDic = new Dictionary<string, GameObject>();
+            _audioDic = new Dictionary<string, AudioSource>();
+            _tmpGameObject = Resources.Load<GameObject>(GamePath.PrefabPath + "AudioSource");
         }
 
         public void PlayAudioOnce(string path)
         {
-            return;
-            var audioSource = InitTempGo(path);
+            Debug.Log($"Play{path}");
             var clip = Resources.Load<AudioClip>(path);
+            if (clip == null)
+                return;
+            var audioSource = InitTempGo();
             audioSource.PlayOneShot(clip);
             GameObject.Destroy(audioSource.gameObject, clip.length);
         }
 
         public void PlayAudioLoop(string path)
         {
-            return;
-            var audioSource = InitTempGo(path);
-            _audioDic.Add(path, audioSource.gameObject);
+            Debug.Log($"Play{path}");
             var clip = Resources.Load<AudioClip>(path);
+            if (clip == null)
+                return;
+
+            AudioSource audioSource;
+            if (!_audioDic.ContainsKey(path))
+            {
+                audioSource = InitTempGo();
+                _audioDic.Add(path, audioSource);
+            }
+            else
+            {
+                audioSource = _audioDic[path];
+            }
+
             audioSource.clip = clip;
             audioSource.loop = true;
             audioSource.Play();
@@ -36,13 +51,15 @@ namespace Game
 
         public void StopAudioLoop(string path)
         {
-            return;
-            var audioSource = _audioDic[path].GetComponent<AudioSource>();
+            if (!_audioDic.ContainsKey(path))
+                return;
+            var audioSource = _audioDic[path];
             audioSource.Stop();
             GameObject.Destroy(audioSource.gameObject);
+            _audioDic.Remove(path);
         }
 
-        private AudioSource InitTempGo(string path)
+        private AudioSource InitTempGo()
         {
             var go = GameObject.Instantiate(_tmpGameObject, transform);
             go.SetActive(true);
