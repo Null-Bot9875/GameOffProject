@@ -10,18 +10,29 @@ namespace Game
     {
         private SpriteRenderer go1;
         private SpriteRenderer go2;
+        [SerializeField] private float waitToShowTime = 4f;
         private void Start()
         {
             go1 = transform.GetChild(0).GetComponent<SpriteRenderer>();
             go2 = transform.GetChild(1).GetComponent<SpriteRenderer>();
+            StartCt();
+        }
+
+        public void StopCt()
+        {
+            StopCoroutine(TipsShow());
+        }
+
+        public void StartCt()
+        {
             StartCoroutine(TipsShow());
         }
 
-        IEnumerator TipsShow()
+         IEnumerator TipsShow()
         {
             go1.color = Color.clear;
             go2.color = Color.clear;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(waitToShowTime);
             go1.DOColor(Color.white, 0.5f);
             go2.DOColor(Color.white, 0.5f);
             transform.DOShakeScale(0.55f, 0.28f, 4, 90f, true).SetLoops(-1);
