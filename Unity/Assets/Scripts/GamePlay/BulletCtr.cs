@@ -20,13 +20,13 @@ namespace Game
         {
             rb = GetComponent<Rigidbody2D>();
             if (!IsGhost)
-                AudioManager.Instance.PlayAudioLoop(GamePath.BulletSFX);
+                AudioManager.Instance.PlayAudioLoop(GamePath.SFXBullet);
         }
 
         private void OnDestroy()
         {
             if (!IsGhost)
-                AudioManager.Instance.StopAudioLoop(GamePath.BulletSFX);
+                AudioManager.Instance.StopAudioLoop(GamePath.SFXBullet);
         }
 
         public void SetFire(Vector2 direction)

@@ -24,7 +24,7 @@ namespace Game
 
             _respawnBtn.onClick.AddListener(() =>
                 {
-                    AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
+                    AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
                     GameSceneManager.Instance.ReloadScene();
                 }
             );
@@ -32,11 +32,11 @@ namespace Game
             if (evtDieReason != DieReason.Enemy)
             {
                 _cgImg.color = Color.black;
-                AudioManager.Instance.PlayAudioOnce(GamePath.GameDieByOtherSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXGameDieByOther);
             }
             else
             {
-                AudioManager.Instance.PlayAudioOnce(GamePath.GameDieByEnemySFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXGameDieByEnemy);
             }
         }
 

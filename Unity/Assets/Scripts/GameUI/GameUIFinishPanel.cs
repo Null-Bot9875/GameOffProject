@@ -16,7 +16,7 @@ namespace Game
             GameDataCache.Instance.Player.IsMove = false;
             _loadBtn.onClick.AddListener(() =>
             {
-                AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
                 GameSceneManager.Instance.LoadNextScene();
             });
 

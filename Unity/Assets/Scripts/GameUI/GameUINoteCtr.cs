@@ -95,7 +95,7 @@ namespace Game
         {
             if (Input.GetKeyDown(KeyCode.Escape) && nowAcitveListEnum!= NoteListName.None)
             {
-                AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
                 _canGetPlayerInput = false;
                 _doTween.Kill(false);
                 ListIndex = 0;
@@ -116,7 +116,7 @@ namespace Game
             }
             if (Input.anyKeyDown)
             {
-                AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
                 _canGetPlayerInput = false;
                 if (_canContinueGame)
                 {

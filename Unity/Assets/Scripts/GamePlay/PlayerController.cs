@@ -132,7 +132,7 @@ namespace Game
                         effectGo.transform.position = muzzle.transform.position;
                         GameDataCache.Instance.ShootCount += 1;
                         TypeEventSystem.Global.Send(new GameShootBulletRequestEvt());
-                        AudioManager.Instance.PlayAudioOnce(GamePath.ForwardShootSFX);
+                        AudioManager.Instance.PlayAudioOnce(GamePath.SFXForwardShoot);
                     }
                     else
                     {
@@ -231,11 +231,11 @@ namespace Game
                 var effect = GameObject.Instantiate(_recycleEffect, muzzle.transform);
                 effect.transform.position = muzzle.transform.position;
                 TypeEventSystem.Global.Send<GameRecycleBulletTriggerEvt>();
-                AudioManager.Instance.PlayAudioOnce(GamePath.RecycleShootSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXRecycleShoot);
             }
             else
             {
-                AudioManager.Instance.PlayAudioOnce(GamePath.BulletHitSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXBulletHit);
                 Die(DieReason.Bullet);
             }
         }

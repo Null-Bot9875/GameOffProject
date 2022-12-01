@@ -24,7 +24,6 @@ namespace Game
         //单次播放，多次播放该音效的时候后面调用的不生效
         public void PlayAudioSingle(string path)
         {
-            Debug.Log($"Play{path}");
             var clip = Resources.Load<AudioClip>(path);
             if (clip == null)
                 return;
@@ -50,7 +49,6 @@ namespace Game
 
         public void PlayAudioOnce(string path)
         {
-            Debug.Log($"Play{path}");
             var clip = Resources.Load<AudioClip>(path);
             if (clip == null)
                 return;
@@ -61,7 +59,6 @@ namespace Game
 
         public void PlayAudioLoop(string path)
         {
-            Debug.Log($"Play{path}");
             var clip = Resources.Load<AudioClip>(path);
             if (clip == null)
                 return;
@@ -95,7 +92,6 @@ namespace Game
 
         public void PlayMusicLoop(string path)
         {
-            Debug.Log($"Play{path}");
             var clip = Resources.Load<AudioClip>(path);
             if (clip == null)
                 return;

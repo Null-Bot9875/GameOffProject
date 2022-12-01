@@ -9,7 +9,7 @@ namespace Game
             var bullet = ctr.gameObject.GetComponent<BulletCtr>();
             if (!bullet.IsGhost)
             {
-                AudioManager.Instance.PlayAudioOnce(GamePath.ReboundSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXRebound);
             }
         }
     }
