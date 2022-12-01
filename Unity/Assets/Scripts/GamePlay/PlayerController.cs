@@ -142,6 +142,7 @@ namespace Game
                         _isBulletOnWall = false;
                         _rb.velocity = Vector2.zero;
                         TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
+                        AudioManager.Instance.PlayAudioOnce(GamePath.SFXRecycleShootRequest);
                     }
                 }
             }

@@ -31,6 +31,7 @@
         public static string SFXRebound = AudioPath + "SFXRebound";
         public static string SFXForwardShoot = AudioPath + "SFXForwardShoot";
         public static string SFXRecycleShoot = AudioPath + "SFXRecycleShoot";
+        public static string SFXRecycleShootRequest = AudioPath + "SFXRecycleShootRequest";
         public static string SFXWall = AudioPath + "SFXWall";
         public static string SFXBullet = AudioPath + "SFXBullet";
         public static string SFXTrainLoop = AudioPath + "SFXTrainLoop";
