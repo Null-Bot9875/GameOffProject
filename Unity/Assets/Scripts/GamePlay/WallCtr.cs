@@ -44,7 +44,7 @@ namespace Game
             instanceOnWallObj = Instantiate(bulletOnWallObj, go.transform.position, Quaternion.identity);
             ctr.DestroyGo();
             
-            AudioManager.Instance.PlayAudioOnce(GamePath.WallSFX);
+            AudioManager.Instance.PlayAudioOnce(GamePath.SFXWall);
         }
     }
 }

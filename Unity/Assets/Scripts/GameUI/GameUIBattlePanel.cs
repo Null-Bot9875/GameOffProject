@@ -49,13 +49,13 @@ namespace Game
         private void OnClickSettingsBtn()
         {
             GameObject.Instantiate(_settingsPanel, GameDataCache.Instance.Canvas.transform);
-            AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
+            AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
         }
 
         private void OnClickReloadBtn()
         {
             GameSceneManager.Instance.ReloadScene();
-            AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
+            AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
         }
     }
 }

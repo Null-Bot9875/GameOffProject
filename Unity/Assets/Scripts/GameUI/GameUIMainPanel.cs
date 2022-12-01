@@ -13,19 +13,19 @@ namespace Game
 
         private void Awake()
         {
-            
             _startBtn.onClick.AddListener(() =>
             {
-                AudioManager.Instance.PlayAudioOnce(GamePath.UIGameStartClickSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIGameStartClick);
                 StartCoroutine(GetComponent<GameUIMainToNextScene>().GoToNextScene());
             });
             _creditsBtn.onClick.AddListener(() =>
             {
-                AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
                 var pfb = Resources.Load<GameObject>(GamePath.UIPrefabPath + "GameUICreditsPanel");
                 GameObject.Instantiate(pfb, transform.parent);
             });
             _quitBtn.onClick.AddListener(Application.Quit);
+            AudioManager.Instance.PlayMusicLoop(GamePath.MusicGameMain);
         }
     }
 }

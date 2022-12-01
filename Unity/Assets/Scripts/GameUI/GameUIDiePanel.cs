@@ -22,17 +22,23 @@ namespace Game
                 enemy.enabled = false;
             }
 
-            _respawnBtn.onClick.AddListener(() => GameSceneManager.Instance.ReloadScene());
+            _respawnBtn.onClick.AddListener(() =>
+                {
+                    AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
+                    GameSceneManager.Instance.ReloadScene();
+                }
+            );
             _cgImg.DOFade(1, 1f).OnComplete(() => _uiGroup.DOFade(1, .2f));
             if (evtDieReason != DieReason.Enemy)
             {
                 _cgImg.color = Color.black;
-                AudioManager.Instance.PlayAudioOnce(GamePath.GameDieByOtherSFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXGameDieByOther);
             }
             else
             {
-                AudioManager.Instance.PlayAudioOnce(GamePath.GameDieByEnemySFX);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXGameDieByEnemy);
             }
+            AudioManager.Instance.PlayMusicLoop(GamePath.MusicGameDie);
         }
 
         private void OnDestroy()

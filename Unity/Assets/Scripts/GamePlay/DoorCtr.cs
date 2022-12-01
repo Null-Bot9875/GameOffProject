@@ -40,6 +40,7 @@ namespace Game
 
         protected virtual void OnTriggerAction()
         {
+            AudioManager.Instance.PlayAudioOnce(GamePath.SFXGamePass);
             TypeEventSystem.Global.Send(new GameFinishEvt());
         }
     }

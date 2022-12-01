@@ -16,13 +16,38 @@ namespace Game
             GameDataCache.Instance.IsOver = false;
             GameDataCache.Instance.ShootCount = 0;
 
-            Instantiate(Resources.Load<GameObject>(GamePath.FadePanelOutPfb),GameDataCache.Instance.Canvas.transform);
-            AudioManager.Instance.PlayAudioLoop(GamePath.TrainLoopSFX);
+            Instantiate(Resources.Load<GameObject>(GamePath.FadePanelOutPfb), GameDataCache.Instance.Canvas.transform);
+            AudioManager.Instance.PlayAudioLoop(GamePath.SFXTrainLoop);
+            switch (GameDataCache.Instance.CrtSceneIdx)
+            {
+                case 1:
+                case 2:
+                    AudioManager.Instance.PlayMusicLoop(GamePath.MusicGame1And2Level);
+                    break;
+                case 3:
+                case 4:
+                    AudioManager.Instance.PlayMusicLoop(GamePath.MusicGame3And4Level);
+                    break;
+                case 5:
+                case 6:
+                    AudioManager.Instance.PlayMusicLoop(GamePath.MusicGame5And6Level);
+                    break;
+                case 7:
+                case 8:
+                    AudioManager.Instance.PlayMusicLoop(GamePath.MusicGame7And8Level);
+                    break;
+                case 9:
+                    AudioManager.Instance.PlayMusicLoop(GamePath.MusicGame9Level);
+                    break;
+                case 10:
+                    AudioManager.Instance.PlayMusicLoop(GamePath.MusicGame10Level);
+                    break;
+            }
         }
 
         private void OnDestroy()
         {
-            AudioManager.Instance.StopAudioLoop(GamePath.TrainLoopSFX);
+            AudioManager.Instance.StopAudioLoop(GamePath.SFXTrainLoop);
         }
     }
 }
