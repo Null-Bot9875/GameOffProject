@@ -8,7 +8,7 @@ namespace Game
         private void OnCollisionEnter2D(Collision2D col)
         {
             var bullet = col.gameObject.GetComponent<BulletCtr>();
-            if (!bullet.IsGhost)
+            if (col.gameObject.CompareTag("Bullet") && !bullet.IsGhost)
             {
                 AudioManager.Instance.PlayAudioOnce(GamePath.SFXRebound);
             }
