@@ -9,11 +9,14 @@ namespace Game
     {
         [SerializeField] private AnimationClip _doorOpen;
         [SerializeField] private AnimancerComponent _animancerComponent;
+        private GameObject light;
         private bool isOpen;
 
         private void Awake()
         {
             TypeEventSystem.Global.Register<GameRecycleBulletTriggerEvt>(OnGameRecycleBulletTriggerEvt);
+            light = transform.Find("Light").gameObject;
+            light.SetActive(false);
         }
 
         private void OnDestroy()
@@ -27,6 +30,7 @@ namespace Game
             {
                 isOpen = true;
                 _animancerComponent.Play(_doorOpen);
+                light.SetActive(true);
                 transform.Find("Light").GetComponent<LightAniCtr>().PlayDoorLight();
             }
         }
