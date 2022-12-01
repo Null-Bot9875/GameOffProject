@@ -31,6 +31,7 @@ namespace Game
                 isOpen = true;
                 _animancerComponent.Play(_doorOpen);
                 light.SetActive(true);
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXOpenDoor);
             }
         }
 

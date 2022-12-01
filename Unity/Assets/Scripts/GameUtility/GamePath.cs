@@ -43,6 +43,7 @@
         public static string SFXGameDieByEnemy = AudioPath + "SFXGameDieByEnemy";
         public static string SFXGameDieByOther = AudioPath + "SFXGameDieByOther";
         public static string SFXGamePass = AudioPath + "SFXGamePass";
+        public static string SFXOpenDoor = AudioPath + "SFXOpenDoor";
         
         public static string MusicGameMain =  AudioPath + "MusicGameMain";
         public static string MusicGameDie =  AudioPath + "MusicGameDie";
