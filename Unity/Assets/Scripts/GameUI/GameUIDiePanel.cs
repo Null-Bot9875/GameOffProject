@@ -22,7 +22,12 @@ namespace Game
                 enemy.enabled = false;
             }
 
-            _respawnBtn.onClick.AddListener(() => GameSceneManager.Instance.ReloadScene());
+            _respawnBtn.onClick.AddListener(() =>
+                {
+                    AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
+                    GameSceneManager.Instance.ReloadScene();
+                }
+            );
             _cgImg.DOFade(1, 1f).OnComplete(() => _uiGroup.DOFade(1, .2f));
             if (evtDieReason != DieReason.Enemy)
             {

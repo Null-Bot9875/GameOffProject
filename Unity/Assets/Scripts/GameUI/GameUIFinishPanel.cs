@@ -14,7 +14,11 @@ namespace Game
         private void Awake()
         {
             GameDataCache.Instance.Player.IsMove = false;
-            _loadBtn.onClick.AddListener(() => GameSceneManager.Instance.LoadNextScene());
+            _loadBtn.onClick.AddListener(() =>
+            {
+                AudioManager.Instance.PlayAudioOnce(GamePath.UIClickSFX);
+                GameSceneManager.Instance.LoadNextScene();
+            });
 
             for (int i = 0; i < 4 - GameDataCache.Instance.ShootCount; i++)
             {
