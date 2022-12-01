@@ -95,12 +95,10 @@ namespace Game
 
         private void Update()
         {
-            if (activeTimes == 1)
-            {
-                Instantiate(tip, new Vector2(-3.38f, 2.69f), Quaternion.identity);
-            }
+            
             if (Input.GetKeyDown(KeyCode.Escape) && nowAcitveListEnum!= NoteListName.None)
             {
+                
                 AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
                 _canGetPlayerInput = false;
                 _doTween.Kill(false);
@@ -131,6 +129,10 @@ namespace Game
                     GameDataCache.Instance.Player.IsMove = true;
                     imageGo.SetActive(false);
                     activeTimes++;
+                    if (activeTimes == 1)
+                    {
+                        Instantiate(tip, new Vector2(-3.38f, 2.69f), Quaternion.identity);
+                    }
                     if (activeTimes >= 3)
                     {
                         Destroy(gameObject);
