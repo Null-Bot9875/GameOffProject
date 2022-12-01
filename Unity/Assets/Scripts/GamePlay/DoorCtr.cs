@@ -32,6 +32,7 @@ namespace Game
                 _animancerComponent.Play(_doorOpen);
                 light.SetActive(true);
                 transform.Find("Light").GetComponent<LightAniCtr>().PlayDoorLight();
+                AudioManager.Instance.PlayAudioOnce(GamePath.SFXOpenDoor);
             }
         }
 
