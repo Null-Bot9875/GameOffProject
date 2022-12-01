@@ -10,7 +10,7 @@ namespace Game
     {
         private SpriteRenderer go1;
         private SpriteRenderer go2;
-        [SerializeField] private float waitToShowTime = 4f;
+        [SerializeField] private float waitToShowTime = 2.2f;
         private void Start()
         {
             go1 = transform.GetChild(0).GetComponent<SpriteRenderer>();

@@ -17,6 +17,7 @@ namespace Game
     public class GameUINoteCtr : MonoBehaviour
     {
         [SerializeField] private GameObject tip;
+        private bool tipActive = false;
         [SerializeField, TextArea] private List<string> textListStart;
         [SerializeField, TextArea] private List<string> textListShoot;
         [SerializeField, TextArea] private List<string> textListBack;
@@ -107,6 +108,11 @@ namespace Game
                 GameDataCache.Instance.Player.IsMove = true;
                 imageGo.SetActive(false);
                 activeTimes++;
+                if (activeTimes == 1 && !tipActive)
+                {
+                    Instantiate(tip, new Vector2(-3.38f, 2.69f), Quaternion.identity);
+                    tipActive = true;
+                }
                 if (activeTimes >= 3)
                 {
                     Destroy(gameObject);
@@ -129,14 +135,14 @@ namespace Game
                     GameDataCache.Instance.Player.IsMove = true;
                     imageGo.SetActive(false);
                     activeTimes++;
-                    if (activeTimes == 1)
+                    if (activeTimes == 1 && !tipActive)
                     {
                         Instantiate(tip, new Vector2(-3.38f, 2.69f), Quaternion.identity);
+                        tipActive = true;
                     }
                     if (activeTimes >= 3)
                     {
                         Destroy(gameObject);
-                        Instantiate(tip, new Vector2(-3.38f, 2.69f), Quaternion.identity);
                     }
                     nowAcitveListEnum = NoteListName.None;
                     return;
