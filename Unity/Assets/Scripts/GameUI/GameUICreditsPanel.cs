@@ -31,6 +31,7 @@ namespace Game
                 }
             });
             MoveToTop();
+            AudioManager.Instance.PlayMusicLoop(GamePath.MusicGameMain);
         }
 
         void MoveToTop()

@@ -38,6 +38,7 @@ namespace Game
             {
                 AudioManager.Instance.PlayAudioOnce(GamePath.SFXGameDieByEnemy);
             }
+            AudioManager.Instance.PlayMusicLoop(GamePath.MusicGameDie);
         }
 
         private void OnDestroy()

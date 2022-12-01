@@ -13,7 +13,6 @@ namespace Game
 
         private void Awake()
         {
-            
             _startBtn.onClick.AddListener(() =>
             {
                 AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIGameStartClick);
@@ -26,6 +25,7 @@ namespace Game
                 GameObject.Instantiate(pfb, transform.parent);
             });
             _quitBtn.onClick.AddListener(Application.Quit);
+            AudioManager.Instance.PlayMusicLoop(GamePath.MusicGameMain);
         }
     }
 }

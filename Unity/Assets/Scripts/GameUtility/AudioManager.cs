@@ -93,7 +93,7 @@ namespace Game
         public void PlayMusicLoop(string path)
         {
             var clip = Resources.Load<AudioClip>(path);
-            if (clip == null)
+            if (clip == null && _audioMusic.clip == clip)
                 return;
             _audioMusic.Stop();
             _audioMusic.clip = clip;
