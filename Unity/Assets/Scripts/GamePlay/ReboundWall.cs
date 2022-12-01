@@ -10,7 +10,6 @@ namespace Game
             var bullet = col.gameObject.GetComponent<BulletCtr>();
             if (!bullet.IsGhost)
             {
-                Debug.Log("SFXRebound");
                 AudioManager.Instance.PlayAudioOnce(GamePath.SFXRebound);
             }
         }
