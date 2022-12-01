@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -14,6 +15,7 @@ namespace Game
             AudioManager.Instance.Init();
             GameSceneManager.Instance.Init();
 
+            SceneManager.LoadScene("Main");
             Cursor.SetCursor(_cursor, new Vector2(_cursor.width / 2f, _cursor.height / 2f), CursorMode.Auto);
         }
     }

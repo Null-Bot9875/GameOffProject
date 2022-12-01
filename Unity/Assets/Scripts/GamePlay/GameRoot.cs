@@ -18,7 +18,7 @@ namespace Game
 
             Instantiate(Resources.Load<GameObject>(GamePath.FadePanelOutPfb), GameDataCache.Instance.Canvas.transform);
             AudioManager.Instance.PlayAudioLoop(GamePath.SFXTrainLoop);
-            switch (GameDataCache.Instance.CrtSceneIdx)
+            switch (GameDataCache.Instance.CrtSceneIdx - 1)
             {
                 case 1:
                 case 2:

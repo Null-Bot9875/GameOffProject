@@ -76,7 +76,7 @@ namespace Game
             }
             else
             {
-                GetComponent<SpriteRenderer>().sortingOrder = 12;
+                GetComponent<SpriteRenderer>().sortingOrder = 10;
             }
         }
 
