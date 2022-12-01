@@ -27,6 +27,7 @@ namespace Game
             UIText = imageGo.transform.Find("Image").transform.Find("Text").GetComponent<Text>();
             imageGo.SetActive(false);
             GameDataCache.Instance.Player = GameObject.FindObjectOfType<PlayerController>();
+            go.SetActive(false);
         }
 
         private void Start()
@@ -41,7 +42,10 @@ namespace Game
             imageGo.SetActive(true);
             GameDataCache.Instance.Player.IsMove = false;
             GameDataCache.Instance.Player.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
+            if (ListIndex == 2)
+            {
+                imageGo.GetComponent<RectTransform>().DOShakeAnchorPos(0.5f, 20, 32, 360);
+            }
             _doTween = UIText.DOText(textList[ListIndex], noteDuartion).OnComplete(() =>
             {
                 _canGetPlayerInput = true;
@@ -64,6 +68,7 @@ namespace Game
                 _canContinueGame = false;
                 GameDataCache.Instance.Player.IsMove = true;
                 imageGo.SetActive(false);
+                go.SetActive(true);
                 go.GetComponent<TipsCtr>().StartCt();
                 Destroy(gameObject);
                 
@@ -82,6 +87,7 @@ namespace Game
                     _canContinueGame = false;
                     GameDataCache.Instance.Player.IsMove = true;
                     imageGo.SetActive(false);
+                    go.SetActive(true);
                     go.GetComponent<TipsCtr>().StartCt();
                     Destroy(gameObject);
                     return;
