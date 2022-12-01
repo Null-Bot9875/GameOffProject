@@ -79,7 +79,6 @@ namespace Game
             audioSource.Play();
         }
 
-
         public void StopAudioLoop(string path)
         {
             if (!_audioSFXDic.ContainsKey(path))
@@ -93,8 +92,9 @@ namespace Game
         public void PlayMusicLoop(string path)
         {
             var clip = Resources.Load<AudioClip>(path);
-            if (clip == null && _audioMusic.clip == clip)
+            if (clip == null || _audioMusic.clip == clip)
                 return;
+
             _audioMusic.Stop();
             _audioMusic.clip = clip;
             _audioMusic.loop = true;

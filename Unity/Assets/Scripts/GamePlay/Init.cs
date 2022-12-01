@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Game
 {
+    [DefaultExecutionOrder(-100)]
     public class Init : MonoBehaviour
     {
         [SerializeField] private Texture2D _cursor;
