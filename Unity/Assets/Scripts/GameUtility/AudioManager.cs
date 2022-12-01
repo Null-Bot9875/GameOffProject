@@ -19,6 +19,8 @@ namespace Game
             _tmpGameObject = Resources.Load<GameObject>(GamePath.PrefabPath + "AudioSource");
             _audioSFXDic = new Dictionary<string, AudioSource>();
             _audioMusic = InitAudioGo(false);
+            
+            SetMusicVolume(0.75f);
         }
 
         //单次播放，多次播放该音效的时候后面调用的不生效
