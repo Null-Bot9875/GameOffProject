@@ -142,7 +142,6 @@ namespace Game
                         _isBulletOnWall = false;
                         _rb.velocity = Vector2.zero;
                         TypeEventSystem.Global.Send<GameRecycleBulletRequestEvt>();
-                        AudioManager.Instance.PlayAudioOnce(GamePath.RecycleShootSFX);
                     }
                 }
             }
@@ -232,6 +231,7 @@ namespace Game
                 var effect = GameObject.Instantiate(_recycleEffect, muzzle.transform);
                 effect.transform.position = muzzle.transform.position;
                 TypeEventSystem.Global.Send<GameRecycleBulletTriggerEvt>();
+                AudioManager.Instance.PlayAudioOnce(GamePath.RecycleShootSFX);
             }
             else
             {

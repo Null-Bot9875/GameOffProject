@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ReboundWall : MonoBehaviour , IBulletTrigger
+    public class ReboundWall : MonoBehaviour, IBulletTrigger
     {
         public void OnBulletTrigger(BulletCtr ctr)
         {
