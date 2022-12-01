@@ -56,8 +56,9 @@ namespace Game
 
         public void DestroyGo()
         {
+            transform.Find("Effect").GetComponent<ParticleSystem>().Stop();
             rb.velocity = Vector2.zero;
-            GameObject.Destroy(gameObject);
+            GameObject.Destroy(gameObject, IsGhost ? 0 : 0.4f);
         }
     }
 }
