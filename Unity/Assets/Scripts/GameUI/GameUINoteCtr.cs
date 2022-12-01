@@ -16,6 +16,7 @@ namespace Game
 
     public class GameUINoteCtr : MonoBehaviour
     {
+        [SerializeField] private GameObject tip;
         [SerializeField, TextArea] private List<string> textListStart;
         [SerializeField, TextArea] private List<string> textListShoot;
         [SerializeField, TextArea] private List<string> textListBack;
@@ -31,6 +32,7 @@ namespace Game
         private bool _canContinueGame;
 
         private Tween _doTween;
+        
 
         void Awake()
         {
@@ -93,6 +95,10 @@ namespace Game
 
         private void Update()
         {
+            if (activeTimes == 1)
+            {
+                Instantiate(tip, new Vector2(-3.38f, 2.69f), Quaternion.identity);
+            }
             if (Input.GetKeyDown(KeyCode.Escape) && nowAcitveListEnum!= NoteListName.None)
             {
                 AudioManager.Instance.PlayAudioOnce(GamePath.SFXUIClick);
@@ -128,6 +134,7 @@ namespace Game
                     if (activeTimes >= 3)
                     {
                         Destroy(gameObject);
+                        Instantiate(tip, new Vector2(-3.38f, 2.69f), Quaternion.identity);
                     }
                     nowAcitveListEnum = NoteListName.None;
                     return;

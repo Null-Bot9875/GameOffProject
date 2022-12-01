@@ -60,3 +60,6 @@ TagManager:
   - name: Weather
     uniqueID: 1905154345
     locked: 0
+  - name: Tips
+    uniqueID: 1044488373
+    locked: 0

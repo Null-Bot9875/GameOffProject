@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d9f810c30404240b806bd0512b8f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tip: {fileID: 3736572689419730361, guid: c83ee2a17c3a5ca469a51bcf9ffc1242, type: 3}
   textListStart:
   - "   <color=red>WASD</color> controls the movement of the character.\n   Hold
     down the <color=red>mouse right button</color> to aim and then click the <color=red>

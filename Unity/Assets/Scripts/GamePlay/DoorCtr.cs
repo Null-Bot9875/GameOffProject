@@ -31,7 +31,6 @@ namespace Game
                 isOpen = true;
                 _animancerComponent.Play(_doorOpen);
                 light.SetActive(true);
-                transform.Find("Light").GetComponent<LightAniCtr>().PlayDoorLight();
             }
         }
 
