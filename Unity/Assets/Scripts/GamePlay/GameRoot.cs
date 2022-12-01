@@ -44,10 +44,5 @@ namespace Game
                     break;
             }
         }
-
-        private void OnDestroy()
-        {
-            AudioManager.Instance.StopAudioLoop(GamePath.SFXTrainLoop);
-        }
     }
 }
