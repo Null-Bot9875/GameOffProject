@@ -36,13 +36,21 @@ namespace Game
 
         void MoveToTop()
         {
-            _content.DOAnchorPosY(_targetY, _speed).SetSpeedBased().OnComplete(MoveEnd);
+            _content.DOAnchorPosY(_targetY, _speed).SetSpeedBased().SetEase(Ease.Linear).OnComplete(MoveEnd);
         }
 
         void MoveEnd()
         {
-            _content.anchoredPosition = Vector2.zero;
-            //MoveToTop();
+            GetComponent<CanvasGroup>().DOFade(0, .4f).OnComplete(() =>
+            {
+                _content.anchoredPosition = Vector2.zero;
+                GameObject.Destroy(gameObject);
+                if (isLast)
+                {
+                    SceneManager.LoadScene("Main");
+                }
+                //MoveToTop();
+            });
         }
     }
 }
