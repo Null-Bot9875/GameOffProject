@@ -35,7 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameData/Scenes/GameLevel9.unity
     guid: 52d60a6135eff0349ae90dcddc295a67
-  - enabled: 0
+  - enabled: 1
     path: Assets/GameData/Scenes/GameLevel10.unity
     guid: c9cbc37f0baf96e45898c479b30dc4a4
   m_configObjects: {}
