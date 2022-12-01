@@ -64,7 +64,7 @@ namespace Game
             if (go.CompareTag("Bullet") && !isInHover)
             {
                 isInHover = true;
-                go.transform.DOMove(targetPos, 2f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
+                go.transform.DOMove(targetPos, 1f).SetEase(Ease.InCirc).OnComplete(OnBulletMoveComplete);
             }
 
             void OnBulletMoveComplete()
